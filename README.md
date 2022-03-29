@@ -201,9 +201,9 @@ output example:
 # 6. Grafana Dashboard import
 
 ```bash
-kubectl port-forward svc/prometheus-operator-grafana 8081:80 -n prometheus
+kubectl port-forward svc/kube-prometheus-stack-grafana  8081:80 -n prometheus
 
-kubectl get secret --namespace prometheus prometheus-operator-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+kubectl get secret --namespace prometheus kube-prometheus-stack-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 ```
 
 http://localhost:8081
