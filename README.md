@@ -172,8 +172,8 @@ prometheus.url format: `http://<service-name>.<namespace>.svc.cluster.local`
 
 e.g.,
 
-* `http://kube-prometheus-prometheus.prometheus.prometheus.svc.cluster.local`
-* `http://kube-prometheus-prometheus.prometheus.monitoring.svc.cluster.local`
+* `http://kube-prometheus-prometheus.prometheus.svc.cluster.local`
+* `http://kube-prometheus-prometheus.monitoring.svc.cluster.local`
 
 ```bash
 helm install prometheus-adapter --set rbac.create=true,prometheus.url=http://kube-prometheus-prometheus.prometheus.svc.cluster.local,prometheus.port=9090 stable/prometheus-adapter
