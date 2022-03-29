@@ -7,7 +7,7 @@ Kubernetes Cluster AutoScaler(CA), Karpenter 를 사용한 GPU AutoScaling guide
 
 * EKS cluster & nodegroup 생성
 * Kubernetes Dashboard 설치
-* Cluster AutoScaler(CA), AWS Load Balancer Controller 설치
+* [Cluster AutoScaler(CA), AWS Load Balancer Controller 설치](./ClusterAutoScaler.md)
 
 * DGCM exporter 배포
 * Prometheus Stack 설치
@@ -61,7 +61,9 @@ kubectl apply -f dcgm-exporter.yaml
 kubectl apply -f dcgm-exporter-karpenter.yaml
 ```
 
-[dcgm-exporter.yaml](./dcgm-exporter.yaml)
+* [dcgm-exporter.yaml](./dcgm-exporter.yaml)
+
+* [dcgm-exporter-karpenter.yaml](./dcgm-exporter-karpenter.yaml)
 
 https://github.com/NVIDIA/dcgm-exporter repository 기준
 
