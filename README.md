@@ -13,7 +13,7 @@ Kubernetes Cluster AutoScaler(CA), Karpenter 를 사용한 GPU AutoScaling guide
 * Prometheus Stack 설치
 * Prometheus custom metric 생성
 * Grafana Dashboard Import
-* API 배포
+* Inference Test API 배포
 * GPU HPA 배포
 * AutoScaling Test
 
@@ -220,7 +220,7 @@ Dashboard import
 
 ![grafana-dcgm](./screenshots/grafana-dcgm-01.png?raw=true)
 
-# 7. API 배포
+# 7. Inference Test API 배포
 
 ```bash
 kubectl apply -f inf-api.yaml
