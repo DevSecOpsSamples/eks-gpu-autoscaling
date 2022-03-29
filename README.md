@@ -242,9 +242,10 @@ GPU load test
 
 ```bash
 kubectl apply -f gputest.yml
+```
 
-kubectl scale deployment gputest --replicas=1
-
+```bash
+kubectl scale deployment gputest --replicas=6
 ```
 
 [gputest.yml](./gputest.yml)
