@@ -235,8 +235,6 @@ kubectl apply -f gpu-hpa.yaml
 
 [gpu-hpa.yaml](./gpu-hpa.yaml)
 
-metric: DCGM_FI_DEV_GPU_UTIL
-
 # 9. AutoScaling Test
 
 GPU load test
