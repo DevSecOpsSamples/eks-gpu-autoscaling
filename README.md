@@ -4,6 +4,8 @@
 
 Kubernetes Cluster AutoScaler(CA), Karpenter 를 사용한 GPU AutoScaling guide
 
+Data Center GPU Manager(DCGM) exporter를 DaemonSet으로 설치하고 Prometheus custom metric을 기준으로 작동하는 Horizontal Pod Autoscaling(HPA)를 통행 Pod를 scaling 합니다.
+
 
 * EKS cluster & nodegroup 생성
 * Kubernetes Dashboard 설치
@@ -16,6 +18,13 @@ Kubernetes Cluster AutoScaler(CA), Karpenter 를 사용한 GPU AutoScaling guide
 5. Inference Test API 배포
 6. GPU Horizontal Pod Autoscaling(HPA) 배포
 7. AutoScaling Test
+
+# Environment
+
+* EKS 1.21 - [버전](https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/kubernetes-versions.html)
+* DCGM 2.65
+* Prometheus 
+* Grafana 6.24.1
 
 # 1. EKS cluster & nodegroup
 

@@ -25,9 +25,10 @@ managedNodeGroups:
   privateNetworking: true
   tags:
     nodegroup-role: worker
-- name: gpu-ng2
-  instanceType: p2.xlarge
+- name: gpu-ng
+  instanceTypes: ['g4dn.xlarge', 'g4dn.2xlarge', 'g4dn.4xlarge']
   spot: true
+  # instanceType: p2.xlarge
   minSize: 3
   maxSize: 10
   desiredCapacity: 3

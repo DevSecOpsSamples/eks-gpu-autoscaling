@@ -6,15 +6,7 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/autoscaling.html
 ```bash
 export AWS_REGION="ap-northeast-2"
 
-eksctl utils associate-iam-oidc-provider --approve --cluster <cluter-name>
-    
-```
-
-```bash
-2022-03-27 23:34:19 [ℹ]  eksctl version 0.70.0
-2022-03-27 23:34:19 [ℹ]  using region ap-northeast-2
-2022-03-27 23:34:20 [ℹ]  will create IAM Open ID Connect provider for cluster "<cluter-name>" in "ap-northeast-2"
-2022-03-27 23:34:22 [✔]  created IAM Open ID Connect provider for cluster "<cluter-name>" in "ap-northeast-2"
+eksctl utils associate-iam-oidc-provider --approve --cluster <cluter-name> 
 ```
 
 ```bash
@@ -44,9 +36,7 @@ kubectl logs -n kube-system  -f deployment/cluster-autoscaler
 
 ```bash
 # should be checked
-kubectl -n kube-system \
-    annotate deployment.apps/cluster-autoscaler \
-    cluster-autoscaler.kubernetes.io/safe-to-evict="false"
+kubectl annotate deployment.apps/cluster-autoscaler cluster-autoscaler.kubernetes.io/safe-to-evict="false" -n kube-system
 
 kubectl version --short | grep 'Server Version:' | sed 's/[^0-9.]*\([0-9.]*\).*/\1/' | cut -d. -f1,2
 ```
