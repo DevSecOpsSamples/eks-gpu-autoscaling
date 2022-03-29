@@ -132,6 +132,9 @@ Karpenter - GPU instance 에만 label 지정 불가능해 beta.kubernetes.io/ins
 
 ```bash
 kubectl port-forward svc/dcgm-exporter 9400:9400
+```
+
+```bash
 curl http://localhost:9400/metrics | grep dcgm
 ```
 
@@ -162,7 +165,7 @@ http://localhost:9090/targets
 prometheus.url 파라미터의 internal DNS 설정을 위한 서비스명 확인
 
 ```bash
-kubectl get svc -n prometheus -lapp=kube-prometheus-stack-prometheus
+kubectl get svc -lapp=kube-prometheus-stack-prometheus -n prometheus 
 ```
 
 prometheus.url format: `http://<service-name>.<namespace>.svc.cluster.local`
