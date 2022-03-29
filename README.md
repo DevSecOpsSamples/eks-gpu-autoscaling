@@ -256,9 +256,8 @@ kubectl scale deployment gputest --replicas=6
 ```bash
 kubectl delete -f dcgm-exporter.yaml
 kubectl delete -f dcgm-exporter-karpenter.yaml
-helm uninstall kube-prometheus-stack -n prometheus
-helm uninstall prometheus-operator -n prometheus
 helm uninstall prometheus-adapter -n prometheus
+helm uninstall kube-prometheus-stack -n prometheus
 ```
 
 # Reference
