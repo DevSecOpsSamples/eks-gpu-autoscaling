@@ -1,21 +1,21 @@
 
 # Summary
 
-```bash
+
 Kubernetes Cluster AutoScaler(CA), Karpenter 를 사용한 GPU AutoScaling guide
-```
+
 
 * EKS cluster & nodegroup 생성
 * Kubernetes Dashboard 설치
 * [Cluster AutoScaler(CA), AWS Load Balancer Controller 설치](./ClusterAutoScaler.md)
 
-* DGCM exporter 배포
-* Prometheus Stack 설치
-* Prometheus custom metric 생성
-* Grafana Dashboard Import
-* Inference Test API 배포
-* GPU HPA 배포
-* AutoScaling Test
+1. Data Center GPU Manager(DCGM) exporter DaemonSet 배포
+2. Prometheus Stack 설치
+3. Prometheus custom metric 생성
+4. Grafana Dashboard Import
+5. Inference Test API 배포
+6. GPU Horizontal Pod Autoscaling(HPA) 배포
+7. AutoScaling Test
 
 # 1. EKS cluster & nodegroup
 
@@ -29,7 +29,9 @@ eksctl create nodegroup -f gpu-cluster-ng.yaml
 * [gpu-cluster.yaml](./gpu-cluster.yaml)
 * [gpu-cluster-ng.yaml](./gpu-cluster-ng.yaml)
 
-Seoul region ap-northeast-2b Zone은 GPU 인스턴스 생성 불가하므로 cluster 생성시 제외
+Seoul region ap-northeast-2b Zone은 GPU 인스턴스 생성 불가하므로 cluster 생성시 제외합니다.
+
+cluster 13분, Manged Node Group 10분 정도 소요됩니다.
 
 ---
 
@@ -37,10 +39,6 @@ Seoul region ap-northeast-2b Zone은 GPU 인스턴스 생성 불가하므로 clu
 
 ```bash
 eksctl create iamidentitymapping --cluster <CluterName> --arn arn:aws:iam::<YourAwsAccountId>:role/<YourRoleName> --group system:masters --username admin --region ap-northeast-2
-
-2022-03-28 23:05:28 [ℹ]  eksctl version 0.70.0
-2022-03-28 23:05:28 [ℹ]  using region ap-northeast-2
-2022-03-28 23:05:29 [ℹ]  adding identity "arn:aws:iam::123456789:role/YourRoleName" to auth ConfigMap
 ```
 
 # 2. Kubernetes Dashboard 설치 (Optional)
@@ -49,7 +47,7 @@ eksctl create iamidentitymapping --cluster <CluterName> --arn arn:aws:iam::<Your
 
 ![k8s-dashboard](./screenshots/k8s-dashboard.png?raw=true)
 
-# 3. DGCM exporter
+# 3. DCGM exporter DaemonSet
 
 ## 3.1 exporter 설치 - 2.6.5 version
 
@@ -102,7 +100,7 @@ spec:
   - port: "metrics"
 ```
 
-ClusterAutoscaler
+Cluster Autoscaler(CA)
 
 ```yaml
     spec:
@@ -128,17 +126,25 @@ Karpenter - GPU instance 에만 label 지정 불가능해 beta.kubernetes.io/ins
                 - g4dn.xlarge
 ```
 
-## 3.2 metric value test
+## 3.2 Metric 값 확인
 
 ```bash
 kubectl port-forward svc/dcgm-exporter 9400:9400
 ```
 
+http://localhost:9400/metrics
+
 ```bash
 curl http://localhost:9400/metrics | grep dcgm
 ```
 
-http://localhost:9400/metrics
+response example:
+
+```bash
+DCGM_FI_DEV_GPU_UTIL{gpu="0",UUID="GPU-74f7fe3b-48f2-6d8b-3cb4-e70426fb669c",device="nvidia0",modelName="Tesla K80",Hostname="dcgm-exporter-cmhft",container="",namespace="",pod=""} 0
+DCGM_FI_DEV_GPU_UTIL{gpu="1",UUID="GPU-f3a2185e-464d-c671-4057-0d056df64b6e",device="nvidia1",modelName="Tesla K80",Hostname="dcgm-exporter-cmhft",container="",namespace="",pod=""} 0
+DCGM_FI_DEV_GPU_UTIL{gpu="2",UUID="GPU-6ae74b72-48d0-f09f-14e2-4e09ceebda63",device="nvidia2",modelName="Tesla K80",Hostname="dcgm-exporter-cmhft",container="",namespace="",pod=""} 0
+```
 
 # 4. Prometheus Stack 설치
 
@@ -168,6 +174,10 @@ prometheus.url 파라미터의 internal DNS 설정을 위한 서비스명 확인
 kubectl get svc -lapp=kube-prometheus-stack-prometheus -n prometheus 
 ```
 
+```bash
+helm install prometheus-adapter --set rbac.create=true,prometheus.url=http://kube-prometheus-prometheus.prometheus.svc.cluster.local,prometheus.port=9090 stable/prometheus-adapter
+```
+
 prometheus.url format: `http://<service-name>.<namespace>.svc.cluster.local`
 
 e.g.,
@@ -175,19 +185,13 @@ e.g.,
 * `http://kube-prometheus-prometheus.prometheus.svc.cluster.local`
 * `http://kube-prometheus-prometheus.monitoring.svc.cluster.local`
 
-```bash
-helm install prometheus-adapter --set rbac.create=true,prometheus.url=http://kube-prometheus-prometheus.prometheus.svc.cluster.local,prometheus.port=9090 stable/prometheus-adapter
-```
-
 ## 5.2 custom metric 확인
 
 ```bash
 kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1 | jq -r . | grep DCGM
 ```
 
-값이 없는 경우 DCGM export pod로 들어가 `wget http://prometheus-url:port` 로 정상 접속되는지 확인합니다.
-
-output example:
+reponse example:
 
 ```bash
       "name": "services/DCGM_FI_DEV_FB_USED",
@@ -200,6 +204,8 @@ output example:
       "name": "namespaces/DCGM_FI_DEV_VGPU_LICENSE_STATUS",
       ...
 ```
+
+값이 없는 경우 DCGM export pod로 들어가 `wget http://prometheus-url:port` 로 정상 접속되는지 확인합니다.
 
 # 6. Grafana Dashboard import
 
