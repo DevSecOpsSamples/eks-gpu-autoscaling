@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: gputest
+  name: gputest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: gputest
+  # strategy:
+  #   rollingUpdate:
+  #     maxSurge: 25%
+  #     maxUnavailable: 25%
+  #   type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: gputest
+    spec:
+      containers:
+      - args:
+        - "1200"
+        image: chrstnhntschl/gpu_burn:latest
+        imagePullPolicy: Always
+        name: gputest
+        resources: 
+          limits:
+            nvidia.com/gpu: 1
+      restartPolicy: Always
+
