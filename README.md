@@ -204,8 +204,10 @@ output example:
 # 6. Grafana Dashboard import
 
 ```bash
-kubectl port-forward svc/kube-prometheus-stack-grafana  8081:80 -n prometheus
+kubectl port-forward svc/kube-prometheus-stack-grafana 8081:80 -n prometheus
+```
 
+```bash
 kubectl get secret --namespace prometheus kube-prometheus-stack-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 ```
 
@@ -213,11 +215,10 @@ http://localhost:8081
 
 Dashboard import
 
-* [NVIDIA DCGM Exporter Dashboard](https://grafana.com/grafana/dashboards/12239) 12239
-* [1 Kubernetes All-in-one Cluster Monitoring KR](https://grafana.com/grafana/dashboards/13770) 13770
+* [NVIDIA DCGM Exporter Dashboard](https://grafana.com/grafana/dashboards/12239) ID: 12239
+* [1 Kubernetes All-in-one Cluster Monitoring KR](https://grafana.com/grafana/dashboards/13770) ID: 13770
 
 ![grafana-dcgm](./screenshots/grafana-dcgm-01.png?raw=true)
-
 
 # 7. API 배포
 
