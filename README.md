@@ -190,6 +190,8 @@ kubectl get svc -lapp=kube-prometheus-stack-prometheus -n prometheus
 kubectl apply -f prometheus-adapter-values.yaml
 ```
 
+[prometheus-adapter-values.yaml](./prometheus-adapter-values.yaml)
+
 prometheus.url format: `http://<service-name>.<namespace>.svc.cluster.local`
 
 e.g.,
