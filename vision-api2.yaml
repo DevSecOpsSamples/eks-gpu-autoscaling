@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vision-api
+  name: vision-api2
   namespace: default
   annotations:
-    app: 'vision-api'
+    app: 'vision-api2'
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: vision-api
+      app: vision-api2
   template:
     metadata:
       labels:
-        app: vision-api
+        app: vision-api2
     spec:
       containers:
-        - name: vision-api
+        - name: vision-api2
           # image: 681747700094.dkr.ecr.ap-northeast-2.amazonaws.com/torchvision:latest
           image: 681747700094.dkr.ecr.ap-northeast-2.amazonaws.com/gpu-cuda-api:latest
           imagePullPolicy: Always
@@ -35,57 +35,56 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: vision-api
+  name: vision-api2
   annotations:
-    app: 'vision-api'
+    app: 'vision-api2'
     alb.ingress.kubernetes.io/healthcheck-path: "/ping"
 spec:
   selector:
-    app: vision-api
+    app: vision-api2
   type: NodePort
   ports:
     - port: 8000
       targetPort: 8000
       protocol: TCP
-# ---
-# apiVersion: autoscaling/v2beta2
-# kind: HorizontalPodAutoscaler
-# metadata:
-#   name: vision-api-gpu-hpa
-#   namespace: default
-#   annotations:
-#     app: 'vision-api'
-# spec:
-#   scaleTargetRef:
-#     apiVersion: apps/v1
-#     kind: Deployment
-#     name: vision-api
-#   minReplicas: 2
-#   maxReplicas: 12
-#   metrics:
-#   - type: Object
-#     object:
-#       metric:
-#         # name: DCGM_FI_DEV_GPU_UTIL
-#         name: DCGM_FI_DEV_GPU_UTIL_AVG
-#       describedObject:
-#         kind: Service
-#         name: dcgm-exporter
-#       target:
-#         type: Value
-#         value: '30'
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: vision-api2-gpu-hpa
+  namespace: default
+  annotations:
+    app: 'vision-api2'
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: vision-api2
+  minReplicas: 2
+  maxReplicas: 12
+  metrics:
+  - type: Object
+    object:
+      metric:
+        name: DCGM_FI_DEV_GPU_UTIL_AVG
+      describedObject:
+        kind: Service
+        name: vision-api2
+      target:
+        type: Value
+        value: '20'
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: "vision-api-ingress"
+  name: "vision-api2-ingress"
   namespace: default
   annotations:
-    app: 'vision-api'
+    app: 'vision-api2'
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/load-balancer-name: vision-api
+    alb.ingress.kubernetes.io/load-balancer-name: vision-api2
     alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=30
     alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=10
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
@@ -104,6 +103,6 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: "vision-api"
+                name: "vision-api2"
                 port:
                   number: 8000

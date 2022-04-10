@@ -178,12 +178,12 @@ http://localhost:9090/targets
 
 # 5. Prometheus custom metric 생성
 
-## 5.1 prometheus-adapter 설치
+## 5.1 prometheus-adapter 설치 & custom metric 설정
 
 prometheus.url 파라미터의 internal DNS 설정을 위한 서비스명 확인
 
 ```bash
-kubectl get svc -lapp=kube-prometheus-stack-prometheus -n prometheus 
+kubectl get svc -lapp=kube-prometheus-stack-prometheus -n prometheus
 ```
 
 ```bash
@@ -198,6 +198,8 @@ e.g.,
 
 * `http://kube-prometheus-stack-prometheus.prometheus.svc.cluster.local`
 * `http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local`
+
+prometheus-adapter rule에 대한 설명은 [SCustomMetric.md](./CustomMetric.md)에 자세히 설명되어있습니다..
 
 prometheus-adapter log 확인
 
@@ -223,13 +225,12 @@ reponse example:
 
 ```bash
 kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/DCGM_FI_DEV_GPU_UTIL" | jq .
-
-kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/DCGM_FI_DEV_GPU_UTIL_AVG" | jq .
 ```
 
 ```bash
 kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/dcgm-exporter/DCGM_FI_DEV_GPU_UTIL" | jq .
-kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/dcgm-exporter/DCGM_FI_DEV_GPU_UTIL_AVG" | jq .
+kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/vision-api/DCGM_FI_DEV_GPU_UTIL_AVG" | jq .
+kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/vision-api2/DCGM_FI_DEV_GPU_UTIL_AVG" | jq .
 ```
 
 reponse example:
@@ -359,24 +360,29 @@ kubectl describe hpa vision-api-gpu-hpa
 ```
 
 ```bash
-Name:                                                              vision-api-gpu-hpa
-Namespace:                                                         default
-Labels:                                                            <none>
-Annotations:                                                       <none>
-CreationTimestamp:                                                 Wed, 06 Apr 2022 23:21:19 +0900
-Reference:                                                         Deployment/vision-api
-Metrics:                                                           ( current / target )
-  "DCGM_FI_DEV_GPU_UTIL_AVG" on Service/dcgm-exporter (target value):  0 / 30
-Min replicas:                                                      1
-Max replicas:                                                      12
-Deployment pods:                                                   1 current / 1 desired
+Name:                                                               vision-api-gpu-hpa
+Namespace:                                                          default
+Labels:                                                             <none>
+Annotations:                                                        app: vision-api
+CreationTimestamp:                                                  Sun, 10 Apr 2022 21:09:59 +0900
+Reference:                                                          Deployment/vision-api
+Metrics:                                                            ( current / target )
+  "DCGM_FI_DEV_GPU_UTIL_AVG" on Service/vision-api (target value):  11 / 20
+Min replicas:                                                       2
+Max replicas:                                                       12
+Deployment pods:                                                    8 current / 8 desired
 Conditions:
-  Type            Status  Reason            Message
-  ----            ------  ------            -------
-  AbleToScale     True    ReadyForNewScale  recommended size matches current size
-  ScalingActive   True    ValidMetricFound  the HPA was able to successfully calculate a replica count from Service metric DCGM_FI_DEV_GPU_UTIL_AVG
-  ScalingLimited  True    TooFewReplicas    the desired replica count is less than the minimum replica count
-Events:           <none>
+  Type            Status  Reason               Message
+  ----            ------  ------               -------
+  AbleToScale     True    ScaleDownStabilized  recent recommendations were higher than current one, applying the highest recent recommendation
+  ScalingActive   True    ValidMetricFound     the HPA was able to successfully calculate a replica count from Service metric DCGM_FI_DEV_GPU_UTIL_AVG
+  ScalingLimited  False   DesiredWithinRange   the desired count is within the acceptable range
+Events:
+  Type    Reason             Age   From                       Message
+  ----    ------             ----  ----                       -------
+  Normal  SuccessfulRescale  53m   horizontal-pod-autoscaler  New size: 5; reason: Service metric DCGM_FI_DEV_GPU_UTIL_AVG above target
+  Normal  SuccessfulRescale  44m   horizontal-pod-autoscaler  New size: 6; reason: Service metric DCGM_FI_DEV_GPU_UTIL_AVG above target
+  Normal  SuccessfulRescale  41m   horizontal-pod-autoscaler  New size: 8; reason: Service metric DCGM_FI_DEV_GPU_UTIL_AVG above target
 ```
 
 
