@@ -196,8 +196,8 @@ prometheus.url format: `http://<service-name>.<namespace>.svc.cluster.local`
 
 e.g.,
 
-* `http://kube-prometheus-prometheus.prometheus.svc.cluster.local`
-* `http://kube-prometheus-prometheus.monitoring.svc.cluster.local`
+* `http://kube-prometheus-stack-prometheus.prometheus.svc.cluster.local`
+* `http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local`
 
 prometheus-adapter log 확인
 
