@@ -71,6 +71,48 @@ kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/servic
 }
 ```
 
+
+```bash
+kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/DCGM_FI_DEV_GPU_UTIL" | jq .
+```
+
+reponse example:
+
+```json
+{
+  "kind": "MetricValueList",
+  "apiVersion": "custom.metrics.k8s.io/v1beta1",
+  "metadata": {
+    "selfLink": "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/%2A/DCGM_FI_DEV_GPU_UTIL"
+  },
+  "items": [
+    {
+      "describedObject": {
+        "kind": "Pod",
+        "namespace": "default",
+        "name": "dcgm-exporter-2fcbn",
+        "apiVersion": "/v1"
+      },
+      "metricName": "DCGM_FI_DEV_GPU_UTIL",
+      "timestamp": "2022-04-08T16:56:47Z",
+      "value": "25",
+      "selector": null
+    },
+    {
+      "describedObject": {
+        "kind": "Pod",
+        "namespace": "default",
+        "name": "dcgm-exporter-7pwxw",
+        "apiVersion": "/v1"
+      },
+      "metricName": "DCGM_FI_DEV_GPU_UTIL",
+      "timestamp": "2022-04-08T16:56:47Z",
+      "value": "24",
+      "selector": null
+    }
+}
+```
+
 **vision-api** service, DCGM_FI_DEV_GPU_UTIL_**AVG** metric 조회
 
 ```bash

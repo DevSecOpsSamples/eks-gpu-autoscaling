@@ -199,13 +199,28 @@ e.g.,
 * `http://kube-prometheus-stack-prometheus.prometheus.svc.cluster.local`
 * `http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local`
 
-prometheus-adapter rule에 대한 설명은 [SCustomMetric.md](./CustomMetric.md)에 자세히 설명되어있습니다..
+```bash
+  custom:
+    - seriesQuery: 'DCGM_FI_DEV_GPU_UTIL'
+      name:
+        as: "DCGM_FI_DEV_GPU_UTIL_AVG"
+      metricsQuery: ceil(avg_over_time(<<.Series>>{<<.LabelMatchers>>}[60s]))
+      resources:
+        overrides:
+          exported_namespace: {resource: "namespace"}
+          exported_container: {resource: "service"}
+          exported_pod: {resource: "pod"}
+```
+
+[prometheus-adapter-values.yaml](./prometheus-adapter-values.yaml)
 
 prometheus-adapter log 확인
 
 ```bash
 TODO
 ```
+
+prometheus-adapter rule에 대한 상세한 내용은 [CustomMetric.md](./CustomMetric.md)를 참고하시기 바랍니다.
 
 ## 5.2 custom metric 확인
 
@@ -220,6 +235,10 @@ reponse example:
       "name": "namespaces/DCGM_FI_DEV_GPU_UTIL",
       "name": "jobs.batch/DCGM_FI_DEV_GPU_UTIL",
       "name": "pods/DCGM_FI_DEV_GPU_UTIL",
+      "name": "services/DCGM_FI_DEV_GPU_UTIL_AVG",
+      "name": "namespaces/DCGM_FI_DEV_GPU_UTIL_AVG",
+      "name": "jobs.batch/DCGM_FI_DEV_GPU_UTIL_AVG",
+      "name": "pods/DCGM_FI_DEV_GPU_UTIL_AVG",
       ...
 ```
 
@@ -228,48 +247,16 @@ kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*
 ```
 
 ```bash
-kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/dcgm-exporter/DCGM_FI_DEV_GPU_UTIL" | jq .
+kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/DCGM_FI_DEV_GPU_UTIL_CVG" | jq .
+```
+
+```bash
+kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/vision-api/DCGM_FI_DEV_GPU_UTIL" | jq .
+```
+
+```bash
 kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/vision-api/DCGM_FI_DEV_GPU_UTIL_AVG" | jq .
-kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/vision-api2/DCGM_FI_DEV_GPU_UTIL_AVG" | jq .
 ```
-
-reponse example:
-
-```json
-{
-  "kind": "MetricValueList",
-  "apiVersion": "custom.metrics.k8s.io/v1beta1",
-  "metadata": {
-    "selfLink": "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/%2A/DCGM_FI_DEV_GPU_UTIL"
-  },
-  "items": [
-    {
-      "describedObject": {
-        "kind": "Pod",
-        "namespace": "default",
-        "name": "dcgm-exporter-2fcbn",
-        "apiVersion": "/v1"
-      },
-      "metricName": "DCGM_FI_DEV_GPU_UTIL",
-      "timestamp": "2022-04-08T16:56:47Z",
-      "value": "25",
-      "selector": null
-    },
-    {
-      "describedObject": {
-        "kind": "Pod",
-        "namespace": "default",
-        "name": "dcgm-exporter-7pwxw",
-        "apiVersion": "/v1"
-      },
-      "metricName": "DCGM_FI_DEV_GPU_UTIL",
-      "timestamp": "2022-04-08T16:56:47Z",
-      "value": "24",
-      "selector": null
-    }
-}
-```
-
 
 값이 없는 경우 DCGM export pod로 들어가 `wget http://prometheus-url:port` 로 정상 접속되는지 확인합니다.
 
