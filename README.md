@@ -187,7 +187,7 @@ kubectl get svc -lapp=kube-prometheus-stack-prometheus -n prometheus
 ```
 
 ```bash
-kubectl apply -f prometheus-adapter-values.yaml
+helm install prometheus-adapter stable/prometheus-adapter -f prometheus-adapter-values.yaml
 ```
 
 [prometheus-adapter-values.yaml](./prometheus-adapter-values.yaml)
