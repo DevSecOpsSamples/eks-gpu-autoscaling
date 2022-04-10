@@ -2,7 +2,7 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: gpu-demo
+  name: gpu-v1
   region: ap-northeast-2
 
 vpc:

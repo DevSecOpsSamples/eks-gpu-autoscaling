@@ -1,15 +1,13 @@
 
 # Summary
 
-
 Kubernetes Cluster AutoScaler(CA), Karpenter 를 사용한 GPU AutoScaling guide
 
-Data Center GPU Manager(DCGM) exporter를 DaemonSet으로 설치하고 Prometheus custom metric을 기준으로 작동하는 Horizontal Pod Autoscaling(HPA)를 통행 Pod를 scaling 합니다.
-
+Data Center GPU Manager(DCGM) exporter를 DaemonSet으로 설치하고 Prometheus custom metric을 기준으로 작동하는 Horizontal Pod Autoscaling(HPA)를 통해 Pod를 scaling 합니다.
 
 * EKS cluster & nodegroup 생성
 * Kubernetes Dashboard 설치
-* [Cluster AutoScaler(CA), AWS Load Balancer Controller 설치](./ClusterAutoScaler.md)
+* [Cluster AutoScaler(CA), AWS Load Balancer Controller 설치](./ClusterAutoScalerAndALB.md)
 
 1. Data Center GPU Manager(DCGM) exporter DaemonSet 배포
 2. Prometheus Stack 설치
@@ -19,11 +17,20 @@ Data Center GPU Manager(DCGM) exporter를 DaemonSet으로 설치하고 Prometheu
 6. GPU Horizontal Pod Autoscaling(HPA) 배포
 7. AutoScaling Test
 
+## CPU scaling vs GPU scling 
+
+|              | CPU   | GPU   | Description                         |
+|--------------|-------|-------|-------------------------------------|
+| Metric 수집   | 지원   |  미지원 | DCGM exporter DaemonSet으로 수집      |
+| Fraction     | 지원   |  미지원 | nvidia.com/gpu: 0.5 형태로 설정 불가   |
+| HPA          | 지원   |  미지원 | prometheus customer metric 기준 scaling    |
+
 # Environment
 
 * EKS 1.21 - [버전](https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/kubernetes-versions.html)
 * DCGM 2.65
-* Prometheus 
+* Prometheus
+* Prometheus Adapter-2.5.1
 * Grafana 6.24.1
 
 # 1. EKS cluster & nodegroup
@@ -72,13 +79,9 @@ kubectl apply -f dcgm-exporter-karpenter.yaml
 
 * [dcgm-exporter-karpenter.yaml](./dcgm-exporter-karpenter.yaml)
 
-https://github.com/NVIDIA/dcgm-exporter repository 기준
+option에 대한 상세한 내용은  [NVIDIA doc DCGM-Exporter](./https://docs.nvidia.com/datacenter/cloud-native/gpu-telemetry/dcgm-exporter.html) 페이지를 참고하시기 바랍니다.
 
-https://docs.nvidia.com/datacenter/cloud-native/gpu-telemetry/dcgm-exporter.html 참고
-
-Service Dicovery를 위한 ServiceMonitor 사용하기 위해 helm 대신 local yaml 파일로 배포
-
-additionalScrapeConfigs 설정에 [job_name](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config)을 추가해 사용 가능하나 service 단위로 configuration을 배포하기 위해  ServiceMonitor를 사용합니다.
+Service Dicovery를 위한 ServiceMonitor 사용하기 위해 helm 대신 local yaml 파일로 배포합니다. additionalScrapeConfigs 설정에 [job_name](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config)을 추가해 사용 가능하나 service 단위로 configuration을 배포하기 위해  ServiceMonitor를 사용합니다.
 
 ```yaml
 ---
@@ -144,7 +147,7 @@ kubectl port-forward svc/dcgm-exporter 9400:9400
 http://localhost:9400/metrics
 
 ```bash
-curl http://localhost:9400/metrics | grep dcgm
+curl http://localhost:9400/metrics | grep DCGM_FI_DEV_GPU_UTIL
 ```
 
 response example:
@@ -184,7 +187,7 @@ kubectl get svc -lapp=kube-prometheus-stack-prometheus -n prometheus
 ```
 
 ```bash
-helm install prometheus-adapter --set rbac.create=true,prometheus.url=http://kube-prometheus-prometheus.prometheus.svc.cluster.local,prometheus.port=9090 stable/prometheus-adapter
+kubectl apply -f prometheus-adapter-values.yaml
 ```
 
 prometheus.url format: `http://<service-name>.<namespace>.svc.cluster.local`
@@ -194,25 +197,76 @@ e.g.,
 * `http://kube-prometheus-prometheus.prometheus.svc.cluster.local`
 * `http://kube-prometheus-prometheus.monitoring.svc.cluster.local`
 
+prometheus-adapter log 확인
+
+```bash
+TODO
+```
+
 ## 5.2 custom metric 확인
 
 ```bash
-kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1 | jq -r . | grep DCGM
+kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1 | jq -r . | grep DCGM_FI_DEV_GPU_UTIL
 ```
 
 reponse example:
 
 ```bash
-      "name": "services/DCGM_FI_DEV_FB_USED",
-      "name": "jobs.batch/DCGM_FI_DEV_XID_ERRORS",
-      "name": "namespaces/DCGM_FI_DEV_NVLINK_BANDWIDTH_TOTAL",
-      "name": "pods/DCGM_FI_DEV_SM_CLOCK",
-      "name": "services/DCGM_FI_DEV_MEM_COPY_UTIL",
-      "name": "pods/DCGM_FI_DEV_POWER_USAGE",
-      "name": "services/DCGM_FI_DEV_ENC_UTIL",
-      "name": "namespaces/DCGM_FI_DEV_VGPU_LICENSE_STATUS",
+      "name": "services/DCGM_FI_DEV_GPU_UTIL",
+      "name": "namespaces/DCGM_FI_DEV_GPU_UTIL",
+      "name": "jobs.batch/DCGM_FI_DEV_GPU_UTIL",
+      "name": "pods/DCGM_FI_DEV_GPU_UTIL",
       ...
 ```
+
+```bash
+kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/DCGM_FI_DEV_GPU_UTIL" | jq .
+
+kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/DCGM_FI_DEV_GPU_UTIL_AVG" | jq .
+```
+
+```bash
+kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/dcgm-exporter/DCGM_FI_DEV_GPU_UTIL" | jq .
+kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/dcgm-exporter/DCGM_FI_DEV_GPU_UTIL_AVG" | jq .
+```
+
+reponse example:
+
+```json
+{
+  "kind": "MetricValueList",
+  "apiVersion": "custom.metrics.k8s.io/v1beta1",
+  "metadata": {
+    "selfLink": "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/%2A/DCGM_FI_DEV_GPU_UTIL"
+  },
+  "items": [
+    {
+      "describedObject": {
+        "kind": "Pod",
+        "namespace": "default",
+        "name": "dcgm-exporter-2fcbn",
+        "apiVersion": "/v1"
+      },
+      "metricName": "DCGM_FI_DEV_GPU_UTIL",
+      "timestamp": "2022-04-08T16:56:47Z",
+      "value": "25",
+      "selector": null
+    },
+    {
+      "describedObject": {
+        "kind": "Pod",
+        "namespace": "default",
+        "name": "dcgm-exporter-7pwxw",
+        "apiVersion": "/v1"
+      },
+      "metricName": "DCGM_FI_DEV_GPU_UTIL",
+      "timestamp": "2022-04-08T16:56:47Z",
+      "value": "24",
+      "selector": null
+    }
+}
+```
+
 
 값이 없는 경우 DCGM export pod로 들어가 `wget http://prometheus-url:port` 로 정상 접속되는지 확인합니다.
 
@@ -235,50 +289,132 @@ Dashboard import
 
 ![grafana-dcgm](./screenshots/grafana-dcgm-01.png?raw=true)
 
-# 7. Inference Test API 배포
+# 7. Inference API & GPU HPA 배포
 
 ```bash
-kubectl apply -f inf-api.yaml
+kubectl apply -f vision-api.yaml
 ```
 
-[inf-api.yaml](./inf-api.yaml)
+vision-api.yaml는 Deployment, Service, Ingress, HorizontalPodAutoscaler 를 배포합니다. AWS Load Balancer Controller 설치를 위한 setup은 [ClusterAutoScalerAndALB.md](./ClusterAutoScalerAndALB.md)를 참고하시기 바랍니다.
 
-# 8. GPU HPA 배포
+image size: 3.33GB, image pull: 39.50s
+
+[vision-api.yaml](./vision-api.yaml)
+
+```yaml
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: vision-api-gpu-hpa
+  namespace: default
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: vision-api
+  minReplicas: 2
+  maxReplicas: 12
+  metrics:
+  - type: Object
+    object:
+      metric:
+        name: DCGM_FI_DEV_GPU_UTIL_AVG
+      describedObject:
+        kind: Service
+        name: dcgm-exporter
+      target:
+        type: Value
+        value: '30'
+```
+
+## prometheus-alert-rule.yaml
 
 ```bash
-kubectl apply -f gpu-hpa.yaml
+kubectl apply -f prometheus-alert-rule.yaml
 ```
 
-[gpu-hpa.yaml](./gpu-hpa.yaml)
+[prometheus-alert-rule.yaml](./prometheus-alert-rule.yaml)
 
 # 9. AutoScaling Test
 
-GPU load test
-
 ```bash
-kubectl apply -f gputest.yml
+bzt vision-api-bzt.yaml
 ```
 
 ```bash
-kubectl scale deployment gputest --replicas=6
+# $JMETER_HOME/bin
+./jmeter -t vision-api.jmx -n  -j ../log/jmeter.log
 ```
 
-[gputest.yml](./gputest.yml)
+[vision-api.jmx](./vision-api.jmx)
 
+![prom-dcgm-metric](./screenshots/prom-dcgm-metric.png?raw=true)
+
+![scalingtest-taurus.png](./screenshots/scalingtest-taurus.png?raw=true)
+
+```bash
+kubectl describe hpa vision-api-gpu-hpa
+```
+
+```bash
+Name:                                                              vision-api-gpu-hpa
+Namespace:                                                         default
+Labels:                                                            <none>
+Annotations:                                                       <none>
+CreationTimestamp:                                                 Wed, 06 Apr 2022 23:21:19 +0900
+Reference:                                                         Deployment/vision-api
+Metrics:                                                           ( current / target )
+  "DCGM_FI_DEV_GPU_UTIL_AVG" on Service/dcgm-exporter (target value):  0 / 30
+Min replicas:                                                      1
+Max replicas:                                                      12
+Deployment pods:                                                   1 current / 1 desired
+Conditions:
+  Type            Status  Reason            Message
+  ----            ------  ------            -------
+  AbleToScale     True    ReadyForNewScale  recommended size matches current size
+  ScalingActive   True    ValidMetricFound  the HPA was able to successfully calculate a replica count from Service metric DCGM_FI_DEV_GPU_UTIL_AVG
+  ScalingLimited  True    TooFewReplicas    the desired replica count is less than the minimum replica count
+Events:           <none>
+```
+
+
+```bash
+kubectl get events -w
+
+kubectl describe deploy vision-api
+
+kubectl describe apiservices v1beta1.metrics.k8s.io
+kubectl get endpoints metrics-server -n kube-system
+kubectl logs -n kube-system -l k8s-app=metrics-server
+
+kubectl scale deployment vision-api --replicas=6
+kubectl get events -w
+```
 
 # Uninstall
 
 ```bash
+
+kubectl delete -f vision-api.yaml
+kubectl delete hpa vision-api-gpu-hpa
+
 kubectl delete -f dcgm-exporter.yaml
 kubectl delete -f dcgm-exporter-karpenter.yaml
-helm uninstall prometheus-adapter -n prometheus
+kubectl delete -f prometheus-alert-rule.yaml
+
+helm uninstall prometheus-adapter
 helm uninstall kube-prometheus-stack -n prometheus
 ```
 
 # Reference
+DCGM-Exporter
+https://docs.nvidia.com/datacenter/cloud-native/gpu-telemetry/dcgm-exporter.html
 
-https://docs.nvidia.com/datacenter/cloud-native/gpu-telemetry/dcgm-exporter.html#integrating-gpu-telemetry-into-kubernetes.html
+https://github.com/kubernetes-sigs/prometheus-adapter
 
+https://aws.amazon.com/ko/blogs/machine-learning/monitoring-gpu-utilization-with-amazon-cloudwatch/
+
+# Trouble Shooting
 
 # ETC
 
@@ -286,3 +422,7 @@ helm repo add gpu-helm-charts https://nvidia.github.io/gpu-monitoring-tools/helm
 helm install --generate-name gpu-helm-charts/dcgm-exporter
 로 설치시 livness 설정 이슈로 pod 재시작됨
 initialDelaySeconds: 20 이상으로 변경 필요
+
+
+Sharing GPU in Kubernetes
+https://www.bytefold.com/sharing-gpu-in-kubernetes/

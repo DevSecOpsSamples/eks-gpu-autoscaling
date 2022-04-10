@@ -1,0 +1,12 @@
+---
+execution:
+- concurrency: 1
+  hold-for: 1s
+  ramp-up: 1s
+  scenario: vision-api
+scenarios:
+  vision-api:
+    requests:
+    - https://vision-api.octankshop.com/gputest
+    think-time: 0.75
+

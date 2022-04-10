@@ -2,22 +2,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ml-api
+  name: vision-api
   namespace: default
+  annotations:
+    app: 'vision-api'
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
-      app: ml-api
+      app: vision-api
   template:
     metadata:
       labels:
-        app: ml-api
+        app: vision-api
     spec:
       containers:
-        - name: ml-api
-          # image: 681747700094.dkr.ecr.ap-northeast-2.amazonaws.com/mlapp:latest
-          image: 681747700094.dkr.ecr.ap-northeast-2.amazonaws.com/mlapp-gpu:latest
+        - name: vision-api
+          # image: 681747700094.dkr.ecr.ap-northeast-2.amazonaws.com/torchvision:latest
+          image: 681747700094.dkr.ecr.ap-northeast-2.amazonaws.com/gpu-cuda-api:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
@@ -34,41 +36,57 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ml-api
+  name: vision-api
   annotations:
+    app: 'vision-api'
     alb.ingress.kubernetes.io/healthcheck-path: "/ping"
 spec:
   selector:
-    app: ml-api
+    app: vision-api
   type: NodePort
   ports:
     - port: 8000
       targetPort: 8000
       protocol: TCP
 ---
-apiVersion: autoscaling/v1
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: ml-api
+  name: vision-api-gpu-hpa
+  namespace: default
+  annotations:
+    app: 'vision-api'
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: ml-api
-  minReplicas: 3
-  maxReplicas: 300
-  targetCPUUtilizationPercentage: 20
+    name: vision-api
+  minReplicas: 2
+  maxReplicas: 12
+  metrics:
+  - type: Object
+    object:
+      metric:
+        # name: DCGM_FI_DEV_GPU_UTIL
+        name: DCGM_FI_DEV_GPU_UTIL_AVG
+      describedObject:
+        kind: Service
+        name: dcgm-exporter
+      target:
+        type: Value
+        value: '30'
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: "ml-api-v3-alb-ingress"
+  name: "vision-api-ingress"
   namespace: default
   annotations:
+    app: 'vision-api'
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/load-balancer-name: ml-api
+    alb.ingress.kubernetes.io/load-balancer-name: vision-api
     alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=30
     alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=10
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
@@ -87,6 +105,6 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: "ml-api"
+                name: "vision-api"
                 port:
                   number: 8000

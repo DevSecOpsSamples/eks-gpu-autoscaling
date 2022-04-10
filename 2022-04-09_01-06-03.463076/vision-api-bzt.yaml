@@ -1,0 +1,14 @@
+#bzt vision-api-bzt.yaml
+---
+execution:
+- concurrency: 1
+  ramp-up: 1s
+  hold-for: 10m30s
+  scenario: vision-api
+
+scenarios:
+  vision-api:
+    think-time: 0.75
+    requests:
+    #- http://
+    - https://vision-api.octankshop.com/gputest

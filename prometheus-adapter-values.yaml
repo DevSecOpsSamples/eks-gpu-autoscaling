@@ -1,0 +1,47 @@
+prometheus:
+    url: http://kube-prometheus-stack-prometheus.prometheus.svc.cluster.local
+    port: 9090
+rbac:
+    create: true
+rules:
+    # https://github.com/kubernetes-sigs/prometheus-adapter/blob/master/docs/config.md
+#   default: false
+  default: true
+  custom:
+    - seriesQuery: '{__name__="DCGM_FI_DEV_GPU_UTIL"}'
+      name:
+        as: "DCGM_FI_DEV_GPU_UTIL_AVG"
+    #   metricsQuery: ceil(avg_over_time(<<.Series>>{<<.LabelMatchers>>}[60s])) by (<<.GroupBy>>)
+      metricsQuery: ceil(avg_over_time(<<.Series>>{<<.LabelMatchers>>}[60s]))
+      resources:
+        overrides:
+          namespace:
+            resource: namespace
+          pod:
+            resource: pod
+          service:
+            resource: service
+    - seriesQuery: '{__name__="DCGM_FI_DEV_GPU_UTIL"}'
+      name:
+        as: "DCGM_FI_DEV_GPU_UTIL_MIN"
+      metricsQuery: ceil(min(<<.Series>>{<<.LabelMatchers>>}[60s]))
+      resources:
+        overrides:
+          namespace:
+            resource: namespace
+          pod:
+            resource: pod
+          service:
+            resource: service
+    - seriesQuery: '{__name__="DCGM_FI_DEV_GPU_UTIL"}'
+      name:
+        as: "DCGM_FI_DEV_GPU_UTIL_MAX"
+      metricsQuery: ceil(max(<<.Series>>{<<.LabelMatchers>>}[60s]))
+      resources:
+        overrides:
+          namespace:
+            resource: namespace
+          pod:
+            resource: pod
+          service:
+            resource: service
