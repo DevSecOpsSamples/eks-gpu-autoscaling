@@ -1,2 +1,0 @@
-timeStamp,elapsed,label,responseCode,responseMessage,threadName,success,bytes,grpThreads,allThreads,Latency,Hostname,Connect
-1649433942467,1639,https://vision-api.octankshop.com/gputest,200,OK,vision-api-ThreadStarter 1-1,true,269,1,1,1636,147ddac640e4.ant.amazon.com,238
