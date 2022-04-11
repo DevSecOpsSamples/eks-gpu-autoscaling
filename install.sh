@@ -10,6 +10,9 @@ helm install prometheus-adapter stable/prometheus-adapter -f prometheus-adapter-
 
 helm upgrade prometheus-adapter stable/prometheus-adapter -f prometheus-adapter-values.yaml
 
+#helm upgrade prometheus-adapter stable/prometheus-adapter -f kube-prometheus-stack.values.yaml
+
+
 kubectl apply -f vision-api.yaml
 
 kubectl apply -f vision-api2.yaml

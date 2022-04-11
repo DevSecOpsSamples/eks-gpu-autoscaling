@@ -17,9 +17,7 @@ DCGM_FI_DEV_GPU_UTIL{exported_container="vision-api"}[60s]
 
 ## Prometheus Adapter Rule
 
-/apis/custom.metrics.k8s.io/v1beta1 API로 DCGM_FI_DEV_GPU_UTIL metric 값 조회시 n개 node GPU의 합으로 출력되므로 node, service 기준 avg로 조회하기 위한 custom metric을 생성합니다.
-
-DCGM_FI_DEV_GPU_UTIL{exported_container="vision-api"} 로 저장되는 데이터를 DCGM_FI_DEV_GPU_UTIL_AVG{service="vision-api"} 형태로 조회 할 수 있도록 label을 override합니다
+/apis/custom.metrics.k8s.io/v1beta1 API로 DCGM_FI_DEV_GPU_UTIL metric 값 조회시 n개 node GPU의 합으로 return 되므로 node, service 기준 평균으로 조회하기 위한 custom metric을 생성합니다. DCGM_FI_DEV_GPU_UTIL{exported_container="vision-api"} 로 저장되는 데이터를 DCGM_FI_DEV_GPU_UTIL_AVG{service="vision-api"} 형태로 조회 할 수 있도록 label을 override합니다
 
 ```bash
   custom:
@@ -37,11 +35,11 @@ DCGM_FI_DEV_GPU_UTIL{exported_container="vision-api"} 로 저장되는 데이터
 [prometheus-adapter-values.yaml](./prometheus-adapter-values.yaml)
 
 
-## 참고
-
-DCGM_FI_DEV_GPU_UTIL metric 값은 value와 같이 n개 node GPU의 합으로 출력됩니다.
+## API Response
 
 http://localhost:9090/graph?g0.expr=DCGM_FI_DEV_GPU_UTIL%7Bexported_container%3D%22vision-api%22%7D%5B60s%5D&g0.tab=1&g0.stacked=0&g0.show_exemplars=0&g0.range_input=15m
+
+### DCGM_FI_DEV_GPU_UTIL metric
 
 ```bash
 kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/dcgm-exporter/DCGM_FI_DEV_GPU_UTIL" | jq .
@@ -112,6 +110,8 @@ reponse example:
     }
 }
 ```
+
+### DCGM_FI_DEV_GPU_UTIL_**AVG** metric
 
 **vision-api** service, DCGM_FI_DEV_GPU_UTIL_**AVG** metric 조회
 

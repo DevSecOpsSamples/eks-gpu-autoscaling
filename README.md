@@ -186,18 +186,18 @@ prometheus.url 파라미터의 internal DNS 설정을 위한 서비스명 확인
 kubectl get svc -lapp=kube-prometheus-stack-prometheus -n prometheus
 ```
 
-```bash
-helm install prometheus-adapter stable/prometheus-adapter -f prometheus-adapter-values.yaml
-```
-
-[prometheus-adapter-values.yaml](./prometheus-adapter-values.yaml)
-
 prometheus.url format: `http://<service-name>.<namespace>.svc.cluster.local`
 
 e.g.,
 
 * `http://kube-prometheus-stack-prometheus.prometheus.svc.cluster.local`
 * `http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local`
+
+```bash
+helm install prometheus-adapter stable/prometheus-adapter -f prometheus-adapter-values.yaml
+```
+
+[prometheus-adapter-values.yaml](./prometheus-adapter-values.yaml)
 
 ```bash
   custom:
@@ -212,15 +212,13 @@ e.g.,
           exported_pod: {resource: "pod"}
 ```
 
-[prometheus-adapter-values.yaml](./prometheus-adapter-values.yaml)
+prometheus-adapter rule에 대한 상세한 내용은 [CustomMetric.md](./CustomMetric.md)를 참고하시기 바랍니다.
 
 prometheus-adapter log 확인
 
 ```bash
 TODO
 ```
-
-prometheus-adapter rule에 대한 상세한 내용은 [CustomMetric.md](./CustomMetric.md)를 참고하시기 바랍니다.
 
 ## 5.2 custom metric 확인
 
@@ -247,11 +245,11 @@ kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*
 ```
 
 ```bash
-kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/DCGM_FI_DEV_GPU_UTIL_CVG" | jq .
+kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/DCGM_FI_DEV_GPU_UTIL_AVG" | jq .
 ```
 
 ```bash
-kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/vision-api/DCGM_FI_DEV_GPU_UTIL" | jq .
+kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/dcgm-exporter/DCGM_FI_DEV_GPU_UTIL" | jq .
 ```
 
 ```bash
@@ -375,7 +373,6 @@ Events:
 
 ```bash
 kubectl get events -w
-
 kubectl describe deploy vision-api
 
 kubectl describe apiservices v1beta1.metrics.k8s.io
@@ -383,7 +380,6 @@ kubectl get endpoints metrics-server -n kube-system
 kubectl logs -n kube-system -l k8s-app=metrics-server
 
 kubectl scale deployment vision-api --replicas=6
-kubectl get events -w
 ```
 
 # Uninstall

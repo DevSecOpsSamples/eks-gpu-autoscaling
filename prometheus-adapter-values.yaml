@@ -9,7 +9,20 @@ rules:
     - seriesQuery: 'DCGM_FI_DEV_GPU_UTIL{exported_namespace="default"}'
       name:
         as: "DCGM_FI_DEV_GPU_UTIL_AVG"
-      metricsQuery: ceil(avg_over_time(<<.Series>>{<<.LabelMatchers>>}[60s]))
+      # metricsQuery: ceil(avg_over_time(<<.Series>>{<<.LabelMatchers>>}[60s]))
+      metricsQuery: avg(<<.Series>>{<<.LabelMatchers>>} offset 1m)
+      # window: 1m
+      resources:
+        overrides:
+          exported_container: {resource: "service"}
+          exported_namespace: {resource: "namespace"}
+          exported_pod: {resource: "pod"}
+    - seriesQuery: 'DCGM_FI_DEV_GPU_UTIL{exported_namespace="default"}'
+      name:
+        as: "DCGM_FI_DEV_GPU_UTIL_AVG2"
+        metricsQuery: avg(<<.Series>>{<<.LabelMatchers>>} offset 1m)
+      # metricsQuery: ceil(avg_over_time(<<.Series>>{<<.LabelMatchers>>}[60s]))
+      # metricsQuery: ceil(avg(<<.Series>>{<<.LabelMatchers>>})) by (<<.GroupBy>>)
       resources:
         overrides:
           exported_container: {resource: "service"}
