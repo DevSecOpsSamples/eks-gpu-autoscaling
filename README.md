@@ -306,9 +306,9 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: vision-api
+    name: vision-api # <-- service name
   minReplicas: 2
-  maxReplicas: 12
+  maxReplicas: 10
   metrics:
   - type: Object
     object:
@@ -316,10 +316,34 @@ spec:
         name: DCGM_FI_DEV_GPU_UTIL_AVG
       describedObject:
         kind: Service
-        name: dcgm-exporter
+        name: vision-api # <-- service name
       target:
         type: Value
         value: '30'
+```
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vision-api
+  namespace: default
+  annotations:
+    app: 'vision-api'
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: vision-api
+  template:
+    metadata:
+      labels:
+        app: vision-api
+    spec:
+      containers:
+        - name: vision-api  # container name 과 service name 동일하게 지정
+          image: 123456789.dkr.ecr.ap-northeast-2.amazonaws.com/gpu-cuda-api:latest
+          imagePullPolicy: Always
 ```
 
 ## prometheus-alert-rule.yaml
@@ -394,6 +418,7 @@ kubectl scale deployment vision-api --replicas=6
 ```bash
 
 kubectl delete -f vision-api.yaml
+kubectl delete -f vision-api2.yaml
 kubectl delete hpa vision-api-gpu-hpa
 
 kubectl delete -f dcgm-exporter.yaml
