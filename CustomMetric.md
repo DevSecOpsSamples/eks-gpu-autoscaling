@@ -25,7 +25,7 @@ DCGM_FI_DEV_GPU_UTIL{exported_container="vision-api"} 로 저장되는 데이터
 
 Service 명과 container 명을 동일하게 지정하고 **exported_container**로 export 되는 값을 기준으로 service 단위 scaling을 설정합니다.
 
-```bash
+```yaml
       resources:
         overrides:
           exported_namespace: {resource: "namespace"}
