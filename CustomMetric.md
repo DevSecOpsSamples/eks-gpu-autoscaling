@@ -3,7 +3,7 @@
 
 ## Background
 
-DGCM exporter를 통해 수집되는 label은 아래와 같이 exported_container, exported_service에 K8s Service가 입력됩니다.
+DGCM exporter를 통해 수집되는 label은 아래와 같이 exported_namespace, exported_container, exported_pod로 service 명은 label로 입력되지 않습니다.
 
 전체 label은 [Service Discovery menu](http://localhost:9090/service-discovery)에서 확인 가능합니다. [prom-servicediscovery.png](./screenshots/prom-servicediscovery.png)
 
@@ -17,19 +17,63 @@ DCGM_FI_DEV_GPU_UTIL{exported_container="vision-api"}[60s]
 
 ## Prometheus Adapter Rule
 
-/apis/custom.metrics.k8s.io/v1beta1 API로 DCGM_FI_DEV_GPU_UTIL metric 값 조회시 n개 node GPU의 합으로 return 되므로 node, service 기준 평균으로 조회하기 위한 custom metric을 생성합니다. DCGM_FI_DEV_GPU_UTIL{exported_container="vision-api"} 로 저장되는 데이터를 DCGM_FI_DEV_GPU_UTIL_AVG{service="vision-api"} 형태로 조회 할 수 있도록 label을 override합니다
+/apis/custom.metrics.k8s.io/v1beta1 API로 DCGM_FI_DEV_GPU_UTIL metric 값 조회시 n개 node GPU의 합으로 return 되므로 node, service 기준 평균으로 조회하기 위한 custom metric을 생성합니다. 
+
+DCGM_FI_DEV_GPU_UTIL{exported_container="vision-api"} 로 저장되는 데이터를 DCGM_FI_DEV_GPU_UTIL_AVG{service="vision-api"} 형태로 조회 할 수 있도록 label을 override합니다
+
+**중요** 
+
+Service 명과 container 명을 동일하게 지정하고 **exported_container**로 export 되는 값을 기준으로 service 단위 scaling을 설정합니다.
 
 ```bash
+      resources:
+        overrides:
+          exported_namespace: {resource: "namespace"}
+          exported_container: {resource: "service"}
+```
+
+PromQL for testing
+
+```bash
+
+DCGM_FI_DEV_GPU_UTIL[1m]
+
+avg by (exported_namespace, exported_container) (round(avg_over_time(DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container!="",exported_pod!=""}[1m])))
+
+max by (exported_namespace, exported_container) (round(max_over_time(DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container!="",exported_pod!=""}[1m])))
+
+```
+
+```bash
+rules:
   custom:
-    - seriesQuery: 'DCGM_FI_DEV_GPU_UTIL'
+    - seriesQuery: 'DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container!="",exported_pod!=""}'
       name:
         as: "DCGM_FI_DEV_GPU_UTIL_AVG"
-      metricsQuery: ceil(avg_over_time(<<.Series>>{<<.LabelMatchers>>}[60s]))
       resources:
         overrides:
           exported_namespace: {resource: "namespace"}
           exported_container: {resource: "service"}
           exported_pod: {resource: "pod"}
+      metricsQuery: avg by (exported_namespace, exported_container) (round(avg_over_time(<<.Series>>[1m])))
+    - seriesQuery: 'DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container!="",exported_pod!=""}'
+      name:
+        as: "DCGM_FI_DEV_GPU_UTIL_MIN"
+      resources:
+        overrides:
+          exported_container: {resource: "service"}
+          exported_namespace: {resource: "namespace"}
+          exported_pod: {resource: "pod"}
+      metricsQuery: min by (exported_namespace, exported_container) (round(min_over_time(<<.Series>>[1m])))
+    - seriesQuery: 'DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container!="",exported_pod!=""}'
+      name:
+        as: "DCGM_FI_DEV_GPU_UTIL_MAX"
+      resources:
+        overrides:
+          exported_container: {resource: "service"}
+          exported_namespace: {resource: "namespace"}
+          exported_pod: {resource: "pod"}
+      metricsQuery: max by (exported_namespace, exported_container) (round(max_over_time(<<.Series>>[1m])))
 ```
 
 [prometheus-adapter-values.yaml](./prometheus-adapter-values.yaml)
