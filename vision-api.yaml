@@ -66,10 +66,10 @@ spec:
   - type: Object
     object:
       metric:
-        name: vision-api
+        name: DCGM_FI_DEV_GPU_UTIL_AVG
       describedObject:
         kind: Service
-        name: dcgm-exporter
+        name: vision-api
       target:
         type: Value
         value: '20'

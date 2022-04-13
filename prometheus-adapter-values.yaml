@@ -1,17 +1,34 @@
 prometheus:
-    url: http://kube-prometheus-stack-prometheus.prometheus.svc.cluster.local
+    # kube-prometheus-stack chart
+    url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local
     port: 9090
-rbac:
-    create: true
 rules:
   default: true
   custom:
-    - seriesQuery: 'DCGM_FI_DEV_GPU_UTIL{exported_namespace="default"}'
+    - seriesQuery: 'DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container!="",exported_pod!=""}'
       name:
         as: "DCGM_FI_DEV_GPU_UTIL_AVG"
-      metricsQuery: ceil(avg_over_time(<<.Series>>{<<.LabelMatchers>>}[60s]))
+      resources:
+        overrides:
+          exported_namespace: {resource: "namespace"}
+          exported_container: {resource: "service"}
+          exported_pod: {resource: "pod"}
+      metricsQuery: avg by (exported_namespace, exported_container) (round(avg_over_time(<<.Series>>[1m])))
+    - seriesQuery: 'DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container!="",exported_pod!=""}'
+      name:
+        as: "DCGM_FI_DEV_GPU_UTIL_MIN"
       resources:
         overrides:
           exported_container: {resource: "service"}
           exported_namespace: {resource: "namespace"}
           exported_pod: {resource: "pod"}
+      metricsQuery: min by (exported_namespace, exported_container) (round(min_over_time(<<.Series>>[1m])))
+    - seriesQuery: 'DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container!="",exported_pod!=""}'
+      name:
+        as: "DCGM_FI_DEV_GPU_UTIL_MAX"
+      resources:
+        overrides:
+          exported_container: {resource: "service"}
+          exported_namespace: {resource: "namespace"}
+          exported_pod: {resource: "pod"}
+      metricsQuery: max by (exported_namespace, exported_container) (round(max_over_time(<<.Series>>[1m])))

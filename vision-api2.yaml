@@ -61,7 +61,7 @@ spec:
     kind: Deployment
     name: vision-api2
   minReplicas: 2
-  maxReplicas: 12
+  maxReplicas: 10
   metrics:
   - type: Object
     object:
@@ -69,7 +69,7 @@ spec:
         name: DCGM_FI_DEV_GPU_UTIL_AVG
       describedObject:
         kind: Service
-        name: vision-api2
+        name: vision-api
       target:
         type: Value
         value: '20'
