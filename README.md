@@ -56,7 +56,7 @@ cluster 13분, Manged Node Group 10분 정도 소요됩니다.
 ## 1.2 WebConsole에서 Kubernetes objects 조회를 위한 IAM identity mapping 생성
 
 ```bash
-eksctl create iamidentitymapping --cluster <CluterName> --arn arn:aws:iam::<YourAwsAccountId>:role/<YourRoleName> --group system:masters --username admin --region ap-northeast-2
+eksctl create iamidentitymapping --cluster <cluster-name> --arn arn:aws:iam::<account-id>:role/<role-name> --group system:masters --username admin --region ap-northeast-2
 ```
 
 # 2. Kubernetes Dashboard 설치 (Optional)
