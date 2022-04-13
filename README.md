@@ -290,6 +290,10 @@ Dashboard import
 kubectl apply -f vision-api.yaml
 ```
 
+```bash
+kubectl apply -f vision-api2.yaml
+```
+
 vision-api.yaml는 Deployment, Service, Ingress, HorizontalPodAutoscaler 를 배포합니다. AWS Load Balancer Controller 설치를 위한 setup은 [ClusterAutoScalerAndALB.md](./ClusterAutoScalerAndALB.md)를 참고하시기 바랍니다.
 
 image size: 3.33GB, image pull: 39.50s
