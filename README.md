@@ -81,7 +81,7 @@ kubectl apply -f dcgm-exporter-karpenter.yaml
 
 * [dcgm-exporter-karpenter.yaml](./dcgm-exporter-karpenter.yaml)
 
-option에 대한 상세한 내용은  [NVIDIA doc DCGM-Exporter](./https://docs.nvidia.com/datacenter/cloud-native/gpu-telemetry/dcgm-exporter.html) 페이지를 참고하시기 바랍니다.
+option에 대한 상세한 내용은  [NVIDIA doc DCGM-Exporter](https://docs.nvidia.com/datacenter/cloud-native/gpu-telemetry/dcgm-exporter.html) 페이지를 참고하시기 바랍니다.
 
 Service Dicovery를 위한 ServiceMonitor 사용하기 위해 helm 대신 local yaml 파일로 배포합니다. additionalScrapeConfigs 설정에 [job_name](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config)을 추가해 사용 가능하나 service 단위로 configuration을 배포하기 위해  ServiceMonitor를 사용합니다.
 
