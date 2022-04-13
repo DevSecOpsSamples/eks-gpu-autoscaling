@@ -27,11 +27,13 @@ Data Center GPU Manager(DCGM) exporter를 DaemonSet으로 설치하고 Prometheu
 
 # Environment
 
-* EKS 1.21 - [버전](https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/kubernetes-versions.html)
-* DCGM 2.65
-* Prometheus
-* Prometheus Adapter-2.5.1
-* Grafana 6.24.1
+| SW           | Version    | Desc   |
+|--------------|---------|-------|
+| EKS                | 1.21    | [버전](https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/kubernetes-versions.html)  |
+| DCGM               | 2.65    |  |
+| Prometheus         | 2.34.0  |  |
+| Prometheus Adapter | 2.5.1   |  |
+| Grafana            | 6.24.1  |  |
 
 # 1. EKS cluster & nodegroup
 
@@ -71,17 +73,21 @@ eksctl create iamidentitymapping --cluster <CluterName> --arn arn:aws:iam::<Your
 kubectl apply -f dcgm-exporter.yaml
 ```
 
+* [dcgm-exporter.yaml](./dcgm-exporter.yaml)
+
 ```bash
 kubectl apply -f dcgm-exporter-karpenter.yaml
 ```
-
-* [dcgm-exporter.yaml](./dcgm-exporter.yaml)
 
 * [dcgm-exporter-karpenter.yaml](./dcgm-exporter-karpenter.yaml)
 
 option에 대한 상세한 내용은  [NVIDIA doc DCGM-Exporter](./https://docs.nvidia.com/datacenter/cloud-native/gpu-telemetry/dcgm-exporter.html) 페이지를 참고하시기 바랍니다.
 
 Service Dicovery를 위한 ServiceMonitor 사용하기 위해 helm 대신 local yaml 파일로 배포합니다. additionalScrapeConfigs 설정에 [job_name](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config)을 추가해 사용 가능하나 service 단위로 configuration을 배포하기 위해  ServiceMonitor를 사용합니다.
+
+```bash
+kubectl get servicemonitor dcgm-exporter -o yaml
+```
 
 ```yaml
 ---
@@ -162,6 +168,7 @@ DCGM_FI_DEV_GPU_UTIL{gpu="2",UUID="GPU-6ae74b72-48d0-f09f-14e2-4e09ceebda63",dev
 
 * Prometheus Server
 * Prometheus Operator
+* Metric Server
 * Grafana
 
 ```bash
