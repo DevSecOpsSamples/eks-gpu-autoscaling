@@ -61,18 +61,18 @@ spec:
     kind: Deployment
     name: vision-api
   minReplicas: 2
-  maxReplicas: 12
+  maxReplicas: 10
   metrics:
   - type: Object
     object:
       metric:
-        name: DCGM_FI_DEV_GPU_UTIL_AVG
+        name: vision-api
       describedObject:
         kind: Service
         name: dcgm-exporter
       target:
         type: Value
-        value: '30'
+        value: '20'
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
