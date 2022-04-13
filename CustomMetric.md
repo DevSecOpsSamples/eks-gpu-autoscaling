@@ -36,7 +36,7 @@ PromQL for testing
 
 ```bash
 
-DCGM_FI_DEV_GPU_UTIL[1m]
+DCGM_FI_DEV_GPU_UTIL[5m]
 
 avg by (exported_namespace, exported_container) (round(avg_over_time(DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container!="",exported_pod!=""}[1m])))
 
@@ -44,7 +44,7 @@ max by (exported_namespace, exported_container) (round(max_over_time(DCGM_FI_DEV
 
 ```
 
-```bash
+```yaml
 rules:
   custom:
     - seriesQuery: 'DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container!="",exported_pod!=""}'
