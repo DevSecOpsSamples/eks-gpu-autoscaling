@@ -83,7 +83,7 @@ rules:
 
 http://localhost:9090/graph?g0.expr=DCGM_FI_DEV_GPU_UTIL%7Bexported_container%3D%22vision-api%22%7D%5B60s%5D&g0.tab=1&g0.stacked=0&g0.show_exemplars=0&g0.range_input=15m
 
-### DCGM_FI_DEV_GPU_UTIL metric
+### 3.1 DCGM_FI_DEV_GPU_UTIL metric
 
 ```bash
 kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/dcgm-exporter/DCGM_FI_DEV_GPU_UTIL" | jq .
@@ -153,7 +153,7 @@ kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*
 }
 ```
 
-### DCGM_FI_DEV_GPU_UTIL_AVG metric
+### 3.2 DCGM_FI_DEV_GPU_UTIL_AVG metric
 
 ```vision-api``` service, DCGM_FI_DEV_GPU_UTIL_```AVG``` metric 조회
 
