@@ -208,15 +208,15 @@ helm install prometheus-adapter stable/prometheus-adapter -f prometheus-adapter-
 
 ```bash
   custom:
-    - seriesQuery: 'DCGM_FI_DEV_GPU_UTIL'
+    - seriesQuery: 'DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container!="",exported_pod!=""}'
       name:
         as: "DCGM_FI_DEV_GPU_UTIL_AVG"
-      metricsQuery: ceil(avg_over_time(<<.Series>>{<<.LabelMatchers>>}[60s]))
       resources:
         overrides:
           exported_namespace: {resource: "namespace"}
           exported_container: {resource: "service"}
           exported_pod: {resource: "pod"}
+      metricsQuery: avg by (exported_namespace, exported_container) (round(avg_over_time(<<.Series>>[1m])))
 ```
 
 prometheus-adapter rule에 대한 상세한 내용은 [CustomMetric.md](./CustomMetric.md)를 참고하시기 바랍니다.

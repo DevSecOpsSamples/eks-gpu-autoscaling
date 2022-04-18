@@ -1,0 +1,26 @@
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: vision-api-gpu-hpa
+  namespace: default
+  annotations:
+    app: 'vision-api'
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: vision-api
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Object
+    object:
+      metric:
+        name: DCGM_FI_DEV_GPU_UTIL_AVG
+      describedObject:
+        kind: Service
+        name: vision-api
+      target:
+        type: Value
+        value: '20'

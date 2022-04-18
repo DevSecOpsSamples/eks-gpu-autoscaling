@@ -1,14 +1,16 @@
 # bzt vision-api-bzt.yaml
 ---
 execution:
-- concurrency: 20
-  ramp-up: 20s
-  hold-for: 10m30s
+- concurrency: 2
+  ramp-up: 120s
+  # ramp-up: 180s
+  hold-for: 30m
+  # hold-for: 30m
   scenario: vision-api
 
 scenarios:
   vision-api:
     think-time: 0
     requests:
-    # - https://vision-api-pstack-742092466.ap-northeast-2.elb.amazonaws.com/gputest
-    - https://vision-api2-pstack-506207160.ap-northeast-2.elb.amazonaws.com/gputest
+    - https://vision-api01-1715501333.ap-northeast-2.elb.amazonaws.com/gputest
+    # - https://vision-api02-1498873337.ap-northeast-2.elb.amazonaws.com/gputest
