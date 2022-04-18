@@ -194,8 +194,7 @@ helm inspect values stable/prometheus-adapter > prometheus-adapter.myvalues.yaml
 Open `prometheus-adapter.myvalues.yaml` and update the file for logLevel, prometheus.url, and custom rule.
 
 ```yaml
-
-# default value is 4
+# logLevel: 4
 logLevel: 6
 
 metricsRelistInterval: 1m
