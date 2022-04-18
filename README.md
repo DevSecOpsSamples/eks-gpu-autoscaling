@@ -176,7 +176,7 @@ helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
    --create-namespace --namespace prometheus \
    --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false
 
-kubectl port-forward svc/kube-prometheus-stack-prometheus 9090:9090 -n prometheus
+kubectl port-forward svc/kube-prometheus-stack-prometheus 9090:9090 -n monitoring
 ```
 
 http://localhost:9090/targets
@@ -190,15 +190,15 @@ http://localhost:9090/targets
 prometheus.url 파라미터의 internal DNS 설정을 위한 서비스명 확인
 
 ```bash
-kubectl get svc -lapp=kube-prometheus-stack-prometheus -n prometheus
+kubectl get svc -lapp=kube-prometheus-stack-prometheus -n monitoring
 ```
 
 prometheus.url format: `http://<service-name>.<namespace>.svc.cluster.local`
 
 e.g.,
 
-* `http://kube-prometheus-stack-prometheus.prometheus.svc.cluster.local`
 * `http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local`
+* `http://kube-prometheus-stack-prometheus.prometheus.svc.cluster.local`
 
 ```bash
 helm install prometheus-adapter stable/prometheus-adapter -f prometheus-adapter-values.yaml
@@ -268,7 +268,7 @@ kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/servic
 # 6. Grafana Dashboard import
 
 ```bash
-kubectl port-forward svc/kube-prometheus-stack-grafana 8081:80 -n prometheus
+kubectl port-forward svc/kube-prometheus-stack-grafana 8081:80 -n monitoring
 ```
 
 ```bash
@@ -430,7 +430,7 @@ kubectl delete -f dcgm-exporter-karpenter.yaml
 kubectl delete -f prometheus-alert-rule.yaml
 
 helm uninstall prometheus-adapter
-helm uninstall kube-prometheus-stack -n prometheus
+helm uninstall kube-prometheus-stack -n monitoring
 ```
 
 # Reference
