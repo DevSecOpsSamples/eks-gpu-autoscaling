@@ -153,7 +153,7 @@ kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*
 }
 ```
 
-### DCGM_FI_DEV_GPU_UTIL_**AVG** metric
+### DCGM_FI_DEV_GPU_UTIL_AVG metric
 
 ```vision-api``` service, DCGM_FI_DEV_GPU_UTIL_```AVG``` metric 조회
 
