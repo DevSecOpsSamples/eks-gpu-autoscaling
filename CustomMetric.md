@@ -3,7 +3,7 @@
 
 ## Background
 
-DGCM exporter를 통해 수집되는 label은 아래와 같이 exported_namespace, exported_container, exported_pod로 service 명은 label로 입력되지 않습니다.
+DGCM exporter를 통해 수집되는 label은 아래와 같이 `exported_namespace`, `exported_container`, `exported_pod`로 service 명은 label로 입력되지 않습니다.
 
 전체 label은 [Service Discovery menu](http://localhost:9090/service-discovery)에서 확인 가능합니다. [prom-servicediscovery.png](./screenshots/prom-servicediscovery.png)
 
