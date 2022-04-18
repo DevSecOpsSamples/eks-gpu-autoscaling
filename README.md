@@ -219,13 +219,7 @@ helm install prometheus-adapter stable/prometheus-adapter -f prometheus-adapter-
       metricsQuery: avg by (exported_namespace, exported_container) (round(avg_over_time(<<.Series>>[1m])))
 ```
 
-prometheus-adapter rule에 대한 상세한 내용은 [CustomMetric.md](./CustomMetric.md)를 참고하시기 바랍니다.
-
-prometheus-adapter log 확인
-
-```bash
-TODO
-```
+prometheus-adapter rule에 대한 상세한 내용과 /api/v1/query API log 확인 방법은 [CustomMetric](./CustomMetric.md) page 를 참고하시기 바랍니다.
 
 ## 5.2 custom metric 확인
 
