@@ -1,7 +1,7 @@
 
 # Custom Metric with Prometheus Adapter
 
-## Background
+## 1. Background
 
 DGCM exporter를 통해 수집되는 label은 아래와 같이 `exported_namespace`, `exported_container`, `exported_pod`로 service 명은 label로 입력되지 않습니다.
 
@@ -15,7 +15,7 @@ DCGM_FI_DEV_GPU_UTIL{exported_container="vision-api"}[60s]
 
 ---
 
-## Prometheus Adapter Rule
+## 2. Prometheus Adapter Rule
 
 /apis/custom.metrics.k8s.io/v1beta1 API로 DCGM_FI_DEV_GPU_UTIL metric 값 조회시 n개 node GPU의 합으로 return 되므로 node, service 기준 평균으로 조회하기 위한 custom metric을 생성합니다. 
 
@@ -79,7 +79,7 @@ rules:
 [prometheus-adapter-values.yaml](./prometheus-adapter-values.yaml)
 
 
-## API Response
+## 3. API Response
 
 http://localhost:9090/graph?g0.expr=DCGM_FI_DEV_GPU_UTIL%7Bexported_container%3D%22vision-api%22%7D%5B60s%5D&g0.tab=1&g0.stacked=0&g0.show_exemplars=0&g0.range_input=15m
 
@@ -185,7 +185,7 @@ kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/servic
 }
 ```
 
-## Enable prometheus-adapter API access log
+## 4. Enable prometheus-adapter API access log
 
 ```bash
 helm inspect values stable/prometheus-adapter > prometheus-adapter.myvalues.yaml
