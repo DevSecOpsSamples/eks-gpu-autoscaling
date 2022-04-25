@@ -17,7 +17,7 @@
 *.rar
 
 # internal
-*_internal*
+*internal*
 *.DS_Store*
 
 # CDK
