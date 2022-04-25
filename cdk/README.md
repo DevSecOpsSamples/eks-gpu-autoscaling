@@ -1,6 +1,6 @@
 # GPU cluster with EKS Blueprints
 
-## Prequisets
+## Prerequisites
 
 ```bash
 npm install -g aws-cdk@2.20.0
