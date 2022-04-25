@@ -25,7 +25,7 @@
 hs_err_pid*
 
 # internal
-*internal*
+*_internal*
 
 # taurus output
 *2022*
