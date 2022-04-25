@@ -1,0 +1,19 @@
+{
+  "version": "17.0.0",
+  "files": {
+    "6ae5bc5e0755e3a403f431484f58903ca85a578e6abe9d5a54f2dff0ab295487": {
+      "source": {
+        "path": "Eks-gpu-demo-v5-local.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "6ae5bc5e0755e3a403f431484f58903ca85a578e6abe9d5a54f2dff0ab295487.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

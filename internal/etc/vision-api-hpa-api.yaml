@@ -1,0 +1,22 @@
+# gpu-hpa.yaml
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hpa-gpu-ml-api
+  namespace: default
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1beta1
+    kind: Deployment
+    name: vision-api
+  minReplicas: 1
+  maxReplicas: 30
+  metrics:
+  - type: Object
+    object:
+      target:
+        kind: Service
+        # name: dcgm-exporter
+        name: vision-api
+      metricName: DCGM_FI_DEV_GPU_UTIL
+      targetValue: 25

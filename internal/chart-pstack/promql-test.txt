@@ -1,0 +1,20 @@
+group by (exported_namespace, exported_container) (max_over_time(DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container="vision-api",exported_pod!=""}[10m]))
+
+
+max by (exported_namespace, exported_container) (max_over_time(DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container="vision-api",exported_pod!=""}[10m]))
+
+
+max by (exported_namespace, exported_container, exported_pod) (max_over_time(DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container=!"",exported_pod!=""}[10m]))
+
+
+
+max_over_time(DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container="vision-api",exported_pod!=""}[10m])
+
+max by (exported_namespace, exported_container) (max_over_time(DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container!="",exported_pod!=""}[10m]))
+
+
+
+
+avg_over_time(<<.Series>>{<<.LabelMatchers>>}[1m]) by (<<.GroupBy>>)
+ceil(avg_over_time(<<.Series>>{<<.LabelMatchers>>}[30s]))
+avg by (exported_namespace, exported_container) (avg_over_time(DCGM_FI_DEV_GPU_UTIL{exported_namespace!="",exported_container!="",exported_pod!=""}[1m]))

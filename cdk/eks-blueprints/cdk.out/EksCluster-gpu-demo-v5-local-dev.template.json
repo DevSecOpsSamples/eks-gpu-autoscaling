@@ -1,0 +1,3600 @@
+{
+ "Description": "Blueprints tracking (qs-1s1r465hk)",
+ "Resources": {
+  "EksClustergpudemov5localdevvpc49DE04EB": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/Resource"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "EksClustergpudemov5localdevvpc49DE04EB"
+    },
+    "AvailabilityZone": "ap-northeast-2a",
+    "CidrBlock": "10.0.0.0/19",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet1/Subnet"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "EksClustergpudemov5localdevvpc49DE04EB"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet1/RouteTable"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6"
+    },
+    "SubnetId": {
+     "Ref": "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "EksClustergpudemov5localdevvpcIGWEB8BF2F1"
+    }
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet1/EIP"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet1/NATGateway"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "EksClustergpudemov5localdevvpc49DE04EB"
+    },
+    "AvailabilityZone": "ap-northeast-2b",
+    "CidrBlock": "10.0.32.0/19",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet2/Subnet"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "EksClustergpudemov5localdevvpc49DE04EB"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet2/RouteTable"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F"
+    },
+    "SubnetId": {
+     "Ref": "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "EksClustergpudemov5localdevvpcIGWEB8BF2F1"
+    }
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet2/EIP"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet2/NATGateway"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "EksClustergpudemov5localdevvpc49DE04EB"
+    },
+    "AvailabilityZone": "ap-northeast-2c",
+    "CidrBlock": "10.0.64.0/19",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet3"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet3/Subnet"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "EksClustergpudemov5localdevvpc49DE04EB"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet3"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet3/RouteTable"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA"
+    },
+    "SubnetId": {
+     "Ref": "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet3/RouteTableAssociation"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "EksClustergpudemov5localdevvpcIGWEB8BF2F1"
+    }
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet3/DefaultRoute"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet3"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet3/EIP"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet3"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PublicSubnet3/NATGateway"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "EksClustergpudemov5localdevvpc49DE04EB"
+    },
+    "AvailabilityZone": "ap-northeast-2a",
+    "CidrBlock": "10.0.96.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet1/Subnet"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "EksClustergpudemov5localdevvpc49DE04EB"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet1/RouteTable"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B"
+    },
+    "SubnetId": {
+     "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet1/RouteTableAssociation"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet1/DefaultRoute"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "EksClustergpudemov5localdevvpc49DE04EB"
+    },
+    "AvailabilityZone": "ap-northeast-2b",
+    "CidrBlock": "10.0.128.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet2/Subnet"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "EksClustergpudemov5localdevvpc49DE04EB"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet2/RouteTable"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25"
+    },
+    "SubnetId": {
+     "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet2/RouteTableAssociation"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet2/DefaultRoute"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "EksClustergpudemov5localdevvpc49DE04EB"
+    },
+    "AvailabilityZone": "ap-northeast-2c",
+    "CidrBlock": "10.0.160.0/19",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet3"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet3/Subnet"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "EksClustergpudemov5localdevvpc49DE04EB"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet3"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet3/RouteTable"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84"
+    },
+    "SubnetId": {
+     "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet3/RouteTableAssociation"
+   }
+  },
+  "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/PrivateSubnet3/DefaultRoute"
+   }
+  },
+  "EksClustergpudemov5localdevvpcIGWEB8BF2F1": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/IGW"
+   }
+  },
+  "EksClustergpudemov5localdevvpcVPCGW587E71EF": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": {
+     "Ref": "EksClustergpudemov5localdevvpc49DE04EB"
+    },
+    "InternetGatewayId": {
+     "Ref": "EksClustergpudemov5localdevvpcIGWEB8BF2F1"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev-vpc/VPCGW"
+   }
+  },
+  "EksClustergpudemov5localdevRole2412D8B0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "eks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKSClusterPolicy"
+       ]
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/Role/Resource"
+   }
+  },
+  "EksClustergpudemov5localdevControlPlaneSecurityGroup66AF6312": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "EKS Control Plane Security Group",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "EksClustergpudemov5localdevvpc49DE04EB"
+    }
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/ControlPlaneSecurityGroup/Resource"
+   }
+  },
+  "EksClustergpudemov5localdevCreationRole8A42C75F": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::681747700094:root"
+          ]
+         ]
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/Resource/CreationRole/Resource"
+   }
+  },
+  "EksClustergpudemov5localdevCreationRoleDefaultPolicy0FF10B84": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "iam:PassRole",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "EksClustergpudemov5localdevRole2412D8B0",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "eks:CreateCluster",
+        "eks:DescribeCluster",
+        "eks:DescribeUpdate",
+        "eks:DeleteCluster",
+        "eks:UpdateClusterVersion",
+        "eks:UpdateClusterConfig",
+        "eks:CreateFargateProfile",
+        "eks:TagResource",
+        "eks:UntagResource"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":eks:ap-northeast-2:681747700094:cluster/EksCluster-gpu-demo-v5-local-dev"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":eks:ap-northeast-2:681747700094:cluster/EksCluster-gpu-demo-v5-local-dev/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "eks:DescribeFargateProfile",
+        "eks:DeleteFargateProfile"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":eks:ap-northeast-2:681747700094:fargateprofile/EksCluster-gpu-demo-v5-local-dev/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "iam:GetRole",
+        "iam:listAttachedRolePolicies"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "iam:CreateServiceLinkedRole",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "ec2:DescribeInstances",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeRouteTables",
+        "ec2:DescribeDhcpOptions",
+        "ec2:DescribeVpcs"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "EksClustergpudemov5localdevCreationRoleDefaultPolicy0FF10B84",
+    "Roles": [
+     {
+      "Ref": "EksClustergpudemov5localdevCreationRole8A42C75F"
+     }
+    ]
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/Resource/CreationRole/DefaultPolicy/Resource"
+   }
+  },
+  "EksClustergpudemov5localdev28F3BDE7": {
+   "Type": "Custom::AWSCDK-EKS-Cluster",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+      "Outputs.EksClustergpudemov5localdevawscdkawseksClusterResourceProviderframeworkonEventF71B1BCAArn"
+     ]
+    },
+    "Config": {
+     "name": "EksCluster-gpu-demo-v5-local-dev",
+     "version": "1.21",
+     "roleArn": {
+      "Fn::GetAtt": [
+       "EksClustergpudemov5localdevRole2412D8B0",
+       "Arn"
+      ]
+     },
+     "resourcesVpcConfig": {
+      "subnetIds": [
+       {
+        "Ref": "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD"
+       },
+       {
+        "Ref": "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7"
+       },
+       {
+        "Ref": "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66"
+       },
+       {
+        "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C"
+       },
+       {
+        "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A"
+       },
+       {
+        "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72"
+       }
+      ],
+      "securityGroupIds": [
+       {
+        "Fn::GetAtt": [
+         "EksClustergpudemov5localdevControlPlaneSecurityGroup66AF6312",
+         "GroupId"
+        ]
+       }
+      ],
+      "endpointPublicAccess": true,
+      "endpointPrivateAccess": true
+     }
+    },
+    "AssumeRoleArn": {
+     "Fn::GetAtt": [
+      "EksClustergpudemov5localdevCreationRole8A42C75F",
+      "Arn"
+     ]
+    },
+    "AttributesRevision": 2
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF",
+    "EksClustergpudemov5localdevCreationRoleDefaultPolicy0FF10B84",
+    "EksClustergpudemov5localdevCreationRole8A42C75F"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/Resource/Resource/Default"
+   }
+  },
+  "EksClustergpudemov5localdevKubectlReadyBarrierDD3609B9": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "aws:cdk:eks:kubectl-ready"
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF",
+    "EksClustergpudemov5localdevCreationRoleDefaultPolicy0FF10B84",
+    "EksClustergpudemov5localdevCreationRole8A42C75F",
+    "EksClustergpudemov5localdev28F3BDE7"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/KubectlReadyBarrier"
+   }
+  },
+  "EksClustergpudemov5localdevMastersRole21681EA7": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::681747700094:root"
+          ]
+         ]
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/MastersRole/Resource"
+   }
+  },
+  "EksClustergpudemov5localdevAwsAuthmanifest1FC7AFA0": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.EksClustergpudemov5localdevawscdkawseksKubectlProviderframeworkonEventC24CDADAArn"
+     ]
+    },
+    "Manifest": {
+     "Fn::Join": [
+      "",
+      [
+       "[{\"apiVersion\":\"v1\",\"kind\":\"ConfigMap\",\"metadata\":{\"name\":\"aws-auth\",\"namespace\":\"kube-system\",\"labels\":{\"aws.cdk.eks/prune-c8424f5a5f58a3d6e93279c0faf32b6b61bd4fb8ac\":\"\"}},\"data\":{\"mapRoles\":\"[{\\\"rolearn\\\":\\\"",
+       {
+        "Fn::GetAtt": [
+         "EksClustergpudemov5localdevMastersRole21681EA7",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"username\\\":\\\"",
+       {
+        "Fn::GetAtt": [
+         "EksClustergpudemov5localdevMastersRole21681EA7",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"groups\\\":[\\\"system:masters\\\"]},{\\\"rolearn\\\":\\\"",
+       {
+        "Fn::GetAtt": [
+         "EksClustergpudemov5localdevNodegroupcpungngNodeGroupRole1DD01776",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"username\\\":\\\"system:node:{{EC2PrivateDNSName}}\\\",\\\"groups\\\":[\\\"system:bootstrappers\\\",\\\"system:nodes\\\"]},{\\\"rolearn\\\":\\\"",
+       {
+        "Fn::GetAtt": [
+         "EksClustergpudemov5localdevNodegroupgpungngNodeGroupRole1FBF8DAF",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"username\\\":\\\"system:node:{{EC2PrivateDNSName}}\\\",\\\"groups\\\":[\\\"system:bootstrappers\\\",\\\"system:nodes\\\"]}]\",\"mapUsers\":\"[]\",\"mapAccounts\":\"[]\"}}]"
+      ]
+     ]
+    },
+    "ClusterName": {
+     "Ref": "EksClustergpudemov5localdev28F3BDE7"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "EksClustergpudemov5localdevCreationRole8A42C75F",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c8424f5a5f58a3d6e93279c0faf32b6b61bd4fb8ac",
+    "Overwrite": true
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF",
+    "EksClustergpudemov5localdevKubectlReadyBarrierDD3609B9"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/AwsAuth/manifest/Resource/Default"
+   }
+  },
+  "EksClustergpudemov5localdevNodegroupcpungngNodeGroupRole1DD01776": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKSWorkerNodePolicy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKS_CNI_Policy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/CloudWatchAgentServerPolicy"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "k8s.io/cluster-autoscaler/EksCluster-gpu-demo-v5-local-dev/clusterName",
+      "Value": "owned"
+     },
+     {
+      "Key": "k8s.io/cluster-autoscaler/enabled",
+      "Value": "true"
+     }
+    ]
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/Nodegroupcpu-ng-ng/NodeGroupRole/Resource"
+   }
+  },
+  "EksClustergpudemov5localdevNodegroupcpungng142EE4F2": {
+   "Type": "AWS::EKS::Nodegroup",
+   "Properties": {
+    "ClusterName": {
+     "Ref": "EksClustergpudemov5localdev28F3BDE7"
+    },
+    "NodeRole": {
+     "Fn::GetAtt": [
+      "EksClustergpudemov5localdevNodegroupcpungngNodeGroupRole1DD01776",
+      "Arn"
+     ]
+    },
+    "Subnets": [
+     {
+      "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C"
+     },
+     {
+      "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A"
+     },
+     {
+      "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72"
+     }
+    ],
+    "AmiType": "AL2_x86_64",
+    "CapacityType": "SPOT",
+    "ForceUpdateEnabled": true,
+    "InstanceTypes": [
+     "c5.large"
+    ],
+    "NodegroupName": "cpu-ng",
+    "ScalingConfig": {
+     "DesiredSize": 1,
+     "MaxSize": 3,
+     "MinSize": 1
+    },
+    "Tags": {
+     "k8s.io/cluster-autoscaler/EksCluster-gpu-demo-v5-local-dev/clusterName": "owned",
+     "k8s.io/cluster-autoscaler/enabled": "true"
+    }
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/Nodegroupcpu-ng-ng/Resource"
+   }
+  },
+  "EksClustergpudemov5localdevNodegroupgpungngNodeGroupRole1FBF8DAF": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKSWorkerNodePolicy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKS_CNI_Policy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/CloudWatchAgentServerPolicy"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "k8s.io/cluster-autoscaler/EksCluster-gpu-demo-v5-local-dev/clusterName",
+      "Value": "owned"
+     },
+     {
+      "Key": "k8s.io/cluster-autoscaler/enabled",
+      "Value": "true"
+     }
+    ]
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/Nodegroupgpu-ng-ng/NodeGroupRole/Resource"
+   }
+  },
+  "EksClustergpudemov5localdevNodegroupgpungngB1CE815E": {
+   "Type": "AWS::EKS::Nodegroup",
+   "Properties": {
+    "ClusterName": {
+     "Ref": "EksClustergpudemov5localdev28F3BDE7"
+    },
+    "NodeRole": {
+     "Fn::GetAtt": [
+      "EksClustergpudemov5localdevNodegroupgpungngNodeGroupRole1FBF8DAF",
+      "Arn"
+     ]
+    },
+    "Subnets": [
+     {
+      "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C"
+     },
+     {
+      "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A"
+     },
+     {
+      "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72"
+     }
+    ],
+    "AmiType": "AL2_x86_64_GPU",
+    "CapacityType": "SPOT",
+    "ForceUpdateEnabled": true,
+    "InstanceTypes": [
+     "p2.xlarge"
+    ],
+    "NodegroupName": "gpu-ng",
+    "ScalingConfig": {
+     "DesiredSize": 1,
+     "MaxSize": 3,
+     "MinSize": 1
+    },
+    "Tags": {
+     "k8s.io/cluster-autoscaler/EksCluster-gpu-demo-v5-local-dev/clusterName": "owned",
+     "k8s.io/cluster-autoscaler/enabled": "true"
+    }
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/Nodegroupgpu-ng-ng/Resource"
+   }
+  },
+  "EksClustergpudemov5localdevchartmetricsserverDA1FBE05": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.EksClustergpudemov5localdevawscdkawseksKubectlProviderframeworkonEventC24CDADAArn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "EksClustergpudemov5localdev28F3BDE7"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "EksClustergpudemov5localdevCreationRole8A42C75F",
+      "Arn"
+     ]
+    },
+    "Release": "blueprints-addon-metrics-server",
+    "Chart": "metrics-server",
+    "Version": "3.7.0",
+    "Values": "{}",
+    "Namespace": "kube-system",
+    "Repository": "https://kubernetes-sigs.github.io/metrics-server",
+    "CreateNamespace": true
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF",
+    "EksClustergpudemov5localdevKubectlReadyBarrierDD3609B9"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/chart-metrics-server/Resource/Default"
+   }
+  },
+  "EksClustergpudemov5localdevchartclusterautoscalerF3D50D28": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.EksClustergpudemov5localdevawscdkawseksKubectlProviderframeworkonEventC24CDADAArn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "EksClustergpudemov5localdev28F3BDE7"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "EksClustergpudemov5localdevCreationRole8A42C75F",
+      "Arn"
+     ]
+    },
+    "Release": "blueprints-addon-cluster-autoscaler",
+    "Chart": "cluster-autoscaler",
+    "Version": "9.10.8",
+    "Values": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"cloudProvider\":\"aws\",\"autoDiscovery\":{\"clusterName\":\"",
+       {
+        "Ref": "EksClustergpudemov5localdev28F3BDE7"
+       },
+       "\"},\"awsRegion\":\"ap-northeast-2\"}"
+      ]
+     ]
+    },
+    "Namespace": "kube-system",
+    "Repository": "https://kubernetes.github.io/autoscaler",
+    "CreateNamespace": true
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF",
+    "EksClustergpudemov5localdevKubectlReadyBarrierDD3609B9"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/chart-cluster-autoscaler/Resource/Default"
+   }
+  },
+  "EksClustergpudemov5localdevchartadotexporterforeksonec2EB474510": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.EksClustergpudemov5localdevawscdkawseksKubectlProviderframeworkonEventC24CDADAArn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "EksClustergpudemov5localdev28F3BDE7"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "EksClustergpudemov5localdevCreationRole8A42C75F",
+      "Arn"
+     ]
+    },
+    "Release": "adot-eks-addon",
+    "Chart": "adot-exporter-for-eks-on-ec2",
+    "Version": "0.1.0",
+    "Values": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"awsRegion\":\"ap-northeast-2\",\"clusterName\":\"",
+       {
+        "Ref": "EksClustergpudemov5localdev28F3BDE7"
+       },
+       "\"}"
+      ]
+     ]
+    },
+    "Namespace": "default",
+    "Repository": "https://aws-observability.github.io/aws-otel-helm-charts",
+    "CreateNamespace": true
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF",
+    "EksClustergpudemov5localdevKubectlReadyBarrierDD3609B9"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/chart-adot-exporter-for-eks-on-ec2/Resource/Default"
+   }
+  },
+  "EksClustergpudemov5localdevawsloadbalancercontrollerConditionJson06F07427": {
+   "Type": "Custom::AWSCDKCfnJson",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+      "Arn"
+     ]
+    },
+    "Value": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "EksClustergpudemov5localdevOpenIdConnectProvider7B78E5C0"
+           }
+          ]
+         }
+        ]
+       },
+       ":aud\":\"sts.amazonaws.com\",\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "EksClustergpudemov5localdevOpenIdConnectProvider7B78E5C0"
+           }
+          ]
+         }
+        ]
+       },
+       ":sub\":\"system:serviceaccount:kube-system:aws-load-balancer-controller\"}"
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/aws-load-balancer-controller/ConditionJson/Resource/Default"
+   }
+  },
+  "EksClustergpudemov5localdevawsloadbalancercontrollerRoleB0605CD8": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRoleWithWebIdentity",
+       "Condition": {
+        "StringEquals": {
+         "Fn::GetAtt": [
+          "EksClustergpudemov5localdevawsloadbalancercontrollerConditionJson06F07427",
+          "Value"
+         ]
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Federated": {
+         "Ref": "EksClustergpudemov5localdevOpenIdConnectProvider7B78E5C0"
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/aws-load-balancer-controller/Role/Resource"
+   }
+  },
+  "EksClustergpudemov5localdevawsloadbalancercontrollerRoleDefaultPolicyB28657A9": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "iam:CreateServiceLinkedRole",
+       "Condition": {
+        "StringEquals": {
+         "iam:AWSServiceName": "elasticloadbalancing.amazonaws.com"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "ec2:DescribeAccountAttributes",
+        "ec2:DescribeAddresses",
+        "ec2:DescribeAvailabilityZones",
+        "ec2:DescribeInternetGateways",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeVpcPeeringConnections",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeInstances",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeTags",
+        "ec2:GetCoipPoolUsage",
+        "ec2:DescribeCoipPools",
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "elasticloadbalancing:DescribeLoadBalancerAttributes",
+        "elasticloadbalancing:DescribeListeners",
+        "elasticloadbalancing:DescribeListenerCertificates",
+        "elasticloadbalancing:DescribeSSLPolicies",
+        "elasticloadbalancing:DescribeRules",
+        "elasticloadbalancing:DescribeTargetGroups",
+        "elasticloadbalancing:DescribeTargetGroupAttributes",
+        "elasticloadbalancing:DescribeTargetHealth",
+        "elasticloadbalancing:DescribeTags"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "cognito-idp:DescribeUserPoolClient",
+        "acm:ListCertificates",
+        "acm:DescribeCertificate",
+        "iam:ListServerCertificates",
+        "iam:GetServerCertificate",
+        "waf-regional:GetWebACL",
+        "waf-regional:GetWebACLForResource",
+        "waf-regional:AssociateWebACL",
+        "waf-regional:DisassociateWebACL",
+        "wafv2:GetWebACL",
+        "wafv2:GetWebACLForResource",
+        "wafv2:AssociateWebACL",
+        "wafv2:DisassociateWebACL",
+        "shield:GetSubscriptionState",
+        "shield:DescribeProtection",
+        "shield:CreateProtection",
+        "shield:DeleteProtection"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:RevokeSecurityGroupIngress"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "ec2:CreateSecurityGroup",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "ec2:CreateTags",
+       "Condition": {
+        "StringEquals": {
+         "ec2:CreateAction": "CreateSecurityGroup"
+        },
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":ec2:*:*:security-group/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "true",
+         "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":ec2:*:*:security-group/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:RevokeSecurityGroupIngress",
+        "ec2:DeleteSecurityGroup"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:CreateLoadBalancer",
+        "elasticloadbalancing:CreateTargetGroup"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:CreateListener",
+        "elasticloadbalancing:DeleteListener",
+        "elasticloadbalancing:CreateRule",
+        "elasticloadbalancing:DeleteRule"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:AddTags",
+        "elasticloadbalancing:RemoveTags"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "true",
+         "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":elasticloadbalancing:*:*:targetgroup/*/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":elasticloadbalancing:*:*:loadbalancer/net/*/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":elasticloadbalancing:*:*:loadbalancer/app/*/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:AddTags",
+        "elasticloadbalancing:RemoveTags"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":elasticloadbalancing:*:*:listener/net/*/*/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":elasticloadbalancing:*:*:listener/app/*/*/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":elasticloadbalancing:*:*:listener-rule/net/*/*/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":elasticloadbalancing:*:*:listener-rule/app/*/*/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:ModifyLoadBalancerAttributes",
+        "elasticloadbalancing:SetIpAddressType",
+        "elasticloadbalancing:SetSecurityGroups",
+        "elasticloadbalancing:SetSubnets",
+        "elasticloadbalancing:DeleteLoadBalancer",
+        "elasticloadbalancing:ModifyTargetGroup",
+        "elasticloadbalancing:ModifyTargetGroupAttributes",
+        "elasticloadbalancing:DeleteTargetGroup"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:RegisterTargets",
+        "elasticloadbalancing:DeregisterTargets"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":elasticloadbalancing:*:*:targetgroup/*/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:SetWebAcl",
+        "elasticloadbalancing:ModifyListener",
+        "elasticloadbalancing:AddListenerCertificates",
+        "elasticloadbalancing:RemoveListenerCertificates",
+        "elasticloadbalancing:ModifyRule"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "EksClustergpudemov5localdevawsloadbalancercontrollerRoleDefaultPolicyB28657A9",
+    "Roles": [
+     {
+      "Ref": "EksClustergpudemov5localdevawsloadbalancercontrollerRoleB0605CD8"
+     }
+    ]
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/aws-load-balancer-controller/Role/DefaultPolicy/Resource"
+   }
+  },
+  "EksClustergpudemov5localdevawsloadbalancercontrollermanifestawsloadbalancercontrollerServiceAccountResource0ACE432B": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.EksClustergpudemov5localdevawscdkawseksKubectlProviderframeworkonEventC24CDADAArn"
+     ]
+    },
+    "Manifest": {
+     "Fn::Join": [
+      "",
+      [
+       "[{\"apiVersion\":\"v1\",\"kind\":\"ServiceAccount\",\"metadata\":{\"name\":\"aws-load-balancer-controller\",\"namespace\":\"kube-system\",\"labels\":{\"aws.cdk.eks/prune-c84879ccd863ad93abea298386bc9c6b3f69e41eaf\":\"\",\"app.kubernetes.io/name\":\"aws-load-balancer-controller\"},\"annotations\":{\"eks.amazonaws.com/role-arn\":\"",
+       {
+        "Fn::GetAtt": [
+         "EksClustergpudemov5localdevawsloadbalancercontrollerRoleB0605CD8",
+         "Arn"
+        ]
+       },
+       "\"}}}]"
+      ]
+     ]
+    },
+    "ClusterName": {
+     "Ref": "EksClustergpudemov5localdev28F3BDE7"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "EksClustergpudemov5localdevCreationRole8A42C75F",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c84879ccd863ad93abea298386bc9c6b3f69e41eaf"
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF",
+    "EksClustergpudemov5localdevKubectlReadyBarrierDD3609B9"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource/Default"
+   }
+  },
+  "EksClustergpudemov5localdevOpenIdConnectProvider7B78E5C0": {
+   "Type": "Custom::AWSCDKOpenIdConnectProvider",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0",
+      "Arn"
+     ]
+    },
+    "ClientIDList": [
+     "sts.amazonaws.com"
+    ],
+    "ThumbprintList": [
+     "9e99a48a9960b14926bb7f3b02e22da2b0ab7280"
+    ],
+    "Url": {
+     "Fn::GetAtt": [
+      "EksClustergpudemov5localdev28F3BDE7",
+      "OpenIdConnectIssuerUrl"
+     ]
+    }
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/OpenIdConnectProvider/Resource/Default"
+   }
+  },
+  "EksClustergpudemov5localdevchartawsloadbalancercontroller57DD551A": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.EksClustergpudemov5localdevawscdkawseksKubectlProviderframeworkonEventC24CDADAArn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "EksClustergpudemov5localdev28F3BDE7"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "EksClustergpudemov5localdevCreationRole8A42C75F",
+      "Arn"
+     ]
+    },
+    "Release": "aws-load-balancer-controller",
+    "Chart": "aws-load-balancer-controller",
+    "Version": "1.3.3",
+    "Values": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"clusterName\":\"",
+       {
+        "Ref": "EksClustergpudemov5localdev28F3BDE7"
+       },
+       "\",\"serviceAccount\":{\"create\":false,\"name\":\"aws-load-balancer-controller\"},\"enableShield\":false,\"enableWaf\":false,\"enableWafv2\":false,\"createIngressClassResource\":true,\"ingressClass\":\"alb\",\"region\":\"ap-northeast-2\",\"image\":{\"repository\":\"602401143452.dkr.ecr.ap-northeast-2.amazonaws.com/amazon/aws-load-balancer-controller\"},\"vpcId\":\"",
+       {
+        "Ref": "EksClustergpudemov5localdevvpc49DE04EB"
+       },
+       "\"}"
+      ]
+     ]
+    },
+    "Namespace": "kube-system",
+    "Repository": "https://aws.github.io/eks-charts",
+    "CreateNamespace": true
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF",
+    "EksClustergpudemov5localdevawsloadbalancercontrollerConditionJson06F07427",
+    "EksClustergpudemov5localdevawsloadbalancercontrollermanifestawsloadbalancercontrollerServiceAccountResource0ACE432B",
+    "EksClustergpudemov5localdevawsloadbalancercontrollerRoleDefaultPolicyB28657A9",
+    "EksClustergpudemov5localdevawsloadbalancercontrollerRoleB0605CD8",
+    "EksClustergpudemov5localdevKubectlReadyBarrierDD3609B9"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/chart-aws-load-balancer-controller/Resource/Default"
+   }
+  },
+  "EksClustergpudemov5localdevxrayaccountConditionJson9779E925": {
+   "Type": "Custom::AWSCDKCfnJson",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+      "Arn"
+     ]
+    },
+    "Value": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "EksClustergpudemov5localdevOpenIdConnectProvider7B78E5C0"
+           }
+          ]
+         }
+        ]
+       },
+       ":aud\":\"sts.amazonaws.com\",\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "EksClustergpudemov5localdevOpenIdConnectProvider7B78E5C0"
+           }
+          ]
+         }
+        ]
+       },
+       ":sub\":\"system:serviceaccount:xray-system:xray-account\"}"
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF",
+    "xraysystemnamespacestruct92DD4253"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/xray-account/ConditionJson/Resource/Default"
+   }
+  },
+  "EksClustergpudemov5localdevxrayaccountRole661E2D6E": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRoleWithWebIdentity",
+       "Condition": {
+        "StringEquals": {
+         "Fn::GetAtt": [
+          "EksClustergpudemov5localdevxrayaccountConditionJson9779E925",
+          "Value"
+         ]
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Federated": {
+         "Ref": "EksClustergpudemov5localdevOpenIdConnectProvider7B78E5C0"
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AWSXRayDaemonWriteAccess"
+       ]
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF",
+    "xraysystemnamespacestruct92DD4253"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/xray-account/Role/Resource"
+   }
+  },
+  "EksClustergpudemov5localdevxrayaccountmanifestxrayaccountServiceAccountResourceE83FD382": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.EksClustergpudemov5localdevawscdkawseksKubectlProviderframeworkonEventC24CDADAArn"
+     ]
+    },
+    "Manifest": {
+     "Fn::Join": [
+      "",
+      [
+       "[{\"apiVersion\":\"v1\",\"kind\":\"ServiceAccount\",\"metadata\":{\"name\":\"xray-account\",\"namespace\":\"xray-system\",\"labels\":{\"aws.cdk.eks/prune-c8533f31c5e8dd439610b2e423fbefc06989cac95f\":\"\",\"app.kubernetes.io/name\":\"xray-account\"},\"annotations\":{\"eks.amazonaws.com/role-arn\":\"",
+       {
+        "Fn::GetAtt": [
+         "EksClustergpudemov5localdevxrayaccountRole661E2D6E",
+         "Arn"
+        ]
+       },
+       "\"}}}]"
+      ]
+     ]
+    },
+    "ClusterName": {
+     "Ref": "EksClustergpudemov5localdev28F3BDE7"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "EksClustergpudemov5localdevCreationRole8A42C75F",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c8533f31c5e8dd439610b2e423fbefc06989cac95f"
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevvpcIGWEB8BF2F1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1DefaultRoute5816BA3D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableCE2BE39B",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1RouteTableAssociation7814AE7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2DefaultRoute3587F4A1",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTable6BF31B25",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2RouteTableAssociationA64ACDD0",
+    "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3DefaultRoute6A03FD4D",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTable2C6D7F84",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3RouteTableAssociationE71A01FF",
+    "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72",
+    "EksClustergpudemov5localdevvpcPublicSubnet1DefaultRoute123AF856",
+    "EksClustergpudemov5localdevvpcPublicSubnet1EIPE1A09F25",
+    "EksClustergpudemov5localdevvpcPublicSubnet1NATGateway7D9A1A98",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableE44494F6",
+    "EksClustergpudemov5localdevvpcPublicSubnet1RouteTableAssociation7F2F740C",
+    "EksClustergpudemov5localdevvpcPublicSubnet1Subnet93FAAEBD",
+    "EksClustergpudemov5localdevvpcPublicSubnet2DefaultRoute672F5D1D",
+    "EksClustergpudemov5localdevvpcPublicSubnet2EIP0BA6A86C",
+    "EksClustergpudemov5localdevvpcPublicSubnet2NATGatewayD6A3C847",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTable42EF066F",
+    "EksClustergpudemov5localdevvpcPublicSubnet2RouteTableAssociation5C07DA68",
+    "EksClustergpudemov5localdevvpcPublicSubnet2Subnet48295CF7",
+    "EksClustergpudemov5localdevvpcPublicSubnet3DefaultRouteDE5523FC",
+    "EksClustergpudemov5localdevvpcPublicSubnet3EIP2C427C50",
+    "EksClustergpudemov5localdevvpcPublicSubnet3NATGatewayA3828182",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTable531C13FA",
+    "EksClustergpudemov5localdevvpcPublicSubnet3RouteTableAssociation5DC1170E",
+    "EksClustergpudemov5localdevvpcPublicSubnet3Subnet3BEDDC66",
+    "EksClustergpudemov5localdevvpc49DE04EB",
+    "EksClustergpudemov5localdevvpcVPCGW587E71EF",
+    "EksClustergpudemov5localdevKubectlReadyBarrierDD3609B9",
+    "xraysystemnamespacestruct92DD4253"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/EksCluster-gpu-demo-v5-local-dev/xray-account/manifest-xray-accountServiceAccountResource/Resource/Default"
+   }
+  },
+  "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454": {
+   "Type": "AWS::CloudFormation::Stack",
+   "Properties": {
+    "TemplateURL": {
+     "Fn::Join": [
+      "",
+      [
+       "https://s3.ap-northeast-2.",
+       {
+        "Ref": "AWS::URLSuffix"
+       },
+       "/cdk-hnb659fds-assets-681747700094-ap-northeast-2/23502a2f12ff40e0865c8aec40b3b02ccdd10fd3b5668a100868b88e56f5e256.json"
+      ]
+     ]
+    },
+    "Parameters": {
+     "referencetoEksClustergpudemov5localdevCreationRoleEFAED6E3Arn": {
+      "Fn::GetAtt": [
+       "EksClustergpudemov5localdevCreationRole8A42C75F",
+       "Arn"
+      ]
+     }
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource",
+    "aws:asset:path": "EksClustergpudemov5localdevawscdkawseksClusterResourceProvider247B5968.nested.template.json",
+    "aws:asset:property": "TemplateURL"
+   }
+  },
+  "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B": {
+   "Type": "AWS::CloudFormation::Stack",
+   "Properties": {
+    "TemplateURL": {
+     "Fn::Join": [
+      "",
+      [
+       "https://s3.ap-northeast-2.",
+       {
+        "Ref": "AWS::URLSuffix"
+       },
+       "/cdk-hnb659fds-assets-681747700094-ap-northeast-2/d280d1c43632fb53a887d576ea58d62a57fb62d04cae856a73bae18d67464d3b.json"
+      ]
+     ]
+    },
+    "Parameters": {
+     "referencetoEksClustergpudemov5localdev59397CA7Arn": {
+      "Fn::GetAtt": [
+       "EksClustergpudemov5localdev28F3BDE7",
+       "Arn"
+      ]
+     },
+     "referencetoEksClustergpudemov5localdevCreationRoleEFAED6E3Arn": {
+      "Fn::GetAtt": [
+       "EksClustergpudemov5localdevCreationRole8A42C75F",
+       "Arn"
+      ]
+     },
+     "referencetoEksClustergpudemov5localdevEksClustergpudemov5localdevvpcPrivateSubnet1SubnetE61526ACRef": {
+      "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet1SubnetDF873C7C"
+     },
+     "referencetoEksClustergpudemov5localdevEksClustergpudemov5localdevvpcPrivateSubnet2Subnet9083C985Ref": {
+      "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet2Subnet4E67473A"
+     },
+     "referencetoEksClustergpudemov5localdevEksClustergpudemov5localdevvpcPrivateSubnet3Subnet26B22089Ref": {
+      "Ref": "EksClustergpudemov5localdevvpcPrivateSubnet3SubnetDD888B72"
+     },
+     "referencetoEksClustergpudemov5localdev59397CA7ClusterSecurityGroupId": {
+      "Fn::GetAtt": [
+       "EksClustergpudemov5localdev28F3BDE7",
+       "ClusterSecurityGroupId"
+      ]
+     }
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource",
+    "aws:asset:path": "EksClustergpudemov5localdevawscdkawseksKubectlProvider7B9E982F.nested.template.json",
+    "aws:asset:property": "TemplateURL"
+   }
+  },
+  "ClusterLogsEnablerCustomResourcePolicyBE4AA329": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "eks:UpdateClusterConfig",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "EksClustergpudemov5localdev28F3BDE7",
+            "Arn"
+           ]
+          },
+          "/update-config"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ClusterLogsEnablerCustomResourcePolicyBE4AA329",
+    "Roles": [
+     {
+      "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/ClusterLogsEnabler/CustomResourcePolicy/Resource"
+   }
+  },
+  "ClusterLogsEnablerD85801E8": {
+   "Type": "Custom::AWS",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+      "Arn"
+     ]
+    },
+    "Create": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"physicalResourceId\":{\"id\":\"",
+       {
+        "Fn::GetAtt": [
+         "EksClustergpudemov5localdev28F3BDE7",
+         "Arn"
+        ]
+       },
+       "/LogsEnabler\"},\"service\":\"EKS\",\"action\":\"updateClusterConfig\",\"region\":\"ap-northeast-2\",\"parameters\":{\"name\":\"",
+       {
+        "Ref": "EksClustergpudemov5localdev28F3BDE7"
+       },
+       "\",\"logging\":{\"clusterLogging\":[{\"enabled\":true,\"types\":[\"api\"]}]}}}"
+      ]
+     ]
+    },
+    "Update": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"physicalResourceId\":{\"id\":\"",
+       {
+        "Fn::GetAtt": [
+         "EksClustergpudemov5localdev28F3BDE7",
+         "Arn"
+        ]
+       },
+       "/LogsEnabler\"},\"service\":\"EKS\",\"action\":\"updateClusterConfig\",\"region\":\"ap-northeast-2\",\"parameters\":{\"name\":\"",
+       {
+        "Ref": "EksClustergpudemov5localdev28F3BDE7"
+       },
+       "\",\"logging\":{\"clusterLogging\":[{\"enabled\":true,\"types\":[\"api\"]},{\"enabled\":false,\"types\":[\"audit\",\"authenticator\",\"controllerManager\",\"scheduler\"]}]}}}"
+      ]
+     ]
+    },
+    "Delete": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"physicalResourceId\":{\"id\":\"",
+       {
+        "Fn::GetAtt": [
+         "EksClustergpudemov5localdev28F3BDE7",
+         "Arn"
+        ]
+       },
+       "/LogsEnabler\"},\"service\":\"EKS\",\"action\":\"updateClusterConfig\",\"region\":\"ap-northeast-2\",\"parameters\":{\"name\":\"",
+       {
+        "Ref": "EksClustergpudemov5localdev28F3BDE7"
+       },
+       "\",\"logging\":{\"clusterLogging\":[{\"enabled\":false,\"types\":[\"api\",\"audit\",\"authenticator\",\"controllerManager\",\"scheduler\"]}]}}}"
+      ]
+     ]
+    },
+    "InstallLatestAwsSdk": true
+   },
+   "DependsOn": [
+    "ClusterLogsEnablerCustomResourcePolicyBE4AA329"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/ClusterLogsEnabler/Resource/Default"
+   }
+  },
+  "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource"
+   }
+  },
+  "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-681747700094-ap-northeast-2",
+     "S3Key": "39381d2c8b8ec42679de4960c24f0c83c56772cdc2b10b6fc14cd0a99aba42ed.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+      "Arn"
+     ]
+    },
+    "Handler": "index.handler",
+    "Runtime": "nodejs12.x",
+    "Timeout": 120
+   },
+   "DependsOn": [
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/AWS679f53fac002430cb0da5b7982bd2287/Resource",
+    "aws:asset:path": "asset.39381d2c8b8ec42679de4960c24f0c83c56772cdc2b10b6fc14cd0a99aba42ed",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "clusterautoscalerpolicyBCFCC783": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "autoscaling:DescribeAutoScalingGroups",
+        "autoscaling:DescribeAutoScalingInstances",
+        "autoscaling:DescribeLaunchConfigurations",
+        "autoscaling:DescribeTags",
+        "autoscaling:SetDesiredCapacity",
+        "autoscaling:TerminateInstanceInAutoScalingGroup",
+        "ec2:DescribeInstanceTypes",
+        "ec2:DescribeLaunchTemplateVersions"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ClusterAutoscalerPolicy",
+    "Roles": [
+     {
+      "Ref": "EksClustergpudemov5localdevNodegroupcpungngNodeGroupRole1DD01776"
+     },
+     {
+      "Ref": "EksClustergpudemov5localdevNodegroupgpungngNodeGroupRole1FBF8DAF"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/cluster-autoscaler-policy/Resource"
+   }
+  },
+  "clusterNameB220FB68": {
+   "Type": "Custom::AWSCDKCfnJson",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+      "Arn"
+     ]
+    },
+    "Value": {
+     "Fn::Join": [
+      "",
+      [
+       "\"",
+       {
+        "Ref": "EksClustergpudemov5localdev28F3BDE7"
+       },
+       "\""
+      ]
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/clusterName/Resource/Default"
+   }
+  },
+  "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/AWSCDKCfnUtilsProviderCustomResourceProvider/Role"
+   }
+  },
+  "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-681747700094-ap-northeast-2",
+     "S3Key": "f6936269880ca7cba4a55a3b31d35973da96a3a8d67bf1bdb89ec0377026b8ee.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs12.x"
+   },
+   "DependsOn": [
+    "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.f6936269880ca7cba4a55a3b31d35973da96a3a8d67bf1bdb89ec0377026b8ee",
+    "aws:asset:property": "Code"
+   }
+  },
+  "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Resource": "*",
+         "Action": [
+          "iam:CreateOpenIDConnectProvider",
+          "iam:DeleteOpenIDConnectProvider",
+          "iam:UpdateOpenIDConnectProviderThumbprint",
+          "iam:AddClientIDToOpenIDConnectProvider",
+          "iam:RemoveClientIDFromOpenIDConnectProvider"
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role"
+   }
+  },
+  "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-681747700094-ap-northeast-2",
+     "S3Key": "e87ed7caf70963cf8fd827aa2d9795431f6e07a2d25d1dbac646437e0e0761ab.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs12.x"
+   },
+   "DependsOn": [
+    "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.e87ed7caf70963cf8fd827aa2d9795431f6e07a2d25d1dbac646437e0e0761ab",
+    "aws:asset:property": "Code"
+   }
+  },
+  "vpccniaddOn": {
+   "Type": "AWS::EKS::Addon",
+   "Properties": {
+    "AddonName": "vpc-cni",
+    "ClusterName": {
+     "Ref": "EksClustergpudemov5localdev28F3BDE7"
+    },
+    "AddonVersion": "v1.10.2-eksbuild.1",
+    "ResolveConflicts": "OVERWRITE"
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/vpc-cni-addOn"
+   }
+  },
+  "corednsaddOn": {
+   "Type": "AWS::EKS::Addon",
+   "Properties": {
+    "AddonName": "coredns",
+    "ClusterName": {
+     "Ref": "EksClustergpudemov5localdev28F3BDE7"
+    },
+    "AddonVersion": "v1.8.4-eksbuild.1",
+    "ResolveConflicts": "OVERWRITE"
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/coredns-addOn"
+   }
+  },
+  "kubeproxyaddOn": {
+   "Type": "AWS::EKS::Addon",
+   "Properties": {
+    "AddonName": "kube-proxy",
+    "ClusterName": {
+     "Ref": "EksClustergpudemov5localdev28F3BDE7"
+    },
+    "AddonVersion": "v1.21.2-eksbuild.2",
+    "ResolveConflicts": "OVERWRITE"
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/kube-proxy-addOn"
+   }
+  },
+  "xraysystemnamespacestruct92DD4253": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.EksClustergpudemov5localdevawscdkawseksKubectlProviderframeworkonEventC24CDADAArn"
+     ]
+    },
+    "Manifest": "[{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"name\":\"xray-system\",\"labels\":{\"aws.cdk.eks/prune-c8e9ebdcbd8bd2e4f96905f149e075b3cf7351363d\":\"\"}}}]",
+    "ClusterName": {
+     "Ref": "EksClustergpudemov5localdev28F3BDE7"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "EksClustergpudemov5localdevCreationRole8A42C75F",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c8e9ebdcbd8bd2e4f96905f149e075b3cf7351363d",
+    "Overwrite": true
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevKubectlReadyBarrierDD3609B9"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/xray-system-namespace-struct/Resource/Default"
+   }
+  },
+  "xraydaemon34B4B4B6": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.EksClustergpudemov5localdevawscdkawseksKubectlProviderframeworkonEventC24CDADAArn"
+     ]
+    },
+    "Manifest": "[{\"apiVersion\":\"rbac.authorization.k8s.io/v1beta1\",\"kind\":\"ClusterRoleBinding\",\"metadata\":{\"name\":\"xray-daemon\",\"labels\":{\"aws.cdk.eks/prune-c876f7fb3bb368f5a7e3776c146ec7840917a5f7d1\":\"\",\"app\":\"xray-daemon\"}},\"roleRef\":{\"apiGroup\":\"rbac.authorization.k8s.io\",\"kind\":\"ClusterRole\",\"name\":\"cluster-admin\"},\"subjects\":[{\"kind\":\"ServiceAccount\",\"name\":\"xray-account\",\"namespace\":\"xray-system\"}]},{\"apiVersion\":\"apps/v1\",\"kind\":\"DaemonSet\",\"metadata\":{\"name\":\"xray-daemon\",\"namespace\":\"xray-system\",\"labels\":{\"aws.cdk.eks/prune-c876f7fb3bb368f5a7e3776c146ec7840917a5f7d1\":\"\"}},\"spec\":{\"updateStrategy\":{\"type\":\"RollingUpdate\"},\"selector\":{\"matchLabels\":{\"app\":\"xray-daemon\"}},\"template\":{\"metadata\":{\"labels\":{\"app\":\"xray-daemon\"}},\"spec\":{\"volumes\":[{\"name\":\"config-volume\",\"configMap\":{\"name\":\"xray-config\"}}],\"hostNetwork\":true,\"serviceAccountName\":\"xray-account\",\"containers\":[{\"name\":\"xray-daemon\",\"image\":\"trevorrobertsjr/eks-workshop-x-ray-daemon:02d13ce10add55081c68b6b76a19b7dfeea00dad\",\"imagePullPolicy\":\"Always\",\"command\":[\"/usr/bin/xray\",\"-c\",\"/aws/xray/config.yaml\"],\"resources\":{\"limits\":{\"memory\":\"24Mi\"}},\"ports\":[{\"name\":\"xray-ingest\",\"containerPort\":2000,\"hostPort\":2000,\"protocol\":\"UDP\"}],\"volumeMounts\":[{\"name\":\"config-volume\",\"mountPath\":\"/aws/xray\",\"readOnly\":true}]}]}}}},{\"apiVersion\":\"v1\",\"kind\":\"ConfigMap\",\"metadata\":{\"name\":\"xray-config\",\"namespace\":\"xray-system\",\"labels\":{\"aws.cdk.eks/prune-c876f7fb3bb368f5a7e3776c146ec7840917a5f7d1\":\"\"}},\"data\":{\"config.yaml\":\"# Maximum buffer size in MB (minimum 3). Choose 0 to use 1% of host memory.\\nTotalBufferSizeMB: 0\\n# Maximum number of concurrent calls to AWS X-Ray to upload segment documents.\\nConcurrency: 8\\n# Send segments to AWS X-Ray service in a specific region\\nRegion: \\\"\\\"\\n# Change the X-Ray service endpoint to which the daemon sends segment documents.\\nEndpoint: \\\"\\\"\\nSocket:\\n  # Change the address and port on which the daemon listens for UDP packets containing segment documents.\\n  # Make sure we listen on all IP's by default for the k8s setup\\n  UDPAddress: 0.0.0.0:2000\\nLogging:\\n  LogRotation: true\\n  # Change the log level, from most verbose to least: dev, debug, info, warn, error, prod (default).\\n  LogLevel: prod\\n  # Output logs to the specified file path.\\n  LogPath: \\\"\\\"\\n# Turn on local mode to skip EC2 instance metadata check.\\nLocalMode: false\\n# Amazon Resource Name (ARN) of the AWS resource running the daemon.\\nResourceARN: \\\"\\\"\\n# Assume an IAM role to upload segments to a different account.\\nRoleARN: \\\"\\\"\\n# Disable TLS certificate verification.\\nNoVerifySSL: false\\n# Upload segments to AWS X-Ray through a proxy.\\nProxyAddress: \\\"\\\"\\n# Daemon configuration file format version.\\nVersion: 1\"}},{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"name\":\"xray-service\",\"namespace\":\"xray-system\",\"labels\":{\"aws.cdk.eks/prune-c876f7fb3bb368f5a7e3776c146ec7840917a5f7d1\":\"\"}},\"spec\":{\"selector\":{\"app\":\"xray-daemon\"},\"clusterIP\":\"None\",\"ports\":[{\"name\":\"incoming\",\"port\":2000,\"protocol\":\"UDP\"}]}}]",
+    "ClusterName": {
+     "Ref": "EksClustergpudemov5localdev28F3BDE7"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "EksClustergpudemov5localdevCreationRole8A42C75F",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c876f7fb3bb368f5a7e3776c146ec7840917a5f7d1",
+    "Overwrite": true
+   },
+   "DependsOn": [
+    "EksClustergpudemov5localdevKubectlReadyBarrierDD3609B9",
+    "EksClustergpudemov5localdevxrayaccountConditionJson9779E925",
+    "EksClustergpudemov5localdevxrayaccountmanifestxrayaccountServiceAccountResourceE83FD382",
+    "EksClustergpudemov5localdevxrayaccountRole661E2D6E"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/xray-daemon/Resource/Default"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/11RwW7CMAz9Fu4hA3bgXKqNsWlQwcQVpamBQJug2AGhqv8+twWKOPn56cXPfhnJ0UAOeuqCfZ0d+7lJZbkipY+CqU0JeiTL9UmLeGvXSSySkOZGr0JqgWquQ0sXCP5UmkPHd1yE6LRRZJx9iGvwMUvqMlc0VQQXdRWJN2eG3eCZJfCM74J2k1sXEe+6L8CSWIEO3tB16l04NTs8E5WAI8oyzgPyOBFdMAq0Fz8hbYYD/iprtoAk5i6D3X1G13xBXsR75WsjfzYaIq1dYN/FCewsi521oCnx7mwyNuC3UZY5WwmjClkuXZtLUxPHGTaHtKgSuSrSTHHyxu5yIGc/g9VNWA/A6juuBL5vFCIQyqgu3MtJ0EegiUKoxBLQBa/Zka91RdfyAk94EegUmoy/sXVof143rzb+JmWTC75MamxZveOFX1zuEVTCcnjygG/n4ViO5bB3QGP6njMzBchlW/8BjAvvSIACAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "EksCluster-gpu-demo-v5-local-dev/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "EksClustergpudemov5localdevClusterName37D99ADE": {
+   "Value": {
+    "Ref": "EksClustergpudemov5localdev28F3BDE7"
+   }
+  },
+  "EksClustergpudemov5localdevConfigCommand99E6DBAA": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "aws eks update-kubeconfig --name ",
+      {
+       "Ref": "EksClustergpudemov5localdev28F3BDE7"
+      },
+      " --region ap-northeast-2 --role-arn ",
+      {
+       "Fn::GetAtt": [
+        "EksClustergpudemov5localdevMastersRole21681EA7",
+        "Arn"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "EksClustergpudemov5localdevGetTokenCommand70DD59D4": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "aws eks get-token --cluster-name ",
+      {
+       "Ref": "EksClustergpudemov5localdev28F3BDE7"
+      },
+      " --region ap-northeast-2 --role-arn ",
+      {
+       "Fn::GetAtt": [
+        "EksClustergpudemov5localdevMastersRole21681EA7",
+        "Arn"
+       ]
+      }
+     ]
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

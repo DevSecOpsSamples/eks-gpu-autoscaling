@@ -1,0 +1,108 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vision-api2
+  namespace: default
+  annotations:
+    app: 'vision-api2'
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: vision-api2
+  template:
+    metadata:
+      labels:
+        app: vision-api2
+    spec:
+      containers:
+        - name: vision-api2
+          # image: 681747700094.dkr.ecr.ap-northeast-2.amazonaws.com/torchvision:latest
+          image: 681747700094.dkr.ecr.ap-northeast-2.amazonaws.com/gpu-cuda-api:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              memory: "1024Mi"
+            limits:
+              nvidia.com/gpu: 1
+          env:
+          - name: env
+            value: "dev"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vision-api2
+  annotations:
+    app: 'vision-api2'
+    alb.ingress.kubernetes.io/healthcheck-path: "/ping"
+spec:
+  selector:
+    app: vision-api2
+  type: NodePort
+  ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: vision-api2-gpu-hpa
+  namespace: default
+  annotations:
+    app: 'vision-api2'
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: vision-api2
+  minReplicas: 2
+  maxReplicas: 12
+  metrics:
+  - type: Object
+    object:
+      metric:
+        name: DCGM_FI_DEV_GPU_UTIL_AVG
+      describedObject:
+        kind: Service
+        name: vision-api2
+      target:
+        type: Value
+        value: '20'
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "vision-api2-ingress"
+  namespace: default
+  annotations:
+    app: 'vision-api2'
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/load-balancer-name: vision-api2-pstack
+    alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=30
+    alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=10
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:681747700094:certificate/ad3b4737-a573-4e0c-ba16-3b4305138fd9
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/tags: env=dev
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '16'
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '15'
+    alb.ingress.kubernetes.io/healthy-threshold-count: '2'
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: '5'
+spec:
+  rules:
+  - http:
+        paths:
+          - path: /*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: "vision-api2"
+                port:
+                  number: 8000

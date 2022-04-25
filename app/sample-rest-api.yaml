@@ -1,0 +1,80 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-rest-api
+  namespace: default
+  annotations:
+    app: 'sample-rest-api'
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sample-rest-api
+  template:
+    metadata:
+      labels:
+        app: sample-rest-api
+    spec:
+      containers:
+        - name: sample-rest-api
+          image: <account>.dkr.ecr.<region>.amazonaws.com/sample-rest-api:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: 1
+              memory: "1024Mi"
+          env:
+          - name: env
+            value: "dev"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-rest-api
+  annotations:
+    app: 'sample-rest-api'
+    alb.ingress.kubernetes.io/healthcheck-path: "/ping"
+spec:
+  selector:
+    app: sample-rest-api
+  type: NodePort
+  ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "sample-rest-api-ingress"
+  namespace: default
+  annotations:
+    app: 'sample-rest-api'
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/load-balancer-name: sample-rest-api
+    alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=30
+    alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=10
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    # alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:<region>:<account-id>:certificate/<id>
+    # alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/tags: env=dev
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '16'
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '15'
+    alb.ingress.kubernetes.io/healthy-threshold-count: '2'
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: '5'
+spec:
+  rules:
+  - http:
+        paths:
+          - path: /*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: "sample-rest-api"
+                port:
+                  number: 8000

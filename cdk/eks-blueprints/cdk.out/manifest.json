@@ -1,0 +1,780 @@
+{
+  "version": "17.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "eksblueprintdemobuild72E40BF2.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "eksblueprintdemobuild72E40BF2.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "eksblueprintdemobuild72E40BF2": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://681747700094/ap-northeast-2",
+      "properties": {
+        "templateFile": "eksblueprintdemobuild72E40BF2.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-deploy-role-681747700094-ap-northeast-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-cfn-exec-role-681747700094-ap-northeast-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-681747700094-ap-northeast-2/50f9d33c445d695298bd6f111582e375fca0e11d2c4b1a085d0ccf3f6da6b663.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "eksblueprintdemobuild72E40BF2.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-lookup-role-681747700094-ap-northeast-2",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "eksblueprintdemobuild72E40BF2.assets"
+      ],
+      "metadata": {
+        "/eks-blueprint-demo/build/build": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "Could not auto-tag private subnet subnet-054430c4e68bddd75 with \"kubernetes.io/role/internal-elb=1\", please remember to do this manually",
+            "trace": [
+              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
+              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
+              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1824:5)",
+              "new Cluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
+              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
+              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
+              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
+              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
+              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/lib/cluster-stack.ts:67:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/bin/index.ts:16:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1099:14)",
+              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "main (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1099:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          },
+          {
+            "type": "aws:cdk:warning",
+            "data": "Could not auto-tag private subnet subnet-0c9d5604a75594d89 with \"kubernetes.io/role/internal-elb=1\", please remember to do this manually",
+            "trace": [
+              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
+              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
+              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1824:5)",
+              "new Cluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
+              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
+              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
+              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
+              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
+              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/lib/cluster-stack.ts:67:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/bin/index.ts:16:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1099:14)",
+              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "main (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1099:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          },
+          {
+            "type": "aws:cdk:warning",
+            "data": "Could not auto-tag private subnet subnet-0adfaba0a6a973b55 with \"kubernetes.io/role/internal-elb=1\", please remember to do this manually",
+            "trace": [
+              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
+              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
+              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1824:5)",
+              "new Cluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
+              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
+              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
+              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
+              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
+              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/lib/cluster-stack.ts:67:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/bin/index.ts:16:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1099:14)",
+              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "main (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1099:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          },
+          {
+            "type": "aws:cdk:warning",
+            "data": "Could not auto-tag public subnet subnet-0f18f905ceaba4deb with \"kubernetes.io/role/elb=1\", please remember to do this manually",
+            "trace": [
+              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
+              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
+              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1825:5)",
+              "new Cluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
+              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
+              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
+              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
+              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
+              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/lib/cluster-stack.ts:67:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/bin/index.ts:16:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1099:14)",
+              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "main (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1099:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          },
+          {
+            "type": "aws:cdk:warning",
+            "data": "Could not auto-tag public subnet subnet-04d24034e72276639 with \"kubernetes.io/role/elb=1\", please remember to do this manually",
+            "trace": [
+              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
+              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
+              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1825:5)",
+              "new Cluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
+              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
+              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
+              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
+              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
+              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/lib/cluster-stack.ts:67:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/bin/index.ts:16:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1099:14)",
+              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "main (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1099:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          },
+          {
+            "type": "aws:cdk:warning",
+            "data": "Could not auto-tag public subnet subnet-06246165d79ebdb2d with \"kubernetes.io/role/elb=1\", please remember to do this manually",
+            "trace": [
+              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
+              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
+              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1825:5)",
+              "new Cluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
+              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
+              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
+              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
+              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
+              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/lib/cluster-stack.ts:67:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/bin/index.ts:16:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1099:14)",
+              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "main (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1099:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/eks-blueprint-demo/build/build/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildRoleD55766F0"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/ControlPlaneSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildControlPlaneSecurityGroup0CA4A3E0"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/Resource/CreationRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildCreationRole55C9E86B"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/Resource/CreationRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildCreationRoleDefaultPolicy2F2AF61B"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/Resource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "build3E86E075"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/KubectlReadyBarrier": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildKubectlReadyBarrier0FD014F2"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/ClusterName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildClusterName26016D89"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/MastersRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildMastersRole930261BF"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/AwsAuth/manifest/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildAwsAuthmanifest93AB55FE"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/ConfigCommand": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildConfigCommandBBF14D1F"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/GetTokenCommand": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildGetTokenCommand0A32E33E"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/Nodegroupcpu-ng-ng/NodeGroupRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildNodegroupcpungngNodeGroupRoleCC60C6A6"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/Nodegroupcpu-ng-ng/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildNodegroupcpungngEB339F15"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/Nodegroupgpu-ng-ng/NodeGroupRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildNodegroupgpungngNodeGroupRoleC0894829"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/Nodegroupgpu-ng-ng/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildNodegroupgpungng929DB7A4"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/chart-metrics-server/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildchartmetricsserver05C40E7F"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/chart-cluster-autoscaler/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildchartclusterautoscaler38DF285B"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/chart-adot-exporter-for-eks-on-ec2/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildchartadotexporterforeksonec2F9DB891B"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/aws-load-balancer-controller/ConditionJson/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildawsloadbalancercontrollerConditionJsonCFB4B97C"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/aws-load-balancer-controller/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildawsloadbalancercontrollerRole05DC8ED4"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/aws-load-balancer-controller/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildawsloadbalancercontrollerRoleDefaultPolicyA59802C3"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildawsloadbalancercontrollermanifestawsloadbalancercontrollerServiceAccountResource3E964B00"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/OpenIdConnectProvider/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildOpenIdConnectProvider9C76C0F0"
+          }
+        ],
+        "/eks-blueprint-demo/build/build/chart-aws-load-balancer-controller/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buildchartawsloadbalancercontrollerCF67A5AB"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodeProxyAgentLayer924C1971"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandlerServiceRole15A26729"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandlerServiceRoleDefaultPolicyC57085D4"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandler42BEBAE0"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandlerServiceRole5810CC58"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandlerServiceRoleDefaultPolicy8F64197B"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandler7073F4DA"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRole9FF04296"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEvent83C1D0A7"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisCompleteServiceRoleB1087139"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisCompleteServiceRoleDefaultPolicy2E7140AC"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisComplete26D7B0CB"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeoutServiceRole28643D26"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeoutServiceRoleDefaultPolicy2688969F"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeout0B47CA38"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderwaiterstatemachineRole0C7159F9"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderwaiterstatemachineRoleDefaultPolicyD3C3DA1A"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Providerwaiterstatemachine5D4A9DF0"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/eksblueprintdemobuildawscdkawseksClusterResourceProviderframeworkonEvent2D546468Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintdemobuildawscdkawseksClusterResourceProviderframeworkonEvent2D546468Arn"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/reference-to-eksblueprintdemobuildCreationRoleBF9DF484Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoeksblueprintdemobuildCreationRoleBF9DF484Arn"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HandlerServiceRoleFCDC14AE"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HandlerServiceRoleDefaultPolicyCBD0CC91"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Handler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Handler886CB40B"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsCliLayerF44AAF94"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KubectlLayer600207B5"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRole9FF04296"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEvent83C1D0A7"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/eksblueprintdemobuildawscdkawseksKubectlProviderframeworkonEvent1993A776Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "eksblueprintdemobuildawscdkawseksKubectlProviderframeworkonEvent1993A776Arn"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/reference-to-eksblueprintdemobuildE49CC8A1Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoeksblueprintdemobuildE49CC8A1Arn"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/reference-to-eksblueprintdemobuildCreationRoleBF9DF484Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoeksblueprintdemobuildCreationRoleBF9DF484Arn"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/reference-to-eksblueprintdemobuildE49CC8A1ClusterSecurityGroupId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoeksblueprintdemobuildE49CC8A1ClusterSecurityGroupId"
+          }
+        ],
+        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B"
+          }
+        ],
+        "/eks-blueprint-demo/build/ClusterLogsEnabler/CustomResourcePolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterLogsEnablerCustomResourcePolicyBE4AA329"
+          }
+        ],
+        "/eks-blueprint-demo/build/ClusterLogsEnabler/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterLogsEnablerD85801E8"
+          }
+        ],
+        "/eks-blueprint-demo/build/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+          }
+        ],
+        "/eks-blueprint-demo/build/AWS679f53fac002430cb0da5b7982bd2287/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWS679f53fac002430cb0da5b7982bd22872D164C4C"
+          }
+        ],
+        "/eks-blueprint-demo/build/cluster-autoscaler-policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "clusterautoscalerpolicyBCFCC783"
+          }
+        ],
+        "/eks-blueprint-demo/build/clusterName/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "clusterNameB220FB68"
+          }
+        ],
+        "/eks-blueprint-demo/build/AWSCDKCfnUtilsProviderCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867"
+          }
+        ],
+        "/eks-blueprint-demo/build/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57"
+          }
+        ],
+        "/eks-blueprint-demo/build/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65"
+          }
+        ],
+        "/eks-blueprint-demo/build/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0"
+          }
+        ],
+        "/eks-blueprint-demo/build/vpc-cni-addOn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "vpccniaddOn"
+          }
+        ],
+        "/eks-blueprint-demo/build/coredns-addOn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "corednsaddOn"
+          }
+        ],
+        "/eks-blueprint-demo/build/kube-proxy-addOn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "kubeproxyaddOn"
+          }
+        ],
+        "/eks-blueprint-demo/build/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/eks-blueprint-demo/build/Exports/Output{\"Ref\":\"build3E86E075\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefbuild3E86E075D494A5EF"
+          }
+        ],
+        "/eks-blueprint-demo/build/Exports/Output{\"Fn::GetAtt\":[\"build3E86E075\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttbuild3E86E075Arn52D6EDC5"
+          }
+        ],
+        "/eks-blueprint-demo/build/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/eks-blueprint-demo/build/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "eks-blueprint-demo/build"
+    },
+    "eks-blueprint-demo.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "eks-blueprint-demo.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "eks-blueprint-demo": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://681747700094/ap-northeast-2",
+      "properties": {
+        "templateFile": "eks-blueprint-demo.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-deploy-role-681747700094-ap-northeast-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-cfn-exec-role-681747700094-ap-northeast-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-681747700094-ap-northeast-2/12a74e5f1aded246ee5a6acb9f1198615c009499fc4a284a0c51164bb744a9f8.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "eks-blueprint-demo.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-lookup-role-681747700094-ap-northeast-2",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "eksblueprintdemobuild72E40BF2",
+        "eks-blueprint-demo.assets"
+      ],
+      "metadata": {
+        "/eks-blueprint-demo/ClusterName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterName"
+          }
+        ],
+        "/eks-blueprint-demo/ClusterArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterArn"
+          }
+        ],
+        "/eks-blueprint-demo/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/eks-blueprint-demo/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/eks-blueprint-demo/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "eks-blueprint-demo"
+    }
+  }
+}
