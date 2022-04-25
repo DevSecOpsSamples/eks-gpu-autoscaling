@@ -9,7 +9,7 @@ export default class EksBlueprintStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
 
-        const vpcId = this.node.tryGetContext('vpcId') || ssm.StringParameter.valueFromLookup(this, '/cdk-eks-blueprints/vpc-id');
+        const vpcId = this.node.tryGetContext('vpcId') || ssm.StringParameter.valueFromLookup(this, '/eks-gpu-autoscaling/vpc-id');
 
         const addOns: Array<blueprints.ClusterAddOn> = [
             new blueprints.addons.MetricsServerAddOn,

@@ -12,6 +12,5 @@ const env = {
     stage: app.node.tryGetContext('stage') || 'local'
 };
 
-// new EksBlueprintStack(app, { id: `${CLUSTER_NAME}` }, { env });
 new EksBlueprintStack(app, `${CLUSTER_NAME}-${env.stage}`, { env });
 

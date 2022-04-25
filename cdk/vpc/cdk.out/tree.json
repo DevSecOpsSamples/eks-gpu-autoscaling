@@ -9,20 +9,20 @@
         "path": "Tree",
         "constructInfo": {
           "fqn": "constructs.Construct",
-          "version": "10.0.121"
+          "version": "10.0.125"
         }
       },
-      "Vpc-local2": {
-        "id": "Vpc-local2",
-        "path": "Vpc-local2",
+      "Vpc-stg": {
+        "id": "Vpc-stg",
+        "path": "Vpc-stg",
         "children": {
           "Vpc": {
             "id": "Vpc",
-            "path": "Vpc-local2/Vpc",
+            "path": "Vpc-stg/Vpc",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "Vpc-local2/Vpc/Resource",
+                "path": "Vpc-stg/Vpc/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
                   "aws:cdk:cloudformation:props": {
@@ -33,7 +33,7 @@
                     "tags": [
                       {
                         "key": "Name",
-                        "value": "Vpc-local2/Vpc"
+                        "value": "Vpc-stg/Vpc"
                       }
                     ]
                   }
@@ -45,11 +45,11 @@
               },
               "publicSubnet1": {
                 "id": "publicSubnet1",
-                "path": "Vpc-local2/Vpc/publicSubnet1",
+                "path": "Vpc-stg/Vpc/publicSubnet1",
                 "children": {
                   "Subnet": {
                     "id": "Subnet",
-                    "path": "Vpc-local2/Vpc/publicSubnet1/Subnet",
+                    "path": "Vpc-stg/Vpc/publicSubnet1/Subnet",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
                       "aws:cdk:cloudformation:props": {
@@ -74,7 +74,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/publicSubnet1"
+                            "value": "Vpc-stg/Vpc/publicSubnet1"
                           }
                         ]
                       }
@@ -86,7 +86,7 @@
                   },
                   "Acl": {
                     "id": "Acl",
-                    "path": "Vpc-local2/Vpc/publicSubnet1/Acl",
+                    "path": "Vpc-stg/Vpc/publicSubnet1/Acl",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -94,7 +94,7 @@
                   },
                   "RouteTable": {
                     "id": "RouteTable",
-                    "path": "Vpc-local2/Vpc/publicSubnet1/RouteTable",
+                    "path": "Vpc-stg/Vpc/publicSubnet1/RouteTable",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
                       "aws:cdk:cloudformation:props": {
@@ -108,7 +108,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/publicSubnet1"
+                            "value": "Vpc-stg/Vpc/publicSubnet1"
                           }
                         ]
                       }
@@ -120,7 +120,7 @@
                   },
                   "RouteTableAssociation": {
                     "id": "RouteTableAssociation",
-                    "path": "Vpc-local2/Vpc/publicSubnet1/RouteTableAssociation",
+                    "path": "Vpc-stg/Vpc/publicSubnet1/RouteTableAssociation",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
                       "aws:cdk:cloudformation:props": {
@@ -139,7 +139,7 @@
                   },
                   "DefaultRoute": {
                     "id": "DefaultRoute",
-                    "path": "Vpc-local2/Vpc/publicSubnet1/DefaultRoute",
+                    "path": "Vpc-stg/Vpc/publicSubnet1/DefaultRoute",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Route",
                       "aws:cdk:cloudformation:props": {
@@ -159,7 +159,7 @@
                   },
                   "EIP": {
                     "id": "EIP",
-                    "path": "Vpc-local2/Vpc/publicSubnet1/EIP",
+                    "path": "Vpc-stg/Vpc/publicSubnet1/EIP",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
                       "aws:cdk:cloudformation:props": {
@@ -171,7 +171,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/publicSubnet1"
+                            "value": "Vpc-stg/Vpc/publicSubnet1"
                           }
                         ]
                       }
@@ -183,7 +183,7 @@
                   },
                   "NATGateway": {
                     "id": "NATGateway",
-                    "path": "Vpc-local2/Vpc/publicSubnet1/NATGateway",
+                    "path": "Vpc-stg/Vpc/publicSubnet1/NATGateway",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
                       "aws:cdk:cloudformation:props": {
@@ -203,7 +203,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/publicSubnet1"
+                            "value": "Vpc-stg/Vpc/publicSubnet1"
                           }
                         ]
                       }
@@ -221,11 +221,11 @@
               },
               "publicSubnet2": {
                 "id": "publicSubnet2",
-                "path": "Vpc-local2/Vpc/publicSubnet2",
+                "path": "Vpc-stg/Vpc/publicSubnet2",
                 "children": {
                   "Subnet": {
                     "id": "Subnet",
-                    "path": "Vpc-local2/Vpc/publicSubnet2/Subnet",
+                    "path": "Vpc-stg/Vpc/publicSubnet2/Subnet",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
                       "aws:cdk:cloudformation:props": {
@@ -250,7 +250,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/publicSubnet2"
+                            "value": "Vpc-stg/Vpc/publicSubnet2"
                           }
                         ]
                       }
@@ -262,7 +262,7 @@
                   },
                   "Acl": {
                     "id": "Acl",
-                    "path": "Vpc-local2/Vpc/publicSubnet2/Acl",
+                    "path": "Vpc-stg/Vpc/publicSubnet2/Acl",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -270,7 +270,7 @@
                   },
                   "RouteTable": {
                     "id": "RouteTable",
-                    "path": "Vpc-local2/Vpc/publicSubnet2/RouteTable",
+                    "path": "Vpc-stg/Vpc/publicSubnet2/RouteTable",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
                       "aws:cdk:cloudformation:props": {
@@ -284,7 +284,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/publicSubnet2"
+                            "value": "Vpc-stg/Vpc/publicSubnet2"
                           }
                         ]
                       }
@@ -296,7 +296,7 @@
                   },
                   "RouteTableAssociation": {
                     "id": "RouteTableAssociation",
-                    "path": "Vpc-local2/Vpc/publicSubnet2/RouteTableAssociation",
+                    "path": "Vpc-stg/Vpc/publicSubnet2/RouteTableAssociation",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
                       "aws:cdk:cloudformation:props": {
@@ -315,7 +315,7 @@
                   },
                   "DefaultRoute": {
                     "id": "DefaultRoute",
-                    "path": "Vpc-local2/Vpc/publicSubnet2/DefaultRoute",
+                    "path": "Vpc-stg/Vpc/publicSubnet2/DefaultRoute",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Route",
                       "aws:cdk:cloudformation:props": {
@@ -335,7 +335,7 @@
                   },
                   "EIP": {
                     "id": "EIP",
-                    "path": "Vpc-local2/Vpc/publicSubnet2/EIP",
+                    "path": "Vpc-stg/Vpc/publicSubnet2/EIP",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
                       "aws:cdk:cloudformation:props": {
@@ -347,7 +347,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/publicSubnet2"
+                            "value": "Vpc-stg/Vpc/publicSubnet2"
                           }
                         ]
                       }
@@ -359,7 +359,7 @@
                   },
                   "NATGateway": {
                     "id": "NATGateway",
-                    "path": "Vpc-local2/Vpc/publicSubnet2/NATGateway",
+                    "path": "Vpc-stg/Vpc/publicSubnet2/NATGateway",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
                       "aws:cdk:cloudformation:props": {
@@ -379,7 +379,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/publicSubnet2"
+                            "value": "Vpc-stg/Vpc/publicSubnet2"
                           }
                         ]
                       }
@@ -397,11 +397,11 @@
               },
               "publicSubnet3": {
                 "id": "publicSubnet3",
-                "path": "Vpc-local2/Vpc/publicSubnet3",
+                "path": "Vpc-stg/Vpc/publicSubnet3",
                 "children": {
                   "Subnet": {
                     "id": "Subnet",
-                    "path": "Vpc-local2/Vpc/publicSubnet3/Subnet",
+                    "path": "Vpc-stg/Vpc/publicSubnet3/Subnet",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
                       "aws:cdk:cloudformation:props": {
@@ -426,7 +426,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/publicSubnet3"
+                            "value": "Vpc-stg/Vpc/publicSubnet3"
                           }
                         ]
                       }
@@ -438,7 +438,7 @@
                   },
                   "Acl": {
                     "id": "Acl",
-                    "path": "Vpc-local2/Vpc/publicSubnet3/Acl",
+                    "path": "Vpc-stg/Vpc/publicSubnet3/Acl",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -446,7 +446,7 @@
                   },
                   "RouteTable": {
                     "id": "RouteTable",
-                    "path": "Vpc-local2/Vpc/publicSubnet3/RouteTable",
+                    "path": "Vpc-stg/Vpc/publicSubnet3/RouteTable",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
                       "aws:cdk:cloudformation:props": {
@@ -460,7 +460,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/publicSubnet3"
+                            "value": "Vpc-stg/Vpc/publicSubnet3"
                           }
                         ]
                       }
@@ -472,7 +472,7 @@
                   },
                   "RouteTableAssociation": {
                     "id": "RouteTableAssociation",
-                    "path": "Vpc-local2/Vpc/publicSubnet3/RouteTableAssociation",
+                    "path": "Vpc-stg/Vpc/publicSubnet3/RouteTableAssociation",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
                       "aws:cdk:cloudformation:props": {
@@ -491,7 +491,7 @@
                   },
                   "DefaultRoute": {
                     "id": "DefaultRoute",
-                    "path": "Vpc-local2/Vpc/publicSubnet3/DefaultRoute",
+                    "path": "Vpc-stg/Vpc/publicSubnet3/DefaultRoute",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Route",
                       "aws:cdk:cloudformation:props": {
@@ -511,7 +511,7 @@
                   },
                   "EIP": {
                     "id": "EIP",
-                    "path": "Vpc-local2/Vpc/publicSubnet3/EIP",
+                    "path": "Vpc-stg/Vpc/publicSubnet3/EIP",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
                       "aws:cdk:cloudformation:props": {
@@ -523,7 +523,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/publicSubnet3"
+                            "value": "Vpc-stg/Vpc/publicSubnet3"
                           }
                         ]
                       }
@@ -535,7 +535,7 @@
                   },
                   "NATGateway": {
                     "id": "NATGateway",
-                    "path": "Vpc-local2/Vpc/publicSubnet3/NATGateway",
+                    "path": "Vpc-stg/Vpc/publicSubnet3/NATGateway",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
                       "aws:cdk:cloudformation:props": {
@@ -555,7 +555,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/publicSubnet3"
+                            "value": "Vpc-stg/Vpc/publicSubnet3"
                           }
                         ]
                       }
@@ -573,11 +573,11 @@
               },
               "privateSubnet1": {
                 "id": "privateSubnet1",
-                "path": "Vpc-local2/Vpc/privateSubnet1",
+                "path": "Vpc-stg/Vpc/privateSubnet1",
                 "children": {
                   "Subnet": {
                     "id": "Subnet",
-                    "path": "Vpc-local2/Vpc/privateSubnet1/Subnet",
+                    "path": "Vpc-stg/Vpc/privateSubnet1/Subnet",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
                       "aws:cdk:cloudformation:props": {
@@ -602,7 +602,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/privateSubnet1"
+                            "value": "Vpc-stg/Vpc/privateSubnet1"
                           }
                         ]
                       }
@@ -614,7 +614,7 @@
                   },
                   "Acl": {
                     "id": "Acl",
-                    "path": "Vpc-local2/Vpc/privateSubnet1/Acl",
+                    "path": "Vpc-stg/Vpc/privateSubnet1/Acl",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -622,7 +622,7 @@
                   },
                   "RouteTable": {
                     "id": "RouteTable",
-                    "path": "Vpc-local2/Vpc/privateSubnet1/RouteTable",
+                    "path": "Vpc-stg/Vpc/privateSubnet1/RouteTable",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
                       "aws:cdk:cloudformation:props": {
@@ -636,7 +636,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/privateSubnet1"
+                            "value": "Vpc-stg/Vpc/privateSubnet1"
                           }
                         ]
                       }
@@ -648,7 +648,7 @@
                   },
                   "RouteTableAssociation": {
                     "id": "RouteTableAssociation",
-                    "path": "Vpc-local2/Vpc/privateSubnet1/RouteTableAssociation",
+                    "path": "Vpc-stg/Vpc/privateSubnet1/RouteTableAssociation",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
                       "aws:cdk:cloudformation:props": {
@@ -667,7 +667,7 @@
                   },
                   "DefaultRoute": {
                     "id": "DefaultRoute",
-                    "path": "Vpc-local2/Vpc/privateSubnet1/DefaultRoute",
+                    "path": "Vpc-stg/Vpc/privateSubnet1/DefaultRoute",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Route",
                       "aws:cdk:cloudformation:props": {
@@ -693,11 +693,11 @@
               },
               "privateSubnet2": {
                 "id": "privateSubnet2",
-                "path": "Vpc-local2/Vpc/privateSubnet2",
+                "path": "Vpc-stg/Vpc/privateSubnet2",
                 "children": {
                   "Subnet": {
                     "id": "Subnet",
-                    "path": "Vpc-local2/Vpc/privateSubnet2/Subnet",
+                    "path": "Vpc-stg/Vpc/privateSubnet2/Subnet",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
                       "aws:cdk:cloudformation:props": {
@@ -722,7 +722,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/privateSubnet2"
+                            "value": "Vpc-stg/Vpc/privateSubnet2"
                           }
                         ]
                       }
@@ -734,7 +734,7 @@
                   },
                   "Acl": {
                     "id": "Acl",
-                    "path": "Vpc-local2/Vpc/privateSubnet2/Acl",
+                    "path": "Vpc-stg/Vpc/privateSubnet2/Acl",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -742,7 +742,7 @@
                   },
                   "RouteTable": {
                     "id": "RouteTable",
-                    "path": "Vpc-local2/Vpc/privateSubnet2/RouteTable",
+                    "path": "Vpc-stg/Vpc/privateSubnet2/RouteTable",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
                       "aws:cdk:cloudformation:props": {
@@ -756,7 +756,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/privateSubnet2"
+                            "value": "Vpc-stg/Vpc/privateSubnet2"
                           }
                         ]
                       }
@@ -768,7 +768,7 @@
                   },
                   "RouteTableAssociation": {
                     "id": "RouteTableAssociation",
-                    "path": "Vpc-local2/Vpc/privateSubnet2/RouteTableAssociation",
+                    "path": "Vpc-stg/Vpc/privateSubnet2/RouteTableAssociation",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
                       "aws:cdk:cloudformation:props": {
@@ -787,7 +787,7 @@
                   },
                   "DefaultRoute": {
                     "id": "DefaultRoute",
-                    "path": "Vpc-local2/Vpc/privateSubnet2/DefaultRoute",
+                    "path": "Vpc-stg/Vpc/privateSubnet2/DefaultRoute",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Route",
                       "aws:cdk:cloudformation:props": {
@@ -813,11 +813,11 @@
               },
               "privateSubnet3": {
                 "id": "privateSubnet3",
-                "path": "Vpc-local2/Vpc/privateSubnet3",
+                "path": "Vpc-stg/Vpc/privateSubnet3",
                 "children": {
                   "Subnet": {
                     "id": "Subnet",
-                    "path": "Vpc-local2/Vpc/privateSubnet3/Subnet",
+                    "path": "Vpc-stg/Vpc/privateSubnet3/Subnet",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
                       "aws:cdk:cloudformation:props": {
@@ -842,7 +842,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/privateSubnet3"
+                            "value": "Vpc-stg/Vpc/privateSubnet3"
                           }
                         ]
                       }
@@ -854,7 +854,7 @@
                   },
                   "Acl": {
                     "id": "Acl",
-                    "path": "Vpc-local2/Vpc/privateSubnet3/Acl",
+                    "path": "Vpc-stg/Vpc/privateSubnet3/Acl",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -862,7 +862,7 @@
                   },
                   "RouteTable": {
                     "id": "RouteTable",
-                    "path": "Vpc-local2/Vpc/privateSubnet3/RouteTable",
+                    "path": "Vpc-stg/Vpc/privateSubnet3/RouteTable",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
                       "aws:cdk:cloudformation:props": {
@@ -876,7 +876,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "Vpc-local2/Vpc/privateSubnet3"
+                            "value": "Vpc-stg/Vpc/privateSubnet3"
                           }
                         ]
                       }
@@ -888,7 +888,7 @@
                   },
                   "RouteTableAssociation": {
                     "id": "RouteTableAssociation",
-                    "path": "Vpc-local2/Vpc/privateSubnet3/RouteTableAssociation",
+                    "path": "Vpc-stg/Vpc/privateSubnet3/RouteTableAssociation",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
                       "aws:cdk:cloudformation:props": {
@@ -907,7 +907,7 @@
                   },
                   "DefaultRoute": {
                     "id": "DefaultRoute",
-                    "path": "Vpc-local2/Vpc/privateSubnet3/DefaultRoute",
+                    "path": "Vpc-stg/Vpc/privateSubnet3/DefaultRoute",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Route",
                       "aws:cdk:cloudformation:props": {
@@ -933,14 +933,14 @@
               },
               "IGW": {
                 "id": "IGW",
-                "path": "Vpc-local2/Vpc/IGW",
+                "path": "Vpc-stg/Vpc/IGW",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
                   "aws:cdk:cloudformation:props": {
                     "tags": [
                       {
                         "key": "Name",
-                        "value": "Vpc-local2/Vpc"
+                        "value": "Vpc-stg/Vpc"
                       }
                     ]
                   }
@@ -952,7 +952,7 @@
               },
               "VPCGW": {
                 "id": "VPCGW",
-                "path": "Vpc-local2/Vpc/VPCGW",
+                "path": "Vpc-stg/Vpc/VPCGW",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
                   "aws:cdk:cloudformation:props": {
@@ -977,11 +977,11 @@
           },
           "SSMVPCID": {
             "id": "SSMVPCID",
-            "path": "Vpc-local2/SSMVPCID",
+            "path": "Vpc-stg/SSMVPCID",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "Vpc-local2/SSMVPCID/Resource",
+                "path": "Vpc-stg/SSMVPCID/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
                   "aws:cdk:cloudformation:props": {
@@ -1005,7 +1005,7 @@
           },
           "VPC": {
             "id": "VPC",
-            "path": "Vpc-local2/VPC",
+            "path": "Vpc-stg/VPC",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnOutput",
               "version": "2.20.0"
@@ -1013,7 +1013,7 @@
           },
           "SSMParameter": {
             "id": "SSMParameter",
-            "path": "Vpc-local2/SSMParameter",
+            "path": "Vpc-stg/SSMParameter",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnOutput",
               "version": "2.20.0"
@@ -1021,7 +1021,7 @@
           },
           "SSMParameterValue": {
             "id": "SSMParameterValue",
-            "path": "Vpc-local2/SSMParameterValue",
+            "path": "Vpc-stg/SSMParameterValue",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnOutput",
               "version": "2.20.0"
@@ -1029,7 +1029,7 @@
           },
           "SSMURL": {
             "id": "SSMURL",
-            "path": "Vpc-local2/SSMURL",
+            "path": "Vpc-stg/SSMURL",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnOutput",
               "version": "2.20.0"
@@ -1037,11 +1037,11 @@
           },
           "CDKMetadata": {
             "id": "CDKMetadata",
-            "path": "Vpc-local2/CDKMetadata",
+            "path": "Vpc-stg/CDKMetadata",
             "children": {
               "Default": {
                 "id": "Default",
-                "path": "Vpc-local2/CDKMetadata/Default",
+                "path": "Vpc-stg/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnResource",
                   "version": "2.20.0"
@@ -1050,7 +1050,7 @@
             },
             "constructInfo": {
               "fqn": "constructs.Construct",
-              "version": "10.0.121"
+              "version": "10.0.125"
             }
           }
         },

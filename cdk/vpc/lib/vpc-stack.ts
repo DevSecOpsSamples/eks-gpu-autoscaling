@@ -45,7 +45,7 @@ export class VpcStack extends Stack {
         tagAllSubnets(vpc.publicSubnets, 'kubernetes.io/role/elb', '1');
         tagAllSubnets(vpc.privateSubnets, 'kubernetes.io/role/internal-elb', '1');
 
-        const parameter = new ssm.StringParameter(this, 'SSMVPCID', { parameterName: '/cdk-eks-blueprints/vpc-id', stringValue: vpc.vpcId });
+        const parameter = new ssm.StringParameter(this, 'SSMVPCID', { parameterName: '/eks-gpu-autoscaling/vpc-id', stringValue: vpc.vpcId });
         new CfnOutput(this, 'VPC', { value: vpc.vpcId });
         new CfnOutput(this, 'SSMParameter', { value: parameter.parameterName });
         new CfnOutput(this, 'SSMParameterValue', { value: vpc.vpcId });

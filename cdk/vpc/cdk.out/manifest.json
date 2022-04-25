@@ -7,27 +7,27 @@
         "file": "tree.json"
       }
     },
-    "Vpc-local2.assets": {
+    "Vpc-stg.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "Vpc-local2.assets.json",
+        "file": "Vpc-stg.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "Vpc-local2": {
+    "Vpc-stg": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://681747700094/ap-northeast-2",
       "properties": {
-        "templateFile": "Vpc-local2.template.json",
+        "templateFile": "Vpc-stg.template.json",
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-deploy-role-681747700094-ap-northeast-2",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-cfn-exec-role-681747700094-ap-northeast-2",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-681747700094-ap-northeast-2/75904d1c35580dcca85d385847d9cbaef5c2e715f03394578d44ca5fd80ecd66.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-681747700094-ap-northeast-2/e7077f9014ed5422e2c3598b208824c96671451ebe4db1e07334cda3fd0369e3.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "Vpc-local2.assets"
+          "Vpc-stg.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-lookup-role-681747700094-ap-northeast-2",
@@ -36,257 +36,257 @@
         }
       },
       "dependencies": [
-        "Vpc-local2.assets"
+        "Vpc-stg.assets"
       ],
       "metadata": {
-        "/Vpc-local2/Vpc/Resource": [
+        "/Vpc-stg/Vpc/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "Vpc8378EB38"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet1/Subnet": [
+        "/Vpc-stg/Vpc/publicSubnet1/Subnet": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet1Subnet2BB74ED7"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet1/RouteTable": [
+        "/Vpc-stg/Vpc/publicSubnet1/RouteTable": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet1RouteTable15C15F8E"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet1/RouteTableAssociation": [
+        "/Vpc-stg/Vpc/publicSubnet1/RouteTableAssociation": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet1RouteTableAssociation4E83B6E4"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet1/DefaultRoute": [
+        "/Vpc-stg/Vpc/publicSubnet1/DefaultRoute": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet1DefaultRouteB88F9E93"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet1/EIP": [
+        "/Vpc-stg/Vpc/publicSubnet1/EIP": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet1EIP411541E6"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet1/NATGateway": [
+        "/Vpc-stg/Vpc/publicSubnet1/NATGateway": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet1NATGatewayA036E8A6"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet2/Subnet": [
+        "/Vpc-stg/Vpc/publicSubnet2/Subnet": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet2SubnetE34B022A"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet2/RouteTable": [
+        "/Vpc-stg/Vpc/publicSubnet2/RouteTable": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet2RouteTableC5A6DF77"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet2/RouteTableAssociation": [
+        "/Vpc-stg/Vpc/publicSubnet2/RouteTableAssociation": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet2RouteTableAssociationCCE257FF"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet2/DefaultRoute": [
+        "/Vpc-stg/Vpc/publicSubnet2/DefaultRoute": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet2DefaultRoute732F0BEB"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet2/EIP": [
+        "/Vpc-stg/Vpc/publicSubnet2/EIP": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet2EIP811E07A7"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet2/NATGateway": [
+        "/Vpc-stg/Vpc/publicSubnet2/NATGateway": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet2NATGateway4A29FD4F"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet3/Subnet": [
+        "/Vpc-stg/Vpc/publicSubnet3/Subnet": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet3SubnetDFEF064A"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet3/RouteTable": [
+        "/Vpc-stg/Vpc/publicSubnet3/RouteTable": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet3RouteTable80517A9C"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet3/RouteTableAssociation": [
+        "/Vpc-stg/Vpc/publicSubnet3/RouteTableAssociation": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet3RouteTableAssociation61C43F88"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet3/DefaultRoute": [
+        "/Vpc-stg/Vpc/publicSubnet3/DefaultRoute": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet3DefaultRouteA3904BF0"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet3/EIP": [
+        "/Vpc-stg/Vpc/publicSubnet3/EIP": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet3EIPD9427DC9"
           }
         ],
-        "/Vpc-local2/Vpc/publicSubnet3/NATGateway": [
+        "/Vpc-stg/Vpc/publicSubnet3/NATGateway": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcpublicSubnet3NATGatewayB3ABD4B1"
           }
         ],
-        "/Vpc-local2/Vpc/privateSubnet1/Subnet": [
+        "/Vpc-stg/Vpc/privateSubnet1/Subnet": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcprivateSubnet1SubnetCEAD3716"
           }
         ],
-        "/Vpc-local2/Vpc/privateSubnet1/RouteTable": [
+        "/Vpc-stg/Vpc/privateSubnet1/RouteTable": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcprivateSubnet1RouteTable1979EACB"
           }
         ],
-        "/Vpc-local2/Vpc/privateSubnet1/RouteTableAssociation": [
+        "/Vpc-stg/Vpc/privateSubnet1/RouteTableAssociation": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcprivateSubnet1RouteTableAssociationEEBD93CE"
           }
         ],
-        "/Vpc-local2/Vpc/privateSubnet1/DefaultRoute": [
+        "/Vpc-stg/Vpc/privateSubnet1/DefaultRoute": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcprivateSubnet1DefaultRouteB506891A"
           }
         ],
-        "/Vpc-local2/Vpc/privateSubnet2/Subnet": [
+        "/Vpc-stg/Vpc/privateSubnet2/Subnet": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcprivateSubnet2Subnet2DE7549C"
           }
         ],
-        "/Vpc-local2/Vpc/privateSubnet2/RouteTable": [
+        "/Vpc-stg/Vpc/privateSubnet2/RouteTable": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcprivateSubnet2RouteTable4D0FFC8C"
           }
         ],
-        "/Vpc-local2/Vpc/privateSubnet2/RouteTableAssociation": [
+        "/Vpc-stg/Vpc/privateSubnet2/RouteTableAssociation": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcprivateSubnet2RouteTableAssociationB691E645"
           }
         ],
-        "/Vpc-local2/Vpc/privateSubnet2/DefaultRoute": [
+        "/Vpc-stg/Vpc/privateSubnet2/DefaultRoute": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcprivateSubnet2DefaultRouteBAC3C1C3"
           }
         ],
-        "/Vpc-local2/Vpc/privateSubnet3/Subnet": [
+        "/Vpc-stg/Vpc/privateSubnet3/Subnet": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcprivateSubnet3SubnetA5AC68D9"
           }
         ],
-        "/Vpc-local2/Vpc/privateSubnet3/RouteTable": [
+        "/Vpc-stg/Vpc/privateSubnet3/RouteTable": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcprivateSubnet3RouteTableAF0D9985"
           }
         ],
-        "/Vpc-local2/Vpc/privateSubnet3/RouteTableAssociation": [
+        "/Vpc-stg/Vpc/privateSubnet3/RouteTableAssociation": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcprivateSubnet3RouteTableAssociation88A12983"
           }
         ],
-        "/Vpc-local2/Vpc/privateSubnet3/DefaultRoute": [
+        "/Vpc-stg/Vpc/privateSubnet3/DefaultRoute": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcprivateSubnet3DefaultRoute5028F7A1"
           }
         ],
-        "/Vpc-local2/Vpc/IGW": [
+        "/Vpc-stg/Vpc/IGW": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcIGWD7BA715C"
           }
         ],
-        "/Vpc-local2/Vpc/VPCGW": [
+        "/Vpc-stg/Vpc/VPCGW": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VpcVPCGWBF912B6E"
           }
         ],
-        "/Vpc-local2/SSMVPCID/Resource": [
+        "/Vpc-stg/SSMVPCID/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SSMVPCID794495B1"
           }
         ],
-        "/Vpc-local2/VPC": [
+        "/Vpc-stg/VPC": [
           {
             "type": "aws:cdk:logicalId",
             "data": "VPC"
           }
         ],
-        "/Vpc-local2/SSMParameter": [
+        "/Vpc-stg/SSMParameter": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SSMParameter"
           }
         ],
-        "/Vpc-local2/SSMParameterValue": [
+        "/Vpc-stg/SSMParameterValue": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SSMParameterValue"
           }
         ],
-        "/Vpc-local2/SSMURL": [
+        "/Vpc-stg/SSMURL": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SSMURL"
           }
         ],
-        "/Vpc-local2/CDKMetadata/Default": [
+        "/Vpc-stg/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/Vpc-local2/BootstrapVersion": [
+        "/Vpc-stg/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/Vpc-local2/CheckBootstrapVersion": [
+        "/Vpc-stg/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "Vpc-local2"
+      "displayName": "Vpc-stg"
     }
   }
 }
