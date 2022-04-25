@@ -22,7 +22,7 @@ Data Center GPU Manager(DCGM) exporter를 DaemonSet으로 설치하고 Prometheu
 |              | CPU   | GPU   | Description                         |
 |--------------|-------|-------|-------------------------------------|
 | Metric 수집   | 지원   |  미지원 | DCGM exporter DaemonSet으로 수집      |
-| Fraction     | 지원   |  미지원 | nvidia.com/gpu: 0.5 형태로 설정 불가   |
+| Fraction     | 지원   |  미지원 | nvidia.com/gpu: 0.5 형태로 분할 사용 불가   |
 | HPA          | 지원   |  미지원 | prometheus customer metric 기준 scaling    |
 
 # Environment
