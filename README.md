@@ -310,8 +310,6 @@ cd ../gpu-api
 ./build.sh
 sed -e "s|<account-id>|${ACCOUNT_ID}|g" gpu-api.yaml | kubectl apply -f -
 sed -e "s|<account-id>|${ACCOUNT_ID}|g" gpu-api2.yaml | kubectl apply -f -
-
-# kubectl apply -f gpu-api2.yaml
 ```
 
 image size: 3.33GB, image pull: 39.50s
@@ -401,11 +399,11 @@ bzt gpu-api-bzt.yaml
 ![scalingtest-taurus.png](./screenshots/scalingtest-taurus.png?raw=true)
 
 ```bash
-kubectl describe hpa gpu-api-gpu-hpa
+kubectl describe hpa gpu-api-hpa
 ```
 
 ```bash
-Name:                                                               gpu-api-gpu-hpa
+Name:                                                               gpu-api-hpa
 Namespace:                                                          default
 Labels:                                                             <none>
 Annotations:                                                        app: gpu-api
