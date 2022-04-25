@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: cpu-api
-          image: <account-id>.dkr.ecr.us-east-1.amazonaws.com/cpu-api:latest
+          image: <account-id>.dkr.ecr.<region>.amazonaws.com/cpu-api:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
