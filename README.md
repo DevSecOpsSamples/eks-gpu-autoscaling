@@ -442,13 +442,12 @@ kubectl scale deployment gpu-api --replicas=6
 # Uninstall
 
 ```bash
-kubectl delete -f cpu-api.yaml
-kubectl delete -f gpu-api.yaml
-kubectl delete -f gpu-api2.yaml
+kubectl delete -f cpu-api/cpu-api.yaml
+kubectl delete -f gpu-api/gpu-api.yaml
+kubectl delete -f gpu-api/gpu-api2.yaml
 
 kubectl delete -f dcgm-exporter.yaml
 kubectl delete -f dcgm-exporter-karpenter.yaml
-kubectl delete -f prometheus-alert-rule.yaml
 
 helm uninstall prometheus-adapter
 helm uninstall kube-prometheus-stack -n monitoring
