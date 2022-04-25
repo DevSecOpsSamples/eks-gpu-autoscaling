@@ -5,7 +5,7 @@
 
 The labels collected through the DGCM exporter are `exported_namespace`, `exported_container`, and `exported_pod`, and the `Service` name is not saved as a label.
 
-You can check all labels in [Service Discovery menu](http://localhost:9090/service-discovery) menu like [prom-servicediscovery.png](./screenshots/prom-servicediscovery.png)
+You can check all labels in the [Service Discovery](http://localhost:9090/service-discovery) menu like [prom-servicediscovery.png](./screenshots/prom-servicediscovery.png)
 
 ```bash
 DCGM_FI_DEV_GPU_UTIL{exported_container="gpu-api"}[60s]
@@ -17,7 +17,7 @@ DCGM_FI_DEV_GPU_UTIL{exported_container="gpu-api"}[60s]
 
 ## 2. Prometheus Adapter Rule
 
-When retrieving the DCGM_FI_DEV_GPU_UTIL metric value with /apis/custom.metrics.k8s.io/v1beta1 API, it is returned as the sum of all node GPUs, so a custom metric is created for inquiring as an average based on node and service. Override the label so that the data saved as DCGM_FI_DEV_GPU_UTIL{exported_container="gpu-api"} can be searched with DCGM_FI_DEV_GPU_UTIL_AVG{service="gpu-api"}.
+When retrieving the DCGM_FI_DEV_GPU_UTIL metric value with /apis/custom.metrics.k8s.io/v1beta1 API, it is returned as the sum of all node GPUs, so a custom metric created for inquiring as an average based on node and service. Override the label so that the data saved as DCGM_FI_DEV_GPU_UTIL{exported_container="gpu-api"} can be searched with DCGM_FI_DEV_GPU_UTIL_AVG{service="gpu-api"}.
 
 **IMPORTANT** 
 

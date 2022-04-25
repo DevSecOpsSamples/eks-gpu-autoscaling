@@ -1,30 +1,29 @@
 
 # GPU AutoScaling on EKS
 
-GPU utilization based horizontal autoscaling for inference APIs.
+GPU utilization-based horizontal autoscaling for inference APIs. This guideline provides complete steps for GPU auto scaling on AWS EKS.
 
-This guideline provides a complete steps for GPU auto scaling on AWS EKS.
-
-***Feel free to create an issue or raise a pull request if update is required***.
+***Feel free to create an issue or raise a pull request if an update is required.***
 
 ## Introduction
 
 There are differences between CPU scaling and GPU scaling below:
 
-#### CPU scaling vs GPU scaling ####
+#### CPU scaling vs. GPU scaling ####
 
 |              | CPU        | GPU           | Description                         |
 |--------------|------------|---------------|-------------------------------------|
-| Metric       | Supported  | Not Supported | `NVIDIA DCGM exporter` daemonset is required to collect GPU metrics because it's not collected through the Metric Server by default. |
+| Metric       | Supported  | Not Supported | `NVIDIA DCGM exporter` daemonset is required to collect GPU metrics because it is not collected through the Metric Server by default. |
 | HPA          | Supported  | Not Supported | Horizontal Pod Autoscaling(HPA) for GPU can be working based on `Prometheus` customer metrics.  |
 | Fraction     | Supported  | Not Supported | GPU resource fraction is not supported such as 'nvidia.com/gpu: 0.5'. |
 
 #### Objectives ####
 
-* Install the Data Center GPU Manager(DCGM) exporter as daemonset and scale pods through HPA which works based on Prometheus custom metric.
-* GPU cluster autoscaling with CA or Karpenter
-* `Pod-level` GPU autoscaling
-* 2 node groups: 1 CPU node group, 1 GPU node group has `accelerator: nvidia-gpu` label. Inference API applications are running in `shared one GPU node group` to not to create clusters per GPU application. 
+* Collect the GPU metrics through Data Center GPU Manager(DCGM) exporter and scale pods through HPA, which works based on Prometheus custom metric.
+* GPU cluster autoscaling with CA or Karpenter.
+* `Pod-level` GPU autoscaling.
+* `One shared GPU node group`:
+  Two node groups are required for CPU and GPU, and GPU node group has `accelerator: nvidia-gpu` label. Inference API applications run in `one shared GPU node group` to not create clusters per GPU application. 
 
 #### Environment ####
 
@@ -37,9 +36,9 @@ There are differences between CPU scaling and GPU scaling below:
 | Prometheus Adapter | 2.5.1   |  |
 | Grafana            | 6.24.1  |  |
 
-## Prequisets
+## Prerequisites
 
-The EKS Blueprint is used for minimum steps for EKS cluter and add-on.
+The EKS Blueprint is used for minimum steps for EKS cluster and add-on.
 
 [Create a cluster with EKS Blueprint](./cdk/README.md):
 
@@ -137,13 +136,13 @@ Karpenter
                 - g4dn.xlarge
 ```
 
-Retrive DCGM_FI_DEV_GPU_UTIL metric:
+Port forward for ['http://localhost:9400/metrics':](http://localhost:9400/metrics)
 
 ```bash
 kubectl port-forward svc/dcgm-exporter 9400:9400
 ```
 
-http://localhost:9400/metrics
+Retrieve DCGM_FI_DEV_GPU_UTIL metric:
 
 ```bash
 curl http://localhost:9400/metrics | grep DCGM_FI_DEV_GPU_UTIL
@@ -172,11 +171,13 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
    --create-namespace --namespace prometheus \
    --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false
-
-kubectl port-forward svc/kube-prometheus-stack-prometheus 9090:9090 -n monitoring
 ```
 
-http://localhost:9090/targets
+Port forward for http://localhost:9090/targets
+
+```bash
+kubectl port-forward svc/kube-prometheus-stack-prometheus 9090:9090 -n monitoring
+```
 
 ![promethus target](./screenshots/dcgm.png?raw=true)
 
@@ -216,11 +217,11 @@ helm install prometheus-adapter stable/prometheus-adapter -f prometheus-adapter-
       metricsQuery: avg by (exported_namespace, exported_container) (round(avg_over_time(<<.Series>>[1m])))
 ```
 
-Override the label to retrive with DCGM_FI_DEV_GPU_UTIL_AVG{`service="gpu-api"`} that saved as DCGM_FI_DEV_GPU_UTIL{`exported_container="gpu-api"`}. For details about prometheus-adapter rule, how works, and how to check the /api/v1/query API logs, refer to the [CustomMetric](./CustomMetric.md) page.
+Override the label to retrieve with DCGM_FI_DEV_GPU_UTIL_AVG{`service="gpu-api"`} that saved as DCGM_FI_DEV_GPU_UTIL{`exported_container="gpu-api"`}. For details about prometheus-adapter rule, how it works, and how to check the /api/v1/query API logs, refer to the [CustomMetric](./CustomMetric.md) page.
 
 ---
 
-Retrive custom metrics:
+Retrieve custom metrics:
 
 ```bash
 kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1 | jq -r . | grep DCGM_FI_DEV_GPU_UTIL
@@ -258,15 +259,17 @@ If there is no value, connect to the DCGM exporter pod, and check connectivity w
 
 # Step 4: Import Grafana Dashboards
 
+Port forward for http://localhost:8081
+
 ```bash
 kubectl port-forward svc/kube-prometheus-stack-grafana 8081:80 -n monitoring
 ```
 
+Command for retrieve the password of Grafana:
+
 ```bash
 kubectl get secret --namespace prometheus kube-prometheus-stack-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 ```
-
-http://localhost:8081
 
 Import dashboards
 
@@ -283,27 +286,26 @@ Import dashboards
 helm install metrics-server stable/metrics-server -n kube-system
 ```
 
-### 2. Deploy CPU API
+### 2. Build and Deploy Applications
 
 ```bash
-kubectl apply -f cpu-api.yaml
+cd cpu-api
+build.sh
+kubectl apply -f ./cpu-api.yaml
 ```
 
-[cpu-api.yaml](./cpu-api.yaml)
-
-### 3. Deploy GPU API
+[cpu-api.yaml](./cpu-api/cpu-api.yaml)
 
 ```bash
+cd ../gpu-api
+build.sh
 kubectl apply -f gpu-api.yaml
-```
-
-```bash
 kubectl apply -f gpu-api2.yaml
 ```
 
 image size: 3.33GB, image pull: 39.50s
 
-[gpu-api.yaml](./gpu-api.yaml)
+[gpu-api.yaml](./gpu-api/gpu-api.yaml)
 
 ```yaml
 apiVersion: autoscaling/v2beta2
@@ -359,20 +361,12 @@ spec:
 kubectl get hpa cpu-api-hpa -w
 kubectl get hpa gpu-api-hpa -w
 kubectl get hpa gpu-api2-hpa -w
-
 ```
-
-## prometheus-alert-rule.yaml
-
-```bash
-kubectl apply -f prometheus-alert-rule.yaml
-```
-
-[prometheus-alert-rule.yaml](./prometheus-alert-rule.yaml)
 
 # Step 6: AutoScaling Test
 
 ```bash
+cd test
 bzt gpu-api-bzt.yaml
 ```
 
@@ -381,7 +375,7 @@ bzt gpu-api-bzt.yaml
 ./jmeter -t gpu-api.jmx -n  -j ../log/jmeter.log
 ```
 
-[gpu-api.jmx](./gpu-api.jmx)
+[test/gpu-api.jmx](./test/gpu-api.jmx)
 
 ![prom-dcgm-metric](./screenshots/prom-dcgm-metric.png?raw=true)
 
@@ -449,13 +443,9 @@ helm uninstall metrics-server stable/metrics-server -n kube-system
 
 [NVIDIA doc DCGM-Exporter](https://docs.nvidia.com/datacenter/cloud-native/gpu-telemetry/dcgm-exporter.html)
 
-https://github.com/kubernetes-sigs/prometheus-adapter
+[prometheus-adapter](https://github.com/kubernetes-sigs/prometheus-adapter)
 
-https://aws.amazon.com/ko/blogs/machine-learning/monitoring-gpu-utilization-with-amazon-cloudwatch/
+[Monitoring GPU Utilization with Amazon CloudWatch](https://aws.amazon.com/ko/blogs/machine-learning/monitoring-gpu-utilization-with-amazon-cloudwatch/)
 
 # Trouble Shooting
 
-# ETC
-
-Sharing GPU in Kubernetes
-https://www.bytefold.com/sharing-gpu-in-kubernetes/
