@@ -288,16 +288,17 @@ helm install metrics-server stable/metrics-server -n kube-system
 
 ### 2. Build and Deploy Applications
 
-Create two repositoryies:
+Create two repositories:
 
 ```bash
-aws ecr create-repository --repository-name cpu-api --region us-east-1
-aws ecr create-repository --repository-name gpu-api --region us-east-1
+REGION=$(aws configure get default.region)
+aws ecr create-repository --repository-name cpu-api --region ${REGION}
+aws ecr create-repository --repository-name gpu-api --region ${REGION}
 ```
 
 ```bash
 cd cpu-api
-build.sh
+./build.sh
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 sed -e "s|<account-id>|${ACCOUNT_ID}|g" cpu-api.yaml | kubectl apply -f -
 ```
@@ -306,7 +307,7 @@ sed -e "s|<account-id>|${ACCOUNT_ID}|g" cpu-api.yaml | kubectl apply -f -
 
 ```bash
 cd ../gpu-api
-build.sh
+./build.sh
 sed -e "s|<account-id>|${ACCOUNT_ID}|g" gpu-api.yaml | kubectl apply -f -
 sed -e "s|<account-id>|${ACCOUNT_ID}|g" gpu-api2.yaml | kubectl apply -f -
 
