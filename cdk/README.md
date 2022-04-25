@@ -5,7 +5,7 @@
 ```bash
 npm install -g aws-cdk@2.20.0
 
-# install packages in the root folder
+# install packages in the <repository-root>/cdk folder
 npm install
 
 export CDK_DEFAULT_ACCOUNT=123456789012
