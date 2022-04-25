@@ -21,8 +21,8 @@ There are differences between CPU scaling and GPU scaling for cluster-level and 
 
 * Install the Data Center GPU Manager(DCGM) exporter as daemonset and scale pods through HPA which works based on Prometheus custom metric.
 * GPU cluster autoscaling with CA or Karpenter
-* Pod-level GPU autoscaling
-* 2 node groups: 1 CPU node group, 1 GPU node group has `accelerator: nvidia-gpu` label. Inference API applications are running in shared one GPU node group to not to create clusters per GPU application. 
+* `Pod-level` GPU autoscaling
+* 2 node groups: 1 CPU node group, 1 GPU node group has `accelerator: nvidia-gpu` label. Inference API applications are running in `shared one GPU node group` to not to create clusters per GPU application. 
 
 #### Environment: ####
 
