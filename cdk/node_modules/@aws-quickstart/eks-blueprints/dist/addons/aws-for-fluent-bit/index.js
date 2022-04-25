@@ -1,0 +1,57 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AwsForFluentBitAddOn = void 0;
+const helm_addon_1 = require("../helm-addon");
+const namespace_utils_1 = require("../../utils/namespace-utils");
+/**
+ * Default props for the add-on.
+ */
+const defaultProps = {
+    name: 'fluent-bit',
+    chart: 'aws-for-fluent-bit',
+    release: "blueprints-addon-aws-for-fluent-bit",
+    version: '0.1.11',
+    repository: 'https://aws.github.io/eks-charts',
+    namespace: 'kube-system',
+    values: {}
+};
+/**
+ * AwsForFluentBitAddOn deploys FluentBit into an EKS cluster using the `aws-for-fluent-bit` Helm chart.
+ * https://github.com/aws/eks-charts/tree/master/stable/aws-for-fluent-bit
+ *
+ * For information on how to configure the `aws-for-fluent-bit` Helm chart to forward logs and metrics to AWS services like CloudWatch or Kinesis, please view the values.yaml spec provided by the chart.
+ * https://github.com/aws/eks-charts/blob/master/stable/aws-for-fluent-bit/values.yaml
+ */
+class AwsForFluentBitAddOn extends helm_addon_1.HelmAddOn {
+    constructor(props) {
+        super({ ...defaultProps, ...props });
+        this.options = this.props;
+    }
+    deploy(clusterInfo) {
+        const cluster = clusterInfo.cluster;
+        // Create the FluentBit namespace.
+        const namespace = this.options.namespace;
+        (0, namespace_utils_1.createNamespace)(this.options.namespace, cluster, true);
+        // Create the FluentBut service account.
+        const serviceAccountName = 'aws-for-fluent-bit-sa';
+        const sa = cluster.addServiceAccount(serviceAccountName, {
+            name: serviceAccountName,
+            namespace: namespace
+        });
+        // Apply additional IAM policies to the service account.
+        const policies = this.options.iamPolicies || [];
+        policies.forEach((policy) => sa.addToPrincipalPolicy(policy));
+        // Configure values.
+        const values = {
+            serviceAccount: {
+                name: serviceAccountName,
+                create: false
+            },
+            ...this.options.values
+        };
+        const helmChart = this.addHelmChart(clusterInfo, values);
+        return Promise.resolve(helmChart);
+    }
+}
+exports.AwsForFluentBitAddOn = AwsForFluentBitAddOn;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9saWIvYWRkb25zL2F3cy1mb3ItZmx1ZW50LWJpdC9pbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFHQSw4Q0FBOEQ7QUFFOUQsaUVBQThEO0FBVzlEOztHQUVHO0FBQ0gsTUFBTSxZQUFZLEdBQThCO0lBQzVDLElBQUksRUFBRSxZQUFZO0lBQ2xCLEtBQUssRUFBRSxvQkFBb0I7SUFDM0IsT0FBTyxFQUFFLHFDQUFxQztJQUM5QyxPQUFPLEVBQUUsUUFBUTtJQUNqQixVQUFVLEVBQUUsa0NBQWtDO0lBQzlDLFNBQVMsRUFBRSxhQUFhO0lBQ3hCLE1BQU0sRUFBRSxFQUFFO0NBQ2IsQ0FBQztBQUVGOzs7Ozs7R0FNRztBQUNILE1BQWEsb0JBQXFCLFNBQVEsc0JBQVM7SUFJL0MsWUFBWSxLQUFpQztRQUN6QyxLQUFLLENBQUMsRUFBRSxHQUFHLFlBQW1CLEVBQUUsR0FBRyxLQUFLLEVBQUUsQ0FBQyxDQUFDO1FBQzVDLElBQUksQ0FBQyxPQUFPLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQztJQUM5QixDQUFDO0lBRUQsTUFBTSxDQUFDLFdBQXdCO1FBQzNCLE1BQU0sT0FBTyxHQUFHLFdBQVcsQ0FBQyxPQUFPLENBQUM7UUFFcEMsa0NBQWtDO1FBQ2xDLE1BQU0sU0FBUyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsU0FBUyxDQUFDO1FBQ3pDLElBQUEsaUNBQWUsRUFBQyxJQUFJLENBQUMsT0FBTyxDQUFDLFNBQVUsRUFBRSxPQUFPLEVBQUUsSUFBSSxDQUFDLENBQUM7UUFFeEQsd0NBQXdDO1FBQ3hDLE1BQU0sa0JBQWtCLEdBQUcsdUJBQXVCLENBQUM7UUFDbkQsTUFBTSxFQUFFLEdBQUcsT0FBTyxDQUFDLGlCQUFpQixDQUFDLGtCQUFrQixFQUFFO1lBQ3JELElBQUksRUFBRSxrQkFBa0I7WUFDeEIsU0FBUyxFQUFFLFNBQVM7U0FDdkIsQ0FBQyxDQUFDO1FBRUgsd0RBQXdEO1FBQ3hELE1BQU0sUUFBUSxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsV0FBVyxJQUFJLEVBQUUsQ0FBQztRQUNoRCxRQUFRLENBQUMsT0FBTyxDQUFDLENBQUMsTUFBdUIsRUFBRSxFQUFFLENBQUMsRUFBRSxDQUFDLG9CQUFvQixDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUM7UUFFL0Usb0JBQW9CO1FBQ3BCLE1BQU0sTUFBTSxHQUFHO1lBQ1gsY0FBYyxFQUFFO2dCQUNaLElBQUksRUFBRSxrQkFBa0I7Z0JBQ3hCLE1BQU0sRUFBRSxLQUFLO2FBQ2hCO1lBQ0QsR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLE1BQU07U0FDekIsQ0FBQztRQUVGLE1BQU0sU0FBUyxHQUFHLElBQUksQ0FBQyxZQUFZLENBQUMsV0FBVyxFQUFFLE1BQU0sQ0FBQyxDQUFDO1FBQ3pELE9BQU8sT0FBTyxDQUFDLE9BQU8sQ0FBQyxTQUFTLENBQUMsQ0FBQztJQUN0QyxDQUFDO0NBQ0o7QUF2Q0Qsb0RBdUNDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgUG9saWN5U3RhdGVtZW50IH0gZnJvbSAnYXdzLWNkay1saWIvYXdzLWlhbSc7XG5pbXBvcnQgeyBDb25zdHJ1Y3QgfSBmcm9tIFwiY29uc3RydWN0c1wiO1xuXG5pbXBvcnQgeyBIZWxtQWRkT24sIEhlbG1BZGRPblVzZXJQcm9wcyB9IGZyb20gXCIuLi9oZWxtLWFkZG9uXCI7XG5pbXBvcnQgeyBDbHVzdGVySW5mbyB9IGZyb20gXCIuLi8uLi9zcGkvdHlwZXNcIjtcbmltcG9ydCB7IGNyZWF0ZU5hbWVzcGFjZSB9IGZyb20gXCIuLi8uLi91dGlscy9uYW1lc3BhY2UtdXRpbHNcIjtcblxuLyoqXG4gKiBDb25maWd1cmF0aW9uIG9wdGlvbnMgZm9yIHRoZSBGbHVlbnRCaXQgYWRkLW9uLlxuICovXG5leHBvcnQgaW50ZXJmYWNlIEF3c0ZvckZsdWVudEJpdEFkZE9uUHJvcHMgZXh0ZW5kcyBIZWxtQWRkT25Vc2VyUHJvcHMge1xuICAgIC8qKlxuICAgICAqIElhbSBwb2xpY2llcyBmb3IgdGhlIGFkZC1vbi5cbiAgICAgKi9cbiAgICBpYW1Qb2xpY2llcz86IFBvbGljeVN0YXRlbWVudFtdXG59XG4vKipcbiAqIERlZmF1bHQgcHJvcHMgZm9yIHRoZSBhZGQtb24uXG4gKi9cbmNvbnN0IGRlZmF1bHRQcm9wczogQXdzRm9yRmx1ZW50Qml0QWRkT25Qcm9wcyA9IHtcbiAgICBuYW1lOiAnZmx1ZW50LWJpdCcsXG4gICAgY2hhcnQ6ICdhd3MtZm9yLWZsdWVudC1iaXQnLFxuICAgIHJlbGVhc2U6IFwiYmx1ZXByaW50cy1hZGRvbi1hd3MtZm9yLWZsdWVudC1iaXRcIixcbiAgICB2ZXJzaW9uOiAnMC4xLjExJyxcbiAgICByZXBvc2l0b3J5OiAnaHR0cHM6Ly9hd3MuZ2l0aHViLmlvL2Vrcy1jaGFydHMnLFxuICAgIG5hbWVzcGFjZTogJ2t1YmUtc3lzdGVtJyxcbiAgICB2YWx1ZXM6IHt9XG59O1xuXG4vKipcbiAqIEF3c0ZvckZsdWVudEJpdEFkZE9uIGRlcGxveXMgRmx1ZW50Qml0IGludG8gYW4gRUtTIGNsdXN0ZXIgdXNpbmcgdGhlIGBhd3MtZm9yLWZsdWVudC1iaXRgIEhlbG0gY2hhcnQuXG4gKiBodHRwczovL2dpdGh1Yi5jb20vYXdzL2Vrcy1jaGFydHMvdHJlZS9tYXN0ZXIvc3RhYmxlL2F3cy1mb3ItZmx1ZW50LWJpdFxuICogXG4gKiBGb3IgaW5mb3JtYXRpb24gb24gaG93IHRvIGNvbmZpZ3VyZSB0aGUgYGF3cy1mb3ItZmx1ZW50LWJpdGAgSGVsbSBjaGFydCB0byBmb3J3YXJkIGxvZ3MgYW5kIG1ldHJpY3MgdG8gQVdTIHNlcnZpY2VzIGxpa2UgQ2xvdWRXYXRjaCBvciBLaW5lc2lzLCBwbGVhc2UgdmlldyB0aGUgdmFsdWVzLnlhbWwgc3BlYyBwcm92aWRlZCBieSB0aGUgY2hhcnQuXG4gKiBodHRwczovL2dpdGh1Yi5jb20vYXdzL2Vrcy1jaGFydHMvYmxvYi9tYXN0ZXIvc3RhYmxlL2F3cy1mb3ItZmx1ZW50LWJpdC92YWx1ZXMueWFtbFxuICovXG5leHBvcnQgY2xhc3MgQXdzRm9yRmx1ZW50Qml0QWRkT24gZXh0ZW5kcyBIZWxtQWRkT24ge1xuXG4gICAgcmVhZG9ubHkgb3B0aW9uczogQXdzRm9yRmx1ZW50Qml0QWRkT25Qcm9wcztcblxuICAgIGNvbnN0cnVjdG9yKHByb3BzPzogQXdzRm9yRmx1ZW50Qml0QWRkT25Qcm9wcykge1xuICAgICAgICBzdXBlcih7IC4uLmRlZmF1bHRQcm9wcyBhcyBhbnksIC4uLnByb3BzIH0pO1xuICAgICAgICB0aGlzLm9wdGlvbnMgPSB0aGlzLnByb3BzO1xuICAgIH1cblxuICAgIGRlcGxveShjbHVzdGVySW5mbzogQ2x1c3RlckluZm8pOiBQcm9taXNlPENvbnN0cnVjdD4ge1xuICAgICAgICBjb25zdCBjbHVzdGVyID0gY2x1c3RlckluZm8uY2x1c3RlcjtcblxuICAgICAgICAvLyBDcmVhdGUgdGhlIEZsdWVudEJpdCBuYW1lc3BhY2UuXG4gICAgICAgIGNvbnN0IG5hbWVzcGFjZSA9IHRoaXMub3B0aW9ucy5uYW1lc3BhY2U7XG4gICAgICAgIGNyZWF0ZU5hbWVzcGFjZSh0aGlzLm9wdGlvbnMubmFtZXNwYWNlISwgY2x1c3RlciwgdHJ1ZSk7XG5cbiAgICAgICAgLy8gQ3JlYXRlIHRoZSBGbHVlbnRCdXQgc2VydmljZSBhY2NvdW50LlxuICAgICAgICBjb25zdCBzZXJ2aWNlQWNjb3VudE5hbWUgPSAnYXdzLWZvci1mbHVlbnQtYml0LXNhJztcbiAgICAgICAgY29uc3Qgc2EgPSBjbHVzdGVyLmFkZFNlcnZpY2VBY2NvdW50KHNlcnZpY2VBY2NvdW50TmFtZSwge1xuICAgICAgICAgICAgbmFtZTogc2VydmljZUFjY291bnROYW1lLFxuICAgICAgICAgICAgbmFtZXNwYWNlOiBuYW1lc3BhY2VcbiAgICAgICAgfSk7XG5cbiAgICAgICAgLy8gQXBwbHkgYWRkaXRpb25hbCBJQU0gcG9saWNpZXMgdG8gdGhlIHNlcnZpY2UgYWNjb3VudC5cbiAgICAgICAgY29uc3QgcG9saWNpZXMgPSB0aGlzLm9wdGlvbnMuaWFtUG9saWNpZXMgfHwgW107XG4gICAgICAgIHBvbGljaWVzLmZvckVhY2goKHBvbGljeTogUG9saWN5U3RhdGVtZW50KSA9PiBzYS5hZGRUb1ByaW5jaXBhbFBvbGljeShwb2xpY3kpKTtcblxuICAgICAgICAvLyBDb25maWd1cmUgdmFsdWVzLlxuICAgICAgICBjb25zdCB2YWx1ZXMgPSB7XG4gICAgICAgICAgICBzZXJ2aWNlQWNjb3VudDoge1xuICAgICAgICAgICAgICAgIG5hbWU6IHNlcnZpY2VBY2NvdW50TmFtZSxcbiAgICAgICAgICAgICAgICBjcmVhdGU6IGZhbHNlXG4gICAgICAgICAgICB9LFxuICAgICAgICAgICAgLi4udGhpcy5vcHRpb25zLnZhbHVlc1xuICAgICAgICB9O1xuXG4gICAgICAgIGNvbnN0IGhlbG1DaGFydCA9IHRoaXMuYWRkSGVsbUNoYXJ0KGNsdXN0ZXJJbmZvLCB2YWx1ZXMpO1xuICAgICAgICByZXR1cm4gUHJvbWlzZS5yZXNvbHZlKGhlbG1DaGFydCk7XG4gICAgfVxufVxuIl19

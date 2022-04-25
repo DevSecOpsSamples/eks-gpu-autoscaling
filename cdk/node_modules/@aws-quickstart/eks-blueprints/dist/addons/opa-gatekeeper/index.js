@@ -1,0 +1,33 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.OpaGatekeeperAddOn = void 0;
+const helm_addon_1 = require("../helm-addon");
+/**
+ * Defaults options for the gatekeeper add-on
+ */
+const defaultProps = {
+    name: 'gatekeeper',
+    release: 'blueprints-addon-opa-gatekeeper',
+    namespace: 'gatekeeper-system',
+    chart: 'gatekeeper',
+    repository: "https://open-policy-agent.github.io/gatekeeper/charts",
+    version: '3.6.0'
+};
+class OpaGatekeeperAddOn extends helm_addon_1.HelmAddOn {
+    constructor(props) {
+        super({ ...defaultProps, ...props });
+        this.options = this.props;
+    }
+    deploy(_clusterInfo) {
+        return;
+    }
+    postDeploy(clusterInfo, _teams) {
+        var _a;
+        const chart = this.addHelmChart(clusterInfo, (_a = this.props.values) !== null && _a !== void 0 ? _a : {});
+        for (let provisioned of clusterInfo.getAllProvisionedAddons().values()) {
+            chart.node.addDependency(provisioned);
+        }
+    }
+}
+exports.OpaGatekeeperAddOn = OpaGatekeeperAddOn;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9saWIvYWRkb25zL29wYS1nYXRla2VlcGVyL2luZGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUNBLDhDQUE4RTtBQVc5RTs7R0FFRztBQUVILE1BQU0sWUFBWSxHQUFtQjtJQUNqQyxJQUFJLEVBQUUsWUFBWTtJQUNsQixPQUFPLEVBQUUsaUNBQWlDO0lBQzFDLFNBQVMsRUFBRSxtQkFBbUI7SUFDOUIsS0FBSyxFQUFFLFlBQVk7SUFDbkIsVUFBVSxFQUFFLHVEQUF1RDtJQUNuRSxPQUFPLEVBQUUsT0FBTztDQUNuQixDQUFDO0FBRUYsTUFBYSxrQkFBbUIsU0FBUSxzQkFBUztJQUk3QyxZQUFZLEtBQStCO1FBQ3ZDLEtBQUssQ0FBQyxFQUFDLEdBQUcsWUFBWSxFQUFFLEdBQUcsS0FBSyxFQUFDLENBQUMsQ0FBQztRQUNuQyxJQUFJLENBQUMsT0FBTyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUM7SUFDOUIsQ0FBQztJQUVELE1BQU0sQ0FBQyxZQUF5QjtRQUM1QixPQUFPO0lBQ1gsQ0FBQztJQUVELFVBQVUsQ0FBQyxXQUF3QixFQUFFLE1BQWM7O1FBRS9DLE1BQU0sS0FBSyxHQUFHLElBQUksQ0FBQyxZQUFZLENBQUMsV0FBVyxFQUFFLE1BQUEsSUFBSSxDQUFDLEtBQUssQ0FBQyxNQUFNLG1DQUFJLEVBQUUsQ0FBQyxDQUFDO1FBRXRFLEtBQUssSUFBSSxXQUFXLElBQUksV0FBVyxDQUFDLHVCQUF1QixFQUFFLENBQUMsTUFBTSxFQUFFLEVBQUU7WUFDcEUsS0FBSyxDQUFDLElBQUksQ0FBQyxhQUFhLENBQUMsV0FBVyxDQUFDLENBQUM7U0FDekM7SUFDTCxDQUFDO0NBRUo7QUF0QkQsZ0RBc0JDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ2x1c3RlckluZm8sIENsdXN0ZXJQb3N0RGVwbG95LCBUZWFtIH0gZnJvbSBcIi4uLy4uL3NwaVwiO1xuaW1wb3J0IHsgSGVsbUFkZE9uLCBIZWxtQWRkT25Qcm9wcywgSGVsbUFkZE9uVXNlclByb3BzIH0gZnJvbSBcIi4uL2hlbG0tYWRkb25cIjtcblxuXG4vKipcbiAqIFByb3BlcnRpZXMgYXZhaWxhYmxlIHRvIGNvbmZpZ3VyZSBvcGEgZ2F0ZWtlZXBlci5cbiAqIG5hbWVzcGFjZSBkZWZhdWx0IGlzIGdhdGVrZWVwZXItc3lzdGVtXG4gKiB2ZXJzaW9uIGRlZmF1bHQgaXMgMy42LjBcbiAqIHZhbHVlcyBhcyBwZXIgaHR0cHM6Ly9naXRodWIuY29tL29wZW4tcG9saWN5LWFnZW50L2dhdGVrZWVwZXIvdHJlZS9tYXN0ZXIvY2hhcnRzL2dhdGVrZWVwZXJcbiAqL1xuZXhwb3J0IHR5cGUgT3BhR2F0ZWtlZXBlckFkZE9uUHJvcHMgPSBIZWxtQWRkT25Vc2VyUHJvcHM7XG5cbi8qKlxuICogRGVmYXVsdHMgb3B0aW9ucyBmb3IgdGhlIGdhdGVrZWVwZXIgYWRkLW9uXG4gKi9cblxuY29uc3QgZGVmYXVsdFByb3BzOiBIZWxtQWRkT25Qcm9wcyA9IHtcbiAgICBuYW1lOiAnZ2F0ZWtlZXBlcicsXG4gICAgcmVsZWFzZTogJ2JsdWVwcmludHMtYWRkb24tb3BhLWdhdGVrZWVwZXInLFxuICAgIG5hbWVzcGFjZTogJ2dhdGVrZWVwZXItc3lzdGVtJyxcbiAgICBjaGFydDogJ2dhdGVrZWVwZXInLFxuICAgIHJlcG9zaXRvcnk6IFwiaHR0cHM6Ly9vcGVuLXBvbGljeS1hZ2VudC5naXRodWIuaW8vZ2F0ZWtlZXBlci9jaGFydHNcIixcbiAgICB2ZXJzaW9uOiAnMy42LjAnXG59O1xuXG5leHBvcnQgY2xhc3MgT3BhR2F0ZWtlZXBlckFkZE9uIGV4dGVuZHMgSGVsbUFkZE9uIGltcGxlbWVudHMgQ2x1c3RlclBvc3REZXBsb3kge1xuXG4gICAgcHJpdmF0ZSBvcHRpb25zOiBPcGFHYXRla2VlcGVyQWRkT25Qcm9wcztcblxuICAgIGNvbnN0cnVjdG9yKHByb3BzPzogT3BhR2F0ZWtlZXBlckFkZE9uUHJvcHMpIHtcbiAgICAgICAgc3VwZXIoey4uLmRlZmF1bHRQcm9wcywgLi4ucHJvcHN9KTtcbiAgICAgICAgdGhpcy5vcHRpb25zID0gdGhpcy5wcm9wcztcbiAgICB9XG5cbiAgICBkZXBsb3koX2NsdXN0ZXJJbmZvOiBDbHVzdGVySW5mbyk6IHZvaWQge1xuICAgICAgICByZXR1cm47XG4gICAgfVxuXG4gICAgcG9zdERlcGxveShjbHVzdGVySW5mbzogQ2x1c3RlckluZm8sIF90ZWFtczogVGVhbVtdKTogdm9pZCB7XG5cbiAgICAgICAgY29uc3QgY2hhcnQgPSB0aGlzLmFkZEhlbG1DaGFydChjbHVzdGVySW5mbywgdGhpcy5wcm9wcy52YWx1ZXMgPz8ge30pO1xuICAgICAgICBcbiAgICAgICAgZm9yIChsZXQgcHJvdmlzaW9uZWQgb2YgY2x1c3RlckluZm8uZ2V0QWxsUHJvdmlzaW9uZWRBZGRvbnMoKS52YWx1ZXMoKSkge1xuICAgICAgICAgICAgY2hhcnQubm9kZS5hZGREZXBlbmRlbmN5KHByb3Zpc2lvbmVkKTtcbiAgICAgICAgfVxuICAgIH1cbiAgICBcbn0iXX0=

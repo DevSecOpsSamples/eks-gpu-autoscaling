@@ -48,7 +48,7 @@ The EKS Blueprint is used for minimum steps for EKS cluster and add-on.
 * AWS Load Balancer Controller Addon
 * Kubernetes Dashboard
 
-If you want to use the existing cluster or create a cluster by using `eksctl`, refer to the [eksctl/README.md](./eksctl/README.md) page.
+If you want to use the existing cluster or create a cluster by using `eksctl`, refer to the [ref-eksctl/README.md](./ref-eksctl/README.md) page.
 
 ## Steps
 
