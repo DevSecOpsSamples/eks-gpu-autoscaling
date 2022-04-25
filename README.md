@@ -254,7 +254,7 @@ kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/servic
 ```
 
 ```bash
-kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/vision-api/DCGM_FI_DEV_GPU_UTIL_AVG" | jq .
+kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/gpu-api/DCGM_FI_DEV_GPU_UTIL_AVG" | jq .
 ```
 
 값이 없는 경우 DCGM export pod로 들어가 `wget http://prometheus-url:port` 로 정상 접속되는지 확인합니다.
@@ -278,33 +278,49 @@ Dashboard import
 
 ![grafana-dcgm](./screenshots/grafana-dcgm-01.png?raw=true)
 
-# 7. Inference API & GPU HPA 배포
+# 7. Inference API & HPA 배포
+
+## 7.1 Metrics Server
 
 ```bash
-kubectl apply -f vision-api.yaml
+helm install metrics-server stable/metrics-server -n kube-system
+```
+
+## 7.2 CPU API
+
+```bash
+kubectl apply -f cpu-api.yaml
+```
+
+[cpu-api.yaml](./cpu-api.yaml)
+
+## 7.3 GPU API
+
+```bash
+kubectl apply -f gpu-api.yaml
 ```
 
 ```bash
-kubectl apply -f vision-api2.yaml
+kubectl apply -f gpu-api2.yaml
 ```
 
-vision-api.yaml는 Deployment, Service, Ingress, HorizontalPodAutoscaler 를 배포합니다. AWS Load Balancer Controller 설치를 위한 setup은 [ClusterAutoScalerAndALB.md](./ClusterAutoScalerAndALB.md)를 참고하시기 바랍니다.
+gpu-api.yaml는 Deployment, Service, Ingress, HorizontalPodAutoscaler 를 배포합니다. AWS Load Balancer Controller 설치를 위한 setup은 [ClusterAutoScalerAndALB.md](./ClusterAutoScalerAndALB.md)를 참고하시기 바랍니다.
 
 image size: 3.33GB, image pull: 39.50s
 
-[vision-api.yaml](./vision-api.yaml)
+[gpu-api.yaml](./gpu-api.yaml)
 
 ```yaml
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: vision-api-gpu-hpa
+  name: gpu-api-gpu-hpa
   namespace: default
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: vision-api # <-- service name
+    name: gpu-api # <-- service name
   minReplicas: 2
   maxReplicas: 10
   metrics:
@@ -314,7 +330,7 @@ spec:
         name: DCGM_FI_DEV_GPU_UTIL_AVG
       describedObject:
         kind: Service
-        name: vision-api # <-- service name
+        name: gpu-api # <-- service name
       target:
         type: Value
         value: '30'
@@ -324,24 +340,32 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vision-api
+  name: gpu-api
   namespace: default
   annotations:
-    app: 'vision-api'
+    app: 'gpu-api'
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: vision-api
+      app: gpu-api
   template:
     metadata:
       labels:
-        app: vision-api
+        app: gpu-api
     spec:
       containers:
-        - name: vision-api  # container name 과 service name 동일하게 지정
+        - name: gpu-api  # container name 과 service name 동일하게 지정
           image: 123456789.dkr.ecr.ap-northeast-2.amazonaws.com/gpu-cuda-api:latest
           imagePullPolicy: Always
+```
+
+```bash
+kubectl get hpa cpu-api-hpa -w
+
+kubectl get hpa gpu-api-hpa -w
+kubectl get hpa gpu-api2-hpa -w
+
 ```
 
 ## prometheus-alert-rule.yaml
@@ -355,33 +379,33 @@ kubectl apply -f prometheus-alert-rule.yaml
 # 9. AutoScaling Test
 
 ```bash
-bzt vision-api-bzt.yaml
+bzt gpu-api-bzt.yaml
 ```
 
 ```bash
 # $JMETER_HOME/bin
-./jmeter -t vision-api.jmx -n  -j ../log/jmeter.log
+./jmeter -t gpu-api.jmx -n  -j ../log/jmeter.log
 ```
 
-[vision-api.jmx](./vision-api.jmx)
+[gpu-api.jmx](./gpu-api.jmx)
 
 ![prom-dcgm-metric](./screenshots/prom-dcgm-metric.png?raw=true)
 
 ![scalingtest-taurus.png](./screenshots/scalingtest-taurus.png?raw=true)
 
 ```bash
-kubectl describe hpa vision-api-gpu-hpa
+kubectl describe hpa gpu-api-gpu-hpa
 ```
 
 ```bash
-Name:                                                               vision-api-gpu-hpa
+Name:                                                               gpu-api-gpu-hpa
 Namespace:                                                          default
 Labels:                                                             <none>
-Annotations:                                                        app: vision-api
+Annotations:                                                        app: gpu-api
 CreationTimestamp:                                                  Sun, 10 Apr 2022 21:09:59 +0900
-Reference:                                                          Deployment/vision-api
+Reference:                                                          Deployment/gpu-api
 Metrics:                                                            ( current / target )
-  "DCGM_FI_DEV_GPU_UTIL_AVG" on Service/vision-api (target value):  11 / 20
+  "DCGM_FI_DEV_GPU_UTIL_AVG" on Service/gpu-api (target value):  11 / 20
 Min replicas:                                                       2
 Max replicas:                                                       12
 Deployment pods:                                                    8 current / 8 desired
@@ -402,22 +426,22 @@ Events:
 
 ```bash
 kubectl get events -w
-kubectl describe deploy vision-api
+kubectl describe deploy gpu-api
 
 kubectl describe apiservices v1beta1.metrics.k8s.io
 kubectl get endpoints metrics-server -n kube-system
 kubectl logs -n kube-system -l k8s-app=metrics-server
 
-kubectl scale deployment vision-api --replicas=6
+kubectl scale deployment gpu-api --replicas=6
 ```
 
 # Uninstall
 
 ```bash
-
-kubectl delete -f vision-api.yaml
-kubectl delete -f vision-api2.yaml
-kubectl delete hpa vision-api-gpu-hpa
+kubectl delete -f cpu-api.yaml
+kubectl delete -f gpu-api.yaml
+kubectl delete -f gpu-api2.yaml
+kubectl delete hpa gpu-api-gpu-hpa
 
 kubectl delete -f dcgm-exporter.yaml
 kubectl delete -f dcgm-exporter-karpenter.yaml
@@ -425,6 +449,8 @@ kubectl delete -f prometheus-alert-rule.yaml
 
 helm uninstall prometheus-adapter
 helm uninstall kube-prometheus-stack -n monitoring
+
+helm uninstall metrics-server stable/metrics-server -n kube-system
 ```
 
 # Reference

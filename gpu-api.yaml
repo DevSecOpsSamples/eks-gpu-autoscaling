@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vision-api2
+  name: gpu-api
   namespace: default
   annotations:
-    app: 'vision-api2'
+    app: 'gpu-api'
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: vision-api2
+      app: gpu-api
   template:
     metadata:
       labels:
-        app: vision-api2
+        app: gpu-api
     spec:
       containers:
-        - name: vision-api2
+        - name: gpu-api
           # image: 681747700094.dkr.ecr.ap-northeast-2.amazonaws.com/torchvision:latest
           image: 681747700094.dkr.ecr.ap-northeast-2.amazonaws.com/gpu-cuda-api:latest
           imagePullPolicy: Always
@@ -35,13 +35,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: vision-api2
+  name: gpu-api
   annotations:
-    app: 'vision-api2'
+    app: 'gpu-api'
     alb.ingress.kubernetes.io/healthcheck-path: "/ping"
 spec:
   selector:
-    app: vision-api2
+    app: gpu-api
   type: NodePort
   ports:
     - port: 8000
@@ -51,15 +51,15 @@ spec:
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: vision-api2-gpu-hpa
+  name: gpu-api-hpa
   namespace: default
   annotations:
-    app: 'vision-api2'
+    app: 'gpu-api'
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: vision-api2
+    name: gpu-api
   minReplicas: 2
   maxReplicas: 10
   metrics:
@@ -69,7 +69,7 @@ spec:
         name: DCGM_FI_DEV_GPU_UTIL_AVG
       describedObject:
         kind: Service
-        name: vision-api2
+        name: gpu-api
       target:
         type: Value
         value: '20'
@@ -77,14 +77,14 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: "vision-api2-ingress"
+  name: "gpu-api-ingress"
   namespace: default
   annotations:
-    app: 'vision-api2'
+    app: 'gpu-api'
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/load-balancer-name: vision-api02
+    alb.ingress.kubernetes.io/load-balancer-name: gpu-api01
     alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=30
     alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=10
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
@@ -103,6 +103,6 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: "vision-api2"
+                name: "gpu-api"
                 port:
                   number: 8000

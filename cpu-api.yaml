@@ -2,32 +2,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vision-api
+  name: cpu-api
   namespace: default
   annotations:
-    app: 'vision-api'
+    app: 'cpu-api'
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: vision-api
+      app: cpu-api
   template:
     metadata:
       labels:
-        app: vision-api
+        app: cpu-api
     spec:
       containers:
-        - name: vision-api
-          # image: 681747700094.dkr.ecr.ap-northeast-2.amazonaws.com/torchvision:latest
-          image: 681747700094.dkr.ecr.ap-northeast-2.amazonaws.com/gpu-cuda-api:latest
+        - name: sample-rest-api
+          image: 681747700094.dkr.ecr.ap-northeast-2.amazonaws.com/sample-rest-api:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8000
+            - containerPort: 8080
           resources:
             requests:
+              cpu: 1
               memory: "1024Mi"
             limits:
-              nvidia.com/gpu: 1
+              cpu: 1
+              memory: "1024Mi"
           env:
           - name: env
             value: "dev"
@@ -35,56 +36,50 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: vision-api
+  name: cpu-api
   annotations:
-    app: 'vision-api'
+    app: 'cpu-api'
     alb.ingress.kubernetes.io/healthcheck-path: "/ping"
 spec:
   selector:
-    app: vision-api
+    app: cpu-api
   type: NodePort
   ports:
-    - port: 8000
-      targetPort: 8000
+    - port: 8080
+      targetPort: 8080
       protocol: TCP
 ---
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: vision-api-gpu-hpa
+  name: 'cpu-api-hpa'
   namespace: default
-  annotations:
-    app: 'vision-api'
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: vision-api
+    name: 'cpu-api'
   minReplicas: 2
   maxReplicas: 10
   metrics:
-  - type: Object
-    object:
-      metric:
-        name: DCGM_FI_DEV_GPU_UTIL_AVG
-      describedObject:
-        kind: Service
-        name: vision-api
-      target:
-        type: Value
-        value: '20'
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: "vision-api-ingress"
+  name: "cpu-api-ingress"
   namespace: default
   annotations:
-    app: 'vision-api'
+    app: 'cpu-api'
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/load-balancer-name: vision-api01
+    alb.ingress.kubernetes.io/load-balancer-name: cpu-api
     alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=30
     alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=10
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
@@ -103,6 +98,6 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: "vision-api"
+                name: "cpu-api"
                 port:
-                  number: 8000
+                  number: 8080
