@@ -1,5 +1,5 @@
 
-# GPU AutoScaling on EKS
+# GPU Auto Scaling on EKS
 
 GPU utilization-based horizontal autoscaling for inference APIs. This guideline provides complete steps for GPU auto scaling on AWS EKS.
 
@@ -169,7 +169,7 @@ DCGM_FI_DEV_GPU_UTIL{gpu="2",UUID="GPU-6ae74b72-48d0-f09f-14e2-4e09ceebda63",dev
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
 helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
-   --create-namespace --namespace prometheus \
+   --create-namespace --namespace monitoring \
    --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false
 ```
 
@@ -288,10 +288,18 @@ helm install metrics-server stable/metrics-server -n kube-system
 
 ### 2. Build and Deploy Applications
 
+Create two repositoryies:
+
+```bash
+aws ecr create-repository --repository-name cpu-api --region us-east-1
+aws ecr create-repository --repository-name gpu-api --region us-east-1
+```
+
 ```bash
 cd cpu-api
 build.sh
-kubectl apply -f ./cpu-api.yaml
+ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+sed -e "s|<account-id>|${ACCOUNT_ID}|g" cpu-api.yaml | kubectl apply -f -
 ```
 
 [cpu-api.yaml](./cpu-api/cpu-api.yaml)
@@ -299,8 +307,10 @@ kubectl apply -f ./cpu-api.yaml
 ```bash
 cd ../gpu-api
 build.sh
-kubectl apply -f gpu-api.yaml
-kubectl apply -f gpu-api2.yaml
+sed -e "s|<account-id>|${ACCOUNT_ID}|g" gpu-api.yaml | kubectl apply -f -
+sed -e "s|<account-id>|${ACCOUNT_ID}|g" gpu-api2.yaml | kubectl apply -f -
+
+# kubectl apply -f gpu-api2.yaml
 ```
 
 image size: 3.33GB, image pull: 39.50s
@@ -361,6 +371,14 @@ spec:
 kubectl get hpa cpu-api-hpa -w
 kubectl get hpa gpu-api-hpa -w
 kubectl get hpa gpu-api2-hpa -w
+```
+
+```bash
+# kubectl get hpa
+NAME                      REFERENCE                    TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+cpu-api-hpa               Deployment/cpu-api           0%/50%    2         10        2          30s
+gpu-api-hpa               Deployment/gpu-api           0/50      2         10        2          30s
+gpu-api2-hpa              Deployment/gpu-api2          0/50      2         10        2          30s
 ```
 
 # Step 6: AutoScaling Test

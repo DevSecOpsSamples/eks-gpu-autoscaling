@@ -12,21 +12,21 @@
           "version": "10.0.125"
         }
       },
-      "gpu-autoscaling-stg": {
-        "id": "gpu-autoscaling-stg",
-        "path": "gpu-autoscaling-stg",
+      "gpu-autoscaling-local": {
+        "id": "gpu-autoscaling-local",
+        "path": "gpu-autoscaling-local",
         "children": {
-          "stack": {
-            "id": "stack",
-            "path": "gpu-autoscaling-stg/stack",
+          "gpu-autoscaling-local": {
+            "id": "gpu-autoscaling-local",
+            "path": "gpu-autoscaling-local/gpu-autoscaling-local",
             "children": {
-              "stack-vpc": {
-                "id": "stack-vpc",
-                "path": "gpu-autoscaling-stg/stack/stack-vpc",
+              "gpu-autoscaling-local-vpc": {
+                "id": "gpu-autoscaling-local-vpc",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local-vpc",
                 "children": {
                   "publicSubnet1": {
                     "id": "publicSubnet1",
-                    "path": "gpu-autoscaling-stg/stack/stack-vpc/publicSubnet1",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local-vpc/publicSubnet1",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -34,7 +34,7 @@
                   },
                   "publicSubnet2": {
                     "id": "publicSubnet2",
-                    "path": "gpu-autoscaling-stg/stack/stack-vpc/publicSubnet2",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local-vpc/publicSubnet2",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -42,7 +42,7 @@
                   },
                   "publicSubnet3": {
                     "id": "publicSubnet3",
-                    "path": "gpu-autoscaling-stg/stack/stack-vpc/publicSubnet3",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local-vpc/publicSubnet3",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -50,7 +50,7 @@
                   },
                   "privateSubnet1": {
                     "id": "privateSubnet1",
-                    "path": "gpu-autoscaling-stg/stack/stack-vpc/privateSubnet1",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local-vpc/privateSubnet1",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -58,7 +58,7 @@
                   },
                   "privateSubnet2": {
                     "id": "privateSubnet2",
-                    "path": "gpu-autoscaling-stg/stack/stack-vpc/privateSubnet2",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local-vpc/privateSubnet2",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -66,7 +66,7 @@
                   },
                   "privateSubnet3": {
                     "id": "privateSubnet3",
-                    "path": "gpu-autoscaling-stg/stack/stack-vpc/privateSubnet3",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local-vpc/privateSubnet3",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -78,17 +78,17 @@
                   "version": "2.20.0"
                 }
               },
-              "stack": {
-                "id": "stack",
-                "path": "gpu-autoscaling-stg/stack/stack",
+              "gpu-autoscaling-local": {
+                "id": "gpu-autoscaling-local",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local",
                 "children": {
                   "Role": {
                     "id": "Role",
-                    "path": "gpu-autoscaling-stg/stack/stack/Role",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Role",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/stack/Role/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Role/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                           "aws:cdk:cloudformation:props": {
@@ -133,11 +133,11 @@
                   },
                   "ControlPlaneSecurityGroup": {
                     "id": "ControlPlaneSecurityGroup",
-                    "path": "gpu-autoscaling-stg/stack/stack/ControlPlaneSecurityGroup",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/ControlPlaneSecurityGroup",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/stack/ControlPlaneSecurityGroup/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/ControlPlaneSecurityGroup/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
                           "aws:cdk:cloudformation:props": {
@@ -165,15 +165,15 @@
                   },
                   "Resource": {
                     "id": "Resource",
-                    "path": "gpu-autoscaling-stg/stack/stack/Resource",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Resource",
                     "children": {
                       "CreationRole": {
                         "id": "CreationRole",
-                        "path": "gpu-autoscaling-stg/stack/stack/Resource/CreationRole",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Resource/CreationRole",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "gpu-autoscaling-stg/stack/stack/Resource/CreationRole/Resource",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Resource/CreationRole/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                               "aws:cdk:cloudformation:props": {
@@ -209,11 +209,11 @@
                           },
                           "DefaultPolicy": {
                             "id": "DefaultPolicy",
-                            "path": "gpu-autoscaling-stg/stack/stack/Resource/CreationRole/DefaultPolicy",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Resource/CreationRole/DefaultPolicy",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "gpu-autoscaling-stg/stack/stack/Resource/CreationRole/DefaultPolicy/Resource",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Resource/CreationRole/DefaultPolicy/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                   "aws:cdk:cloudformation:props": {
@@ -224,7 +224,7 @@
                                           "Effect": "Allow",
                                           "Resource": {
                                             "Fn::GetAtt": [
-                                              "stackRoleC82B8918",
+                                              "gpuautoscalinglocalRole066512E8",
                                               "Arn"
                                             ]
                                           }
@@ -251,7 +251,7 @@
                                                   {
                                                     "Ref": "AWS::Partition"
                                                   },
-                                                  ":eks:ap-northeast-2:681747700094:cluster/stack"
+                                                  ":eks:ap-northeast-2:681747700094:cluster/gpu-autoscaling-local"
                                                 ]
                                               ]
                                             },
@@ -263,7 +263,7 @@
                                                   {
                                                     "Ref": "AWS::Partition"
                                                   },
-                                                  ":eks:ap-northeast-2:681747700094:cluster/stack/*"
+                                                  ":eks:ap-northeast-2:681747700094:cluster/gpu-autoscaling-local/*"
                                                 ]
                                               ]
                                             }
@@ -283,7 +283,7 @@
                                                 {
                                                   "Ref": "AWS::Partition"
                                                 },
-                                                ":eks:ap-northeast-2:681747700094:fargateprofile/stack/*"
+                                                ":eks:ap-northeast-2:681747700094:fargateprofile/gpu-autoscaling-local/*"
                                               ]
                                             ]
                                           }
@@ -317,10 +317,10 @@
                                       ],
                                       "Version": "2012-10-17"
                                     },
-                                    "policyName": "stackCreationRoleDefaultPolicy67C37630",
+                                    "policyName": "gpuautoscalinglocalCreationRoleDefaultPolicyCFA0AA9D",
                                     "roles": [
                                       {
-                                        "Ref": "stackCreationRoleCCD9260B"
+                                        "Ref": "gpuautoscalinglocalCreationRoleF56C758F"
                                       }
                                     ]
                                   }
@@ -344,11 +344,11 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/stack/Resource/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Resource/Resource",
                         "children": {
                           "Default": {
                             "id": "Default",
-                            "path": "gpu-autoscaling-stg/stack/stack/Resource/Resource/Default",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Resource/Resource/Default",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.CfnResource",
                               "version": "2.20.0"
@@ -368,7 +368,7 @@
                   },
                   "KubectlReadyBarrier": {
                     "id": "KubectlReadyBarrier",
-                    "path": "gpu-autoscaling-stg/stack/stack/KubectlReadyBarrier",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/KubectlReadyBarrier",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
                       "version": "2.20.0"
@@ -376,7 +376,7 @@
                   },
                   "ClusterSecurityGroup": {
                     "id": "ClusterSecurityGroup",
-                    "path": "gpu-autoscaling-stg/stack/stack/ClusterSecurityGroup",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/ClusterSecurityGroup",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -384,7 +384,7 @@
                   },
                   "ClusterName": {
                     "id": "ClusterName",
-                    "path": "gpu-autoscaling-stg/stack/stack/ClusterName",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/ClusterName",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.20.0"
@@ -392,11 +392,11 @@
                   },
                   "MastersRole": {
                     "id": "MastersRole",
-                    "path": "gpu-autoscaling-stg/stack/stack/MastersRole",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/MastersRole",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/stack/MastersRole/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/MastersRole/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                           "aws:cdk:cloudformation:props": {
@@ -438,19 +438,19 @@
                   },
                   "AwsAuth": {
                     "id": "AwsAuth",
-                    "path": "gpu-autoscaling-stg/stack/stack/AwsAuth",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/AwsAuth",
                     "children": {
                       "manifest": {
                         "id": "manifest",
-                        "path": "gpu-autoscaling-stg/stack/stack/AwsAuth/manifest",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/AwsAuth/manifest",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "gpu-autoscaling-stg/stack/stack/AwsAuth/manifest/Resource",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/AwsAuth/manifest/Resource",
                             "children": {
                               "Default": {
                                 "id": "Default",
-                                "path": "gpu-autoscaling-stg/stack/stack/AwsAuth/manifest/Resource/Default",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/AwsAuth/manifest/Resource/Default",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.CfnResource",
                                   "version": "2.20.0"
@@ -476,7 +476,7 @@
                   },
                   "ConfigCommand": {
                     "id": "ConfigCommand",
-                    "path": "gpu-autoscaling-stg/stack/stack/ConfigCommand",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/ConfigCommand",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.20.0"
@@ -484,7 +484,7 @@
                   },
                   "GetTokenCommand": {
                     "id": "GetTokenCommand",
-                    "path": "gpu-autoscaling-stg/stack/stack/GetTokenCommand",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/GetTokenCommand",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.20.0"
@@ -492,15 +492,15 @@
                   },
                   "Nodegroupcpu-ng-ng": {
                     "id": "Nodegroupcpu-ng-ng",
-                    "path": "gpu-autoscaling-stg/stack/stack/Nodegroupcpu-ng-ng",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupcpu-ng-ng",
                     "children": {
                       "NodeGroupRole": {
                         "id": "NodeGroupRole",
-                        "path": "gpu-autoscaling-stg/stack/stack/Nodegroupcpu-ng-ng/NodeGroupRole",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupcpu-ng-ng/NodeGroupRole",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "gpu-autoscaling-stg/stack/stack/Nodegroupcpu-ng-ng/NodeGroupRole/Resource",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupcpu-ng-ng/NodeGroupRole/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                               "aws:cdk:cloudformation:props": {
@@ -584,7 +584,7 @@
                                     "value": "true"
                                   },
                                   {
-                                    "key": "k8s.io/cluster-autoscaler/gpu-autoscaling-stg/stack/clusterName",
+                                    "key": "k8s.io/cluster-autoscaler/gpu-autoscaling-local/gpu-autoscaling-local/clusterName",
                                     "value": "owned"
                                   }
                                 ]
@@ -603,16 +603,16 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/stack/Nodegroupcpu-ng-ng/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupcpu-ng-ng/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::EKS::Nodegroup",
                           "aws:cdk:cloudformation:props": {
                             "clusterName": {
-                              "Ref": "stack9D5F5B02"
+                              "Ref": "gpuautoscalinglocalD78C029F"
                             },
                             "nodeRole": {
                               "Fn::GetAtt": [
-                                "stackNodegroupcpungngNodeGroupRoleDF9A5D67",
+                                "gpuautoscalinglocalNodegroupcpungngNodeGroupRoleA9C9364D",
                                 "Arn"
                               ]
                             },
@@ -635,7 +635,7 @@
                             },
                             "tags": {
                               "k8s.io/cluster-autoscaler/enabled": "true",
-                              "k8s.io/cluster-autoscaler/gpu-autoscaling-stg/stack/clusterName": "owned"
+                              "k8s.io/cluster-autoscaler/gpu-autoscaling-local/gpu-autoscaling-local/clusterName": "owned"
                             }
                           }
                         },
@@ -652,15 +652,15 @@
                   },
                   "Nodegroupgpu-ng-ng": {
                     "id": "Nodegroupgpu-ng-ng",
-                    "path": "gpu-autoscaling-stg/stack/stack/Nodegroupgpu-ng-ng",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupgpu-ng-ng",
                     "children": {
                       "NodeGroupRole": {
                         "id": "NodeGroupRole",
-                        "path": "gpu-autoscaling-stg/stack/stack/Nodegroupgpu-ng-ng/NodeGroupRole",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupgpu-ng-ng/NodeGroupRole",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "gpu-autoscaling-stg/stack/stack/Nodegroupgpu-ng-ng/NodeGroupRole/Resource",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupgpu-ng-ng/NodeGroupRole/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                               "aws:cdk:cloudformation:props": {
@@ -744,7 +744,7 @@
                                     "value": "true"
                                   },
                                   {
-                                    "key": "k8s.io/cluster-autoscaler/gpu-autoscaling-stg/stack/clusterName",
+                                    "key": "k8s.io/cluster-autoscaler/gpu-autoscaling-local/gpu-autoscaling-local/clusterName",
                                     "value": "owned"
                                   }
                                 ]
@@ -763,16 +763,16 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/stack/Nodegroupgpu-ng-ng/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupgpu-ng-ng/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::EKS::Nodegroup",
                           "aws:cdk:cloudformation:props": {
                             "clusterName": {
-                              "Ref": "stack9D5F5B02"
+                              "Ref": "gpuautoscalinglocalD78C029F"
                             },
                             "nodeRole": {
                               "Fn::GetAtt": [
-                                "stackNodegroupgpungngNodeGroupRoleE7D50F85",
+                                "gpuautoscalinglocalNodegroupgpungngNodeGroupRole0E097733",
                                 "Arn"
                               ]
                             },
@@ -795,7 +795,7 @@
                             },
                             "tags": {
                               "k8s.io/cluster-autoscaler/enabled": "true",
-                              "k8s.io/cluster-autoscaler/gpu-autoscaling-stg/stack/clusterName": "owned"
+                              "k8s.io/cluster-autoscaler/gpu-autoscaling-local/gpu-autoscaling-local/clusterName": "owned"
                             }
                           }
                         },
@@ -812,15 +812,15 @@
                   },
                   "chart-metrics-server": {
                     "id": "chart-metrics-server",
-                    "path": "gpu-autoscaling-stg/stack/stack/chart-metrics-server",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-metrics-server",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/stack/chart-metrics-server/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-metrics-server/Resource",
                         "children": {
                           "Default": {
                             "id": "Default",
-                            "path": "gpu-autoscaling-stg/stack/stack/chart-metrics-server/Resource/Default",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-metrics-server/Resource/Default",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.CfnResource",
                               "version": "2.20.0"
@@ -840,15 +840,15 @@
                   },
                   "chart-cluster-autoscaler": {
                     "id": "chart-cluster-autoscaler",
-                    "path": "gpu-autoscaling-stg/stack/stack/chart-cluster-autoscaler",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-cluster-autoscaler",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/stack/chart-cluster-autoscaler/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-cluster-autoscaler/Resource",
                         "children": {
                           "Default": {
                             "id": "Default",
-                            "path": "gpu-autoscaling-stg/stack/stack/chart-cluster-autoscaler/Resource/Default",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-cluster-autoscaler/Resource/Default",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.CfnResource",
                               "version": "2.20.0"
@@ -868,15 +868,15 @@
                   },
                   "chart-adot-exporter-for-eks-on-ec2": {
                     "id": "chart-adot-exporter-for-eks-on-ec2",
-                    "path": "gpu-autoscaling-stg/stack/stack/chart-adot-exporter-for-eks-on-ec2",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-adot-exporter-for-eks-on-ec2",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/stack/chart-adot-exporter-for-eks-on-ec2/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-adot-exporter-for-eks-on-ec2/Resource",
                         "children": {
                           "Default": {
                             "id": "Default",
-                            "path": "gpu-autoscaling-stg/stack/stack/chart-adot-exporter-for-eks-on-ec2/Resource/Default",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-adot-exporter-for-eks-on-ec2/Resource/Default",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.CfnResource",
                               "version": "2.20.0"
@@ -896,19 +896,19 @@
                   },
                   "aws-load-balancer-controller": {
                     "id": "aws-load-balancer-controller",
-                    "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller",
                     "children": {
                       "ConditionJson": {
                         "id": "ConditionJson",
-                        "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/ConditionJson",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/ConditionJson",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/ConditionJson/Resource",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/ConditionJson/Resource",
                             "children": {
                               "Default": {
                                 "id": "Default",
-                                "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/ConditionJson/Resource/Default",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/ConditionJson/Resource/Default",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.CfnResource",
                                   "version": "2.20.0"
@@ -928,11 +928,11 @@
                       },
                       "Role": {
                         "id": "Role",
-                        "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/Role",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/Role",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/Role/Resource",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/Role/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                               "aws:cdk:cloudformation:props": {
@@ -943,7 +943,7 @@
                                       "Condition": {
                                         "StringEquals": {
                                           "Fn::GetAtt": [
-                                            "stackawsloadbalancercontrollerConditionJson504358AA",
+                                            "gpuautoscalinglocalawsloadbalancercontrollerConditionJson5974394E",
                                             "Value"
                                           ]
                                         }
@@ -951,7 +951,7 @@
                                       "Effect": "Allow",
                                       "Principal": {
                                         "Federated": {
-                                          "Ref": "stackOpenIdConnectProviderEAB720C9"
+                                          "Ref": "gpuautoscalinglocalOpenIdConnectProvider30F8CD15"
                                         }
                                       }
                                     }
@@ -967,11 +967,11 @@
                           },
                           "DefaultPolicy": {
                             "id": "DefaultPolicy",
-                            "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/Role/DefaultPolicy",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/Role/DefaultPolicy",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/Role/DefaultPolicy/Resource",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/Role/DefaultPolicy/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                   "aws:cdk:cloudformation:props": {
@@ -1298,10 +1298,10 @@
                                       ],
                                       "Version": "2012-10-17"
                                     },
-                                    "policyName": "stackawsloadbalancercontrollerRoleDefaultPolicy3497E942",
+                                    "policyName": "gpuautoscalinglocalawsloadbalancercontrollerRoleDefaultPolicyC2CF049B",
                                     "roles": [
                                       {
-                                        "Ref": "stackawsloadbalancercontrollerRoleBEB03111"
+                                        "Ref": "gpuautoscalinglocalawsloadbalancercontrollerRole2E52CC9D"
                                       }
                                     ]
                                   }
@@ -1325,15 +1325,15 @@
                       },
                       "manifest-aws-load-balancer-controllerServiceAccountResource": {
                         "id": "manifest-aws-load-balancer-controllerServiceAccountResource",
-                        "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource",
                             "children": {
                               "Default": {
                                 "id": "Default",
-                                "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource/Default",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource/Default",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.CfnResource",
                                   "version": "2.20.0"
@@ -1359,15 +1359,15 @@
                   },
                   "OpenIdConnectProvider": {
                     "id": "OpenIdConnectProvider",
-                    "path": "gpu-autoscaling-stg/stack/stack/OpenIdConnectProvider",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/OpenIdConnectProvider",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/stack/OpenIdConnectProvider/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/OpenIdConnectProvider/Resource",
                         "children": {
                           "Default": {
                             "id": "Default",
-                            "path": "gpu-autoscaling-stg/stack/stack/OpenIdConnectProvider/Resource/Default",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/OpenIdConnectProvider/Resource/Default",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.CfnResource",
                               "version": "2.20.0"
@@ -1387,15 +1387,15 @@
                   },
                   "chart-aws-load-balancer-controller": {
                     "id": "chart-aws-load-balancer-controller",
-                    "path": "gpu-autoscaling-stg/stack/stack/chart-aws-load-balancer-controller",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-aws-load-balancer-controller",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/stack/chart-aws-load-balancer-controller/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-aws-load-balancer-controller/Resource",
                         "children": {
                           "Default": {
                             "id": "Default",
-                            "path": "gpu-autoscaling-stg/stack/stack/chart-aws-load-balancer-controller/Resource/Default",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-aws-load-balancer-controller/Resource/Default",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.CfnResource",
                               "version": "2.20.0"
@@ -1421,19 +1421,19 @@
               },
               "@aws-cdk--aws-eks.ClusterResourceProvider": {
                 "id": "@aws-cdk--aws-eks.ClusterResourceProvider",
-                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider",
                 "children": {
                   "NodeProxyAgentLayer": {
                     "id": "NodeProxyAgentLayer",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer",
                     "children": {
                       "Code": {
                         "id": "Code",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Code",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Code",
                         "children": {
                           "Stage": {
                             "id": "Stage",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Code/Stage",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Code/Stage",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.AssetStaging",
                               "version": "2.20.0"
@@ -1441,7 +1441,7 @@
                           },
                           "AssetBucket": {
                             "id": "AssetBucket",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Code/AssetBucket",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Code/AssetBucket",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                               "version": "2.20.0"
@@ -1455,7 +1455,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Lambda::LayerVersion",
                           "aws:cdk:cloudformation:props": {
@@ -1479,15 +1479,15 @@
                   },
                   "OnEventHandler": {
                     "id": "OnEventHandler",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler",
                     "children": {
                       "ServiceRole": {
                         "id": "ServiceRole",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/Resource",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                               "aws:cdk:cloudformation:props": {
@@ -1526,11 +1526,11 @@
                           },
                           "DefaultPolicy": {
                             "id": "DefaultPolicy",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/DefaultPolicy",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/DefaultPolicy",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/DefaultPolicy/Resource",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/DefaultPolicy/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                   "aws:cdk:cloudformation:props": {
@@ -1540,7 +1540,7 @@
                                           "Action": "sts:AssumeRole",
                                           "Effect": "Allow",
                                           "Resource": {
-                                            "Ref": "referencetogpuautoscalingstgstackCreationRole7ADEA5E6Arn"
+                                            "Ref": "referencetogpuautoscalinglocalCreationRoleDC484638Arn"
                                           }
                                         }
                                       ],
@@ -1573,11 +1573,11 @@
                       },
                       "Code": {
                         "id": "Code",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Code",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Code",
                         "children": {
                           "Stage": {
                             "id": "Stage",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Code/Stage",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Code/Stage",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.AssetStaging",
                               "version": "2.20.0"
@@ -1585,7 +1585,7 @@
                           },
                           "AssetBucket": {
                             "id": "AssetBucket",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Code/AssetBucket",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Code/AssetBucket",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                               "version": "2.20.0"
@@ -1599,7 +1599,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                           "aws:cdk:cloudformation:props": {
@@ -1637,15 +1637,15 @@
                   },
                   "IsCompleteHandler": {
                     "id": "IsCompleteHandler",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler",
                     "children": {
                       "ServiceRole": {
                         "id": "ServiceRole",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/Resource",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                               "aws:cdk:cloudformation:props": {
@@ -1684,11 +1684,11 @@
                           },
                           "DefaultPolicy": {
                             "id": "DefaultPolicy",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/DefaultPolicy",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/DefaultPolicy",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/DefaultPolicy/Resource",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/DefaultPolicy/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                   "aws:cdk:cloudformation:props": {
@@ -1698,7 +1698,7 @@
                                           "Action": "sts:AssumeRole",
                                           "Effect": "Allow",
                                           "Resource": {
-                                            "Ref": "referencetogpuautoscalingstgstackCreationRole7ADEA5E6Arn"
+                                            "Ref": "referencetogpuautoscalinglocalCreationRoleDC484638Arn"
                                           }
                                         }
                                       ],
@@ -1731,11 +1731,11 @@
                       },
                       "Code": {
                         "id": "Code",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Code",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Code",
                         "children": {
                           "Stage": {
                             "id": "Stage",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Code/Stage",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Code/Stage",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.AssetStaging",
                               "version": "2.20.0"
@@ -1743,7 +1743,7 @@
                           },
                           "AssetBucket": {
                             "id": "AssetBucket",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Code/AssetBucket",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Code/AssetBucket",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                               "version": "2.20.0"
@@ -1757,7 +1757,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                           "aws:cdk:cloudformation:props": {
@@ -1795,19 +1795,19 @@
                   },
                   "Provider": {
                     "id": "Provider",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider",
                     "children": {
                       "framework-onEvent": {
                         "id": "framework-onEvent",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent",
                         "children": {
                           "ServiceRole": {
                             "id": "ServiceRole",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/Resource",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                                   "aws:cdk:cloudformation:props": {
@@ -1846,11 +1846,11 @@
                               },
                               "DefaultPolicy": {
                                 "id": "DefaultPolicy",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy",
                                 "children": {
                                   "Resource": {
                                     "id": "Resource",
-                                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource",
+                                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource",
                                     "attributes": {
                                       "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                       "aws:cdk:cloudformation:props": {
@@ -1945,11 +1945,11 @@
                           },
                           "Code": {
                             "id": "Code",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Code",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Code",
                             "children": {
                               "Stage": {
                                 "id": "Stage",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Code/Stage",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Code/Stage",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.AssetStaging",
                                   "version": "2.20.0"
@@ -1957,7 +1957,7 @@
                               },
                               "AssetBucket": {
                                 "id": "AssetBucket",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Code/AssetBucket",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Code/AssetBucket",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                                   "version": "2.20.0"
@@ -1971,7 +1971,7 @@
                           },
                           "Resource": {
                             "id": "Resource",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Resource",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                               "aws:cdk:cloudformation:props": {
@@ -1985,7 +1985,7 @@
                                     "Arn"
                                   ]
                                 },
-                                "description": "AWS CDK resource provider framework - onEvent (gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider)",
+                                "description": "AWS CDK resource provider framework - onEvent (gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider)",
                                 "environment": {
                                   "variables": {
                                     "USER_ON_EVENT_FUNCTION_ARN": {
@@ -2023,15 +2023,15 @@
                       },
                       "framework-isComplete": {
                         "id": "framework-isComplete",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete",
                         "children": {
                           "ServiceRole": {
                             "id": "ServiceRole",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/Resource",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                                   "aws:cdk:cloudformation:props": {
@@ -2070,11 +2070,11 @@
                               },
                               "DefaultPolicy": {
                                 "id": "DefaultPolicy",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy",
                                 "children": {
                                   "Resource": {
                                     "id": "Resource",
-                                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy/Resource",
+                                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy/Resource",
                                     "attributes": {
                                       "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                       "aws:cdk:cloudformation:props": {
@@ -2162,11 +2162,11 @@
                           },
                           "Code": {
                             "id": "Code",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Code",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Code",
                             "children": {
                               "Stage": {
                                 "id": "Stage",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Code/Stage",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Code/Stage",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.AssetStaging",
                                   "version": "2.20.0"
@@ -2174,7 +2174,7 @@
                               },
                               "AssetBucket": {
                                 "id": "AssetBucket",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Code/AssetBucket",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Code/AssetBucket",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                                   "version": "2.20.0"
@@ -2188,7 +2188,7 @@
                           },
                           "Resource": {
                             "id": "Resource",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Resource",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                               "aws:cdk:cloudformation:props": {
@@ -2202,7 +2202,7 @@
                                     "Arn"
                                   ]
                                 },
-                                "description": "AWS CDK resource provider framework - isComplete (gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider)",
+                                "description": "AWS CDK resource provider framework - isComplete (gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider)",
                                 "environment": {
                                   "variables": {
                                     "USER_ON_EVENT_FUNCTION_ARN": {
@@ -2237,15 +2237,15 @@
                       },
                       "framework-onTimeout": {
                         "id": "framework-onTimeout",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout",
                         "children": {
                           "ServiceRole": {
                             "id": "ServiceRole",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/Resource",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                                   "aws:cdk:cloudformation:props": {
@@ -2284,11 +2284,11 @@
                               },
                               "DefaultPolicy": {
                                 "id": "DefaultPolicy",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy",
                                 "children": {
                                   "Resource": {
                                     "id": "Resource",
-                                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource",
+                                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource",
                                     "attributes": {
                                       "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                       "aws:cdk:cloudformation:props": {
@@ -2376,11 +2376,11 @@
                           },
                           "Code": {
                             "id": "Code",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Code",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Code",
                             "children": {
                               "Stage": {
                                 "id": "Stage",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Code/Stage",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Code/Stage",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.AssetStaging",
                                   "version": "2.20.0"
@@ -2388,7 +2388,7 @@
                               },
                               "AssetBucket": {
                                 "id": "AssetBucket",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Code/AssetBucket",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Code/AssetBucket",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                                   "version": "2.20.0"
@@ -2402,7 +2402,7 @@
                           },
                           "Resource": {
                             "id": "Resource",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Resource",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                               "aws:cdk:cloudformation:props": {
@@ -2416,7 +2416,7 @@
                                     "Arn"
                                   ]
                                 },
-                                "description": "AWS CDK resource provider framework - onTimeout (gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider)",
+                                "description": "AWS CDK resource provider framework - onTimeout (gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider)",
                                 "environment": {
                                   "variables": {
                                     "USER_ON_EVENT_FUNCTION_ARN": {
@@ -2451,15 +2451,15 @@
                       },
                       "waiter-state-machine": {
                         "id": "waiter-state-machine",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine",
                         "children": {
                           "Role": {
                             "id": "Role",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/Resource",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                                   "aws:cdk:cloudformation:props": {
@@ -2484,11 +2484,11 @@
                               },
                               "DefaultPolicy": {
                                 "id": "DefaultPolicy",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy",
                                 "children": {
                                   "Resource": {
                                     "id": "Resource",
-                                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy/Resource",
+                                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy/Resource",
                                     "attributes": {
                                       "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                       "aws:cdk:cloudformation:props": {
@@ -2576,7 +2576,7 @@
                           },
                           "Resource": {
                             "id": "Resource",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Resource",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Resource",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.CfnResource",
                               "version": "2.20.0"
@@ -2596,11 +2596,11 @@
                   },
                   "CDKMetadata": {
                     "id": "CDKMetadata",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata",
                     "children": {
                       "Default": {
                         "id": "Default",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata/Default",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata/Default",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.CfnResource",
                           "version": "2.20.0"
@@ -2612,17 +2612,17 @@
                       "version": "10.0.125"
                     }
                   },
-                  "gpuautoscalingstgstackawscdkawseksClusterResourceProviderframeworkonEvent9B81272FArn": {
-                    "id": "gpuautoscalingstgstackawscdkawseksClusterResourceProviderframeworkonEvent9B81272FArn",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/gpuautoscalingstgstackawscdkawseksClusterResourceProviderframeworkonEvent9B81272FArn",
+                  "gpuautoscalinglocalawscdkawseksClusterResourceProviderframeworkonEvent48AC9208Arn": {
+                    "id": "gpuautoscalinglocalawscdkawseksClusterResourceProviderframeworkonEvent48AC9208Arn",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/gpuautoscalinglocalawscdkawseksClusterResourceProviderframeworkonEvent48AC9208Arn",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.20.0"
                     }
                   },
-                  "reference-to-gpuautoscalingstgstackCreationRole7ADEA5E6Arn": {
-                    "id": "reference-to-gpuautoscalingstgstackCreationRole7ADEA5E6Arn",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/reference-to-gpuautoscalingstgstackCreationRole7ADEA5E6Arn",
+                  "reference-to-gpuautoscalinglocalCreationRoleDC484638Arn": {
+                    "id": "reference-to-gpuautoscalinglocalCreationRoleDC484638Arn",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/reference-to-gpuautoscalinglocalCreationRoleDC484638Arn",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnParameter",
                       "version": "2.20.0"
@@ -2636,11 +2636,11 @@
               },
               "@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack": {
                 "id": "@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack",
-                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack",
                 "children": {
                   "@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource": {
                     "id": "@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::CloudFormation::Stack",
                       "aws:cdk:cloudformation:props": {
@@ -2652,14 +2652,14 @@
                               {
                                 "Ref": "AWS::URLSuffix"
                               },
-                              "/cdk-hnb659fds-assets-681747700094-ap-northeast-2/37a6417ca260b3e0d8514457205213defd56fc452abb46436ee1815ce071ab55.json"
+                              "/cdk-hnb659fds-assets-681747700094-ap-northeast-2/40f8085461a657a00ac8a56f22201eda321e5d68a482df3316d50febc3a21387.json"
                             ]
                           ]
                         },
                         "parameters": {
-                          "referencetogpuautoscalingstgstackCreationRole7ADEA5E6Arn": {
+                          "referencetogpuautoscalinglocalCreationRoleDC484638Arn": {
                             "Fn::GetAtt": [
-                              "stackCreationRoleCCD9260B",
+                              "gpuautoscalinglocalCreationRoleF56C758F",
                               "Arn"
                             ]
                           }
@@ -2679,19 +2679,19 @@
               },
               "@aws-cdk--aws-eks.KubectlProvider": {
                 "id": "@aws-cdk--aws-eks.KubectlProvider",
-                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider",
                 "children": {
                   "Handler": {
                     "id": "Handler",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Handler",
                     "children": {
                       "ServiceRole": {
                         "id": "ServiceRole",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/Resource",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                               "aws:cdk:cloudformation:props": {
@@ -2754,11 +2754,11 @@
                           },
                           "DefaultPolicy": {
                             "id": "DefaultPolicy",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/DefaultPolicy",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/DefaultPolicy",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/DefaultPolicy/Resource",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/DefaultPolicy/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                   "aws:cdk:cloudformation:props": {
@@ -2768,14 +2768,14 @@
                                           "Action": "eks:DescribeCluster",
                                           "Effect": "Allow",
                                           "Resource": {
-                                            "Ref": "referencetogpuautoscalingstgstackB50ADC9AArn"
+                                            "Ref": "referencetogpuautoscalinglocal971BC66BArn"
                                           }
                                         },
                                         {
                                           "Action": "sts:AssumeRole",
                                           "Effect": "Allow",
                                           "Resource": {
-                                            "Ref": "referencetogpuautoscalingstgstackCreationRole7ADEA5E6Arn"
+                                            "Ref": "referencetogpuautoscalinglocalCreationRoleDC484638Arn"
                                           }
                                         }
                                       ],
@@ -2808,11 +2808,11 @@
                       },
                       "Code": {
                         "id": "Code",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/Code",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Handler/Code",
                         "children": {
                           "Stage": {
                             "id": "Stage",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/Code/Stage",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Handler/Code/Stage",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.AssetStaging",
                               "version": "2.20.0"
@@ -2820,7 +2820,7 @@
                           },
                           "AssetBucket": {
                             "id": "AssetBucket",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/Code/AssetBucket",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Handler/Code/AssetBucket",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                               "version": "2.20.0"
@@ -2834,7 +2834,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Handler/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                           "aws:cdk:cloudformation:props": {
@@ -2869,7 +2869,7 @@
                               ],
                               "securityGroupIds": [
                                 {
-                                  "Ref": "referencetogpuautoscalingstgstackB50ADC9AClusterSecurityGroupId"
+                                  "Ref": "referencetogpuautoscalinglocal971BC66BClusterSecurityGroupId"
                                 }
                               ]
                             }
@@ -2888,15 +2888,15 @@
                   },
                   "AwsCliLayer": {
                     "id": "AwsCliLayer",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer",
                     "children": {
                       "Code": {
                         "id": "Code",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Code",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Code",
                         "children": {
                           "Stage": {
                             "id": "Stage",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Code/Stage",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Code/Stage",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.AssetStaging",
                               "version": "2.20.0"
@@ -2904,7 +2904,7 @@
                           },
                           "AssetBucket": {
                             "id": "AssetBucket",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Code/AssetBucket",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Code/AssetBucket",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                               "version": "2.20.0"
@@ -2918,7 +2918,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Lambda::LayerVersion",
                           "aws:cdk:cloudformation:props": {
@@ -2942,15 +2942,15 @@
                   },
                   "KubectlLayer": {
                     "id": "KubectlLayer",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer",
                     "children": {
                       "Code": {
                         "id": "Code",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Code",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Code",
                         "children": {
                           "Stage": {
                             "id": "Stage",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Code/Stage",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Code/Stage",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.AssetStaging",
                               "version": "2.20.0"
@@ -2958,7 +2958,7 @@
                           },
                           "AssetBucket": {
                             "id": "AssetBucket",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Code/AssetBucket",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Code/AssetBucket",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                               "version": "2.20.0"
@@ -2972,7 +2972,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Lambda::LayerVersion",
                           "aws:cdk:cloudformation:props": {
@@ -2996,19 +2996,19 @@
                   },
                   "Provider": {
                     "id": "Provider",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Provider",
                     "children": {
                       "framework-onEvent": {
                         "id": "framework-onEvent",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent",
                         "children": {
                           "ServiceRole": {
                             "id": "ServiceRole",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/Resource",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                                   "aws:cdk:cloudformation:props": {
@@ -3059,11 +3059,11 @@
                               },
                               "DefaultPolicy": {
                                 "id": "DefaultPolicy",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy",
                                 "children": {
                                   "Resource": {
                                     "id": "Resource",
-                                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource",
+                                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource",
                                     "attributes": {
                                       "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                       "aws:cdk:cloudformation:props": {
@@ -3125,11 +3125,11 @@
                           },
                           "Code": {
                             "id": "Code",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Code",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Code",
                             "children": {
                               "Stage": {
                                 "id": "Stage",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Code/Stage",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Code/Stage",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.AssetStaging",
                                   "version": "2.20.0"
@@ -3137,7 +3137,7 @@
                               },
                               "AssetBucket": {
                                 "id": "AssetBucket",
-                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Code/AssetBucket",
+                                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Code/AssetBucket",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                                   "version": "2.20.0"
@@ -3151,7 +3151,7 @@
                           },
                           "Resource": {
                             "id": "Resource",
-                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Resource",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                               "aws:cdk:cloudformation:props": {
@@ -3165,7 +3165,7 @@
                                     "Arn"
                                   ]
                                 },
-                                "description": "AWS CDK resource provider framework - onEvent (gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider)",
+                                "description": "AWS CDK resource provider framework - onEvent (gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Provider)",
                                 "environment": {
                                   "variables": {
                                     "USER_ON_EVENT_FUNCTION_ARN": {
@@ -3187,7 +3187,7 @@
                                   ],
                                   "securityGroupIds": [
                                     {
-                                      "Ref": "referencetogpuautoscalingstgstackB50ADC9AClusterSecurityGroupId"
+                                      "Ref": "referencetogpuautoscalinglocal971BC66BClusterSecurityGroupId"
                                     }
                                   ]
                                 }
@@ -3212,11 +3212,11 @@
                   },
                   "CDKMetadata": {
                     "id": "CDKMetadata",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata",
                     "children": {
                       "Default": {
                         "id": "Default",
-                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata/Default",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata/Default",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.CfnResource",
                           "version": "2.20.0"
@@ -3228,33 +3228,33 @@
                       "version": "10.0.125"
                     }
                   },
-                  "gpuautoscalingstgstackawscdkawseksKubectlProviderframeworkonEventCBFBE7AEArn": {
-                    "id": "gpuautoscalingstgstackawscdkawseksKubectlProviderframeworkonEventCBFBE7AEArn",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/gpuautoscalingstgstackawscdkawseksKubectlProviderframeworkonEventCBFBE7AEArn",
+                  "gpuautoscalinglocalawscdkawseksKubectlProviderframeworkonEventA89A7DD5Arn": {
+                    "id": "gpuautoscalinglocalawscdkawseksKubectlProviderframeworkonEventA89A7DD5Arn",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/gpuautoscalinglocalawscdkawseksKubectlProviderframeworkonEventA89A7DD5Arn",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.20.0"
                     }
                   },
-                  "reference-to-gpuautoscalingstgstackB50ADC9AArn": {
-                    "id": "reference-to-gpuautoscalingstgstackB50ADC9AArn",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalingstgstackB50ADC9AArn",
+                  "reference-to-gpuautoscalinglocal971BC66BArn": {
+                    "id": "reference-to-gpuautoscalinglocal971BC66BArn",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalinglocal971BC66BArn",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnParameter",
                       "version": "2.20.0"
                     }
                   },
-                  "reference-to-gpuautoscalingstgstackCreationRole7ADEA5E6Arn": {
-                    "id": "reference-to-gpuautoscalingstgstackCreationRole7ADEA5E6Arn",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalingstgstackCreationRole7ADEA5E6Arn",
+                  "reference-to-gpuautoscalinglocalCreationRoleDC484638Arn": {
+                    "id": "reference-to-gpuautoscalinglocalCreationRoleDC484638Arn",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalinglocalCreationRoleDC484638Arn",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnParameter",
                       "version": "2.20.0"
                     }
                   },
-                  "reference-to-gpuautoscalingstgstackB50ADC9AClusterSecurityGroupId": {
-                    "id": "reference-to-gpuautoscalingstgstackB50ADC9AClusterSecurityGroupId",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalingstgstackB50ADC9AClusterSecurityGroupId",
+                  "reference-to-gpuautoscalinglocal971BC66BClusterSecurityGroupId": {
+                    "id": "reference-to-gpuautoscalinglocal971BC66BClusterSecurityGroupId",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalinglocal971BC66BClusterSecurityGroupId",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnParameter",
                       "version": "2.20.0"
@@ -3268,11 +3268,11 @@
               },
               "@aws-cdk--aws-eks.KubectlProvider.NestedStack": {
                 "id": "@aws-cdk--aws-eks.KubectlProvider.NestedStack",
-                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider.NestedStack",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider.NestedStack",
                 "children": {
                   "@aws-cdk--aws-eks.KubectlProvider.NestedStackResource": {
                     "id": "@aws-cdk--aws-eks.KubectlProvider.NestedStackResource",
-                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::CloudFormation::Stack",
                       "aws:cdk:cloudformation:props": {
@@ -3284,26 +3284,26 @@
                               {
                                 "Ref": "AWS::URLSuffix"
                               },
-                              "/cdk-hnb659fds-assets-681747700094-ap-northeast-2/37b72293091310b010ea6169abaf6f35e120a367dad08cb5436db084d7f2abf4.json"
+                              "/cdk-hnb659fds-assets-681747700094-ap-northeast-2/025beaef0d28d05f20be4a5b881ca2ec75efe295105658d70e665fa4ea583cdb.json"
                             ]
                           ]
                         },
                         "parameters": {
-                          "referencetogpuautoscalingstgstackB50ADC9AArn": {
+                          "referencetogpuautoscalinglocal971BC66BArn": {
                             "Fn::GetAtt": [
-                              "stack9D5F5B02",
+                              "gpuautoscalinglocalD78C029F",
                               "Arn"
                             ]
                           },
-                          "referencetogpuautoscalingstgstackCreationRole7ADEA5E6Arn": {
+                          "referencetogpuautoscalinglocalCreationRoleDC484638Arn": {
                             "Fn::GetAtt": [
-                              "stackCreationRoleCCD9260B",
+                              "gpuautoscalinglocalCreationRoleF56C758F",
                               "Arn"
                             ]
                           },
-                          "referencetogpuautoscalingstgstackB50ADC9AClusterSecurityGroupId": {
+                          "referencetogpuautoscalinglocal971BC66BClusterSecurityGroupId": {
                             "Fn::GetAtt": [
-                              "stack9D5F5B02",
+                              "gpuautoscalinglocalD78C029F",
                               "ClusterSecurityGroupId"
                             ]
                           }
@@ -3323,11 +3323,11 @@
               },
               "ClusterLogsEnabler": {
                 "id": "ClusterLogsEnabler",
-                "path": "gpu-autoscaling-stg/stack/ClusterLogsEnabler",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/ClusterLogsEnabler",
                 "children": {
                   "Provider": {
                     "id": "Provider",
-                    "path": "gpu-autoscaling-stg/stack/ClusterLogsEnabler/Provider",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/ClusterLogsEnabler/Provider",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_lambda.SingletonFunction",
                       "version": "2.20.0"
@@ -3335,11 +3335,11 @@
                   },
                   "CustomResourcePolicy": {
                     "id": "CustomResourcePolicy",
-                    "path": "gpu-autoscaling-stg/stack/ClusterLogsEnabler/CustomResourcePolicy",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/ClusterLogsEnabler/CustomResourcePolicy",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/ClusterLogsEnabler/CustomResourcePolicy/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/ClusterLogsEnabler/CustomResourcePolicy/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                           "aws:cdk:cloudformation:props": {
@@ -3354,7 +3354,7 @@
                                       [
                                         {
                                           "Fn::GetAtt": [
-                                            "stack9D5F5B02",
+                                            "gpuautoscalinglocalD78C029F",
                                             "Arn"
                                           ]
                                         },
@@ -3387,11 +3387,11 @@
                   },
                   "Resource": {
                     "id": "Resource",
-                    "path": "gpu-autoscaling-stg/stack/ClusterLogsEnabler/Resource",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/ClusterLogsEnabler/Resource",
                     "children": {
                       "Default": {
                         "id": "Default",
-                        "path": "gpu-autoscaling-stg/stack/ClusterLogsEnabler/Resource/Default",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/ClusterLogsEnabler/Resource/Default",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.CfnResource",
                           "version": "2.20.0"
@@ -3411,15 +3411,15 @@
               },
               "AWS679f53fac002430cb0da5b7982bd2287": {
                 "id": "AWS679f53fac002430cb0da5b7982bd2287",
-                "path": "gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/AWS679f53fac002430cb0da5b7982bd2287",
                 "children": {
                   "ServiceRole": {
                     "id": "ServiceRole",
-                    "path": "gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                           "aws:cdk:cloudformation:props": {
@@ -3464,11 +3464,11 @@
                   },
                   "Code": {
                     "id": "Code",
-                    "path": "gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287/Code",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/AWS679f53fac002430cb0da5b7982bd2287/Code",
                     "children": {
                       "Stage": {
                         "id": "Stage",
-                        "path": "gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287/Code/Stage",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/AWS679f53fac002430cb0da5b7982bd2287/Code/Stage",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.AssetStaging",
                           "version": "2.20.0"
@@ -3476,7 +3476,7 @@
                       },
                       "AssetBucket": {
                         "id": "AssetBucket",
-                        "path": "gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287/Code/AssetBucket",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/AWS679f53fac002430cb0da5b7982bd2287/Code/AssetBucket",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                           "version": "2.20.0"
@@ -3490,7 +3490,7 @@
                   },
                   "Resource": {
                     "id": "Resource",
-                    "path": "gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287/Resource",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/AWS679f53fac002430cb0da5b7982bd2287/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                       "aws:cdk:cloudformation:props": {
@@ -3522,11 +3522,11 @@
               },
               "cluster-autoscaler-policy": {
                 "id": "cluster-autoscaler-policy",
-                "path": "gpu-autoscaling-stg/stack/cluster-autoscaler-policy",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/cluster-autoscaler-policy",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "gpu-autoscaling-stg/stack/cluster-autoscaler-policy/Resource",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/cluster-autoscaler-policy/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                       "aws:cdk:cloudformation:props": {
@@ -3552,10 +3552,10 @@
                         "policyName": "ClusterAutoscalerPolicy",
                         "roles": [
                           {
-                            "Ref": "stackNodegroupcpungngNodeGroupRoleDF9A5D67"
+                            "Ref": "gpuautoscalinglocalNodegroupcpungngNodeGroupRoleA9C9364D"
                           },
                           {
-                            "Ref": "stackNodegroupgpungngNodeGroupRoleE7D50F85"
+                            "Ref": "gpuautoscalinglocalNodegroupgpungngNodeGroupRole0E097733"
                           }
                         ]
                       }
@@ -3573,15 +3573,15 @@
               },
               "clusterName": {
                 "id": "clusterName",
-                "path": "gpu-autoscaling-stg/stack/clusterName",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/clusterName",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "gpu-autoscaling-stg/stack/clusterName/Resource",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/clusterName/Resource",
                     "children": {
                       "Default": {
                         "id": "Default",
-                        "path": "gpu-autoscaling-stg/stack/clusterName/Resource/Default",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/clusterName/Resource/Default",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.CfnResource",
                           "version": "2.20.0"
@@ -3601,11 +3601,11 @@
               },
               "AWSCDKCfnUtilsProviderCustomResourceProvider": {
                 "id": "AWSCDKCfnUtilsProviderCustomResourceProvider",
-                "path": "gpu-autoscaling-stg/stack/AWSCDKCfnUtilsProviderCustomResourceProvider",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/AWSCDKCfnUtilsProviderCustomResourceProvider",
                 "children": {
                   "Staging": {
                     "id": "Staging",
-                    "path": "gpu-autoscaling-stg/stack/AWSCDKCfnUtilsProviderCustomResourceProvider/Staging",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/AWSCDKCfnUtilsProviderCustomResourceProvider/Staging",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.AssetStaging",
                       "version": "2.20.0"
@@ -3613,7 +3613,7 @@
                   },
                   "Role": {
                     "id": "Role",
-                    "path": "gpu-autoscaling-stg/stack/AWSCDKCfnUtilsProviderCustomResourceProvider/Role",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/AWSCDKCfnUtilsProviderCustomResourceProvider/Role",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
                       "version": "2.20.0"
@@ -3621,7 +3621,7 @@
                   },
                   "Handler": {
                     "id": "Handler",
-                    "path": "gpu-autoscaling-stg/stack/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
                       "version": "2.20.0"
@@ -3635,11 +3635,11 @@
               },
               "Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider": {
                 "id": "Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider",
-                "path": "gpu-autoscaling-stg/stack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider",
                 "children": {
                   "Staging": {
                     "id": "Staging",
-                    "path": "gpu-autoscaling-stg/stack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Staging",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Staging",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.AssetStaging",
                       "version": "2.20.0"
@@ -3647,7 +3647,7 @@
                   },
                   "Role": {
                     "id": "Role",
-                    "path": "gpu-autoscaling-stg/stack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
                       "version": "2.20.0"
@@ -3655,7 +3655,7 @@
                   },
                   "Handler": {
                     "id": "Handler",
-                    "path": "gpu-autoscaling-stg/stack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
                       "version": "2.20.0"
@@ -3669,13 +3669,13 @@
               },
               "vpc-cni-addOn": {
                 "id": "vpc-cni-addOn",
-                "path": "gpu-autoscaling-stg/stack/vpc-cni-addOn",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/vpc-cni-addOn",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EKS::Addon",
                   "aws:cdk:cloudformation:props": {
                     "addonName": "vpc-cni",
                     "clusterName": {
-                      "Ref": "stack9D5F5B02"
+                      "Ref": "gpuautoscalinglocalD78C029F"
                     },
                     "addonVersion": "v1.10.2-eksbuild.1",
                     "resolveConflicts": "OVERWRITE"
@@ -3688,13 +3688,13 @@
               },
               "coredns-addOn": {
                 "id": "coredns-addOn",
-                "path": "gpu-autoscaling-stg/stack/coredns-addOn",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/coredns-addOn",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EKS::Addon",
                   "aws:cdk:cloudformation:props": {
                     "addonName": "coredns",
                     "clusterName": {
-                      "Ref": "stack9D5F5B02"
+                      "Ref": "gpuautoscalinglocalD78C029F"
                     },
                     "addonVersion": "v1.8.4-eksbuild.1",
                     "resolveConflicts": "OVERWRITE"
@@ -3707,13 +3707,13 @@
               },
               "kube-proxy-addOn": {
                 "id": "kube-proxy-addOn",
-                "path": "gpu-autoscaling-stg/stack/kube-proxy-addOn",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/kube-proxy-addOn",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EKS::Addon",
                   "aws:cdk:cloudformation:props": {
                     "addonName": "kube-proxy",
                     "clusterName": {
-                      "Ref": "stack9D5F5B02"
+                      "Ref": "gpuautoscalinglocalD78C029F"
                     },
                     "addonVersion": "v1.21.2-eksbuild.2",
                     "resolveConflicts": "OVERWRITE"
@@ -3726,11 +3726,11 @@
               },
               "CDKMetadata": {
                 "id": "CDKMetadata",
-                "path": "gpu-autoscaling-stg/stack/CDKMetadata",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/CDKMetadata",
                 "children": {
                   "Default": {
                     "id": "Default",
-                    "path": "gpu-autoscaling-stg/stack/CDKMetadata/Default",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
                       "version": "2.20.0"
@@ -3744,19 +3744,19 @@
               },
               "Exports": {
                 "id": "Exports",
-                "path": "gpu-autoscaling-stg/stack/Exports",
+                "path": "gpu-autoscaling-local/gpu-autoscaling-local/Exports",
                 "children": {
-                  "Output{\"Ref\":\"stack9D5F5B02\"}": {
-                    "id": "Output{\"Ref\":\"stack9D5F5B02\"}",
-                    "path": "gpu-autoscaling-stg/stack/Exports/Output{\"Ref\":\"stack9D5F5B02\"}",
+                  "Output{\"Ref\":\"gpuautoscalinglocalD78C029F\"}": {
+                    "id": "Output{\"Ref\":\"gpuautoscalinglocalD78C029F\"}",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/Exports/Output{\"Ref\":\"gpuautoscalinglocalD78C029F\"}",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.20.0"
                     }
                   },
-                  "Output{\"Fn::GetAtt\":[\"stack9D5F5B02\",\"Arn\"]}": {
-                    "id": "Output{\"Fn::GetAtt\":[\"stack9D5F5B02\",\"Arn\"]}",
-                    "path": "gpu-autoscaling-stg/stack/Exports/Output{\"Fn::GetAtt\":[\"stack9D5F5B02\",\"Arn\"]}",
+                  "Output{\"Fn::GetAtt\":[\"gpuautoscalinglocalD78C029F\",\"Arn\"]}": {
+                    "id": "Output{\"Fn::GetAtt\":[\"gpuautoscalinglocalD78C029F\",\"Arn\"]}",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/Exports/Output{\"Fn::GetAtt\":[\"gpuautoscalinglocalD78C029F\",\"Arn\"]}",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.20.0"
@@ -3776,7 +3776,7 @@
           },
           "ClusterName": {
             "id": "ClusterName",
-            "path": "gpu-autoscaling-stg/ClusterName",
+            "path": "gpu-autoscaling-local/ClusterName",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnOutput",
               "version": "2.20.0"
@@ -3784,7 +3784,7 @@
           },
           "ClusterArn": {
             "id": "ClusterArn",
-            "path": "gpu-autoscaling-stg/ClusterArn",
+            "path": "gpu-autoscaling-local/ClusterArn",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnOutput",
               "version": "2.20.0"
@@ -3792,11 +3792,11 @@
           },
           "CDKMetadata": {
             "id": "CDKMetadata",
-            "path": "gpu-autoscaling-stg/CDKMetadata",
+            "path": "gpu-autoscaling-local/CDKMetadata",
             "children": {
               "Default": {
                 "id": "Default",
-                "path": "gpu-autoscaling-stg/CDKMetadata/Default",
+                "path": "gpu-autoscaling-local/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnResource",
                   "version": "2.20.0"

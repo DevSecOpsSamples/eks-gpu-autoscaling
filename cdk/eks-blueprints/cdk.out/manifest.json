@@ -7,27 +7,27 @@
         "file": "tree.json"
       }
     },
-    "gpuautoscalingstgstackB9CCA2ED.assets": {
+    "gpuautoscalinglocalC4F43E85.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "gpuautoscalingstgstackB9CCA2ED.assets.json",
+        "file": "gpuautoscalinglocalC4F43E85.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "gpuautoscalingstgstackB9CCA2ED": {
+    "gpuautoscalinglocalC4F43E85": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://681747700094/ap-northeast-2",
       "properties": {
-        "templateFile": "gpuautoscalingstgstackB9CCA2ED.template.json",
+        "templateFile": "gpuautoscalinglocalC4F43E85.template.json",
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-deploy-role-681747700094-ap-northeast-2",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-cfn-exec-role-681747700094-ap-northeast-2",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-681747700094-ap-northeast-2/8ebaf4dc81b0f22ad6025d6c14fc854ba75795130fef7ecbe87c3d12e7f88686.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-681747700094-ap-northeast-2/848dd188fd0b49b37da6325625d2e2a4072bc39ccd6cf1433d4408ce50192a77.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "gpuautoscalingstgstackB9CCA2ED.assets"
+          "gpuautoscalinglocalC4F43E85.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-lookup-role-681747700094-ap-northeast-2",
@@ -36,10 +36,10 @@
         }
       },
       "dependencies": [
-        "gpuautoscalingstgstackB9CCA2ED.assets"
+        "gpuautoscalinglocalC4F43E85.assets"
       ],
       "metadata": {
-        "/gpu-autoscaling-stg/stack/stack": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local": [
           {
             "type": "aws:cdk:warning",
             "data": "Could not auto-tag private subnet subnet-0ee02055d479e015e with \"kubernetes.io/role/internal-elb=1\", please remember to do this manually",
@@ -233,504 +233,504 @@
             ]
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/Role/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Role/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackRoleC82B8918"
+            "data": "gpuautoscalinglocalRole066512E8"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/ControlPlaneSecurityGroup/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/ControlPlaneSecurityGroup/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackControlPlaneSecurityGroupB755CD71"
+            "data": "gpuautoscalinglocalControlPlaneSecurityGroup740D01C0"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/Resource/CreationRole/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Resource/CreationRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackCreationRoleCCD9260B"
+            "data": "gpuautoscalinglocalCreationRoleF56C758F"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/Resource/CreationRole/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Resource/CreationRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackCreationRoleDefaultPolicy67C37630"
+            "data": "gpuautoscalinglocalCreationRoleDefaultPolicyCFA0AA9D"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/Resource/Resource/Default": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Resource/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stack9D5F5B02"
+            "data": "gpuautoscalinglocalD78C029F"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/KubectlReadyBarrier": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/KubectlReadyBarrier": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackKubectlReadyBarrierBFD42037"
+            "data": "gpuautoscalinglocalKubectlReadyBarrier4CCD2A7F"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/ClusterName": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/ClusterName": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackClusterName04D9E805"
+            "data": "gpuautoscalinglocalClusterNameEA1DAD2D"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/MastersRole/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/MastersRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackMastersRole089F1C17"
+            "data": "gpuautoscalinglocalMastersRoleA4B84851"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/AwsAuth/manifest/Resource/Default": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/AwsAuth/manifest/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackAwsAuthmanifestE992D16E"
+            "data": "gpuautoscalinglocalAwsAuthmanifestB7546CA7"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/ConfigCommand": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/ConfigCommand": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackConfigCommandE9858FEA"
+            "data": "gpuautoscalinglocalConfigCommand0D506CF5"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/GetTokenCommand": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/GetTokenCommand": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackGetTokenCommandB4A608C9"
+            "data": "gpuautoscalinglocalGetTokenCommand4E622749"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/Nodegroupcpu-ng-ng/NodeGroupRole/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupcpu-ng-ng/NodeGroupRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackNodegroupcpungngNodeGroupRoleDF9A5D67"
+            "data": "gpuautoscalinglocalNodegroupcpungngNodeGroupRoleA9C9364D"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/Nodegroupcpu-ng-ng/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupcpu-ng-ng/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackNodegroupcpungngFEA12D01"
+            "data": "gpuautoscalinglocalNodegroupcpungng0015FCEB"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/Nodegroupgpu-ng-ng/NodeGroupRole/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupgpu-ng-ng/NodeGroupRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackNodegroupgpungngNodeGroupRoleE7D50F85"
+            "data": "gpuautoscalinglocalNodegroupgpungngNodeGroupRole0E097733"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/Nodegroupgpu-ng-ng/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupgpu-ng-ng/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackNodegroupgpungngF75151F5"
+            "data": "gpuautoscalinglocalNodegroupgpungng757EAF03"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/chart-metrics-server/Resource/Default": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-metrics-server/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackchartmetricsserver21A33978"
+            "data": "gpuautoscalinglocalchartmetricsserver81953123"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/chart-cluster-autoscaler/Resource/Default": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-cluster-autoscaler/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackchartclusterautoscaler990E3CE1"
+            "data": "gpuautoscalinglocalchartclusterautoscaler9E8EB53A"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/chart-adot-exporter-for-eks-on-ec2/Resource/Default": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-adot-exporter-for-eks-on-ec2/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackchartadotexporterforeksonec2411D0265"
+            "data": "gpuautoscalinglocalchartadotexporterforeksonec2F7F40EA1"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/ConditionJson/Resource/Default": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/ConditionJson/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackawsloadbalancercontrollerConditionJson504358AA"
+            "data": "gpuautoscalinglocalawsloadbalancercontrollerConditionJson5974394E"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/Role/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/Role/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackawsloadbalancercontrollerRoleBEB03111"
+            "data": "gpuautoscalinglocalawsloadbalancercontrollerRole2E52CC9D"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/Role/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/Role/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackawsloadbalancercontrollerRoleDefaultPolicy3497E942"
+            "data": "gpuautoscalinglocalawsloadbalancercontrollerRoleDefaultPolicyC2CF049B"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource/Default": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackawsloadbalancercontrollermanifestawsloadbalancercontrollerServiceAccountResource5839BA9B"
+            "data": "gpuautoscalinglocalawsloadbalancercontrollermanifestawsloadbalancercontrollerServiceAccountResourceC344905A"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/OpenIdConnectProvider/Resource/Default": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/OpenIdConnectProvider/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackOpenIdConnectProviderEAB720C9"
+            "data": "gpuautoscalinglocalOpenIdConnectProvider30F8CD15"
           }
         ],
-        "/gpu-autoscaling-stg/stack/stack/chart-aws-load-balancer-controller/Resource/Default": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-aws-load-balancer-controller/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "stackchartawsloadbalancercontroller3612CE5A"
+            "data": "gpuautoscalinglocalchartawsloadbalancercontrollerEE831889"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "NodeProxyAgentLayer924C1971"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "OnEventHandlerServiceRole15A26729"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "OnEventHandlerServiceRoleDefaultPolicyC57085D4"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "OnEventHandler42BEBAE0"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "IsCompleteHandlerServiceRole5810CC58"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "IsCompleteHandlerServiceRoleDefaultPolicy8F64197B"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "IsCompleteHandler7073F4DA"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonEventServiceRole9FF04296"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonEvent83C1D0A7"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkisCompleteServiceRoleB1087139"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkisCompleteServiceRoleDefaultPolicy2E7140AC"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkisComplete26D7B0CB"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonTimeoutServiceRole28643D26"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonTimeoutServiceRoleDefaultPolicy2688969F"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonTimeout0B47CA38"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderwaiterstatemachineRole0C7159F9"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderwaiterstatemachineRoleDefaultPolicyD3C3DA1A"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "Providerwaiterstatemachine5D4A9DF0"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata/Default": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/gpuautoscalingstgstackawscdkawseksClusterResourceProviderframeworkonEvent9B81272FArn": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/gpuautoscalinglocalawscdkawseksClusterResourceProviderframeworkonEvent48AC9208Arn": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "gpuautoscalingstgstackawscdkawseksClusterResourceProviderframeworkonEvent9B81272FArn"
+            "data": "gpuautoscalinglocalawscdkawseksClusterResourceProviderframeworkonEvent48AC9208Arn"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/reference-to-gpuautoscalingstgstackCreationRole7ADEA5E6Arn": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider/reference-to-gpuautoscalinglocalCreationRoleDC484638Arn": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetogpuautoscalingstgstackCreationRole7ADEA5E6Arn"
+            "data": "referencetogpuautoscalinglocalCreationRoleDC484638Arn"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "HandlerServiceRoleFCDC14AE"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "HandlerServiceRoleDefaultPolicyCBD0CC91"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Handler/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "Handler886CB40B"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AwsCliLayerF44AAF94"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "KubectlLayer600207B5"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonEventServiceRole9FF04296"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonEvent83C1D0A7"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata/Default": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/gpuautoscalingstgstackawscdkawseksKubectlProviderframeworkonEventCBFBE7AEArn": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/gpuautoscalinglocalawscdkawseksKubectlProviderframeworkonEventA89A7DD5Arn": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "gpuautoscalingstgstackawscdkawseksKubectlProviderframeworkonEventCBFBE7AEArn"
+            "data": "gpuautoscalinglocalawscdkawseksKubectlProviderframeworkonEventA89A7DD5Arn"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalingstgstackB50ADC9AArn": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalinglocal971BC66BArn": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetogpuautoscalingstgstackB50ADC9AArn"
+            "data": "referencetogpuautoscalinglocal971BC66BArn"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalingstgstackCreationRole7ADEA5E6Arn": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalinglocalCreationRoleDC484638Arn": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetogpuautoscalingstgstackCreationRole7ADEA5E6Arn"
+            "data": "referencetogpuautoscalinglocalCreationRoleDC484638Arn"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalingstgstackB50ADC9AClusterSecurityGroupId": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalinglocal971BC66BClusterSecurityGroupId": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetogpuautoscalingstgstackB50ADC9AClusterSecurityGroupId"
+            "data": "referencetogpuautoscalinglocal971BC66BClusterSecurityGroupId"
           }
         ],
-        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B"
           }
         ],
-        "/gpu-autoscaling-stg/stack/ClusterLogsEnabler/CustomResourcePolicy/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/ClusterLogsEnabler/CustomResourcePolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ClusterLogsEnablerCustomResourcePolicyBE4AA329"
           }
         ],
-        "/gpu-autoscaling-stg/stack/ClusterLogsEnabler/Resource/Default": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/ClusterLogsEnabler/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ClusterLogsEnablerD85801E8"
           }
         ],
-        "/gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
           }
         ],
-        "/gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/AWS679f53fac002430cb0da5b7982bd2287/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AWS679f53fac002430cb0da5b7982bd22872D164C4C"
           }
         ],
-        "/gpu-autoscaling-stg/stack/cluster-autoscaler-policy/Resource": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/cluster-autoscaler-policy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "clusterautoscalerpolicyBCFCC783"
           }
         ],
-        "/gpu-autoscaling-stg/stack/clusterName/Resource/Default": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/clusterName/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "clusterNameB220FB68"
           }
         ],
-        "/gpu-autoscaling-stg/stack/AWSCDKCfnUtilsProviderCustomResourceProvider/Role": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/AWSCDKCfnUtilsProviderCustomResourceProvider/Role": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867"
           }
         ],
-        "/gpu-autoscaling-stg/stack/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57"
           }
         ],
-        "/gpu-autoscaling-stg/stack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65"
           }
         ],
-        "/gpu-autoscaling-stg/stack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0"
           }
         ],
-        "/gpu-autoscaling-stg/stack/vpc-cni-addOn": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/vpc-cni-addOn": [
           {
             "type": "aws:cdk:logicalId",
             "data": "vpccniaddOn"
           }
         ],
-        "/gpu-autoscaling-stg/stack/coredns-addOn": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/coredns-addOn": [
           {
             "type": "aws:cdk:logicalId",
             "data": "corednsaddOn"
           }
         ],
-        "/gpu-autoscaling-stg/stack/kube-proxy-addOn": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/kube-proxy-addOn": [
           {
             "type": "aws:cdk:logicalId",
             "data": "kubeproxyaddOn"
           }
         ],
-        "/gpu-autoscaling-stg/stack/CDKMetadata/Default": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/gpu-autoscaling-stg/stack/Exports/Output{\"Ref\":\"stack9D5F5B02\"}": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/Exports/Output{\"Ref\":\"gpuautoscalinglocalD78C029F\"}": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefstack9D5F5B02246722BE"
+            "data": "ExportsOutputRefgpuautoscalinglocalD78C029FB9F306C3"
           }
         ],
-        "/gpu-autoscaling-stg/stack/Exports/Output{\"Fn::GetAtt\":[\"stack9D5F5B02\",\"Arn\"]}": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/Exports/Output{\"Fn::GetAtt\":[\"gpuautoscalinglocalD78C029F\",\"Arn\"]}": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputFnGetAttstack9D5F5B02Arn1816E275"
+            "data": "ExportsOutputFnGetAttgpuautoscalinglocalD78C029FArn798A1035"
           }
         ],
-        "/gpu-autoscaling-stg/stack/BootstrapVersion": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/gpu-autoscaling-stg/stack/CheckBootstrapVersion": [
+        "/gpu-autoscaling-local/gpu-autoscaling-local/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "gpu-autoscaling-stg/stack"
+      "displayName": "gpu-autoscaling-local/gpu-autoscaling-local"
     },
-    "gpu-autoscaling-stg.assets": {
+    "gpu-autoscaling-local.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "gpu-autoscaling-stg.assets.json",
+        "file": "gpu-autoscaling-local.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "gpu-autoscaling-stg": {
+    "gpu-autoscaling-local": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://681747700094/ap-northeast-2",
       "properties": {
-        "templateFile": "gpu-autoscaling-stg.template.json",
+        "templateFile": "gpu-autoscaling-local.template.json",
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-deploy-role-681747700094-ap-northeast-2",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-cfn-exec-role-681747700094-ap-northeast-2",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-681747700094-ap-northeast-2/577230ad41efb7d262f1bf534dfe8207c53c194e6d24bed1fa6d97ccdf1203b6.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-681747700094-ap-northeast-2/82749f5ed735bef5b03a9e3968473f18d34d6cc8d84d33cbab5ffa4797ef0ba2.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "gpu-autoscaling-stg.assets"
+          "gpu-autoscaling-local.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-lookup-role-681747700094-ap-northeast-2",
@@ -739,42 +739,42 @@
         }
       },
       "dependencies": [
-        "gpuautoscalingstgstackB9CCA2ED",
-        "gpu-autoscaling-stg.assets"
+        "gpuautoscalinglocalC4F43E85",
+        "gpu-autoscaling-local.assets"
       ],
       "metadata": {
-        "/gpu-autoscaling-stg/ClusterName": [
+        "/gpu-autoscaling-local/ClusterName": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ClusterName"
           }
         ],
-        "/gpu-autoscaling-stg/ClusterArn": [
+        "/gpu-autoscaling-local/ClusterArn": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ClusterArn"
           }
         ],
-        "/gpu-autoscaling-stg/CDKMetadata/Default": [
+        "/gpu-autoscaling-local/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/gpu-autoscaling-stg/BootstrapVersion": [
+        "/gpu-autoscaling-local/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/gpu-autoscaling-stg/CheckBootstrapVersion": [
+        "/gpu-autoscaling-local/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "gpu-autoscaling-stg"
+      "displayName": "gpu-autoscaling-local"
     }
   }
 }

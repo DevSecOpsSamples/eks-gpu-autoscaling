@@ -46,7 +46,7 @@ export default class EksBlueprintStack extends Stack {
             .resourceProvider(blueprints.GlobalResources.Vpc, new blueprints.VpcProvider(vpcId))
             .clusterProvider(clusterProvider)
             .enableControlPlaneLogTypes('api')
-            .build(this, 'stack', props);
+            .build(this, id, props);
 
         // AmazonSSMManagedInstanceCore role is added to connect to EC2 instances by using SSM on AWS web console
         eksBlueprint.getClusterInfo().nodeGroups?.forEach(n => {

@@ -47,14 +47,14 @@ cdk deploy
 
 ### Step 2: EKS cluster and add-on with Blueprints
 
-2 CDK stacks will be created eks-gpu-autoscaling and `eks-gpu-autoscaling/stack`, and you need to deploy the `eks-gpu-autoscaling/stack`.
+2 CDK stacks will be created gpu-autoscaling-local and `gpu-autoscaling-local/gpu-autoscaling-local`, and you need to deploy the `gpu-autoscaling-local/gpu-autoscaling-local`.
 
 ```bash
 cd ../eks-blueprints
-cdk deploy eks-gpu-autoscaling/stack
+cdk deploy gpu-autoscaling-local/gpu-autoscaling-local
 
 # or define your VPC id with context parameter
-cdk deploy eks-gpu-autoscaling/stack -c vpcId=<vpc-id>
+cdk deploy gpu-autoscaling-local/gpu-autoscaling-local -c vpcId=<vpc-id>
 ```
 
 Cluster Name: [eks-blueprints/lib/cluster-config.ts](./eks-blueprints/lib/cluster-config.ts)
@@ -95,11 +95,13 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.1/a
 kubectl apply -f k8s-dabboard/eks-admin-service-account.yaml
 
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | awk '{print $1}')
-
-kubectl proxy
 ```
 
-[Dashboard Login](http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login)
+kubectl proxy for [Dashboard Login](http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login):
+
+```bash
+kubectl proxy
+```
 
 ## Destroy
 
