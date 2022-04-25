@@ -7,27 +7,27 @@
         "file": "tree.json"
       }
     },
-    "eksblueprintdemobuild72E40BF2.assets": {
+    "gpuautoscalingstgstackB9CCA2ED.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "eksblueprintdemobuild72E40BF2.assets.json",
+        "file": "gpuautoscalingstgstackB9CCA2ED.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "eksblueprintdemobuild72E40BF2": {
+    "gpuautoscalingstgstackB9CCA2ED": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://681747700094/ap-northeast-2",
       "properties": {
-        "templateFile": "eksblueprintdemobuild72E40BF2.template.json",
+        "templateFile": "gpuautoscalingstgstackB9CCA2ED.template.json",
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-deploy-role-681747700094-ap-northeast-2",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-cfn-exec-role-681747700094-ap-northeast-2",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-681747700094-ap-northeast-2/50f9d33c445d695298bd6f111582e375fca0e11d2c4b1a085d0ccf3f6da6b663.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-681747700094-ap-northeast-2/8ebaf4dc81b0f22ad6025d6c14fc854ba75795130fef7ecbe87c3d12e7f88686.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "eksblueprintdemobuild72E40BF2.assets"
+          "gpuautoscalingstgstackB9CCA2ED.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-lookup-role-681747700094-ap-northeast-2",
@@ -36,34 +36,34 @@
         }
       },
       "dependencies": [
-        "eksblueprintdemobuild72E40BF2.assets"
+        "gpuautoscalingstgstackB9CCA2ED.assets"
       ],
       "metadata": {
-        "/eks-blueprint-demo/build/build": [
+        "/gpu-autoscaling-stg/stack/stack": [
           {
             "type": "aws:cdk:warning",
-            "data": "Could not auto-tag private subnet subnet-054430c4e68bddd75 with \"kubernetes.io/role/internal-elb=1\", please remember to do this manually",
+            "data": "Could not auto-tag private subnet subnet-0ee02055d479e015e with \"kubernetes.io/role/internal-elb=1\", please remember to do this manually",
             "trace": [
-              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
-              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
-              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
-              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1824:5)",
-              "new Cluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
-              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
-              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
-              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
-              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
-              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/lib/cluster-stack.ts:67:14)",
-              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/bin/index.ts:16:1)",
+              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
+              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
+              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1824:5)",
+              "new Cluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
+              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
+              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
+              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
+              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
+              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/eks-blueprints/lib/cluster-stack.ts:49:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/eks-blueprints/bin/index.ts:15:1)",
               "Module._compile (node:internal/modules/cjs/loader:1099:14)",
-              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/index.ts:1056:23)",
               "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
-              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1059:12)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/index.ts:1059:12)",
               "Module.load (node:internal/modules/cjs/loader:975:32)",
               "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
               "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
-              "main (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:198:14)",
-              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:288:3)",
+              "main (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/bin.ts:288:3)",
               "Module._compile (node:internal/modules/cjs/loader:1099:14)",
               "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
               "Module.load (node:internal/modules/cjs/loader:975:32)",
@@ -74,28 +74,28 @@
           },
           {
             "type": "aws:cdk:warning",
-            "data": "Could not auto-tag private subnet subnet-0c9d5604a75594d89 with \"kubernetes.io/role/internal-elb=1\", please remember to do this manually",
+            "data": "Could not auto-tag private subnet subnet-0369027aeedf63e74 with \"kubernetes.io/role/internal-elb=1\", please remember to do this manually",
             "trace": [
-              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
-              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
-              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
-              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1824:5)",
-              "new Cluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
-              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
-              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
-              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
-              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
-              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/lib/cluster-stack.ts:67:14)",
-              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/bin/index.ts:16:1)",
+              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
+              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
+              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1824:5)",
+              "new Cluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
+              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
+              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
+              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
+              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
+              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/eks-blueprints/lib/cluster-stack.ts:49:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/eks-blueprints/bin/index.ts:15:1)",
               "Module._compile (node:internal/modules/cjs/loader:1099:14)",
-              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/index.ts:1056:23)",
               "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
-              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1059:12)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/index.ts:1059:12)",
               "Module.load (node:internal/modules/cjs/loader:975:32)",
               "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
               "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
-              "main (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:198:14)",
-              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:288:3)",
+              "main (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/bin.ts:288:3)",
               "Module._compile (node:internal/modules/cjs/loader:1099:14)",
               "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
               "Module.load (node:internal/modules/cjs/loader:975:32)",
@@ -106,28 +106,28 @@
           },
           {
             "type": "aws:cdk:warning",
-            "data": "Could not auto-tag private subnet subnet-0adfaba0a6a973b55 with \"kubernetes.io/role/internal-elb=1\", please remember to do this manually",
+            "data": "Could not auto-tag private subnet subnet-00cbfd8e8d730f4bf with \"kubernetes.io/role/internal-elb=1\", please remember to do this manually",
             "trace": [
-              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
-              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
-              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
-              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1824:5)",
-              "new Cluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
-              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
-              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
-              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
-              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
-              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/lib/cluster-stack.ts:67:14)",
-              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/bin/index.ts:16:1)",
+              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
+              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
+              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1824:5)",
+              "new Cluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
+              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
+              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
+              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
+              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
+              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/eks-blueprints/lib/cluster-stack.ts:49:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/eks-blueprints/bin/index.ts:15:1)",
               "Module._compile (node:internal/modules/cjs/loader:1099:14)",
-              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/index.ts:1056:23)",
               "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
-              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1059:12)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/index.ts:1059:12)",
               "Module.load (node:internal/modules/cjs/loader:975:32)",
               "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
               "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
-              "main (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:198:14)",
-              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:288:3)",
+              "main (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/bin.ts:288:3)",
               "Module._compile (node:internal/modules/cjs/loader:1099:14)",
               "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
               "Module.load (node:internal/modules/cjs/loader:975:32)",
@@ -138,28 +138,28 @@
           },
           {
             "type": "aws:cdk:warning",
-            "data": "Could not auto-tag public subnet subnet-0f18f905ceaba4deb with \"kubernetes.io/role/elb=1\", please remember to do this manually",
+            "data": "Could not auto-tag public subnet subnet-0353b157a0ad8ff7c with \"kubernetes.io/role/elb=1\", please remember to do this manually",
             "trace": [
-              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
-              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
-              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
-              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1825:5)",
-              "new Cluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
-              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
-              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
-              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
-              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
-              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/lib/cluster-stack.ts:67:14)",
-              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/bin/index.ts:16:1)",
+              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
+              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
+              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1825:5)",
+              "new Cluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
+              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
+              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
+              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
+              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
+              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/eks-blueprints/lib/cluster-stack.ts:49:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/eks-blueprints/bin/index.ts:15:1)",
               "Module._compile (node:internal/modules/cjs/loader:1099:14)",
-              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/index.ts:1056:23)",
               "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
-              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1059:12)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/index.ts:1059:12)",
               "Module.load (node:internal/modules/cjs/loader:975:32)",
               "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
               "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
-              "main (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:198:14)",
-              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:288:3)",
+              "main (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/bin.ts:288:3)",
               "Module._compile (node:internal/modules/cjs/loader:1099:14)",
               "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
               "Module.load (node:internal/modules/cjs/loader:975:32)",
@@ -170,28 +170,28 @@
           },
           {
             "type": "aws:cdk:warning",
-            "data": "Could not auto-tag public subnet subnet-04d24034e72276639 with \"kubernetes.io/role/elb=1\", please remember to do this manually",
+            "data": "Could not auto-tag public subnet subnet-00a68c30181acb18e with \"kubernetes.io/role/elb=1\", please remember to do this manually",
             "trace": [
-              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
-              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
-              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
-              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1825:5)",
-              "new Cluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
-              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
-              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
-              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
-              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
-              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/lib/cluster-stack.ts:67:14)",
-              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/bin/index.ts:16:1)",
+              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
+              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
+              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1825:5)",
+              "new Cluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
+              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
+              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
+              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
+              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
+              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/eks-blueprints/lib/cluster-stack.ts:49:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/eks-blueprints/bin/index.ts:15:1)",
               "Module._compile (node:internal/modules/cjs/loader:1099:14)",
-              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/index.ts:1056:23)",
               "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
-              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1059:12)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/index.ts:1059:12)",
               "Module.load (node:internal/modules/cjs/loader:975:32)",
               "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
               "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
-              "main (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:198:14)",
-              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:288:3)",
+              "main (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/bin.ts:288:3)",
               "Module._compile (node:internal/modules/cjs/loader:1099:14)",
               "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
               "Module.load (node:internal/modules/cjs/loader:975:32)",
@@ -202,28 +202,28 @@
           },
           {
             "type": "aws:cdk:warning",
-            "data": "Could not auto-tag public subnet subnet-06246165d79ebdb2d with \"kubernetes.io/role/elb=1\", please remember to do this manually",
+            "data": "Could not auto-tag public subnet subnet-09314449879b0104d with \"kubernetes.io/role/elb=1\", please remember to do this manually",
             "trace": [
-              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
-              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
-              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
-              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1825:5)",
-              "new Cluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
-              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
-              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
-              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
-              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
-              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/lib/cluster-stack.ts:67:14)",
-              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/blueprints/bin/index.ts:16:1)",
+              "Annotations.addMessage (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addWarning (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
+              "tagAllSubnets (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1815:32)",
+              "Cluster.tagSubnets (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1825:5)",
+              "new Cluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/aws-cdk-lib/aws-eks/lib/cluster.ts:1332:10)",
+              "GenericClusterProvider.internalCreateCluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:164:16)",
+              "GenericClusterProvider.createCluster (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/cluster-providers/generic-cluster-provider.ts:134:30)",
+              "new EksBlueprint (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:188:44)",
+              "BlueprintBuilder.build (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/@aws-quickstart/eks-blueprints/lib/stacks/eks-blueprint-stack.ts:144:16)",
+              "new EksBlueprintStack (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/eks-blueprints/lib/cluster-stack.ts:49:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/eks-blueprints/bin/index.ts:15:1)",
               "Module._compile (node:internal/modules/cjs/loader:1099:14)",
-              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module.m._compile (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/index.ts:1056:23)",
               "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
-              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/index.ts:1059:12)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/index.ts:1059:12)",
               "Module.load (node:internal/modules/cjs/loader:975:32)",
               "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
               "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
-              "main (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:198:14)",
-              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/cdk-eks-blueprints/node_modules/ts-node/src/bin.ts:288:3)",
+              "main (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/junhyeok/Documents/00.cdk/eks-gpu-autoscaling-eng/cdk/node_modules/ts-node/src/bin.ts:288:3)",
               "Module._compile (node:internal/modules/cjs/loader:1099:14)",
               "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
               "Module.load (node:internal/modules/cjs/loader:975:32)",
@@ -233,504 +233,504 @@
             ]
           }
         ],
-        "/eks-blueprint-demo/build/build/Role/Resource": [
+        "/gpu-autoscaling-stg/stack/stack/Role/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildRoleD55766F0"
+            "data": "stackRoleC82B8918"
           }
         ],
-        "/eks-blueprint-demo/build/build/ControlPlaneSecurityGroup/Resource": [
+        "/gpu-autoscaling-stg/stack/stack/ControlPlaneSecurityGroup/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildControlPlaneSecurityGroup0CA4A3E0"
+            "data": "stackControlPlaneSecurityGroupB755CD71"
           }
         ],
-        "/eks-blueprint-demo/build/build/Resource/CreationRole/Resource": [
+        "/gpu-autoscaling-stg/stack/stack/Resource/CreationRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildCreationRole55C9E86B"
+            "data": "stackCreationRoleCCD9260B"
           }
         ],
-        "/eks-blueprint-demo/build/build/Resource/CreationRole/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-stg/stack/stack/Resource/CreationRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildCreationRoleDefaultPolicy2F2AF61B"
+            "data": "stackCreationRoleDefaultPolicy67C37630"
           }
         ],
-        "/eks-blueprint-demo/build/build/Resource/Resource/Default": [
+        "/gpu-autoscaling-stg/stack/stack/Resource/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "build3E86E075"
+            "data": "stack9D5F5B02"
           }
         ],
-        "/eks-blueprint-demo/build/build/KubectlReadyBarrier": [
+        "/gpu-autoscaling-stg/stack/stack/KubectlReadyBarrier": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildKubectlReadyBarrier0FD014F2"
+            "data": "stackKubectlReadyBarrierBFD42037"
           }
         ],
-        "/eks-blueprint-demo/build/build/ClusterName": [
+        "/gpu-autoscaling-stg/stack/stack/ClusterName": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildClusterName26016D89"
+            "data": "stackClusterName04D9E805"
           }
         ],
-        "/eks-blueprint-demo/build/build/MastersRole/Resource": [
+        "/gpu-autoscaling-stg/stack/stack/MastersRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildMastersRole930261BF"
+            "data": "stackMastersRole089F1C17"
           }
         ],
-        "/eks-blueprint-demo/build/build/AwsAuth/manifest/Resource/Default": [
+        "/gpu-autoscaling-stg/stack/stack/AwsAuth/manifest/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildAwsAuthmanifest93AB55FE"
+            "data": "stackAwsAuthmanifestE992D16E"
           }
         ],
-        "/eks-blueprint-demo/build/build/ConfigCommand": [
+        "/gpu-autoscaling-stg/stack/stack/ConfigCommand": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildConfigCommandBBF14D1F"
+            "data": "stackConfigCommandE9858FEA"
           }
         ],
-        "/eks-blueprint-demo/build/build/GetTokenCommand": [
+        "/gpu-autoscaling-stg/stack/stack/GetTokenCommand": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildGetTokenCommand0A32E33E"
+            "data": "stackGetTokenCommandB4A608C9"
           }
         ],
-        "/eks-blueprint-demo/build/build/Nodegroupcpu-ng-ng/NodeGroupRole/Resource": [
+        "/gpu-autoscaling-stg/stack/stack/Nodegroupcpu-ng-ng/NodeGroupRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildNodegroupcpungngNodeGroupRoleCC60C6A6"
+            "data": "stackNodegroupcpungngNodeGroupRoleDF9A5D67"
           }
         ],
-        "/eks-blueprint-demo/build/build/Nodegroupcpu-ng-ng/Resource": [
+        "/gpu-autoscaling-stg/stack/stack/Nodegroupcpu-ng-ng/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildNodegroupcpungngEB339F15"
+            "data": "stackNodegroupcpungngFEA12D01"
           }
         ],
-        "/eks-blueprint-demo/build/build/Nodegroupgpu-ng-ng/NodeGroupRole/Resource": [
+        "/gpu-autoscaling-stg/stack/stack/Nodegroupgpu-ng-ng/NodeGroupRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildNodegroupgpungngNodeGroupRoleC0894829"
+            "data": "stackNodegroupgpungngNodeGroupRoleE7D50F85"
           }
         ],
-        "/eks-blueprint-demo/build/build/Nodegroupgpu-ng-ng/Resource": [
+        "/gpu-autoscaling-stg/stack/stack/Nodegroupgpu-ng-ng/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildNodegroupgpungng929DB7A4"
+            "data": "stackNodegroupgpungngF75151F5"
           }
         ],
-        "/eks-blueprint-demo/build/build/chart-metrics-server/Resource/Default": [
+        "/gpu-autoscaling-stg/stack/stack/chart-metrics-server/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildchartmetricsserver05C40E7F"
+            "data": "stackchartmetricsserver21A33978"
           }
         ],
-        "/eks-blueprint-demo/build/build/chart-cluster-autoscaler/Resource/Default": [
+        "/gpu-autoscaling-stg/stack/stack/chart-cluster-autoscaler/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildchartclusterautoscaler38DF285B"
+            "data": "stackchartclusterautoscaler990E3CE1"
           }
         ],
-        "/eks-blueprint-demo/build/build/chart-adot-exporter-for-eks-on-ec2/Resource/Default": [
+        "/gpu-autoscaling-stg/stack/stack/chart-adot-exporter-for-eks-on-ec2/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildchartadotexporterforeksonec2F9DB891B"
+            "data": "stackchartadotexporterforeksonec2411D0265"
           }
         ],
-        "/eks-blueprint-demo/build/build/aws-load-balancer-controller/ConditionJson/Resource/Default": [
+        "/gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/ConditionJson/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildawsloadbalancercontrollerConditionJsonCFB4B97C"
+            "data": "stackawsloadbalancercontrollerConditionJson504358AA"
           }
         ],
-        "/eks-blueprint-demo/build/build/aws-load-balancer-controller/Role/Resource": [
+        "/gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/Role/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildawsloadbalancercontrollerRole05DC8ED4"
+            "data": "stackawsloadbalancercontrollerRoleBEB03111"
           }
         ],
-        "/eks-blueprint-demo/build/build/aws-load-balancer-controller/Role/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/Role/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildawsloadbalancercontrollerRoleDefaultPolicyA59802C3"
+            "data": "stackawsloadbalancercontrollerRoleDefaultPolicy3497E942"
           }
         ],
-        "/eks-blueprint-demo/build/build/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource/Default": [
+        "/gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildawsloadbalancercontrollermanifestawsloadbalancercontrollerServiceAccountResource3E964B00"
+            "data": "stackawsloadbalancercontrollermanifestawsloadbalancercontrollerServiceAccountResource5839BA9B"
           }
         ],
-        "/eks-blueprint-demo/build/build/OpenIdConnectProvider/Resource/Default": [
+        "/gpu-autoscaling-stg/stack/stack/OpenIdConnectProvider/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildOpenIdConnectProvider9C76C0F0"
+            "data": "stackOpenIdConnectProviderEAB720C9"
           }
         ],
-        "/eks-blueprint-demo/build/build/chart-aws-load-balancer-controller/Resource/Default": [
+        "/gpu-autoscaling-stg/stack/stack/chart-aws-load-balancer-controller/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "buildchartawsloadbalancercontrollerCF67A5AB"
+            "data": "stackchartawsloadbalancercontroller3612CE5A"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "NodeProxyAgentLayer924C1971"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "OnEventHandlerServiceRole15A26729"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "OnEventHandlerServiceRoleDefaultPolicyC57085D4"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "OnEventHandler42BEBAE0"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "IsCompleteHandlerServiceRole5810CC58"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "IsCompleteHandlerServiceRoleDefaultPolicy8F64197B"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "IsCompleteHandler7073F4DA"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonEventServiceRole9FF04296"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonEvent83C1D0A7"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkisCompleteServiceRoleB1087139"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkisCompleteServiceRoleDefaultPolicy2E7140AC"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkisComplete26D7B0CB"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonTimeoutServiceRole28643D26"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonTimeoutServiceRoleDefaultPolicy2688969F"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonTimeout0B47CA38"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderwaiterstatemachineRole0C7159F9"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderwaiterstatemachineRoleDefaultPolicyD3C3DA1A"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "Providerwaiterstatemachine5D4A9DF0"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata/Default": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/eksblueprintdemobuildawscdkawseksClusterResourceProviderframeworkonEvent2D546468Arn": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/gpuautoscalingstgstackawscdkawseksClusterResourceProviderframeworkonEvent9B81272FArn": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "eksblueprintdemobuildawscdkawseksClusterResourceProviderframeworkonEvent2D546468Arn"
+            "data": "gpuautoscalingstgstackawscdkawseksClusterResourceProviderframeworkonEvent9B81272FArn"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/reference-to-eksblueprintdemobuildCreationRoleBF9DF484Arn": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/reference-to-gpuautoscalingstgstackCreationRole7ADEA5E6Arn": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetoeksblueprintdemobuildCreationRoleBF9DF484Arn"
+            "data": "referencetogpuautoscalingstgstackCreationRole7ADEA5E6Arn"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "HandlerServiceRoleFCDC14AE"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "HandlerServiceRoleDefaultPolicyCBD0CC91"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Handler/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "Handler886CB40B"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AwsCliLayerF44AAF94"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "KubectlLayer600207B5"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonEventServiceRole9FF04296"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Resource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ProviderframeworkonEvent83C1D0A7"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata/Default": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/eksblueprintdemobuildawscdkawseksKubectlProviderframeworkonEvent1993A776Arn": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/gpuautoscalingstgstackawscdkawseksKubectlProviderframeworkonEventCBFBE7AEArn": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "eksblueprintdemobuildawscdkawseksKubectlProviderframeworkonEvent1993A776Arn"
+            "data": "gpuautoscalingstgstackawscdkawseksKubectlProviderframeworkonEventCBFBE7AEArn"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/reference-to-eksblueprintdemobuildE49CC8A1Arn": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalingstgstackB50ADC9AArn": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetoeksblueprintdemobuildE49CC8A1Arn"
+            "data": "referencetogpuautoscalingstgstackB50ADC9AArn"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/reference-to-eksblueprintdemobuildCreationRoleBF9DF484Arn": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalingstgstackCreationRole7ADEA5E6Arn": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetoeksblueprintdemobuildCreationRoleBF9DF484Arn"
+            "data": "referencetogpuautoscalingstgstackCreationRole7ADEA5E6Arn"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/reference-to-eksblueprintdemobuildE49CC8A1ClusterSecurityGroupId": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalingstgstackB50ADC9AClusterSecurityGroupId": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetoeksblueprintdemobuildE49CC8A1ClusterSecurityGroupId"
+            "data": "referencetogpuautoscalingstgstackB50ADC9AClusterSecurityGroupId"
           }
         ],
-        "/eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource": [
+        "/gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B"
           }
         ],
-        "/eks-blueprint-demo/build/ClusterLogsEnabler/CustomResourcePolicy/Resource": [
+        "/gpu-autoscaling-stg/stack/ClusterLogsEnabler/CustomResourcePolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ClusterLogsEnablerCustomResourcePolicyBE4AA329"
           }
         ],
-        "/eks-blueprint-demo/build/ClusterLogsEnabler/Resource/Default": [
+        "/gpu-autoscaling-stg/stack/ClusterLogsEnabler/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ClusterLogsEnablerD85801E8"
           }
         ],
-        "/eks-blueprint-demo/build/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource": [
+        "/gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
           }
         ],
-        "/eks-blueprint-demo/build/AWS679f53fac002430cb0da5b7982bd2287/Resource": [
+        "/gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AWS679f53fac002430cb0da5b7982bd22872D164C4C"
           }
         ],
-        "/eks-blueprint-demo/build/cluster-autoscaler-policy/Resource": [
+        "/gpu-autoscaling-stg/stack/cluster-autoscaler-policy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "clusterautoscalerpolicyBCFCC783"
           }
         ],
-        "/eks-blueprint-demo/build/clusterName/Resource/Default": [
+        "/gpu-autoscaling-stg/stack/clusterName/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "clusterNameB220FB68"
           }
         ],
-        "/eks-blueprint-demo/build/AWSCDKCfnUtilsProviderCustomResourceProvider/Role": [
+        "/gpu-autoscaling-stg/stack/AWSCDKCfnUtilsProviderCustomResourceProvider/Role": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867"
           }
         ],
-        "/eks-blueprint-demo/build/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler": [
+        "/gpu-autoscaling-stg/stack/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57"
           }
         ],
-        "/eks-blueprint-demo/build/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role": [
+        "/gpu-autoscaling-stg/stack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65"
           }
         ],
-        "/eks-blueprint-demo/build/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler": [
+        "/gpu-autoscaling-stg/stack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0"
           }
         ],
-        "/eks-blueprint-demo/build/vpc-cni-addOn": [
+        "/gpu-autoscaling-stg/stack/vpc-cni-addOn": [
           {
             "type": "aws:cdk:logicalId",
             "data": "vpccniaddOn"
           }
         ],
-        "/eks-blueprint-demo/build/coredns-addOn": [
+        "/gpu-autoscaling-stg/stack/coredns-addOn": [
           {
             "type": "aws:cdk:logicalId",
             "data": "corednsaddOn"
           }
         ],
-        "/eks-blueprint-demo/build/kube-proxy-addOn": [
+        "/gpu-autoscaling-stg/stack/kube-proxy-addOn": [
           {
             "type": "aws:cdk:logicalId",
             "data": "kubeproxyaddOn"
           }
         ],
-        "/eks-blueprint-demo/build/CDKMetadata/Default": [
+        "/gpu-autoscaling-stg/stack/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/eks-blueprint-demo/build/Exports/Output{\"Ref\":\"build3E86E075\"}": [
+        "/gpu-autoscaling-stg/stack/Exports/Output{\"Ref\":\"stack9D5F5B02\"}": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefbuild3E86E075D494A5EF"
+            "data": "ExportsOutputRefstack9D5F5B02246722BE"
           }
         ],
-        "/eks-blueprint-demo/build/Exports/Output{\"Fn::GetAtt\":[\"build3E86E075\",\"Arn\"]}": [
+        "/gpu-autoscaling-stg/stack/Exports/Output{\"Fn::GetAtt\":[\"stack9D5F5B02\",\"Arn\"]}": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputFnGetAttbuild3E86E075Arn52D6EDC5"
+            "data": "ExportsOutputFnGetAttstack9D5F5B02Arn1816E275"
           }
         ],
-        "/eks-blueprint-demo/build/BootstrapVersion": [
+        "/gpu-autoscaling-stg/stack/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/eks-blueprint-demo/build/CheckBootstrapVersion": [
+        "/gpu-autoscaling-stg/stack/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "eks-blueprint-demo/build"
+      "displayName": "gpu-autoscaling-stg/stack"
     },
-    "eks-blueprint-demo.assets": {
+    "gpu-autoscaling-stg.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "eks-blueprint-demo.assets.json",
+        "file": "gpu-autoscaling-stg.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "eks-blueprint-demo": {
+    "gpu-autoscaling-stg": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://681747700094/ap-northeast-2",
       "properties": {
-        "templateFile": "eks-blueprint-demo.template.json",
+        "templateFile": "gpu-autoscaling-stg.template.json",
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-deploy-role-681747700094-ap-northeast-2",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-cfn-exec-role-681747700094-ap-northeast-2",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-681747700094-ap-northeast-2/12a74e5f1aded246ee5a6acb9f1198615c009499fc4a284a0c51164bb744a9f8.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-681747700094-ap-northeast-2/577230ad41efb7d262f1bf534dfe8207c53c194e6d24bed1fa6d97ccdf1203b6.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "eks-blueprint-demo.assets"
+          "gpu-autoscaling-stg.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::681747700094:role/cdk-hnb659fds-lookup-role-681747700094-ap-northeast-2",
@@ -739,42 +739,42 @@
         }
       },
       "dependencies": [
-        "eksblueprintdemobuild72E40BF2",
-        "eks-blueprint-demo.assets"
+        "gpuautoscalingstgstackB9CCA2ED",
+        "gpu-autoscaling-stg.assets"
       ],
       "metadata": {
-        "/eks-blueprint-demo/ClusterName": [
+        "/gpu-autoscaling-stg/ClusterName": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ClusterName"
           }
         ],
-        "/eks-blueprint-demo/ClusterArn": [
+        "/gpu-autoscaling-stg/ClusterArn": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ClusterArn"
           }
         ],
-        "/eks-blueprint-demo/CDKMetadata/Default": [
+        "/gpu-autoscaling-stg/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/eks-blueprint-demo/BootstrapVersion": [
+        "/gpu-autoscaling-stg/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/eks-blueprint-demo/CheckBootstrapVersion": [
+        "/gpu-autoscaling-stg/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "eks-blueprint-demo"
+      "displayName": "gpu-autoscaling-stg"
     }
   }
 }

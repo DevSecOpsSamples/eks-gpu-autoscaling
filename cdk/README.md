@@ -38,8 +38,8 @@ Parameter Name : `/eks-gpu-autoscaling/vpc-id`
 Use the `-c vpcId` context parameter if you want to use the existing VPC.
 
 ```bash
-cd vpc
 cdk bootstrap
+cd vpc
 cdk deploy
 ```
 
@@ -51,7 +51,6 @@ cdk deploy
 
 ```bash
 cd ../eks-blueprints
-cdk bootstrap
 cdk deploy eks-gpu-autoscaling/stack
 
 # or define your VPC id with context parameter

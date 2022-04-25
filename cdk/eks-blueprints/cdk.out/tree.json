@@ -9,24 +9,24 @@
         "path": "Tree",
         "constructInfo": {
           "fqn": "constructs.Construct",
-          "version": "10.0.121"
+          "version": "10.0.125"
         }
       },
-      "eks-blueprint-demo": {
-        "id": "eks-blueprint-demo",
-        "path": "eks-blueprint-demo",
+      "gpu-autoscaling-stg": {
+        "id": "gpu-autoscaling-stg",
+        "path": "gpu-autoscaling-stg",
         "children": {
-          "build": {
-            "id": "build",
-            "path": "eks-blueprint-demo/build",
+          "stack": {
+            "id": "stack",
+            "path": "gpu-autoscaling-stg/stack",
             "children": {
-              "build-vpc": {
-                "id": "build-vpc",
-                "path": "eks-blueprint-demo/build/build-vpc",
+              "stack-vpc": {
+                "id": "stack-vpc",
+                "path": "gpu-autoscaling-stg/stack/stack-vpc",
                 "children": {
                   "publicSubnet1": {
                     "id": "publicSubnet1",
-                    "path": "eks-blueprint-demo/build/build-vpc/publicSubnet1",
+                    "path": "gpu-autoscaling-stg/stack/stack-vpc/publicSubnet1",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -34,7 +34,7 @@
                   },
                   "publicSubnet2": {
                     "id": "publicSubnet2",
-                    "path": "eks-blueprint-demo/build/build-vpc/publicSubnet2",
+                    "path": "gpu-autoscaling-stg/stack/stack-vpc/publicSubnet2",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -42,7 +42,7 @@
                   },
                   "publicSubnet3": {
                     "id": "publicSubnet3",
-                    "path": "eks-blueprint-demo/build/build-vpc/publicSubnet3",
+                    "path": "gpu-autoscaling-stg/stack/stack-vpc/publicSubnet3",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -50,7 +50,7 @@
                   },
                   "privateSubnet1": {
                     "id": "privateSubnet1",
-                    "path": "eks-blueprint-demo/build/build-vpc/privateSubnet1",
+                    "path": "gpu-autoscaling-stg/stack/stack-vpc/privateSubnet1",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -58,7 +58,7 @@
                   },
                   "privateSubnet2": {
                     "id": "privateSubnet2",
-                    "path": "eks-blueprint-demo/build/build-vpc/privateSubnet2",
+                    "path": "gpu-autoscaling-stg/stack/stack-vpc/privateSubnet2",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -66,7 +66,7 @@
                   },
                   "privateSubnet3": {
                     "id": "privateSubnet3",
-                    "path": "eks-blueprint-demo/build/build-vpc/privateSubnet3",
+                    "path": "gpu-autoscaling-stg/stack/stack-vpc/privateSubnet3",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -78,17 +78,17 @@
                   "version": "2.20.0"
                 }
               },
-              "build": {
-                "id": "build",
-                "path": "eks-blueprint-demo/build/build",
+              "stack": {
+                "id": "stack",
+                "path": "gpu-autoscaling-stg/stack/stack",
                 "children": {
                   "Role": {
                     "id": "Role",
-                    "path": "eks-blueprint-demo/build/build/Role",
+                    "path": "gpu-autoscaling-stg/stack/stack/Role",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/build/Role/Resource",
+                        "path": "gpu-autoscaling-stg/stack/stack/Role/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                           "aws:cdk:cloudformation:props": {
@@ -133,11 +133,11 @@
                   },
                   "ControlPlaneSecurityGroup": {
                     "id": "ControlPlaneSecurityGroup",
-                    "path": "eks-blueprint-demo/build/build/ControlPlaneSecurityGroup",
+                    "path": "gpu-autoscaling-stg/stack/stack/ControlPlaneSecurityGroup",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/build/ControlPlaneSecurityGroup/Resource",
+                        "path": "gpu-autoscaling-stg/stack/stack/ControlPlaneSecurityGroup/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
                           "aws:cdk:cloudformation:props": {
@@ -149,7 +149,7 @@
                                 "ipProtocol": "-1"
                               }
                             ],
-                            "vpcId": "vpc-07c58ad3dcc09fbad"
+                            "vpcId": "vpc-0617a2cb231493f27"
                           }
                         },
                         "constructInfo": {
@@ -165,15 +165,15 @@
                   },
                   "Resource": {
                     "id": "Resource",
-                    "path": "eks-blueprint-demo/build/build/Resource",
+                    "path": "gpu-autoscaling-stg/stack/stack/Resource",
                     "children": {
                       "CreationRole": {
                         "id": "CreationRole",
-                        "path": "eks-blueprint-demo/build/build/Resource/CreationRole",
+                        "path": "gpu-autoscaling-stg/stack/stack/Resource/CreationRole",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "eks-blueprint-demo/build/build/Resource/CreationRole/Resource",
+                            "path": "gpu-autoscaling-stg/stack/stack/Resource/CreationRole/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                               "aws:cdk:cloudformation:props": {
@@ -209,11 +209,11 @@
                           },
                           "DefaultPolicy": {
                             "id": "DefaultPolicy",
-                            "path": "eks-blueprint-demo/build/build/Resource/CreationRole/DefaultPolicy",
+                            "path": "gpu-autoscaling-stg/stack/stack/Resource/CreationRole/DefaultPolicy",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "eks-blueprint-demo/build/build/Resource/CreationRole/DefaultPolicy/Resource",
+                                "path": "gpu-autoscaling-stg/stack/stack/Resource/CreationRole/DefaultPolicy/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                   "aws:cdk:cloudformation:props": {
@@ -224,7 +224,7 @@
                                           "Effect": "Allow",
                                           "Resource": {
                                             "Fn::GetAtt": [
-                                              "buildRoleD55766F0",
+                                              "stackRoleC82B8918",
                                               "Arn"
                                             ]
                                           }
@@ -251,7 +251,7 @@
                                                   {
                                                     "Ref": "AWS::Partition"
                                                   },
-                                                  ":eks:ap-northeast-2:681747700094:cluster/build"
+                                                  ":eks:ap-northeast-2:681747700094:cluster/stack"
                                                 ]
                                               ]
                                             },
@@ -263,7 +263,7 @@
                                                   {
                                                     "Ref": "AWS::Partition"
                                                   },
-                                                  ":eks:ap-northeast-2:681747700094:cluster/build/*"
+                                                  ":eks:ap-northeast-2:681747700094:cluster/stack/*"
                                                 ]
                                               ]
                                             }
@@ -283,7 +283,7 @@
                                                 {
                                                   "Ref": "AWS::Partition"
                                                 },
-                                                ":eks:ap-northeast-2:681747700094:fargateprofile/build/*"
+                                                ":eks:ap-northeast-2:681747700094:fargateprofile/stack/*"
                                               ]
                                             ]
                                           }
@@ -317,10 +317,10 @@
                                       ],
                                       "Version": "2012-10-17"
                                     },
-                                    "policyName": "buildCreationRoleDefaultPolicy2F2AF61B",
+                                    "policyName": "stackCreationRoleDefaultPolicy67C37630",
                                     "roles": [
                                       {
-                                        "Ref": "buildCreationRole55C9E86B"
+                                        "Ref": "stackCreationRoleCCD9260B"
                                       }
                                     ]
                                   }
@@ -344,11 +344,11 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/build/Resource/Resource",
+                        "path": "gpu-autoscaling-stg/stack/stack/Resource/Resource",
                         "children": {
                           "Default": {
                             "id": "Default",
-                            "path": "eks-blueprint-demo/build/build/Resource/Resource/Default",
+                            "path": "gpu-autoscaling-stg/stack/stack/Resource/Resource/Default",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.CfnResource",
                               "version": "2.20.0"
@@ -363,12 +363,12 @@
                     },
                     "constructInfo": {
                       "fqn": "constructs.Construct",
-                      "version": "10.0.121"
+                      "version": "10.0.125"
                     }
                   },
                   "KubectlReadyBarrier": {
                     "id": "KubectlReadyBarrier",
-                    "path": "eks-blueprint-demo/build/build/KubectlReadyBarrier",
+                    "path": "gpu-autoscaling-stg/stack/stack/KubectlReadyBarrier",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
                       "version": "2.20.0"
@@ -376,7 +376,7 @@
                   },
                   "ClusterSecurityGroup": {
                     "id": "ClusterSecurityGroup",
-                    "path": "eks-blueprint-demo/build/build/ClusterSecurityGroup",
+                    "path": "gpu-autoscaling-stg/stack/stack/ClusterSecurityGroup",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.20.0"
@@ -384,7 +384,7 @@
                   },
                   "ClusterName": {
                     "id": "ClusterName",
-                    "path": "eks-blueprint-demo/build/build/ClusterName",
+                    "path": "gpu-autoscaling-stg/stack/stack/ClusterName",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.20.0"
@@ -392,11 +392,11 @@
                   },
                   "MastersRole": {
                     "id": "MastersRole",
-                    "path": "eks-blueprint-demo/build/build/MastersRole",
+                    "path": "gpu-autoscaling-stg/stack/stack/MastersRole",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/build/MastersRole/Resource",
+                        "path": "gpu-autoscaling-stg/stack/stack/MastersRole/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                           "aws:cdk:cloudformation:props": {
@@ -438,19 +438,19 @@
                   },
                   "AwsAuth": {
                     "id": "AwsAuth",
-                    "path": "eks-blueprint-demo/build/build/AwsAuth",
+                    "path": "gpu-autoscaling-stg/stack/stack/AwsAuth",
                     "children": {
                       "manifest": {
                         "id": "manifest",
-                        "path": "eks-blueprint-demo/build/build/AwsAuth/manifest",
+                        "path": "gpu-autoscaling-stg/stack/stack/AwsAuth/manifest",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "eks-blueprint-demo/build/build/AwsAuth/manifest/Resource",
+                            "path": "gpu-autoscaling-stg/stack/stack/AwsAuth/manifest/Resource",
                             "children": {
                               "Default": {
                                 "id": "Default",
-                                "path": "eks-blueprint-demo/build/build/AwsAuth/manifest/Resource/Default",
+                                "path": "gpu-autoscaling-stg/stack/stack/AwsAuth/manifest/Resource/Default",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.CfnResource",
                                   "version": "2.20.0"
@@ -476,7 +476,7 @@
                   },
                   "ConfigCommand": {
                     "id": "ConfigCommand",
-                    "path": "eks-blueprint-demo/build/build/ConfigCommand",
+                    "path": "gpu-autoscaling-stg/stack/stack/ConfigCommand",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.20.0"
@@ -484,7 +484,7 @@
                   },
                   "GetTokenCommand": {
                     "id": "GetTokenCommand",
-                    "path": "eks-blueprint-demo/build/build/GetTokenCommand",
+                    "path": "gpu-autoscaling-stg/stack/stack/GetTokenCommand",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.20.0"
@@ -492,15 +492,15 @@
                   },
                   "Nodegroupcpu-ng-ng": {
                     "id": "Nodegroupcpu-ng-ng",
-                    "path": "eks-blueprint-demo/build/build/Nodegroupcpu-ng-ng",
+                    "path": "gpu-autoscaling-stg/stack/stack/Nodegroupcpu-ng-ng",
                     "children": {
                       "NodeGroupRole": {
                         "id": "NodeGroupRole",
-                        "path": "eks-blueprint-demo/build/build/Nodegroupcpu-ng-ng/NodeGroupRole",
+                        "path": "gpu-autoscaling-stg/stack/stack/Nodegroupcpu-ng-ng/NodeGroupRole",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "eks-blueprint-demo/build/build/Nodegroupcpu-ng-ng/NodeGroupRole/Resource",
+                            "path": "gpu-autoscaling-stg/stack/stack/Nodegroupcpu-ng-ng/NodeGroupRole/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                               "aws:cdk:cloudformation:props": {
@@ -580,12 +580,12 @@
                                 ],
                                 "tags": [
                                   {
-                                    "key": "k8s.io/cluster-autoscaler/eks-blueprint-demo/build/clusterName",
-                                    "value": "owned"
-                                  },
-                                  {
                                     "key": "k8s.io/cluster-autoscaler/enabled",
                                     "value": "true"
+                                  },
+                                  {
+                                    "key": "k8s.io/cluster-autoscaler/gpu-autoscaling-stg/stack/clusterName",
+                                    "value": "owned"
                                   }
                                 ]
                               }
@@ -603,23 +603,23 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/build/Nodegroupcpu-ng-ng/Resource",
+                        "path": "gpu-autoscaling-stg/stack/stack/Nodegroupcpu-ng-ng/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::EKS::Nodegroup",
                           "aws:cdk:cloudformation:props": {
                             "clusterName": {
-                              "Ref": "build3E86E075"
+                              "Ref": "stack9D5F5B02"
                             },
                             "nodeRole": {
                               "Fn::GetAtt": [
-                                "buildNodegroupcpungngNodeGroupRoleCC60C6A6",
+                                "stackNodegroupcpungngNodeGroupRoleDF9A5D67",
                                 "Arn"
                               ]
                             },
                             "subnets": [
-                              "subnet-054430c4e68bddd75",
-                              "subnet-0c9d5604a75594d89",
-                              "subnet-0adfaba0a6a973b55"
+                              "subnet-0ee02055d479e015e",
+                              "subnet-0369027aeedf63e74",
+                              "subnet-00cbfd8e8d730f4bf"
                             ],
                             "amiType": "AL2_x86_64",
                             "capacityType": "SPOT",
@@ -634,8 +634,8 @@
                               "minSize": 2
                             },
                             "tags": {
-                              "k8s.io/cluster-autoscaler/eks-blueprint-demo/build/clusterName": "owned",
-                              "k8s.io/cluster-autoscaler/enabled": "true"
+                              "k8s.io/cluster-autoscaler/enabled": "true",
+                              "k8s.io/cluster-autoscaler/gpu-autoscaling-stg/stack/clusterName": "owned"
                             }
                           }
                         },
@@ -652,15 +652,15 @@
                   },
                   "Nodegroupgpu-ng-ng": {
                     "id": "Nodegroupgpu-ng-ng",
-                    "path": "eks-blueprint-demo/build/build/Nodegroupgpu-ng-ng",
+                    "path": "gpu-autoscaling-stg/stack/stack/Nodegroupgpu-ng-ng",
                     "children": {
                       "NodeGroupRole": {
                         "id": "NodeGroupRole",
-                        "path": "eks-blueprint-demo/build/build/Nodegroupgpu-ng-ng/NodeGroupRole",
+                        "path": "gpu-autoscaling-stg/stack/stack/Nodegroupgpu-ng-ng/NodeGroupRole",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "eks-blueprint-demo/build/build/Nodegroupgpu-ng-ng/NodeGroupRole/Resource",
+                            "path": "gpu-autoscaling-stg/stack/stack/Nodegroupgpu-ng-ng/NodeGroupRole/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                               "aws:cdk:cloudformation:props": {
@@ -740,12 +740,12 @@
                                 ],
                                 "tags": [
                                   {
-                                    "key": "k8s.io/cluster-autoscaler/eks-blueprint-demo/build/clusterName",
-                                    "value": "owned"
-                                  },
-                                  {
                                     "key": "k8s.io/cluster-autoscaler/enabled",
                                     "value": "true"
+                                  },
+                                  {
+                                    "key": "k8s.io/cluster-autoscaler/gpu-autoscaling-stg/stack/clusterName",
+                                    "value": "owned"
                                   }
                                 ]
                               }
@@ -763,23 +763,23 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/build/Nodegroupgpu-ng-ng/Resource",
+                        "path": "gpu-autoscaling-stg/stack/stack/Nodegroupgpu-ng-ng/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::EKS::Nodegroup",
                           "aws:cdk:cloudformation:props": {
                             "clusterName": {
-                              "Ref": "build3E86E075"
+                              "Ref": "stack9D5F5B02"
                             },
                             "nodeRole": {
                               "Fn::GetAtt": [
-                                "buildNodegroupgpungngNodeGroupRoleC0894829",
+                                "stackNodegroupgpungngNodeGroupRoleE7D50F85",
                                 "Arn"
                               ]
                             },
                             "subnets": [
-                              "subnet-054430c4e68bddd75",
-                              "subnet-0c9d5604a75594d89",
-                              "subnet-0adfaba0a6a973b55"
+                              "subnet-0ee02055d479e015e",
+                              "subnet-0369027aeedf63e74",
+                              "subnet-00cbfd8e8d730f4bf"
                             ],
                             "amiType": "AL2_x86_64_GPU",
                             "capacityType": "SPOT",
@@ -794,8 +794,8 @@
                               "minSize": 2
                             },
                             "tags": {
-                              "k8s.io/cluster-autoscaler/eks-blueprint-demo/build/clusterName": "owned",
-                              "k8s.io/cluster-autoscaler/enabled": "true"
+                              "k8s.io/cluster-autoscaler/enabled": "true",
+                              "k8s.io/cluster-autoscaler/gpu-autoscaling-stg/stack/clusterName": "owned"
                             }
                           }
                         },
@@ -812,15 +812,15 @@
                   },
                   "chart-metrics-server": {
                     "id": "chart-metrics-server",
-                    "path": "eks-blueprint-demo/build/build/chart-metrics-server",
+                    "path": "gpu-autoscaling-stg/stack/stack/chart-metrics-server",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/build/chart-metrics-server/Resource",
+                        "path": "gpu-autoscaling-stg/stack/stack/chart-metrics-server/Resource",
                         "children": {
                           "Default": {
                             "id": "Default",
-                            "path": "eks-blueprint-demo/build/build/chart-metrics-server/Resource/Default",
+                            "path": "gpu-autoscaling-stg/stack/stack/chart-metrics-server/Resource/Default",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.CfnResource",
                               "version": "2.20.0"
@@ -840,15 +840,15 @@
                   },
                   "chart-cluster-autoscaler": {
                     "id": "chart-cluster-autoscaler",
-                    "path": "eks-blueprint-demo/build/build/chart-cluster-autoscaler",
+                    "path": "gpu-autoscaling-stg/stack/stack/chart-cluster-autoscaler",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/build/chart-cluster-autoscaler/Resource",
+                        "path": "gpu-autoscaling-stg/stack/stack/chart-cluster-autoscaler/Resource",
                         "children": {
                           "Default": {
                             "id": "Default",
-                            "path": "eks-blueprint-demo/build/build/chart-cluster-autoscaler/Resource/Default",
+                            "path": "gpu-autoscaling-stg/stack/stack/chart-cluster-autoscaler/Resource/Default",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.CfnResource",
                               "version": "2.20.0"
@@ -868,15 +868,15 @@
                   },
                   "chart-adot-exporter-for-eks-on-ec2": {
                     "id": "chart-adot-exporter-for-eks-on-ec2",
-                    "path": "eks-blueprint-demo/build/build/chart-adot-exporter-for-eks-on-ec2",
+                    "path": "gpu-autoscaling-stg/stack/stack/chart-adot-exporter-for-eks-on-ec2",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/build/chart-adot-exporter-for-eks-on-ec2/Resource",
+                        "path": "gpu-autoscaling-stg/stack/stack/chart-adot-exporter-for-eks-on-ec2/Resource",
                         "children": {
                           "Default": {
                             "id": "Default",
-                            "path": "eks-blueprint-demo/build/build/chart-adot-exporter-for-eks-on-ec2/Resource/Default",
+                            "path": "gpu-autoscaling-stg/stack/stack/chart-adot-exporter-for-eks-on-ec2/Resource/Default",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.CfnResource",
                               "version": "2.20.0"
@@ -896,19 +896,19 @@
                   },
                   "aws-load-balancer-controller": {
                     "id": "aws-load-balancer-controller",
-                    "path": "eks-blueprint-demo/build/build/aws-load-balancer-controller",
+                    "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller",
                     "children": {
                       "ConditionJson": {
                         "id": "ConditionJson",
-                        "path": "eks-blueprint-demo/build/build/aws-load-balancer-controller/ConditionJson",
+                        "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/ConditionJson",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "eks-blueprint-demo/build/build/aws-load-balancer-controller/ConditionJson/Resource",
+                            "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/ConditionJson/Resource",
                             "children": {
                               "Default": {
                                 "id": "Default",
-                                "path": "eks-blueprint-demo/build/build/aws-load-balancer-controller/ConditionJson/Resource/Default",
+                                "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/ConditionJson/Resource/Default",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.CfnResource",
                                   "version": "2.20.0"
@@ -928,11 +928,11 @@
                       },
                       "Role": {
                         "id": "Role",
-                        "path": "eks-blueprint-demo/build/build/aws-load-balancer-controller/Role",
+                        "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/Role",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "eks-blueprint-demo/build/build/aws-load-balancer-controller/Role/Resource",
+                            "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/Role/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                               "aws:cdk:cloudformation:props": {
@@ -943,7 +943,7 @@
                                       "Condition": {
                                         "StringEquals": {
                                           "Fn::GetAtt": [
-                                            "buildawsloadbalancercontrollerConditionJsonCFB4B97C",
+                                            "stackawsloadbalancercontrollerConditionJson504358AA",
                                             "Value"
                                           ]
                                         }
@@ -951,7 +951,7 @@
                                       "Effect": "Allow",
                                       "Principal": {
                                         "Federated": {
-                                          "Ref": "buildOpenIdConnectProvider9C76C0F0"
+                                          "Ref": "stackOpenIdConnectProviderEAB720C9"
                                         }
                                       }
                                     }
@@ -967,11 +967,11 @@
                           },
                           "DefaultPolicy": {
                             "id": "DefaultPolicy",
-                            "path": "eks-blueprint-demo/build/build/aws-load-balancer-controller/Role/DefaultPolicy",
+                            "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/Role/DefaultPolicy",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "eks-blueprint-demo/build/build/aws-load-balancer-controller/Role/DefaultPolicy/Resource",
+                                "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/Role/DefaultPolicy/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                   "aws:cdk:cloudformation:props": {
@@ -1298,10 +1298,10 @@
                                       ],
                                       "Version": "2012-10-17"
                                     },
-                                    "policyName": "buildawsloadbalancercontrollerRoleDefaultPolicyA59802C3",
+                                    "policyName": "stackawsloadbalancercontrollerRoleDefaultPolicy3497E942",
                                     "roles": [
                                       {
-                                        "Ref": "buildawsloadbalancercontrollerRole05DC8ED4"
+                                        "Ref": "stackawsloadbalancercontrollerRoleBEB03111"
                                       }
                                     ]
                                   }
@@ -1325,15 +1325,15 @@
                       },
                       "manifest-aws-load-balancer-controllerServiceAccountResource": {
                         "id": "manifest-aws-load-balancer-controllerServiceAccountResource",
-                        "path": "eks-blueprint-demo/build/build/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource",
+                        "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "eks-blueprint-demo/build/build/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource",
+                            "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource",
                             "children": {
                               "Default": {
                                 "id": "Default",
-                                "path": "eks-blueprint-demo/build/build/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource/Default",
+                                "path": "gpu-autoscaling-stg/stack/stack/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource/Default",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.CfnResource",
                                   "version": "2.20.0"
@@ -1359,15 +1359,15 @@
                   },
                   "OpenIdConnectProvider": {
                     "id": "OpenIdConnectProvider",
-                    "path": "eks-blueprint-demo/build/build/OpenIdConnectProvider",
+                    "path": "gpu-autoscaling-stg/stack/stack/OpenIdConnectProvider",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/build/OpenIdConnectProvider/Resource",
+                        "path": "gpu-autoscaling-stg/stack/stack/OpenIdConnectProvider/Resource",
                         "children": {
                           "Default": {
                             "id": "Default",
-                            "path": "eks-blueprint-demo/build/build/OpenIdConnectProvider/Resource/Default",
+                            "path": "gpu-autoscaling-stg/stack/stack/OpenIdConnectProvider/Resource/Default",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.CfnResource",
                               "version": "2.20.0"
@@ -1387,15 +1387,15 @@
                   },
                   "chart-aws-load-balancer-controller": {
                     "id": "chart-aws-load-balancer-controller",
-                    "path": "eks-blueprint-demo/build/build/chart-aws-load-balancer-controller",
+                    "path": "gpu-autoscaling-stg/stack/stack/chart-aws-load-balancer-controller",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/build/chart-aws-load-balancer-controller/Resource",
+                        "path": "gpu-autoscaling-stg/stack/stack/chart-aws-load-balancer-controller/Resource",
                         "children": {
                           "Default": {
                             "id": "Default",
-                            "path": "eks-blueprint-demo/build/build/chart-aws-load-balancer-controller/Resource/Default",
+                            "path": "gpu-autoscaling-stg/stack/stack/chart-aws-load-balancer-controller/Resource/Default",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.CfnResource",
                               "version": "2.20.0"
@@ -1421,19 +1421,19 @@
               },
               "@aws-cdk--aws-eks.ClusterResourceProvider": {
                 "id": "@aws-cdk--aws-eks.ClusterResourceProvider",
-                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider",
+                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider",
                 "children": {
                   "NodeProxyAgentLayer": {
                     "id": "NodeProxyAgentLayer",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer",
                     "children": {
                       "Code": {
                         "id": "Code",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Code",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Code",
                         "children": {
                           "Stage": {
                             "id": "Stage",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Code/Stage",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Code/Stage",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.AssetStaging",
                               "version": "2.20.0"
@@ -1441,7 +1441,7 @@
                           },
                           "AssetBucket": {
                             "id": "AssetBucket",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Code/AssetBucket",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Code/AssetBucket",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                               "version": "2.20.0"
@@ -1455,7 +1455,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Lambda::LayerVersion",
                           "aws:cdk:cloudformation:props": {
@@ -1479,15 +1479,15 @@
                   },
                   "OnEventHandler": {
                     "id": "OnEventHandler",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler",
                     "children": {
                       "ServiceRole": {
                         "id": "ServiceRole",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/Resource",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                               "aws:cdk:cloudformation:props": {
@@ -1526,11 +1526,11 @@
                           },
                           "DefaultPolicy": {
                             "id": "DefaultPolicy",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/DefaultPolicy",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/DefaultPolicy",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/DefaultPolicy/Resource",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/DefaultPolicy/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                   "aws:cdk:cloudformation:props": {
@@ -1540,7 +1540,7 @@
                                           "Action": "sts:AssumeRole",
                                           "Effect": "Allow",
                                           "Resource": {
-                                            "Ref": "referencetoeksblueprintdemobuildCreationRoleBF9DF484Arn"
+                                            "Ref": "referencetogpuautoscalingstgstackCreationRole7ADEA5E6Arn"
                                           }
                                         }
                                       ],
@@ -1573,11 +1573,11 @@
                       },
                       "Code": {
                         "id": "Code",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Code",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Code",
                         "children": {
                           "Stage": {
                             "id": "Stage",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Code/Stage",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Code/Stage",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.AssetStaging",
                               "version": "2.20.0"
@@ -1585,7 +1585,7 @@
                           },
                           "AssetBucket": {
                             "id": "AssetBucket",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Code/AssetBucket",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Code/AssetBucket",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                               "version": "2.20.0"
@@ -1599,7 +1599,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Resource",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                           "aws:cdk:cloudformation:props": {
@@ -1637,15 +1637,15 @@
                   },
                   "IsCompleteHandler": {
                     "id": "IsCompleteHandler",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler",
                     "children": {
                       "ServiceRole": {
                         "id": "ServiceRole",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/Resource",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                               "aws:cdk:cloudformation:props": {
@@ -1684,11 +1684,11 @@
                           },
                           "DefaultPolicy": {
                             "id": "DefaultPolicy",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/DefaultPolicy",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/DefaultPolicy",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/DefaultPolicy/Resource",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/DefaultPolicy/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                   "aws:cdk:cloudformation:props": {
@@ -1698,7 +1698,7 @@
                                           "Action": "sts:AssumeRole",
                                           "Effect": "Allow",
                                           "Resource": {
-                                            "Ref": "referencetoeksblueprintdemobuildCreationRoleBF9DF484Arn"
+                                            "Ref": "referencetogpuautoscalingstgstackCreationRole7ADEA5E6Arn"
                                           }
                                         }
                                       ],
@@ -1731,11 +1731,11 @@
                       },
                       "Code": {
                         "id": "Code",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Code",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Code",
                         "children": {
                           "Stage": {
                             "id": "Stage",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Code/Stage",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Code/Stage",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.AssetStaging",
                               "version": "2.20.0"
@@ -1743,7 +1743,7 @@
                           },
                           "AssetBucket": {
                             "id": "AssetBucket",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Code/AssetBucket",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Code/AssetBucket",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                               "version": "2.20.0"
@@ -1757,7 +1757,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Resource",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                           "aws:cdk:cloudformation:props": {
@@ -1795,19 +1795,19 @@
                   },
                   "Provider": {
                     "id": "Provider",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider",
                     "children": {
                       "framework-onEvent": {
                         "id": "framework-onEvent",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent",
                         "children": {
                           "ServiceRole": {
                             "id": "ServiceRole",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/Resource",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                                   "aws:cdk:cloudformation:props": {
@@ -1846,11 +1846,11 @@
                               },
                               "DefaultPolicy": {
                                 "id": "DefaultPolicy",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy",
                                 "children": {
                                   "Resource": {
                                     "id": "Resource",
-                                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource",
+                                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource",
                                     "attributes": {
                                       "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                       "aws:cdk:cloudformation:props": {
@@ -1945,11 +1945,11 @@
                           },
                           "Code": {
                             "id": "Code",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Code",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Code",
                             "children": {
                               "Stage": {
                                 "id": "Stage",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Code/Stage",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Code/Stage",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.AssetStaging",
                                   "version": "2.20.0"
@@ -1957,7 +1957,7 @@
                               },
                               "AssetBucket": {
                                 "id": "AssetBucket",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Code/AssetBucket",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Code/AssetBucket",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                                   "version": "2.20.0"
@@ -1971,7 +1971,7 @@
                           },
                           "Resource": {
                             "id": "Resource",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Resource",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                               "aws:cdk:cloudformation:props": {
@@ -1985,7 +1985,7 @@
                                     "Arn"
                                   ]
                                 },
-                                "description": "AWS CDK resource provider framework - onEvent (eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider)",
+                                "description": "AWS CDK resource provider framework - onEvent (gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider)",
                                 "environment": {
                                   "variables": {
                                     "USER_ON_EVENT_FUNCTION_ARN": {
@@ -2023,15 +2023,15 @@
                       },
                       "framework-isComplete": {
                         "id": "framework-isComplete",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete",
                         "children": {
                           "ServiceRole": {
                             "id": "ServiceRole",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/Resource",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                                   "aws:cdk:cloudformation:props": {
@@ -2070,11 +2070,11 @@
                               },
                               "DefaultPolicy": {
                                 "id": "DefaultPolicy",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy",
                                 "children": {
                                   "Resource": {
                                     "id": "Resource",
-                                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy/Resource",
+                                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy/Resource",
                                     "attributes": {
                                       "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                       "aws:cdk:cloudformation:props": {
@@ -2162,11 +2162,11 @@
                           },
                           "Code": {
                             "id": "Code",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Code",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Code",
                             "children": {
                               "Stage": {
                                 "id": "Stage",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Code/Stage",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Code/Stage",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.AssetStaging",
                                   "version": "2.20.0"
@@ -2174,7 +2174,7 @@
                               },
                               "AssetBucket": {
                                 "id": "AssetBucket",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Code/AssetBucket",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Code/AssetBucket",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                                   "version": "2.20.0"
@@ -2188,7 +2188,7 @@
                           },
                           "Resource": {
                             "id": "Resource",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Resource",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                               "aws:cdk:cloudformation:props": {
@@ -2202,7 +2202,7 @@
                                     "Arn"
                                   ]
                                 },
-                                "description": "AWS CDK resource provider framework - isComplete (eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider)",
+                                "description": "AWS CDK resource provider framework - isComplete (gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider)",
                                 "environment": {
                                   "variables": {
                                     "USER_ON_EVENT_FUNCTION_ARN": {
@@ -2237,15 +2237,15 @@
                       },
                       "framework-onTimeout": {
                         "id": "framework-onTimeout",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout",
                         "children": {
                           "ServiceRole": {
                             "id": "ServiceRole",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/Resource",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                                   "aws:cdk:cloudformation:props": {
@@ -2284,11 +2284,11 @@
                               },
                               "DefaultPolicy": {
                                 "id": "DefaultPolicy",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy",
                                 "children": {
                                   "Resource": {
                                     "id": "Resource",
-                                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource",
+                                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource",
                                     "attributes": {
                                       "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                       "aws:cdk:cloudformation:props": {
@@ -2376,11 +2376,11 @@
                           },
                           "Code": {
                             "id": "Code",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Code",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Code",
                             "children": {
                               "Stage": {
                                 "id": "Stage",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Code/Stage",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Code/Stage",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.AssetStaging",
                                   "version": "2.20.0"
@@ -2388,7 +2388,7 @@
                               },
                               "AssetBucket": {
                                 "id": "AssetBucket",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Code/AssetBucket",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Code/AssetBucket",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                                   "version": "2.20.0"
@@ -2402,7 +2402,7 @@
                           },
                           "Resource": {
                             "id": "Resource",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Resource",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                               "aws:cdk:cloudformation:props": {
@@ -2416,7 +2416,7 @@
                                     "Arn"
                                   ]
                                 },
-                                "description": "AWS CDK resource provider framework - onTimeout (eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider)",
+                                "description": "AWS CDK resource provider framework - onTimeout (gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider)",
                                 "environment": {
                                   "variables": {
                                     "USER_ON_EVENT_FUNCTION_ARN": {
@@ -2451,15 +2451,15 @@
                       },
                       "waiter-state-machine": {
                         "id": "waiter-state-machine",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine",
                         "children": {
                           "Role": {
                             "id": "Role",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/Resource",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                                   "aws:cdk:cloudformation:props": {
@@ -2484,11 +2484,11 @@
                               },
                               "DefaultPolicy": {
                                 "id": "DefaultPolicy",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy",
                                 "children": {
                                   "Resource": {
                                     "id": "Resource",
-                                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy/Resource",
+                                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy/Resource",
                                     "attributes": {
                                       "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                       "aws:cdk:cloudformation:props": {
@@ -2576,7 +2576,7 @@
                           },
                           "Resource": {
                             "id": "Resource",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Resource",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Resource",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.CfnResource",
                               "version": "2.20.0"
@@ -2585,7 +2585,7 @@
                         },
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.0.121"
+                          "version": "10.0.125"
                         }
                       }
                     },
@@ -2596,11 +2596,11 @@
                   },
                   "CDKMetadata": {
                     "id": "CDKMetadata",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata",
                     "children": {
                       "Default": {
                         "id": "Default",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata/Default",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata/Default",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.CfnResource",
                           "version": "2.20.0"
@@ -2609,20 +2609,20 @@
                     },
                     "constructInfo": {
                       "fqn": "constructs.Construct",
-                      "version": "10.0.121"
+                      "version": "10.0.125"
                     }
                   },
-                  "eksblueprintdemobuildawscdkawseksClusterResourceProviderframeworkonEvent2D546468Arn": {
-                    "id": "eksblueprintdemobuildawscdkawseksClusterResourceProviderframeworkonEvent2D546468Arn",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/eksblueprintdemobuildawscdkawseksClusterResourceProviderframeworkonEvent2D546468Arn",
+                  "gpuautoscalingstgstackawscdkawseksClusterResourceProviderframeworkonEvent9B81272FArn": {
+                    "id": "gpuautoscalingstgstackawscdkawseksClusterResourceProviderframeworkonEvent9B81272FArn",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/gpuautoscalingstgstackawscdkawseksClusterResourceProviderframeworkonEvent9B81272FArn",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.20.0"
                     }
                   },
-                  "reference-to-eksblueprintdemobuildCreationRoleBF9DF484Arn": {
-                    "id": "reference-to-eksblueprintdemobuildCreationRoleBF9DF484Arn",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider/reference-to-eksblueprintdemobuildCreationRoleBF9DF484Arn",
+                  "reference-to-gpuautoscalingstgstackCreationRole7ADEA5E6Arn": {
+                    "id": "reference-to-gpuautoscalingstgstackCreationRole7ADEA5E6Arn",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider/reference-to-gpuautoscalingstgstackCreationRole7ADEA5E6Arn",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnParameter",
                       "version": "2.20.0"
@@ -2636,11 +2636,11 @@
               },
               "@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack": {
                 "id": "@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack",
-                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack",
+                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack",
                 "children": {
                   "@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource": {
                     "id": "@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::CloudFormation::Stack",
                       "aws:cdk:cloudformation:props": {
@@ -2652,14 +2652,14 @@
                               {
                                 "Ref": "AWS::URLSuffix"
                               },
-                              "/cdk-hnb659fds-assets-681747700094-ap-northeast-2/6f84201e25a78f5c78f0deed3432dc863fdc03ff0c3284737feaf57e8c068b9c.json"
+                              "/cdk-hnb659fds-assets-681747700094-ap-northeast-2/37a6417ca260b3e0d8514457205213defd56fc452abb46436ee1815ce071ab55.json"
                             ]
                           ]
                         },
                         "parameters": {
-                          "referencetoeksblueprintdemobuildCreationRoleBF9DF484Arn": {
+                          "referencetogpuautoscalingstgstackCreationRole7ADEA5E6Arn": {
                             "Fn::GetAtt": [
-                              "buildCreationRole55C9E86B",
+                              "stackCreationRoleCCD9260B",
                               "Arn"
                             ]
                           }
@@ -2674,24 +2674,24 @@
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.0.121"
+                  "version": "10.0.125"
                 }
               },
               "@aws-cdk--aws-eks.KubectlProvider": {
                 "id": "@aws-cdk--aws-eks.KubectlProvider",
-                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider",
+                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider",
                 "children": {
                   "Handler": {
                     "id": "Handler",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Handler",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler",
                     "children": {
                       "ServiceRole": {
                         "id": "ServiceRole",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/Resource",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                               "aws:cdk:cloudformation:props": {
@@ -2754,11 +2754,11 @@
                           },
                           "DefaultPolicy": {
                             "id": "DefaultPolicy",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/DefaultPolicy",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/DefaultPolicy",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/DefaultPolicy/Resource",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/DefaultPolicy/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                   "aws:cdk:cloudformation:props": {
@@ -2768,14 +2768,14 @@
                                           "Action": "eks:DescribeCluster",
                                           "Effect": "Allow",
                                           "Resource": {
-                                            "Ref": "referencetoeksblueprintdemobuildE49CC8A1Arn"
+                                            "Ref": "referencetogpuautoscalingstgstackB50ADC9AArn"
                                           }
                                         },
                                         {
                                           "Action": "sts:AssumeRole",
                                           "Effect": "Allow",
                                           "Resource": {
-                                            "Ref": "referencetoeksblueprintdemobuildCreationRoleBF9DF484Arn"
+                                            "Ref": "referencetogpuautoscalingstgstackCreationRole7ADEA5E6Arn"
                                           }
                                         }
                                       ],
@@ -2808,11 +2808,11 @@
                       },
                       "Code": {
                         "id": "Code",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Handler/Code",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/Code",
                         "children": {
                           "Stage": {
                             "id": "Stage",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Handler/Code/Stage",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/Code/Stage",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.AssetStaging",
                               "version": "2.20.0"
@@ -2820,7 +2820,7 @@
                           },
                           "AssetBucket": {
                             "id": "AssetBucket",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Handler/Code/AssetBucket",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/Code/AssetBucket",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                               "version": "2.20.0"
@@ -2834,7 +2834,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Handler/Resource",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Handler/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                           "aws:cdk:cloudformation:props": {
@@ -2863,13 +2863,13 @@
                             "timeout": 900,
                             "vpcConfig": {
                               "subnetIds": [
-                                "subnet-054430c4e68bddd75",
-                                "subnet-0c9d5604a75594d89",
-                                "subnet-0adfaba0a6a973b55"
+                                "subnet-0ee02055d479e015e",
+                                "subnet-0369027aeedf63e74",
+                                "subnet-00cbfd8e8d730f4bf"
                               ],
                               "securityGroupIds": [
                                 {
-                                  "Ref": "referencetoeksblueprintdemobuildE49CC8A1ClusterSecurityGroupId"
+                                  "Ref": "referencetogpuautoscalingstgstackB50ADC9AClusterSecurityGroupId"
                                 }
                               ]
                             }
@@ -2888,15 +2888,15 @@
                   },
                   "AwsCliLayer": {
                     "id": "AwsCliLayer",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer",
                     "children": {
                       "Code": {
                         "id": "Code",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Code",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Code",
                         "children": {
                           "Stage": {
                             "id": "Stage",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Code/Stage",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Code/Stage",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.AssetStaging",
                               "version": "2.20.0"
@@ -2904,7 +2904,7 @@
                           },
                           "AssetBucket": {
                             "id": "AssetBucket",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Code/AssetBucket",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Code/AssetBucket",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                               "version": "2.20.0"
@@ -2918,7 +2918,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Resource",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Lambda::LayerVersion",
                           "aws:cdk:cloudformation:props": {
@@ -2942,15 +2942,15 @@
                   },
                   "KubectlLayer": {
                     "id": "KubectlLayer",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer",
                     "children": {
                       "Code": {
                         "id": "Code",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Code",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Code",
                         "children": {
                           "Stage": {
                             "id": "Stage",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Code/Stage",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Code/Stage",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.AssetStaging",
                               "version": "2.20.0"
@@ -2958,7 +2958,7 @@
                           },
                           "AssetBucket": {
                             "id": "AssetBucket",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Code/AssetBucket",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Code/AssetBucket",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                               "version": "2.20.0"
@@ -2972,7 +2972,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Resource",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Lambda::LayerVersion",
                           "aws:cdk:cloudformation:props": {
@@ -2996,19 +2996,19 @@
                   },
                   "Provider": {
                     "id": "Provider",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider",
                     "children": {
                       "framework-onEvent": {
                         "id": "framework-onEvent",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent",
                         "children": {
                           "ServiceRole": {
                             "id": "ServiceRole",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/Resource",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                                   "aws:cdk:cloudformation:props": {
@@ -3059,11 +3059,11 @@
                               },
                               "DefaultPolicy": {
                                 "id": "DefaultPolicy",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy",
                                 "children": {
                                   "Resource": {
                                     "id": "Resource",
-                                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource",
+                                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource",
                                     "attributes": {
                                       "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                       "aws:cdk:cloudformation:props": {
@@ -3125,11 +3125,11 @@
                           },
                           "Code": {
                             "id": "Code",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Code",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Code",
                             "children": {
                               "Stage": {
                                 "id": "Stage",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Code/Stage",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Code/Stage",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.AssetStaging",
                                   "version": "2.20.0"
@@ -3137,7 +3137,7 @@
                               },
                               "AssetBucket": {
                                 "id": "AssetBucket",
-                                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Code/AssetBucket",
+                                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Code/AssetBucket",
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                                   "version": "2.20.0"
@@ -3151,7 +3151,7 @@
                           },
                           "Resource": {
                             "id": "Resource",
-                            "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Resource",
+                            "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                               "aws:cdk:cloudformation:props": {
@@ -3165,7 +3165,7 @@
                                     "Arn"
                                   ]
                                 },
-                                "description": "AWS CDK resource provider framework - onEvent (eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/Provider)",
+                                "description": "AWS CDK resource provider framework - onEvent (gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/Provider)",
                                 "environment": {
                                   "variables": {
                                     "USER_ON_EVENT_FUNCTION_ARN": {
@@ -3181,13 +3181,13 @@
                                 "timeout": 900,
                                 "vpcConfig": {
                                   "subnetIds": [
-                                    "subnet-054430c4e68bddd75",
-                                    "subnet-0c9d5604a75594d89",
-                                    "subnet-0adfaba0a6a973b55"
+                                    "subnet-0ee02055d479e015e",
+                                    "subnet-0369027aeedf63e74",
+                                    "subnet-00cbfd8e8d730f4bf"
                                   ],
                                   "securityGroupIds": [
                                     {
-                                      "Ref": "referencetoeksblueprintdemobuildE49CC8A1ClusterSecurityGroupId"
+                                      "Ref": "referencetogpuautoscalingstgstackB50ADC9AClusterSecurityGroupId"
                                     }
                                   ]
                                 }
@@ -3212,11 +3212,11 @@
                   },
                   "CDKMetadata": {
                     "id": "CDKMetadata",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata",
                     "children": {
                       "Default": {
                         "id": "Default",
-                        "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata/Default",
+                        "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata/Default",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.CfnResource",
                           "version": "2.20.0"
@@ -3225,36 +3225,36 @@
                     },
                     "constructInfo": {
                       "fqn": "constructs.Construct",
-                      "version": "10.0.121"
+                      "version": "10.0.125"
                     }
                   },
-                  "eksblueprintdemobuildawscdkawseksKubectlProviderframeworkonEvent1993A776Arn": {
-                    "id": "eksblueprintdemobuildawscdkawseksKubectlProviderframeworkonEvent1993A776Arn",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/eksblueprintdemobuildawscdkawseksKubectlProviderframeworkonEvent1993A776Arn",
+                  "gpuautoscalingstgstackawscdkawseksKubectlProviderframeworkonEventCBFBE7AEArn": {
+                    "id": "gpuautoscalingstgstackawscdkawseksKubectlProviderframeworkonEventCBFBE7AEArn",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/gpuautoscalingstgstackawscdkawseksKubectlProviderframeworkonEventCBFBE7AEArn",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.20.0"
                     }
                   },
-                  "reference-to-eksblueprintdemobuildE49CC8A1Arn": {
-                    "id": "reference-to-eksblueprintdemobuildE49CC8A1Arn",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/reference-to-eksblueprintdemobuildE49CC8A1Arn",
+                  "reference-to-gpuautoscalingstgstackB50ADC9AArn": {
+                    "id": "reference-to-gpuautoscalingstgstackB50ADC9AArn",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalingstgstackB50ADC9AArn",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnParameter",
                       "version": "2.20.0"
                     }
                   },
-                  "reference-to-eksblueprintdemobuildCreationRoleBF9DF484Arn": {
-                    "id": "reference-to-eksblueprintdemobuildCreationRoleBF9DF484Arn",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/reference-to-eksblueprintdemobuildCreationRoleBF9DF484Arn",
+                  "reference-to-gpuautoscalingstgstackCreationRole7ADEA5E6Arn": {
+                    "id": "reference-to-gpuautoscalingstgstackCreationRole7ADEA5E6Arn",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalingstgstackCreationRole7ADEA5E6Arn",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnParameter",
                       "version": "2.20.0"
                     }
                   },
-                  "reference-to-eksblueprintdemobuildE49CC8A1ClusterSecurityGroupId": {
-                    "id": "reference-to-eksblueprintdemobuildE49CC8A1ClusterSecurityGroupId",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider/reference-to-eksblueprintdemobuildE49CC8A1ClusterSecurityGroupId",
+                  "reference-to-gpuautoscalingstgstackB50ADC9AClusterSecurityGroupId": {
+                    "id": "reference-to-gpuautoscalingstgstackB50ADC9AClusterSecurityGroupId",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-gpuautoscalingstgstackB50ADC9AClusterSecurityGroupId",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnParameter",
                       "version": "2.20.0"
@@ -3268,11 +3268,11 @@
               },
               "@aws-cdk--aws-eks.KubectlProvider.NestedStack": {
                 "id": "@aws-cdk--aws-eks.KubectlProvider.NestedStack",
-                "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider.NestedStack",
+                "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider.NestedStack",
                 "children": {
                   "@aws-cdk--aws-eks.KubectlProvider.NestedStackResource": {
                     "id": "@aws-cdk--aws-eks.KubectlProvider.NestedStackResource",
-                    "path": "eks-blueprint-demo/build/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource",
+                    "path": "gpu-autoscaling-stg/stack/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::CloudFormation::Stack",
                       "aws:cdk:cloudformation:props": {
@@ -3284,26 +3284,26 @@
                               {
                                 "Ref": "AWS::URLSuffix"
                               },
-                              "/cdk-hnb659fds-assets-681747700094-ap-northeast-2/3ffac0a6d44f41fc82ee2615e95de377880d8cb5546bcb0c0ab2e9ec019fa615.json"
+                              "/cdk-hnb659fds-assets-681747700094-ap-northeast-2/37b72293091310b010ea6169abaf6f35e120a367dad08cb5436db084d7f2abf4.json"
                             ]
                           ]
                         },
                         "parameters": {
-                          "referencetoeksblueprintdemobuildE49CC8A1Arn": {
+                          "referencetogpuautoscalingstgstackB50ADC9AArn": {
                             "Fn::GetAtt": [
-                              "build3E86E075",
+                              "stack9D5F5B02",
                               "Arn"
                             ]
                           },
-                          "referencetoeksblueprintdemobuildCreationRoleBF9DF484Arn": {
+                          "referencetogpuautoscalingstgstackCreationRole7ADEA5E6Arn": {
                             "Fn::GetAtt": [
-                              "buildCreationRole55C9E86B",
+                              "stackCreationRoleCCD9260B",
                               "Arn"
                             ]
                           },
-                          "referencetoeksblueprintdemobuildE49CC8A1ClusterSecurityGroupId": {
+                          "referencetogpuautoscalingstgstackB50ADC9AClusterSecurityGroupId": {
                             "Fn::GetAtt": [
-                              "build3E86E075",
+                              "stack9D5F5B02",
                               "ClusterSecurityGroupId"
                             ]
                           }
@@ -3318,16 +3318,16 @@
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.0.121"
+                  "version": "10.0.125"
                 }
               },
               "ClusterLogsEnabler": {
                 "id": "ClusterLogsEnabler",
-                "path": "eks-blueprint-demo/build/ClusterLogsEnabler",
+                "path": "gpu-autoscaling-stg/stack/ClusterLogsEnabler",
                 "children": {
                   "Provider": {
                     "id": "Provider",
-                    "path": "eks-blueprint-demo/build/ClusterLogsEnabler/Provider",
+                    "path": "gpu-autoscaling-stg/stack/ClusterLogsEnabler/Provider",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_lambda.SingletonFunction",
                       "version": "2.20.0"
@@ -3335,11 +3335,11 @@
                   },
                   "CustomResourcePolicy": {
                     "id": "CustomResourcePolicy",
-                    "path": "eks-blueprint-demo/build/ClusterLogsEnabler/CustomResourcePolicy",
+                    "path": "gpu-autoscaling-stg/stack/ClusterLogsEnabler/CustomResourcePolicy",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/ClusterLogsEnabler/CustomResourcePolicy/Resource",
+                        "path": "gpu-autoscaling-stg/stack/ClusterLogsEnabler/CustomResourcePolicy/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                           "aws:cdk:cloudformation:props": {
@@ -3354,7 +3354,7 @@
                                       [
                                         {
                                           "Fn::GetAtt": [
-                                            "build3E86E075",
+                                            "stack9D5F5B02",
                                             "Arn"
                                           ]
                                         },
@@ -3387,11 +3387,11 @@
                   },
                   "Resource": {
                     "id": "Resource",
-                    "path": "eks-blueprint-demo/build/ClusterLogsEnabler/Resource",
+                    "path": "gpu-autoscaling-stg/stack/ClusterLogsEnabler/Resource",
                     "children": {
                       "Default": {
                         "id": "Default",
-                        "path": "eks-blueprint-demo/build/ClusterLogsEnabler/Resource/Default",
+                        "path": "gpu-autoscaling-stg/stack/ClusterLogsEnabler/Resource/Default",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.CfnResource",
                           "version": "2.20.0"
@@ -3411,15 +3411,15 @@
               },
               "AWS679f53fac002430cb0da5b7982bd2287": {
                 "id": "AWS679f53fac002430cb0da5b7982bd2287",
-                "path": "eks-blueprint-demo/build/AWS679f53fac002430cb0da5b7982bd2287",
+                "path": "gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287",
                 "children": {
                   "ServiceRole": {
                     "id": "ServiceRole",
-                    "path": "eks-blueprint-demo/build/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole",
+                    "path": "gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "eks-blueprint-demo/build/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource",
+                        "path": "gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                           "aws:cdk:cloudformation:props": {
@@ -3464,11 +3464,11 @@
                   },
                   "Code": {
                     "id": "Code",
-                    "path": "eks-blueprint-demo/build/AWS679f53fac002430cb0da5b7982bd2287/Code",
+                    "path": "gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287/Code",
                     "children": {
                       "Stage": {
                         "id": "Stage",
-                        "path": "eks-blueprint-demo/build/AWS679f53fac002430cb0da5b7982bd2287/Code/Stage",
+                        "path": "gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287/Code/Stage",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.AssetStaging",
                           "version": "2.20.0"
@@ -3476,7 +3476,7 @@
                       },
                       "AssetBucket": {
                         "id": "AssetBucket",
-                        "path": "eks-blueprint-demo/build/AWS679f53fac002430cb0da5b7982bd2287/Code/AssetBucket",
+                        "path": "gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287/Code/AssetBucket",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                           "version": "2.20.0"
@@ -3490,7 +3490,7 @@
                   },
                   "Resource": {
                     "id": "Resource",
-                    "path": "eks-blueprint-demo/build/AWS679f53fac002430cb0da5b7982bd2287/Resource",
+                    "path": "gpu-autoscaling-stg/stack/AWS679f53fac002430cb0da5b7982bd2287/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                       "aws:cdk:cloudformation:props": {
@@ -3522,11 +3522,11 @@
               },
               "cluster-autoscaler-policy": {
                 "id": "cluster-autoscaler-policy",
-                "path": "eks-blueprint-demo/build/cluster-autoscaler-policy",
+                "path": "gpu-autoscaling-stg/stack/cluster-autoscaler-policy",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "eks-blueprint-demo/build/cluster-autoscaler-policy/Resource",
+                    "path": "gpu-autoscaling-stg/stack/cluster-autoscaler-policy/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                       "aws:cdk:cloudformation:props": {
@@ -3552,10 +3552,10 @@
                         "policyName": "ClusterAutoscalerPolicy",
                         "roles": [
                           {
-                            "Ref": "buildNodegroupcpungngNodeGroupRoleCC60C6A6"
+                            "Ref": "stackNodegroupcpungngNodeGroupRoleDF9A5D67"
                           },
                           {
-                            "Ref": "buildNodegroupgpungngNodeGroupRoleC0894829"
+                            "Ref": "stackNodegroupgpungngNodeGroupRoleE7D50F85"
                           }
                         ]
                       }
@@ -3573,15 +3573,15 @@
               },
               "clusterName": {
                 "id": "clusterName",
-                "path": "eks-blueprint-demo/build/clusterName",
+                "path": "gpu-autoscaling-stg/stack/clusterName",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "eks-blueprint-demo/build/clusterName/Resource",
+                    "path": "gpu-autoscaling-stg/stack/clusterName/Resource",
                     "children": {
                       "Default": {
                         "id": "Default",
-                        "path": "eks-blueprint-demo/build/clusterName/Resource/Default",
+                        "path": "gpu-autoscaling-stg/stack/clusterName/Resource/Default",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.CfnResource",
                           "version": "2.20.0"
@@ -3601,11 +3601,11 @@
               },
               "AWSCDKCfnUtilsProviderCustomResourceProvider": {
                 "id": "AWSCDKCfnUtilsProviderCustomResourceProvider",
-                "path": "eks-blueprint-demo/build/AWSCDKCfnUtilsProviderCustomResourceProvider",
+                "path": "gpu-autoscaling-stg/stack/AWSCDKCfnUtilsProviderCustomResourceProvider",
                 "children": {
                   "Staging": {
                     "id": "Staging",
-                    "path": "eks-blueprint-demo/build/AWSCDKCfnUtilsProviderCustomResourceProvider/Staging",
+                    "path": "gpu-autoscaling-stg/stack/AWSCDKCfnUtilsProviderCustomResourceProvider/Staging",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.AssetStaging",
                       "version": "2.20.0"
@@ -3613,7 +3613,7 @@
                   },
                   "Role": {
                     "id": "Role",
-                    "path": "eks-blueprint-demo/build/AWSCDKCfnUtilsProviderCustomResourceProvider/Role",
+                    "path": "gpu-autoscaling-stg/stack/AWSCDKCfnUtilsProviderCustomResourceProvider/Role",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
                       "version": "2.20.0"
@@ -3621,7 +3621,7 @@
                   },
                   "Handler": {
                     "id": "Handler",
-                    "path": "eks-blueprint-demo/build/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler",
+                    "path": "gpu-autoscaling-stg/stack/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
                       "version": "2.20.0"
@@ -3635,11 +3635,11 @@
               },
               "Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider": {
                 "id": "Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider",
-                "path": "eks-blueprint-demo/build/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider",
+                "path": "gpu-autoscaling-stg/stack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider",
                 "children": {
                   "Staging": {
                     "id": "Staging",
-                    "path": "eks-blueprint-demo/build/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Staging",
+                    "path": "gpu-autoscaling-stg/stack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Staging",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.AssetStaging",
                       "version": "2.20.0"
@@ -3647,7 +3647,7 @@
                   },
                   "Role": {
                     "id": "Role",
-                    "path": "eks-blueprint-demo/build/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role",
+                    "path": "gpu-autoscaling-stg/stack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
                       "version": "2.20.0"
@@ -3655,7 +3655,7 @@
                   },
                   "Handler": {
                     "id": "Handler",
-                    "path": "eks-blueprint-demo/build/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler",
+                    "path": "gpu-autoscaling-stg/stack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
                       "version": "2.20.0"
@@ -3669,13 +3669,13 @@
               },
               "vpc-cni-addOn": {
                 "id": "vpc-cni-addOn",
-                "path": "eks-blueprint-demo/build/vpc-cni-addOn",
+                "path": "gpu-autoscaling-stg/stack/vpc-cni-addOn",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EKS::Addon",
                   "aws:cdk:cloudformation:props": {
                     "addonName": "vpc-cni",
                     "clusterName": {
-                      "Ref": "build3E86E075"
+                      "Ref": "stack9D5F5B02"
                     },
                     "addonVersion": "v1.10.2-eksbuild.1",
                     "resolveConflicts": "OVERWRITE"
@@ -3688,13 +3688,13 @@
               },
               "coredns-addOn": {
                 "id": "coredns-addOn",
-                "path": "eks-blueprint-demo/build/coredns-addOn",
+                "path": "gpu-autoscaling-stg/stack/coredns-addOn",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EKS::Addon",
                   "aws:cdk:cloudformation:props": {
                     "addonName": "coredns",
                     "clusterName": {
-                      "Ref": "build3E86E075"
+                      "Ref": "stack9D5F5B02"
                     },
                     "addonVersion": "v1.8.4-eksbuild.1",
                     "resolveConflicts": "OVERWRITE"
@@ -3707,13 +3707,13 @@
               },
               "kube-proxy-addOn": {
                 "id": "kube-proxy-addOn",
-                "path": "eks-blueprint-demo/build/kube-proxy-addOn",
+                "path": "gpu-autoscaling-stg/stack/kube-proxy-addOn",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EKS::Addon",
                   "aws:cdk:cloudformation:props": {
                     "addonName": "kube-proxy",
                     "clusterName": {
-                      "Ref": "build3E86E075"
+                      "Ref": "stack9D5F5B02"
                     },
                     "addonVersion": "v1.21.2-eksbuild.2",
                     "resolveConflicts": "OVERWRITE"
@@ -3726,11 +3726,11 @@
               },
               "CDKMetadata": {
                 "id": "CDKMetadata",
-                "path": "eks-blueprint-demo/build/CDKMetadata",
+                "path": "gpu-autoscaling-stg/stack/CDKMetadata",
                 "children": {
                   "Default": {
                     "id": "Default",
-                    "path": "eks-blueprint-demo/build/CDKMetadata/Default",
+                    "path": "gpu-autoscaling-stg/stack/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
                       "version": "2.20.0"
@@ -3739,24 +3739,24 @@
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.0.121"
+                  "version": "10.0.125"
                 }
               },
               "Exports": {
                 "id": "Exports",
-                "path": "eks-blueprint-demo/build/Exports",
+                "path": "gpu-autoscaling-stg/stack/Exports",
                 "children": {
-                  "Output{\"Ref\":\"build3E86E075\"}": {
-                    "id": "Output{\"Ref\":\"build3E86E075\"}",
-                    "path": "eks-blueprint-demo/build/Exports/Output{\"Ref\":\"build3E86E075\"}",
+                  "Output{\"Ref\":\"stack9D5F5B02\"}": {
+                    "id": "Output{\"Ref\":\"stack9D5F5B02\"}",
+                    "path": "gpu-autoscaling-stg/stack/Exports/Output{\"Ref\":\"stack9D5F5B02\"}",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.20.0"
                     }
                   },
-                  "Output{\"Fn::GetAtt\":[\"build3E86E075\",\"Arn\"]}": {
-                    "id": "Output{\"Fn::GetAtt\":[\"build3E86E075\",\"Arn\"]}",
-                    "path": "eks-blueprint-demo/build/Exports/Output{\"Fn::GetAtt\":[\"build3E86E075\",\"Arn\"]}",
+                  "Output{\"Fn::GetAtt\":[\"stack9D5F5B02\",\"Arn\"]}": {
+                    "id": "Output{\"Fn::GetAtt\":[\"stack9D5F5B02\",\"Arn\"]}",
+                    "path": "gpu-autoscaling-stg/stack/Exports/Output{\"Fn::GetAtt\":[\"stack9D5F5B02\",\"Arn\"]}",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.20.0"
@@ -3765,7 +3765,7 @@
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.0.121"
+                  "version": "10.0.125"
                 }
               }
             },
@@ -3776,7 +3776,7 @@
           },
           "ClusterName": {
             "id": "ClusterName",
-            "path": "eks-blueprint-demo/ClusterName",
+            "path": "gpu-autoscaling-stg/ClusterName",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnOutput",
               "version": "2.20.0"
@@ -3784,7 +3784,7 @@
           },
           "ClusterArn": {
             "id": "ClusterArn",
-            "path": "eks-blueprint-demo/ClusterArn",
+            "path": "gpu-autoscaling-stg/ClusterArn",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnOutput",
               "version": "2.20.0"
@@ -3792,11 +3792,11 @@
           },
           "CDKMetadata": {
             "id": "CDKMetadata",
-            "path": "eks-blueprint-demo/CDKMetadata",
+            "path": "gpu-autoscaling-stg/CDKMetadata",
             "children": {
               "Default": {
                 "id": "Default",
-                "path": "eks-blueprint-demo/CDKMetadata/Default",
+                "path": "gpu-autoscaling-stg/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnResource",
                   "version": "2.20.0"
@@ -3805,7 +3805,7 @@
             },
             "constructInfo": {
               "fqn": "constructs.Construct",
-              "version": "10.0.121"
+              "version": "10.0.125"
             }
           }
         },

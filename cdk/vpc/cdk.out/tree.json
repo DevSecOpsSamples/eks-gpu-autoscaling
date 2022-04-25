@@ -989,7 +989,7 @@
                     "value": {
                       "Ref": "Vpc8378EB38"
                     },
-                    "name": "/cdk-eks-blueprints/vpc-id"
+                    "name": "/eks-gpu-autoscaling/vpc-id"
                   }
                 },
                 "constructInfo": {

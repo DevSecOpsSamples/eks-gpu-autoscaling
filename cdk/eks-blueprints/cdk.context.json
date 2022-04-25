@@ -121,5 +121,61 @@
         ]
       }
     ]
+  },
+  "ssm:account=681747700094:parameterName=/eks-gpu-autoscaling/vpc-id:region=ap-northeast-2": "vpc-0617a2cb231493f27",
+  "vpc-provider:account=681747700094:filter.vpc-id=vpc-0617a2cb231493f27:region=ap-northeast-2:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-0617a2cb231493f27",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-0ee02055d479e015e",
+            "cidr": "10.0.48.0/20",
+            "availabilityZone": "ap-northeast-2a",
+            "routeTableId": "rtb-07f9c2bc695a2385f"
+          },
+          {
+            "subnetId": "subnet-0369027aeedf63e74",
+            "cidr": "10.0.64.0/20",
+            "availabilityZone": "ap-northeast-2b",
+            "routeTableId": "rtb-0f3f66bb2df0b60d8"
+          },
+          {
+            "subnetId": "subnet-00cbfd8e8d730f4bf",
+            "cidr": "10.0.80.0/20",
+            "availabilityZone": "ap-northeast-2c",
+            "routeTableId": "rtb-089bb8e0279baed10"
+          }
+        ]
+      },
+      {
+        "name": "public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0353b157a0ad8ff7c",
+            "cidr": "10.0.0.0/20",
+            "availabilityZone": "ap-northeast-2a",
+            "routeTableId": "rtb-0136f424c812ab1af"
+          },
+          {
+            "subnetId": "subnet-00a68c30181acb18e",
+            "cidr": "10.0.16.0/20",
+            "availabilityZone": "ap-northeast-2b",
+            "routeTableId": "rtb-042b22205e1f323e1"
+          },
+          {
+            "subnetId": "subnet-09314449879b0104d",
+            "cidr": "10.0.32.0/20",
+            "availabilityZone": "ap-northeast-2c",
+            "routeTableId": "rtb-083609b1607951556"
+          }
+        ]
+      }
+    ]
   }
 }
