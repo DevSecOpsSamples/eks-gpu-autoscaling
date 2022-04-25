@@ -17,11 +17,11 @@ spec:
         app: cpu-api
     spec:
       containers:
-        - name: sample-rest-api
-          image: 681747700094.dkr.ecr.ap-northeast-2.amazonaws.com/sample-rest-api:latest
+        - name: cpu-api
+          image: <account-id>.dkr.ecr.<region>.amazonaws.com/cpu-api:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 8000
           resources:
             requests:
               cpu: 1
@@ -45,8 +45,8 @@ spec:
     app: cpu-api
   type: NodePort
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: 8000
+      targetPort: 8000
       protocol: TCP
 ---
 apiVersion: autoscaling/v2beta2
@@ -82,9 +82,10 @@ metadata:
     alb.ingress.kubernetes.io/load-balancer-name: cpu-api
     alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=30
     alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=10
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:681747700094:certificate/ad3b4737-a573-4e0c-ba16-3b4305138fd9
-    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    # alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    # alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:<region>:<account-id>:certificate/<certificate-id>
+    # alb.ingress.kubernetes.io/ssl-redirect: '443'
     alb.ingress.kubernetes.io/tags: env=dev
     alb.ingress.kubernetes.io/healthcheck-interval-seconds: '16'
     alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '15'
@@ -100,4 +101,4 @@ spec:
               service:
                 name: "cpu-api"
                 port:
-                  number: 8080
+                  number: 8000

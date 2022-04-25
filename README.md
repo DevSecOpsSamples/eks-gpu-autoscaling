@@ -5,26 +5,28 @@ GPU utilization based horizontal autoscaling for inference APIs.
 
 This guideline provides a complete steps for GPU auto scaling on AWS EKS.
 
+***Feel free to create an issue or raise a pull request if update is required***.
+
 ## Introduction
 
-There are differences between CPU scaling and GPU scaling for cluster-level and pod-level like the following:
+There are differences between CPU scaling and GPU scaling below:
 
 #### CPU scaling vs GPU scaling ####
 
 |              | CPU        | GPU           | Description                         |
 |--------------|------------|---------------|-------------------------------------|
-| Metric       | Supported  | Not Supported | `DCGM exporter` daemonset is required to collect GPU metrics because it's not collected through the Metric Server by default. |
-| HPA          | Supported  | Not Supported | Horizontal Pod Autoscaling(HPA) for GPU working based on `Prometheus` customer metrics.  |
+| Metric       | Supported  | Not Supported | `NVIDIA DCGM exporter` daemonset is required to collect GPU metrics because it's not collected through the Metric Server by default. |
+| HPA          | Supported  | Not Supported | Horizontal Pod Autoscaling(HPA) for GPU can be working based on `Prometheus` customer metrics.  |
 | Fraction     | Supported  | Not Supported | GPU resource fraction is not supported such as 'nvidia.com/gpu: 0.5'. |
 
-#### Objectives: ####
+#### Objectives ####
 
 * Install the Data Center GPU Manager(DCGM) exporter as daemonset and scale pods through HPA which works based on Prometheus custom metric.
 * GPU cluster autoscaling with CA or Karpenter
 * `Pod-level` GPU autoscaling
 * 2 node groups: 1 CPU node group, 1 GPU node group has `accelerator: nvidia-gpu` label. Inference API applications are running in `shared one GPU node group` to not to create clusters per GPU application. 
 
-#### Environment: ####
+#### Environment ####
 
 | SW                 | Version | Desc   |
 |--------------------|---------|-------|
@@ -51,7 +53,7 @@ If you want to use the existing cluster or create a cluster by using `eksctl`, r
 
 ## Steps
 
-1. Deploy DCGM exporter daemonset
+1. Deploy NVIDIA DCGM exporter as daemonset
 2. Install Prometheus Stack
 3. Install Prometheus Adapter with custom metric configuration
 4. Create Grafana Dashboards
@@ -60,9 +62,7 @@ If you want to use the existing cluster or create a cluster by using `eksctl`, r
 
 # Install
 
-# Step 1: DCGM exporter
-
-## 1. Install DCGM exporter as DaemonSet
+# Step 1: Deploy NVIDIA DCGM exporter as daemonset
 
 ```bash
 kubectl apply -f dcgm-exporter.yaml
@@ -159,7 +159,7 @@ DCGM_FI_DEV_GPU_UTIL{gpu="2",UUID="GPU-6ae74b72-48d0-f09f-14e2-4e09ceebda63",dev
 
 # Step 2: Install Prometheus Stack
 
-4 major stacks are included in `kube-prometheus-stack` stack:
+4 major stacks are included in the `kube-prometheus-stack` stack:
 
 * Prometheus Server
 * Prometheus Operator
@@ -167,7 +167,6 @@ DCGM_FI_DEV_GPU_UTIL{gpu="2",UUID="GPU-6ae74b72-48d0-f09f-14e2-4e09ceebda63",dev
 * Grafana
 
 ```bash
-
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
 helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack \

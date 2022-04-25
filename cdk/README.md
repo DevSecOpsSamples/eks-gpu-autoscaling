@@ -1,4 +1,4 @@
-# CDK EKS Blueprints Sample
+# GPU cluster with EKS Blueprints
 
 ## Prequisets
 
@@ -27,7 +27,7 @@ Use the `cdk` command-line toolkit to interact with your project:
 | EKS cluster                   | 21m  (38 Stacks)   |
 | Total                         | 24m     | 
 
-## Install
+## Deploy
 
 ### Step 1: VPC
 
@@ -76,13 +76,13 @@ eks-gpu-autoscaling.eksclusterConfigCommand515C0544 = aws eks update-kubeconfig 
 eks-gpu-autoscaling.eksclusterGetTokenCommand3C33A2A5 = aws eks get-token --cluster-name eks-gpu-autoscaling --region us-east-1 --role-arn arn:aws:iam::123456789012:role/eks-gpu-autoscaling-iamrole10180D71-D83FQPH1BRW3
 ```
 
-Pods
+Pods:
 
-![K9s Pod](./screenshots/pod.png?raw=true)
+![K9s Pod](../screenshots/eks-bp-pod.png?raw=true)
 
-Services
+Services:
 
-![K9s Service](./screenshots/service.png?raw=true)
+![K9s Service](../screenshots/eks-bp-service.png?raw=true)
 
 ```bash
 eksctl create iamidentitymapping --cluster <cluster-name> --arn arn:aws:iam::<account-id>:role/<role-name> --group system:masters --username admin --region us-east-1
@@ -102,19 +102,18 @@ kubectl proxy
 
 [Dashboard Login](http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login)
 
-## Uninstall
+## Destroy
 
 ```bash
 cd cdk/vpc
 cdk destroy 
 
 cd ../eks-blueprints
-cdk destroy 
-
+cdk destroy
 ```
 
 ## Reference
 
-https://github.com/aws-quickstart/cdk-eks-blueprints
+ * https://github.com/aws-quickstart/cdk-eks-blueprints
 
-https://aws-quickstart.github.io/cdk-eks-blueprints
+ * https://aws-quickstart.github.io/cdk-eks-blueprints
