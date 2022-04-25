@@ -30,7 +30,7 @@ There are differences between CPU scaling and GPU scaling below:
 | SW                 | Version | Desc   |
 |--------------------|---------|-------|
 | EKS                | 1.21    | [version](https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/kubernetes-versions.html)  |
-| DCGM               | 2.65    |  |
+| DCGM exporter      | 2.65    |  |
 | Prometheus         | 2.34.0  |  |
 | Prometheus Adapter | 2.5.1   |  |
 | Grafana            | 6.24.1  |  |
