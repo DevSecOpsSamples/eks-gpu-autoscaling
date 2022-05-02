@@ -382,7 +382,7 @@ spec:
     spec:
       containers:
         - name: gpu-api  # Set container name and service name with same name
-          image: 123456789.dkr.ecr.ap-northeast-2.amazonaws.com/gpu-cuda-api:latest
+          image: 123456789.dkr.ecr.ap-northeast-2.amazonaws.com/gpu-api:latest
           imagePullPolicy: Always
 ```
 
@@ -396,8 +396,8 @@ kubectl get hpa gpu-api2-hpa -w
 # kubectl get hpa
 NAME                      REFERENCE                    TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
 cpu-api-hpa               Deployment/cpu-api           0%/50%    2         10        2          30s
-gpu-api-hpa               Deployment/gpu-api           0/50      2         10        2          30s
-gpu-api2-hpa              Deployment/gpu-api2          0/50      2         10        2          30s
+gpu-api-hpa               Deployment/gpu-api           0/20      2         10        2          30s
+gpu-api2-hpa              Deployment/gpu-api2          0/20      2         10        2          30s
 ```
 
 # Step 6: AutoScaling Test
