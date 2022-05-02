@@ -30,6 +30,9 @@
 *gpu-api.yaml*
 *gpu2-api.yaml*
 
+ref-eksctl/cluster-autoscaler-autodiscover.yaml*
+ref-eksctl/v2_4_0_full.yaml*
+
 # taurus output
 *2022*
 *2023*
