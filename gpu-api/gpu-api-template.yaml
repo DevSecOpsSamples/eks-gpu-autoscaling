@@ -2,29 +2,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gpu-api2
+  name: gpu-api
   namespace: default
   annotations:
-    app: 'gpu-api2'
+    app: 'gpu-api'
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: gpu-api2
+      app: gpu-api
   template:
     metadata:
       labels:
-        app: gpu-api2
+        app: gpu-api
     spec:
       containers:
-        - name: gpu-api2
-          image: 681747700094.dkr.ecr.ap-northeast-2.amazonaws.com/gpu-api:latest
+        - name: gpu-api
+          image: <account-id>.dkr.ecr.<region>.amazonaws.com/gpu-api:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
           resources:
-            requests:
-              memory: "1024Mi"
             limits:
               nvidia.com/gpu: 1
           env:
@@ -34,13 +32,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: gpu-api2
+  name: gpu-api
   annotations:
-    app: 'gpu-api2'
+    app: 'gpu-api'
     alb.ingress.kubernetes.io/healthcheck-path: "/ping"
 spec:
   selector:
-    app: gpu-api2
+    app: gpu-api
   type: NodePort
   ports:
     - port: 8000
@@ -50,15 +48,15 @@ spec:
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: gpu-api2-hpa
+  name: gpu-api-hpa
   namespace: default
   annotations:
-    app: 'gpu-api2'
+    app: 'gpu-api'
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: gpu-api2
+    name: gpu-api
   minReplicas: 2
   maxReplicas: 10
   metrics:
@@ -68,27 +66,28 @@ spec:
         name: DCGM_FI_DEV_GPU_UTIL_AVG
       describedObject:
         kind: Service
-        name: gpu-api2
+        name: gpu-api
       target:
         type: Value
-        value: '40'
+        value: '20'
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: "gpu-api2-ingress"
+  name: "gpu-api-ingress"
   namespace: default
   annotations:
-    app: 'gpu-api2'
+    app: 'gpu-api'
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/load-balancer-name: gpu-api02
+    alb.ingress.kubernetes.io/load-balancer-name: gpu-api01
     alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=30
     alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=10
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:681747700094:certificate/ad3b4737-a573-4e0c-ba16-3b4305138fd9
-    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    # alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    # alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:<region>:<account-id>:certificate/<certificate-id>
+    # alb.ingress.kubernetes.io/ssl-redirect: '443'
     alb.ingress.kubernetes.io/tags: env=dev
     alb.ingress.kubernetes.io/healthcheck-interval-seconds: '16'
     alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '15'
@@ -102,6 +101,6 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: "gpu-api2"
+                name: "gpu-api"
                 port:
                   number: 8000

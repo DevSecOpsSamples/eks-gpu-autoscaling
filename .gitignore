@@ -25,6 +25,11 @@
 *cdk.out*
 *cdk.context.json*
 
+# K8s output
+*cpu-api.yaml
+*gpu-api.yaml
+*gpu2-api.yaml
+
 # taurus output
 *2022*
 *2023*

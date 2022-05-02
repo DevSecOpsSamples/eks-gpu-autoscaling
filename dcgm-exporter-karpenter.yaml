@@ -87,4 +87,4 @@ spec:
       app.kubernetes.io/name: "dcgm-exporter"
   endpoints:
   - port: "metrics"
-  - interval: "15"
+  - interval: "15s"

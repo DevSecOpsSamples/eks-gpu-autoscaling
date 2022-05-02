@@ -75,6 +75,30 @@ eks-gpu-autoscaling.eksclusterConfigCommand515C0544 = aws eks update-kubeconfig 
 eks-gpu-autoscaling.eksclusterGetTokenCommand3C33A2A5 = aws eks get-token --cluster-name eks-gpu-autoscaling --region us-east-1 --role-arn arn:aws:iam::123456789012:role/eks-gpu-autoscaling-iamrole10180D71-D83FQPH1BRW3
 ```
 
+Update the `accelerator=nvidia-gpu` lebel for GPU node group:
+
+```bash
+aws eks update-nodegroup-config --cluster-name gpu-autoscaling-local --nodegroup-name gpu-ng --labels addOrUpdateLabels={accelerator=nvidia-gpu}
+```
+
+```json
+{
+    "update": {
+        "id": "75880a48-d608-3cd8-9cbe-f1ee10bb4cd4",
+        "status": "InProgress",
+        "type": "ConfigUpdate",
+        "params": [
+            {
+                "type": "LabelsToAdd",
+                "value": "{\"accelerator\":\"nvidia-gpu\"}"
+            }
+        ],
+        "createdAt": "2022-04-26T12:16:05.910000+09:00",
+        "errors": []
+    }
+}
+```
+
 Pods:
 
 ![K9s Pod](../screenshots/eks-bp-pod.png?raw=true)
@@ -84,7 +108,9 @@ Services:
 ![K9s Service](../screenshots/eks-bp-service.png?raw=true)
 
 ```bash
-eksctl create iamidentitymapping --cluster <cluster-name> --arn arn:aws:iam::<account-id>:role/<role-name> --group system:masters --username admin --region us-east-1
+ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+REGION=$(aws configure get default.region)
+eksctl create iamidentitymapping --cluster <cluster-name> --arn arn:aws:iam::${ACCOUNT_ID}:role/<role-name> --group system:masters --username admin --region ${REGION}
 ```
 
 ### Step 3: Kubernetes Dashboard

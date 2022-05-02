@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: cpu-api
-          image: <account-id>.dkr.ecr.<region>.amazonaws.com/cpu-api:latest
+          image: 681747700094.dkr.ecr.ap-northeast-2.amazonaws.com/cpu-api:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
@@ -84,7 +84,7 @@ metadata:
     alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=10
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
     # alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
-    # alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:<region>:<account-id>:certificate/<certificate-id>
+    # alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:681747700094:certificate/<certificate-id>
     # alb.ingress.kubernetes.io/ssl-redirect: '443'
     alb.ingress.kubernetes.io/tags: env=dev
     alb.ingress.kubernetes.io/healthcheck-interval-seconds: '16'

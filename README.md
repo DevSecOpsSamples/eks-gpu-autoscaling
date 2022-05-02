@@ -32,9 +32,16 @@ There are differences between CPU scaling and GPU scaling below:
 | EKS                | 1.21    | [version](https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/kubernetes-versions.html)  |
 | DCGM exporter      | 2.65    |  |
 | Prometheus         | 2.34.0  |  |
-| Prometheus Adapter | 2.5.1   |  |
+| Prometheus Adapter | 3.2.2   |  |
 | Grafana            | 6.24.1  |  |
 | CDK                | 2.20.0  |  |
+
+#### Helm ####
+
+| NAME                  | CHART    | APP VERSION |
+|-----------------------|----------|-------------|
+| kube-prometheus-stack | 35.0.3   | 0.56.0      |
+| prometheus-adapter    | 3.2.2    | v0.9.1      |
 
 ## Prerequisites
 
@@ -52,8 +59,8 @@ If you want to use the existing cluster or create a cluster by using `eksctl`, r
 
 ## Steps
 
-1. Deploy NVIDIA DCGM exporter as daemonset
-2. Install Prometheus Stack
+1. Install Prometheus Stack
+2. Deploy NVIDIA DCGM exporter as daemonset
 3. Install Prometheus Adapter with custom metric configuration
 4. Create Grafana Dashboards
 5. Deploy inference API and GPU HPA
@@ -61,7 +68,35 @@ If you want to use the existing cluster or create a cluster by using `eksctl`, r
 
 # Install
 
-# Step 1: Deploy NVIDIA DCGM exporter as daemonset
+# Step 1: Install Prometheus Stack
+
+4 major stacks are included in the `kube-prometheus-stack` stack:
+
+* Prometheus Server
+* Prometheus Operator
+* Metric Server
+* Grafana
+
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+# helm search repo prometheus-community | grep kube-prometheus-stack  
+#NAME                                                    CHART VERSION   APP VERSION     DESCRIPTION                                       
+#prometheus-community/kube-prometheus-stack              35.0.3          0.56.0          kube-prometheus-stack collects Kubernetes manif...
+# helm search repo stable | prometheus-adapter
+
+helm upgrade kube-prometheus-stack prometheus-community/kube-prometheus-stack \
+   --install --create-namespace --namespace monitoring \
+   --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false
+```
+
+Port forward for http://localhost:9090/targets
+
+```bash
+kubectl port-forward svc/kube-prometheus-stack-prometheus 9090:9090 -n monitoring
+```
+
+# Step 2: Deploy NVIDIA DCGM exporter as daemonset
 
 ```bash
 kubectl apply -f dcgm-exporter.yaml
@@ -136,6 +171,10 @@ Karpenter
                 - g4dn.xlarge
 ```
 
+You can see `serviceMonitor/default/dcgm-exporter` in [Status > Targets](http://localhost:9090/targets) menu:
+
+![promethus target](./screenshots/dcgm.png?raw=true)
+
 Port forward for ['http://localhost:9400/metrics':](http://localhost:9400/metrics)
 
 ```bash
@@ -156,30 +195,6 @@ DCGM_FI_DEV_GPU_UTIL{gpu="1",UUID="GPU-f3a2185e-464d-c671-4057-0d056df64b6e",dev
 DCGM_FI_DEV_GPU_UTIL{gpu="2",UUID="GPU-6ae74b72-48d0-f09f-14e2-4e09ceebda63",device="nvidia2",modelName="Tesla K80",Hostname="dcgm-exporter-cmhft",container="",namespace="",pod=""} 0
 ```
 
-# Step 2: Install Prometheus Stack
-
-4 major stacks are included in the `kube-prometheus-stack` stack:
-
-* Prometheus Server
-* Prometheus Operator
-* Metric Server
-* Grafana
-
-```bash
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-
-helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
-   --create-namespace --namespace monitoring \
-   --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false
-```
-
-Port forward for http://localhost:9090/targets
-
-```bash
-kubectl port-forward svc/kube-prometheus-stack-prometheus 9090:9090 -n monitoring
-```
-
-![promethus target](./screenshots/dcgm.png?raw=true)
 
 # Step 3:  Install prometheus-adapter for custom metric
 
@@ -199,7 +214,13 @@ e.g.,
 Install prometheus-adapter:
 
 ```bash
-helm install prometheus-adapter stable/prometheus-adapter -f prometheus-adapter-values.yaml
+helm install prometheus-adapter prometheus-community/prometheus-adapter -f prometheus-adapter-values.yaml
+```
+
+```bash
+$ helm list
+NAME              	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART                         APP VERSION   
+prometheus-adapter	default  	1       	2022-05-02 13:43:52.857581 +0900 KST   	deployed	prometheus-adapter-3.2.2      v0.9.1  
 ```
 
 [prometheus-adapter-values.yaml](./prometheus-adapter-values.yaml)
@@ -300,7 +321,8 @@ aws ecr create-repository --repository-name gpu-api --region ${REGION}
 cd cpu-api
 ./build.sh
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-sed -e "s|<account-id>|${ACCOUNT_ID}|g" cpu-api.yaml | kubectl apply -f -
+sed -e "s|<account-id>|${ACCOUNT_ID}|g" cpu-api-template.yaml | sed -e "s|<region>|${REGION}|g" > cpu-api.yaml
+kubectl apply -f cpu-api.yaml
 ```
 
 [cpu-api.yaml](./cpu-api/cpu-api.yaml)
@@ -308,8 +330,11 @@ sed -e "s|<account-id>|${ACCOUNT_ID}|g" cpu-api.yaml | kubectl apply -f -
 ```bash
 cd ../gpu-api
 ./build.sh
-sed -e "s|<account-id>|${ACCOUNT_ID}|g" gpu-api.yaml | kubectl apply -f -
-sed -e "s|<account-id>|${ACCOUNT_ID}|g" gpu-api2.yaml | kubectl apply -f -
+sed -e "s|<account-id>|${ACCOUNT_ID}|g" gpu-api-template.yaml | sed -e "s|<region>|${REGION}|g" > gpu-api.yaml
+kubectl apply -f gpu-api.yaml
+
+sed -e "s|<account-id>|${ACCOUNT_ID}|g" gpu-api2-template.yaml | sed -e "s|<region>|${REGION}|g" > gpu-api2.yaml
+kubectl apply -f gpu-api2.yaml
 ```
 
 image size: 3.33GB, image pull: 39.50s
