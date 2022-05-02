@@ -20,20 +20,20 @@ It will taks account 23 minutes: Cluster 13m, Manged Node Group 10m. GPU instanc
 2022-04-29 13:34:58 [ℹ]  nodegroup "gpu-ng" will use "" [AmazonLinux2/1.20]
 2022-04-29 13:34:58 [ℹ]  2 existing nodegroup(s) (cpu-ng,gpu-ng) will be excluded
 2022-04-29 13:34:58 [ℹ]  1 nodegroup (gpu-ng) was included (based on the include/exclude rules)
-2022-04-29 13:34:58 [ℹ]  will create a CloudFormation stack for each of 1 managed nodegroups in cluster "gpu-demo"
+2022-04-29 13:34:58 [ℹ]  will create a CloudFormation stack for each of 1 managed nodegroups in cluster "gpu-autoscaling-local"
 2022-04-29 13:34:58 [ℹ]  
 2 sequential tasks: { fix cluster compatibility, 1 task: { 1 task: { create managed nodegroup "gpu-ng" } } 
 }
 2022-04-29 13:34:58 [ℹ]  checking cluster stack for missing resources
 2022-04-29 13:34:59 [ℹ]  cluster stack has all required resources
-2022-04-29 13:34:59 [ℹ]  building managed nodegroup stack "eksctl-gpu-demo-nodegroup-gpu-ng"
-2022-04-29 13:34:59 [ℹ]  deploying stack "eksctl-gpu-demo-nodegroup-gpu-ng"
-2022-04-29 13:34:59 [ℹ]  waiting for CloudFormation stack "eksctl-gpu-demo-nodegroup-gpu-ng"
+2022-04-29 13:34:59 [ℹ]  building managed nodegroup stack "eksctl-gpu-autoscaling-local-nodegroup-gpu-ng"
+2022-04-29 13:34:59 [ℹ]  deploying stack "eksctl-gpu-autoscaling-local-nodegroup-gpu-ng"
+2022-04-29 13:34:59 [ℹ]  waiting for CloudFormation stack "eksctl-gpu-autoscaling-local-nodegroup-gpu-ng"
 2022-04-29 14:02:29 [ℹ]  1 task: { install Nvidia device plugin }
 2022-04-29 14:02:31 [ℹ]  replaced "kube-system:DaemonSet.apps/nvidia-device-plugin-daemonset"
 2022-04-29 14:02:31 [ℹ]  as you are using the EKS-Optimized Accelerated AMI with a GPU-enabled instance type, the Nvidia Kubernetes device plugin was automatically installed.
         to skip installing it, use --install-nvidia-plugin=false.
-2022-04-29 14:02:31 [✔]  created 0 nodegroup(s) in cluster "gpu-demo"
+2022-04-29 14:02:31 [✔]  created 0 nodegroup(s) in cluster "gpu-autoscaling-local"
 ```
 
 ---
@@ -77,7 +77,7 @@ kubectl apply -f cluster-autoscaler-autodiscover.yaml
 ```
 
 ```bash
-# 로그 확인
+# logs for cluster-autoscaler
 kubectl logs -n kube-system  -f deployment/cluster-autoscaler
 ```
 

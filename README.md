@@ -449,7 +449,6 @@ Events:
 ```
 
 ```bash
-kubectl get events -w
 kubectl describe deploy gpu-api
 
 kubectl describe apiservices v1beta1.metrics.k8s.io
@@ -483,3 +482,4 @@ helm uninstall kube-prometheus-stack -n monitoring
 
 # Trouble Shooting
 
+You can check event logs with `kubectl get events -w` command.

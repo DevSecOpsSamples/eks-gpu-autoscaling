@@ -25,7 +25,7 @@ Use the `cdk` command-line toolkit to interact with your project:
 |-------------------------------|---------|
 | VPC                           | 3m      |
 | EKS cluster                   | 21m  (38 Stacks)   |
-| Total                         | 24m     | 
+| Total                         | 24m     |
 
 ## Deploy
 
@@ -47,6 +47,17 @@ cdk deploy
 
 ### Step 2: EKS cluster and add-on with Blueprints
 
+| Instance Type | GPU | vCPU | RAM(GiB) |
+|---------------|-----|------|----------|
+| g4dn.xlarge   | 1   | 4    | 16       |
+| g4dn.2xlarge  | 1   | 8    | 32       |
+| g4dn.4xlarge  | 1   | 16   | 64       |
+| g4dn.8xlarge  | 1   | 32   | 128      |
+| g4dn.16xlarge | 1   | 64   | 256      |
+| p2.xlarge     | 1   | 4    | 61       |
+| p2.8xlarge    | 8   | 32   | 488      |
+| p2.16xlarge   | 16  | 64   | 732      |
+
 2 CDK stacks will be created gpu-autoscaling-local and `gpu-autoscaling-local/gpu-autoscaling-local`, and you need to deploy the `gpu-autoscaling-local/gpu-autoscaling-local`.
 
 ```bash
@@ -63,19 +74,28 @@ Cluster Name: [eks-blueprints/lib/cluster-config.ts](./eks-blueprints/lib/cluste
 
 ```bash
 Outputs:
-eks-gpu-autoscaling.Cluster = eks-gpu-autoscaling
-eks-gpu-autoscaling.ClusterArn = arn:aws:eks:us-east-1:123456789012:cluster/eks-gpu-autoscaling
-eks-gpu-autoscaling.ClusterCertificateAuthorityData = xxxxxxxx
-eks-gpu-autoscaling.ClusterEncryptionConfigKeyArn = 
-eks-gpu-autoscaling.ClusterEndpoint = https://123456789012.gr7.us-east-1.eks.amazonaws.com
-eks-gpu-autoscaling.ClusterName = eks-gpu-autoscaling
-eks-gpu-autoscaling.ClusterSecurityGroupId = sg-0123456789abc
-eks-gpu-autoscaling.VPC = vpc-0123456789abc
-eks-gpu-autoscaling.eksclusterConfigCommand515C0544 = aws eks update-kubeconfig --name eks-gpu-autoscaling --region us-east-1 --role-arn arn:aws:iam::123456789012:role/eks-gpu-autoscaling-iamrole10180D71-D83FQPH1BRW3
-eks-gpu-autoscaling.eksclusterGetTokenCommand3C33A2A5 = aws eks get-token --cluster-name eks-gpu-autoscaling --region us-east-1 --role-arn arn:aws:iam::123456789012:role/eks-gpu-autoscaling-iamrole10180D71-D83FQPH1BRW3
+eks-gpu-autoscaling-local.Cluster = eks-gpu-autoscaling-local
+eks-gpu-autoscaling-local.ClusterArn = arn:aws:eks:us-east-1:123456789012:cluster/eks-gpu-autoscaling-local
+eks-gpu-autoscaling-local.ClusterCertificateAuthorityData = xxxxxxxx
+eks-gpu-autoscaling-local.ClusterEncryptionConfigKeyArn = 
+eks-gpu-autoscaling-local.ClusterEndpoint = https://123456789012.gr7.us-east-1.eks.amazonaws.com
+eks-gpu-autoscaling-local.ClusterName = eks-gpu-autoscaling-local
+eks-gpu-autoscaling-local.ClusterSecurityGroupId = sg-0123456789abc
+eks-gpu-autoscaling-local.VPC = vpc-0123456789abc
+eks-gpu-autoscaling-local.eksclusterConfigCommand515C0544 = aws eks update-kubeconfig --name eks-gpu-autoscaling-local --region us-east-1 --role-arn arn:aws:iam::123456789012:role/eks-gpu-autoscaling-local-iamrole10180D71-D83FQPH1BRW3
+eks-gpu-autoscaling-local.eksclusterGetTokenCommand3C33A2A5 = aws eks get-token --cluster-name eks-gpu-autoscaling-local --region us-east-1 --role-arn arn:aws:iam::123456789012:role/eks-gpu-autoscaling-local-iamrole10180D71-D83FQPH1BRW3
 ```
 
-Update the `accelerator=nvidia-gpu` lebel for GPU node group:
+```bash
+# [optional] create iamidentitymapping to access to K8s cluster on AWS webconsole
+ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+REGION=$(aws configure get default.region)
+eksctl create iamidentitymapping --cluster <cluster-name> --arn arn:aws:iam::${ACCOUNT_ID}:role/<role-name> --group system:masters --username admin --region ${REGION}
+```
+
+### Step 3: Label for GPU node group
+
+Update the `accelerator=nvidia-gpu` label for GPU node group:
 
 ```bash
 aws eks update-nodegroup-config --cluster-name gpu-autoscaling-local --nodegroup-name gpu-ng --labels addOrUpdateLabels={accelerator=nvidia-gpu}
@@ -99,21 +119,17 @@ aws eks update-nodegroup-config --cluster-name gpu-autoscaling-local --nodegroup
 }
 ```
 
-Pods:
+### Step 4: Install NVIDIA Device Plugin
 
-![K9s Pod](../screenshots/eks-bp-pod.png?raw=true)
+https://github.com/NVIDIA/k8s-device-plugin
 
-Services:
-
-![K9s Service](../screenshots/eks-bp-service.png?raw=true)
+Enable GPU support by deploying the following Daemonset:
 
 ```bash
-ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-REGION=$(aws configure get default.region)
-eksctl create iamidentitymapping --cluster <cluster-name> --arn arn:aws:iam::${ACCOUNT_ID}:role/<role-name> --group system:masters --username admin --region ${REGION}
+kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v0.11.0/nvidia-device-plugin.yml
 ```
 
-### Step 3: Kubernetes Dashboard
+### Step 5: Kubernetes Dashboard
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.1/aio/deploy/recommended.yaml
@@ -128,6 +144,16 @@ kubectl proxy for [Dashboard Login](http://localhost:8001/api/v1/namespaces/kube
 ```bash
 kubectl proxy
 ```
+
+### Pods in Cluster
+
+Pods:
+
+![K9s Pod](../screenshots/eks-bp-pod.png?raw=true)
+
+Services:
+
+![K9s Service](../screenshots/eks-bp-service.png?raw=true)
 
 ## Destroy
 
