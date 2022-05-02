@@ -7,9 +7,6 @@
 # BlueJ files
 *.ctxt
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
 # Package Files #
 *.jar
 *.war
@@ -19,5 +16,23 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# internal
+*internal*
+*.DS_Store*
+
+# CDK
+*node_modules*
+*cdk.out*
+*cdk.context.json*
+
+# K8s output
+*cpu-api.yaml*
+*gpu-api.yaml*
+*gpu2-api.yaml*
+
+ref-eksctl/cluster-autoscaler-autodiscover.yaml*
+ref-eksctl/v2_4_0_full.yaml*
+
+# taurus output
+*2022*
+*2023*

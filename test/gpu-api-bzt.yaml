@@ -1,0 +1,15 @@
+# bzt gpu-api-bzt.yaml
+---
+execution:
+- concurrency: 2
+  ramp-up: 120s
+  # ramp-up: 180s
+  hold-for: 30m
+  # hold-for: 30m
+  scenario: gpu-api
+
+scenarios:
+  gpu-api:
+    think-time: 0
+    requests:
+    - https://<alb>.ap-northeast-2.elb.amazonaws.com/gputest

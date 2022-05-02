@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: "dcgm-exporter"
+  labels:
+    app.kubernetes.io/name: "dcgm-exporter"
+    app.kubernetes.io/version: "2.6.5"
+spec:
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "dcgm-exporter"
+      app.kubernetes.io/version: "2.6.5"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: "dcgm-exporter"
+        app.kubernetes.io/version: "2.6.5"
+      name: "dcgm-exporter"
+    spec:
+      # nodeSelector:
+      nodeSelector:
+        accelerator: nvidia-gpu
+      # tolerations:
+      # - key: "nvidia.com/gpu"
+      #   value: "present"
+      #   effect: "NoSchedule"
+      containers:
+      - image: "nvcr.io/nvidia/k8s/dcgm-exporter:2.3.5-2.6.5-ubuntu20.04"
+        env:
+        - name: "DCGM_EXPORTER_LISTEN"
+          value: ":9400"
+        - name: "DCGM_EXPORTER_KUBERNETES"
+          value: "true"
+        name: "dcgm-exporter"
+        ports:
+        - name: "metrics"
+          containerPort: 9400
+        securityContext:
+          runAsNonRoot: false
+          runAsUser: 0
+        volumeMounts:
+        - name: "pod-gpu-resources"
+          readOnly: true
+          mountPath: "/var/lib/kubelet/pod-resources"
+      volumes:
+      - name: "pod-gpu-resources"
+        hostPath:
+          path: "/var/lib/kubelet/pod-resources"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: "dcgm-exporter"
+  labels:
+    app.kubernetes.io/name: "dcgm-exporter"
+    app.kubernetes.io/version: "2.6.5"
+spec:
+  selector:
+    app.kubernetes.io/name: "dcgm-exporter"
+    app.kubernetes.io/version: "2.6.5"
+  ports:
+  - name: "metrics"
+    port: 9400
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: "dcgm-exporter"
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "dcgm-exporter"
+  endpoints:
+  - port: "metrics"
+  - interval: "15s"
