@@ -8,7 +8,8 @@ import * as blueprints from '@aws-quickstart/eks-blueprints';
 
 /**
  * TODO:
- * Add 'accelerator: nvidia-gpu' label 
+ * Add 'accelerator: nvidia-gpu' label
+ * 
  */
 export default class EksBlueprintStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
@@ -37,10 +38,10 @@ export default class EksBlueprintStack extends Stack {
                     nodeGroupCapacityType: CapacityType.SPOT,
                 },
                 {
-                    id: "gpu-ng",
+                    id: "gpu-ng2",
                     minSize: 2,
                     maxSize: 10,
-                    instanceTypes: [new ec2.InstanceType('p2.xlarge')],
+                    instanceTypes: [new ec2.InstanceType('g4dn.xlarge')],
                     nodeGroupCapacityType: CapacityType.SPOT
                 }
             ]
