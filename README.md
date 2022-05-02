@@ -14,7 +14,7 @@ There are differences between CPU scaling and GPU scaling below:
 |              | CPU        | GPU           | Description                         |
 |--------------|------------|---------------|-------------------------------------|
 | Metric       | Supported  | Not Supported | `NVIDIA DCGM exporter` daemonset is required to collect GPU metrics because it is not collected through the Metric Server by default. |
-| HPA          | Supported  | Not Supported | Horizontal Pod Autoscaling(HPA) for GPU can be working based on `Prometheus` customer metrics.  |
+| HPA          | Supported  | Not Supported | Horizontal Pod Autoscaling(HPA) for GPU can be working based on `Prometheus` custom metrics.  |
 | Fraction     | Supported  | Not Supported | GPU resource fraction is not supported such as 'nvidia.com/gpu: 0.5'. |
 
 #### Objectives ####
