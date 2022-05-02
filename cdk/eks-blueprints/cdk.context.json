@@ -1,0 +1,181 @@
+{
+  "availability-zones:account=681747700094:region=ap-northeast-2": [
+    "ap-northeast-2a",
+    "ap-northeast-2b",
+    "ap-northeast-2c",
+    "ap-northeast-2d"
+  ],
+  "availability-zones:account=681747700094:region=ap-southeast-1": [
+    "ap-southeast-1a",
+    "ap-southeast-1b",
+    "ap-southeast-1c"
+  ],
+  "ssm:account=681747700094:parameterName=/cdk-eks-gpu-cluster/vpc-id:region=ap-northeast-2": "vpc-042de3c35123038fc",
+  "vpc-provider:account=681747700094:filter.vpc-id=vpc-042de3c35123038fc:region=ap-northeast-2:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-042de3c35123038fc",
+    "vpcCidrBlock": "10.100.0.0/16",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-097e4d8580d677c0d",
+            "cidr": "10.100.48.0/20",
+            "availabilityZone": "ap-northeast-2a",
+            "routeTableId": "rtb-05902545c3e5e8afd"
+          },
+          {
+            "subnetId": "subnet-07d324a636e4e0877",
+            "cidr": "10.100.64.0/20",
+            "availabilityZone": "ap-northeast-2b",
+            "routeTableId": "rtb-02418406e028827b2"
+          },
+          {
+            "subnetId": "subnet-0890166d17fcfd195",
+            "cidr": "10.100.80.0/20",
+            "availabilityZone": "ap-northeast-2c",
+            "routeTableId": "rtb-08504ac4c5df17a83"
+          }
+        ]
+      },
+      {
+        "name": "public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0fb7673881765b5ff",
+            "cidr": "10.100.0.0/20",
+            "availabilityZone": "ap-northeast-2a",
+            "routeTableId": "rtb-0f037fc4de70182c6"
+          },
+          {
+            "subnetId": "subnet-0f8e7c3ceeb11459f",
+            "cidr": "10.100.16.0/20",
+            "availabilityZone": "ap-northeast-2b",
+            "routeTableId": "rtb-0ee8c47ebbc108504"
+          },
+          {
+            "subnetId": "subnet-084e171d45b64bf42",
+            "cidr": "10.100.32.0/20",
+            "availabilityZone": "ap-northeast-2c",
+            "routeTableId": "rtb-000042fd8e9b0f229"
+          }
+        ]
+      }
+    ]
+  },
+  "ssm:account=681747700094:parameterName=/cdk-eks-blueprints/vpc-id:region=ap-northeast-2": "vpc-07c58ad3dcc09fbad",
+  "vpc-provider:account=681747700094:filter.vpc-id=vpc-07c58ad3dcc09fbad:region=ap-northeast-2:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-07c58ad3dcc09fbad",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0f18f905ceaba4deb",
+            "cidr": "10.0.0.0/20",
+            "availabilityZone": "ap-northeast-2a",
+            "routeTableId": "rtb-082e887f6f0fed96c"
+          },
+          {
+            "subnetId": "subnet-04d24034e72276639",
+            "cidr": "10.0.16.0/20",
+            "availabilityZone": "ap-northeast-2b",
+            "routeTableId": "rtb-09e4a1a7986f57c4c"
+          },
+          {
+            "subnetId": "subnet-06246165d79ebdb2d",
+            "cidr": "10.0.32.0/20",
+            "availabilityZone": "ap-northeast-2c",
+            "routeTableId": "rtb-01882e108bff2af3a"
+          }
+        ]
+      },
+      {
+        "name": "private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-054430c4e68bddd75",
+            "cidr": "10.0.48.0/20",
+            "availabilityZone": "ap-northeast-2a",
+            "routeTableId": "rtb-010071a64371b255a"
+          },
+          {
+            "subnetId": "subnet-0c9d5604a75594d89",
+            "cidr": "10.0.64.0/20",
+            "availabilityZone": "ap-northeast-2b",
+            "routeTableId": "rtb-0547c0e9283f9bf03"
+          },
+          {
+            "subnetId": "subnet-0adfaba0a6a973b55",
+            "cidr": "10.0.80.0/20",
+            "availabilityZone": "ap-northeast-2c",
+            "routeTableId": "rtb-0e73f48bbb9964549"
+          }
+        ]
+      }
+    ]
+  },
+  "ssm:account=681747700094:parameterName=/eks-gpu-autoscaling/vpc-id:region=ap-northeast-2": "vpc-0617a2cb231493f27",
+  "vpc-provider:account=681747700094:filter.vpc-id=vpc-0617a2cb231493f27:region=ap-northeast-2:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-0617a2cb231493f27",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-0ee02055d479e015e",
+            "cidr": "10.0.48.0/20",
+            "availabilityZone": "ap-northeast-2a",
+            "routeTableId": "rtb-07f9c2bc695a2385f"
+          },
+          {
+            "subnetId": "subnet-0369027aeedf63e74",
+            "cidr": "10.0.64.0/20",
+            "availabilityZone": "ap-northeast-2b",
+            "routeTableId": "rtb-0f3f66bb2df0b60d8"
+          },
+          {
+            "subnetId": "subnet-00cbfd8e8d730f4bf",
+            "cidr": "10.0.80.0/20",
+            "availabilityZone": "ap-northeast-2c",
+            "routeTableId": "rtb-089bb8e0279baed10"
+          }
+        ]
+      },
+      {
+        "name": "public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0353b157a0ad8ff7c",
+            "cidr": "10.0.0.0/20",
+            "availabilityZone": "ap-northeast-2a",
+            "routeTableId": "rtb-0136f424c812ab1af"
+          },
+          {
+            "subnetId": "subnet-00a68c30181acb18e",
+            "cidr": "10.0.16.0/20",
+            "availabilityZone": "ap-northeast-2b",
+            "routeTableId": "rtb-042b22205e1f323e1"
+          },
+          {
+            "subnetId": "subnet-09314449879b0104d",
+            "cidr": "10.0.32.0/20",
+            "availabilityZone": "ap-northeast-2c",
+            "routeTableId": "rtb-083609b1607951556"
+          }
+        ]
+      }
+    ]
+  }
+}
