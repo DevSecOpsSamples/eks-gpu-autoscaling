@@ -80,11 +80,6 @@ If you want to use the existing cluster or create a cluster by using `eksctl`, r
 ```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
-# helm search repo prometheus-community | grep kube-prometheus-stack  
-#NAME                                                    CHART VERSION   APP VERSION     DESCRIPTION                                       
-#prometheus-community/kube-prometheus-stack              35.0.3          0.56.0          kube-prometheus-stack collects Kubernetes manif...
-# helm search repo stable | prometheus-adapter
-
 helm upgrade kube-prometheus-stack prometheus-community/kube-prometheus-stack \
    --install --create-namespace --namespace monitoring \
    --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false
