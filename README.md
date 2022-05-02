@@ -471,8 +471,6 @@ kubectl delete -f dcgm-exporter-karpenter.yaml
 
 helm uninstall prometheus-adapter
 helm uninstall kube-prometheus-stack -n monitoring
-
-helm uninstall metrics-server stable/metrics-server -n kube-system
 ```
 
 # Reference
