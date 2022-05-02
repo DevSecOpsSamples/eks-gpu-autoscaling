@@ -10,7 +10,7 @@ eksctl create nodegroup -f gpu-cluster-ng.yaml
 * [gpu-cluster.yaml](./gpu-cluster.yaml)
 * [gpu-cluster-ng.yaml](./gpu-cluster-ng.yaml)
 
-It will taks account 23 minutes: Cluster 13m, Manged Node Group 10m. GPU instance is not supported in some AZ such `ap-northeast-2b` Zone of Seoul region.
+It takes around 23 minutes: Cluster 13m, Manged Node Group 10m. GPU instance is not supported in some AZ such `ap-northeast-2b` Zone of Seoul region.
 
 ```bash
 2022-04-29 13:34:53 [ℹ]  eksctl version 0.90.0
