@@ -29,6 +29,12 @@ Use the `cdk` command-line toolkit to interact with your project:
 
 ## Deploy
 
+1. VPC
+2. EKS cluster and add-on with Blueprints
+3. Label for GPU node group
+4. Install NVIDIA Device Plugin
+5. Kubernetes Dashboard
+
 ### Step 1: VPC
 
 The VPC ID will be saved into the SSM parameter store to refer from other stacks.

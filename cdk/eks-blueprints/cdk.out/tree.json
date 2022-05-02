@@ -650,17 +650,17 @@
                       "version": "2.20.0"
                     }
                   },
-                  "Nodegroupgpu-ng2-ng": {
-                    "id": "Nodegroupgpu-ng2-ng",
-                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupgpu-ng2-ng",
+                  "Nodegroupgpu-ng-ng": {
+                    "id": "Nodegroupgpu-ng-ng",
+                    "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupgpu-ng-ng",
                     "children": {
                       "NodeGroupRole": {
                         "id": "NodeGroupRole",
-                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupgpu-ng2-ng/NodeGroupRole",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupgpu-ng-ng/NodeGroupRole",
                         "children": {
                           "Resource": {
                             "id": "Resource",
-                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupgpu-ng2-ng/NodeGroupRole/Resource",
+                            "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupgpu-ng-ng/NodeGroupRole/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                               "aws:cdk:cloudformation:props": {
@@ -763,7 +763,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupgpu-ng2-ng/Resource",
+                        "path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupgpu-ng-ng/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::EKS::Nodegroup",
                           "aws:cdk:cloudformation:props": {
@@ -772,7 +772,7 @@
                             },
                             "nodeRole": {
                               "Fn::GetAtt": [
-                                "gpuautoscalinglocalNodegroupgpung2ngNodeGroupRole55DD1B62",
+                                "gpuautoscalinglocalNodegroupgpungngNodeGroupRole0E097733",
                                 "Arn"
                               ]
                             },
@@ -787,11 +787,11 @@
                             "instanceTypes": [
                               "g4dn.xlarge"
                             ],
-                            "nodegroupName": "gpu-ng2",
+                            "nodegroupName": "gpu-ng",
                             "scalingConfig": {
-                              "desiredSize": 4,
+                              "desiredSize": 2,
                               "maxSize": 10,
-                              "minSize": 4
+                              "minSize": 2
                             },
                             "tags": {
                               "k8s.io/cluster-autoscaler/enabled": "true",
@@ -3555,7 +3555,7 @@
                             "Ref": "gpuautoscalinglocalNodegroupcpungngNodeGroupRoleA9C9364D"
                           },
                           {
-                            "Ref": "gpuautoscalinglocalNodegroupgpung2ngNodeGroupRole55DD1B62"
+                            "Ref": "gpuautoscalinglocalNodegroupgpungngNodeGroupRole0E097733"
                           }
                         ]
                       }

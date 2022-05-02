@@ -38,7 +38,7 @@ export default class EksBlueprintStack extends Stack {
                     nodeGroupCapacityType: CapacityType.SPOT,
                 },
                 {
-                    id: "gpu-ng2",
+                    id: "gpu-ng",
                     minSize: 2,
                     maxSize: 10,
                     instanceTypes: [new ec2.InstanceType('g4dn.xlarge')],
