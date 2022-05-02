@@ -38,23 +38,31 @@ It takes around 23 minutes: Cluster 13m, Manged Node Group 10m. GPU instance is 
 
 ---
 
-## 1.2 IAM identity mapping
+```bash
+REGION=$(aws configure get default.region)
+ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+CLUSTER_NAME=$(kubectl config current-context | cut -d '@' -f2 | cut -d '.' -f1)
+echo "REGION: ${REGION}, ACCOUNT_ID: ${ACCOUNT_ID}, CLUSTER_NAME: ${CLUSTER_NAME}"
+
+eksctl utils associate-iam-oidc-provider --approve --cluster ${CLUSTER_NAME}
+```
 
 Create the iamidentitymapping to access to Kubernetes cluster on AWS WebConsole:
 
 ```bash
-eksctl create iamidentitymapping --cluster <cluster-name> --arn arn:aws:iam::<account-id>:role/<role-name> --group system:masters --username admin --region ap-northeast-2
+eksctl create iamidentitymapping --cluster ${CLUSTER_NAME} --arn arn:aws:iam::${ACCOUNT_ID}:role/<role-name> --group system:masters --username admin --region ap-northeast-2
 ```
 
-## Step 2: Setup Cluster AutoScaler
-
-https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/autoscaling.html
+## Step 2: Install metrics-server
 
 ```bash
-export AWS_REGION="ap-northeast-2"
-
-eksctl utils associate-iam-oidc-provider --approve --cluster <cluster-name> 
+helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
+helm upgrade --install metrics-server metrics-server/metrics-server -n monitoring
 ```
+
+## Step 3: Setup Cluster AutoScaler
+
+https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/autoscaling.html
 
 ```bash
 aws iam create-policy \
@@ -62,18 +70,20 @@ aws iam create-policy \
     --policy-document file://cluster-autoscaler-policy.json
 
 eksctl create iamserviceaccount \
-  --cluster=<cluster-name> \
+  --cluster=${CLUSTER_NAME} \
   --namespace=kube-system \
   --name=cluster-autoscaler \
-  --attach-policy-arn=arn:aws:iam::<account-id>:policy/AmazonEKSClusterAutoscalerPolicy \
+  --attach-policy-arn=arn:aws:iam::${ACCOUNT_ID}:policy/AmazonEKSClusterAutoscalerPolicy \
   --override-existing-serviceaccounts \
   --approve
 ```
 
 ```bash
-# cluster-autoscaler-autodiscover.yaml <YOUR CLUSTER NAME> 부분 변경
-curl -o cluster-autoscaler-autodiscover.yaml https://raw.githubusercontent.com/kubernetes/autoscaler/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml
+curl -o cluster-autoscaler-autodiscover-template.yaml https://raw.githubusercontent.com/kubernetes/autoscaler/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml
+echo "CLUSTER_NAME: ${CLUSTER_NAME}"
+sed -e "s|<YOUR CLUSTER NAME>|${CLUSTER_NAME}|g" cluster-autoscaler-autodiscover-template.yaml > cluster-autoscaler-autodiscover.yaml
 kubectl apply -f cluster-autoscaler-autodiscover.yaml
+kubectl annotate deployment.apps/cluster-autoscaler cluster-autoscaler.kubernetes.io/safe-to-evict="false" -n kube-system
 ```
 
 ```bash
@@ -81,38 +91,30 @@ kubectl apply -f cluster-autoscaler-autodiscover.yaml
 kubectl logs -n kube-system  -f deployment/cluster-autoscaler
 ```
 
-```bash
-# should be checked
-kubectl annotate deployment.apps/cluster-autoscaler cluster-autoscaler.kubernetes.io/safe-to-evict="false" -n kube-system
-
-kubectl version --short | grep 'Server Version:' | sed 's/[^0-9.]*\([0-9.]*\).*/\1/' | cut -d. -f1,2
-```
-
 ## Step 2: Install AWS Load Balancer Controller
 
 ```bash
 eksctl utils associate-iam-oidc-provider \
-    --region ${AWS_REGION} \
-    --cluster <cluster-name>  \
+    --region ${REGION} \
+    --cluster ${CLUSTER_NAME} \
     --approve
 
-aws eks describe-cluster --name <cluster-name> --query "cluster.identity.oidc.issuer" --output text
+aws eks describe-cluster --name ${CLUSTER_NAME} --query "cluster.identity.oidc.issuer" --output text
 
 # https://oidc.eks.ap-northeast-2.amazonaws.com/id/E7027A45F2989B456FF1F485FD367E57
 
 aws iam list-open-id-connect-providers | grep 
 
-# "Arn": "arn:aws:iam::<account-id>:oidc-provider/oidc.eks.ap-northeast-2.amazonaws.com/id/E7027A45F2989B456FF1F485FD367E57"
+# "Arn": "arn:aws:iam::${ACCOUNT_ID}:oidc-provider/oidc.eks.ap-northeast-2.amazonaws.com/id/E7027A45F2989B456FF1F485FD367E57"
 
 curl -o alb_iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.4.0/docs/install/iam_policy.json
-# curl -o alb_iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/iam_policy.json
 aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://alb_iam_policy.json
 
 eksctl create iamserviceaccount \
-    --cluster <cluster-name> \
+    --cluster ${CLUSTER_NAME} \
     --namespace kube-system \
     --name aws-load-balancer-controller \
-    --attach-policy-arn arn:aws:iam::<account-id>:policy/AWSLoadBalancerControllerIAMPolicy \
+    --attach-policy-arn arn:aws:iam::${ACCOUNT_ID}:policy/AWSLoadBalancerControllerIAMPolicy \
     --override-existing-serviceaccounts \
     --approve
 
@@ -121,13 +123,10 @@ helm repo update
 ```
 
 ```bash
-# cert-manager 설치
 kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
-
-# load-balancer-controller  설치
-curl -Lo v2_4_0_full.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.4.0/v2_4_0_full.yaml
-# replace cluster name
-sed -i.bak -e 's|your-cluster-name|<cluster-name>|' ./v2_4_0_full.yaml
+curl -Lo v2_4_0_full-template.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.4.0/v2_4_0_full.yaml
+echo "CLUSTER_NAME: ${CLUSTER_NAME}"
+sed -e "s|your-cluster-name|${CLUSTER_NAME}|g" v2_4_0_full-template.yaml > v2_4_0_full.yaml
 kubectl apply -f v2_4_0_full.yaml
 
 kubectl get deployment -n kube-system aws-load-balancer-controller

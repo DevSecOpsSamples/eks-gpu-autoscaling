@@ -45,7 +45,7 @@ There are differences between CPU scaling and GPU scaling below:
 
 ## Prerequisites
 
-The EKS Blueprint is used for minimum steps for EKS cluster and add-on.
+The EKS Blueprint was used to minimize the installation steps of EKS cluster and add-on.
 
 [Create a cluster with EKS Blueprint](./cdk/README.md):
 
@@ -70,12 +70,14 @@ If you want to use the existing cluster or create a cluster by using `eksctl`, r
 
 # Step 1: Install Prometheus Stack
 
-4 major stacks are included in the `kube-prometheus-stack` stack:
+6 components are included in the `kube-prometheus-stack` stack:
 
-* Prometheus Server
-* Prometheus Operator
-* Metric Server
-* Grafana
+* prometheus (prometheus-kube-prometheus-stack-prometheus-0)
+* prometheus-operator
+* alertmanager
+* node-exporter
+* kube-state-metrics
+* grafana
 
 ```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -190,7 +192,6 @@ DCGM_FI_DEV_GPU_UTIL{gpu="1",UUID="GPU-f3a2185e-464d-c671-4057-0d056df64b6e",dev
 DCGM_FI_DEV_GPU_UTIL{gpu="2",UUID="GPU-6ae74b72-48d0-f09f-14e2-4e09ceebda63",device="nvidia2",modelName="Tesla K80",Hostname="dcgm-exporter-cmhft",container="",namespace="",pod=""} 0
 ```
 
-
 # Step 3:  Install prometheus-adapter for custom metric
 
 Check a service name to configure the internal DNS setting of `prometheus.url` parameter:
@@ -233,7 +234,7 @@ prometheus-adapter	default  	1       	2022-05-02 13:43:52.857581 +0900 KST   	de
       metricsQuery: avg by (exported_namespace, exported_container) (round(avg_over_time(<<.Series>>[1m])))
 ```
 
-Override the label to retrieve with DCGM_FI_DEV_GPU_UTIL_AVG{`service="gpu-api"`} that saved as DCGM_FI_DEV_GPU_UTIL{`exported_container="gpu-api"`}. For details about prometheus-adapter rule, how it works, and how to check the /api/v1/query API logs, refer to the [CustomMetric](./CustomMetric.md) page.
+Override the label to retrieve with DCGM_FI_DEV_GPU_UTIL_AVG{`service="gpu-api"`} that saved as DCGM_FI_DEV_GPU_UTIL{`exported_container="gpu-api"`}. For details about prometheus-adapter rule, how it works, and how to check the /api/v1/query API logs, refer to the [CustomMetric.md](./CustomMetric.md) page.
 
 ---
 
@@ -271,6 +272,8 @@ kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/servic
 kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/gpu-api/DCGM_FI_DEV_GPU_UTIL_AVG" | jq .
 ```
 
+Refer to the [CustomMetric.md](./CustomMetric.md) page to check API response.
+
 If there is no value, connect to the DCGM exporter pod, and check connectivity with `wget http://<prometheus-url>:<port>`.
 
 # Step 4: Import Grafana Dashboards
@@ -296,13 +299,12 @@ Import dashboards
 
 ## Step 5: Deploy Inference API and HPA
 
-### 1. Install Metrics Server
+The metrics-server installation is required only if a cluster is created by `eksctl`. It's included in EKS blueprints.
 
 ```bash
-helm install metrics-server stable/metrics-server -n kube-system
+helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
+helm upgrade --install metrics-server metrics-server/metrics-server -n monitoring
 ```
-
-### 2. Build and Deploy Applications
 
 Create two repositories:
 
@@ -315,6 +317,7 @@ aws ecr create-repository --repository-name gpu-api --region ${REGION}
 ```bash
 cd cpu-api
 ./build.sh
+REGION=$(aws configure get default.region)
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 sed -e "s|<account-id>|${ACCOUNT_ID}|g" cpu-api-template.yaml | sed -e "s|<region>|${REGION}|g" > cpu-api.yaml
 kubectl apply -f cpu-api.yaml
@@ -387,6 +390,9 @@ spec:
 ```
 
 ```bash
+# aws-load-balancer-controller logs
+kubectl logs -f $(kubectl get po -n kube-system | egrep -o 'aws-load-balancer-controller-[A-Za-z0-9-]+') -n kube-system
+
 kubectl get hpa cpu-api-hpa -w
 kubectl get hpa gpu-api-hpa -w
 kubectl get hpa gpu-api2-hpa -w
@@ -450,12 +456,8 @@ Events:
 
 ```bash
 kubectl describe deploy gpu-api
-
 kubectl describe apiservices v1beta1.metrics.k8s.io
-kubectl get endpoints metrics-server -n kube-system
 kubectl logs -n kube-system -l k8s-app=metrics-server
-
-kubectl scale deployment gpu-api --replicas=6
 ```
 
 # Uninstall
@@ -470,6 +472,7 @@ kubectl delete -f dcgm-exporter-karpenter.yaml
 
 helm uninstall prometheus-adapter
 helm uninstall kube-prometheus-stack -n monitoring
+helm uninstall metrics-server -n monitoring
 ```
 
 # Reference
