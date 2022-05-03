@@ -168,7 +168,7 @@ Karpenter
                 - g4dn.xlarge
 ```
 
-You can see `serviceMonitor/default/dcgm-exporter` in [Status > Targets](http://localhost:9090/targets) menu:
+After deployment, you can see `serviceMonitor/default/dcgm-exporter` in [Status > Targets](http://localhost:9090/targets) menu like the following:
 
 ![promethus target](./screenshots/dcgm.png?raw=true)
 
