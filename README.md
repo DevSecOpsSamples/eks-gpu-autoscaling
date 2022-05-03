@@ -522,16 +522,14 @@ helm uninstall metrics-server -n monitoring
 
 [Monitoring GPU Utilization with Amazon CloudWatch](https://aws.amazon.com/ko/blogs/machine-learning/monitoring-gpu-utilization-with-amazon-cloudwatch/)
 
-# Trouble Shooting
+# Troubleshooting
 
-1. You can check all event logs with `kubectl get events -w` command.
+You can check all event logs with `kubectl get events -w` command.
 
+1. Error from server (NotFound): the server could not find the metric DCGM_FI_DEV_GPU_UTIL_AVG for services
 
-2. Error from server (NotFound): the server could not find the metric DCGM_FI_DEV_GPU_UTIL_AVG for services
+* gpu-api or your application should be deployed as a K8s Service.
 
- *  gpu-api or your application should be deployed as a K8s Service.
+2. How to check PromQL logs of prometheus-adapter?
 
-3. How to check PromQL logs?
-
- *  You can see access log of /api/v1/query API with `logLevel: 6`. Refer to the [CustomMetric.md](./CustomMetric.md) page.
-
+* You can see access log of /api/v1/query API with `logLevel: 6`. Refer to the [CustomMetric.md](./CustomMetric.md) page.
