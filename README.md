@@ -531,7 +531,7 @@ helm uninstall metrics-server -n monitoring
 
  *  gpu-api or your application should be deployed as a K8s Service.
 
-3. How to check PromQL log?
+3. How to check PromQL logs?
 
  *  You can see access log of /api/v1/query API with `logLevel: 6`. Refer to the [CustomMetric.md](./CustomMetric.md) page.
 
