@@ -70,7 +70,7 @@ If you want to use the existing cluster or create a cluster by using `eksctl`, r
 
 # Step 1: Install Prometheus Stack
 
-6 components are included in the `kube-prometheus-stack` stack:
+Six components are included in the `kube-prometheus-stack` stack:
 
 * prometheus (prometheus-kube-prometheus-stack-prometheus-0)
 * prometheus-operator
@@ -297,6 +297,8 @@ REGION=$(aws configure get default.region)
 aws ecr create-repository --repository-name cpu-api --region ${REGION}
 aws ecr create-repository --repository-name gpu-api --region ${REGION}
 ```
+
+We will deploy Deployment, Service, HorizontalPodAutoscaler, and Ingress for cpu-api and gpu-api:
 
 ```bash
 cd cpu-api
