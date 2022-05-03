@@ -1,13 +1,8 @@
-# Compiled class file
-*.class
 
-# Log file
+.gradle
+.vscode
+
 *.log
-
-# BlueJ files
-*.ctxt
-
-# Package Files #
 *.jar
 *.war
 *.nar
@@ -19,6 +14,7 @@
 # internal
 *internal*
 
+# MAC
 **/.DS_Store
 
 # CDK
