@@ -1,0 +1,765 @@
+{
+ "Resources": {
+  "Vpc8378EB38": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/Resource"
+   }
+  },
+  "VpcpublicSubnet1Subnet2BB74ED7": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    },
+    "AvailabilityZone": "ap-northeast-2a",
+    "CidrBlock": "10.0.0.0/20",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/publicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet1/Subnet"
+   }
+  },
+  "VpcpublicSubnet1RouteTable15C15F8E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/publicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet1/RouteTable"
+   }
+  },
+  "VpcpublicSubnet1RouteTableAssociation4E83B6E4": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcpublicSubnet1RouteTable15C15F8E"
+    },
+    "SubnetId": {
+     "Ref": "VpcpublicSubnet1Subnet2BB74ED7"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet1/RouteTableAssociation"
+   }
+  },
+  "VpcpublicSubnet1DefaultRouteB88F9E93": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcpublicSubnet1RouteTable15C15F8E"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    }
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet1/DefaultRoute"
+   }
+  },
+  "VpcpublicSubnet1EIP411541E6": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/publicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet1/EIP"
+   }
+  },
+  "VpcpublicSubnet1NATGatewayA036E8A6": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "VpcpublicSubnet1Subnet2BB74ED7"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "VpcpublicSubnet1EIP411541E6",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/publicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet1/NATGateway"
+   }
+  },
+  "VpcpublicSubnet2SubnetE34B022A": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    },
+    "AvailabilityZone": "ap-northeast-2b",
+    "CidrBlock": "10.0.16.0/20",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/publicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet2/Subnet"
+   }
+  },
+  "VpcpublicSubnet2RouteTableC5A6DF77": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/publicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet2/RouteTable"
+   }
+  },
+  "VpcpublicSubnet2RouteTableAssociationCCE257FF": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcpublicSubnet2RouteTableC5A6DF77"
+    },
+    "SubnetId": {
+     "Ref": "VpcpublicSubnet2SubnetE34B022A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet2/RouteTableAssociation"
+   }
+  },
+  "VpcpublicSubnet2DefaultRoute732F0BEB": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcpublicSubnet2RouteTableC5A6DF77"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    }
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet2/DefaultRoute"
+   }
+  },
+  "VpcpublicSubnet2EIP811E07A7": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/publicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet2/EIP"
+   }
+  },
+  "VpcpublicSubnet2NATGateway4A29FD4F": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "VpcpublicSubnet2SubnetE34B022A"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "VpcpublicSubnet2EIP811E07A7",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/publicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet2/NATGateway"
+   }
+  },
+  "VpcpublicSubnet3SubnetDFEF064A": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    },
+    "AvailabilityZone": "ap-northeast-2c",
+    "CidrBlock": "10.0.32.0/20",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/publicSubnet3"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet3/Subnet"
+   }
+  },
+  "VpcpublicSubnet3RouteTable80517A9C": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/publicSubnet3"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet3/RouteTable"
+   }
+  },
+  "VpcpublicSubnet3RouteTableAssociation61C43F88": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcpublicSubnet3RouteTable80517A9C"
+    },
+    "SubnetId": {
+     "Ref": "VpcpublicSubnet3SubnetDFEF064A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet3/RouteTableAssociation"
+   }
+  },
+  "VpcpublicSubnet3DefaultRouteA3904BF0": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcpublicSubnet3RouteTable80517A9C"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    }
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet3/DefaultRoute"
+   }
+  },
+  "VpcpublicSubnet3EIPD9427DC9": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/publicSubnet3"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet3/EIP"
+   }
+  },
+  "VpcpublicSubnet3NATGatewayB3ABD4B1": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "VpcpublicSubnet3SubnetDFEF064A"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "VpcpublicSubnet3EIPD9427DC9",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/publicSubnet3"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/publicSubnet3/NATGateway"
+   }
+  },
+  "VpcprivateSubnet1SubnetCEAD3716": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    },
+    "AvailabilityZone": "ap-northeast-2a",
+    "CidrBlock": "10.0.48.0/20",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/privateSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/privateSubnet1/Subnet"
+   }
+  },
+  "VpcprivateSubnet1RouteTable1979EACB": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/privateSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/privateSubnet1/RouteTable"
+   }
+  },
+  "VpcprivateSubnet1RouteTableAssociationEEBD93CE": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcprivateSubnet1RouteTable1979EACB"
+    },
+    "SubnetId": {
+     "Ref": "VpcprivateSubnet1SubnetCEAD3716"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/privateSubnet1/RouteTableAssociation"
+   }
+  },
+  "VpcprivateSubnet1DefaultRouteB506891A": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcprivateSubnet1RouteTable1979EACB"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "VpcpublicSubnet1NATGatewayA036E8A6"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/privateSubnet1/DefaultRoute"
+   }
+  },
+  "VpcprivateSubnet2Subnet2DE7549C": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    },
+    "AvailabilityZone": "ap-northeast-2b",
+    "CidrBlock": "10.0.64.0/20",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/privateSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/privateSubnet2/Subnet"
+   }
+  },
+  "VpcprivateSubnet2RouteTable4D0FFC8C": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/privateSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/privateSubnet2/RouteTable"
+   }
+  },
+  "VpcprivateSubnet2RouteTableAssociationB691E645": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcprivateSubnet2RouteTable4D0FFC8C"
+    },
+    "SubnetId": {
+     "Ref": "VpcprivateSubnet2Subnet2DE7549C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/privateSubnet2/RouteTableAssociation"
+   }
+  },
+  "VpcprivateSubnet2DefaultRouteBAC3C1C3": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcprivateSubnet2RouteTable4D0FFC8C"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "VpcpublicSubnet2NATGateway4A29FD4F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/privateSubnet2/DefaultRoute"
+   }
+  },
+  "VpcprivateSubnet3SubnetA5AC68D9": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    },
+    "AvailabilityZone": "ap-northeast-2c",
+    "CidrBlock": "10.0.80.0/20",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/privateSubnet3"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/privateSubnet3/Subnet"
+   }
+  },
+  "VpcprivateSubnet3RouteTableAF0D9985": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc/privateSubnet3"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/privateSubnet3/RouteTable"
+   }
+  },
+  "VpcprivateSubnet3RouteTableAssociation88A12983": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcprivateSubnet3RouteTableAF0D9985"
+    },
+    "SubnetId": {
+     "Ref": "VpcprivateSubnet3SubnetA5AC68D9"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/privateSubnet3/RouteTableAssociation"
+   }
+  },
+  "VpcprivateSubnet3DefaultRoute5028F7A1": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcprivateSubnet3RouteTableAF0D9985"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "VpcpublicSubnet3NATGatewayB3ABD4B1"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/privateSubnet3/DefaultRoute"
+   }
+  },
+  "VpcIGWD7BA715C": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "Vpc-local/Vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/IGW"
+   }
+  },
+  "VpcVPCGWBF912B6E": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    },
+    "InternetGatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/Vpc/VPCGW"
+   }
+  },
+  "SSMVPCID794495B1": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": {
+     "Ref": "Vpc8378EB38"
+    },
+    "Name": "/cdk-eks-blueprints/vpc-id"
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/SSMVPCID/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/0WOsQ7CMAxEv4U9DdCFGSGEWCAqiBW5wYBLm6DEAaGq/05CgU53fjrbl8t8IicjePpMn25ZTaVsdwz6JiI6tqhz2R7uWizO5qAWQoWyJr0LpUFObHCFDYx7KGsc+MDm3ltNwGTNP5zMcq2SbIBXwPiEl1COHtEOh9eG0UX/C/RNvtOcY9drg4Y74X2TujsyFwUOGox7Kf0fuk4U6G1w+vN7G/ge+u5f2gljTygrP35MZ3Imp6PKE2UuGKYGZdHrG2JVLIkzAQAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "Vpc-local/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "VPC": {
+   "Value": {
+    "Ref": "Vpc8378EB38"
+   }
+  },
+  "SSMParameter": {
+   "Value": {
+    "Ref": "SSMVPCID794495B1"
+   }
+  },
+  "SSMParameterValue": {
+   "Value": {
+    "Ref": "Vpc8378EB38"
+   }
+  },
+  "SSMURL": {
+   "Value": "https://ap-northeast-2.console.aws.amazon.com/systems-manager/parameters/"
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

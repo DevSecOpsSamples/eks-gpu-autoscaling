@@ -18,17 +18,18 @@
 
 # internal
 *internal*
-*.DS_Store*
+
+**/.DS_Store
 
 # CDK
-*node_modules*
-*cdk.out*
-*cdk.context.json*
+**/node_modules
+#**/cdk.out
+**/cdk.context.json
 
 # K8s output
-*cpu-api.yaml*
-*gpu-api.yaml*
-*gpu2-api.yaml*
+**/cpu-api.yaml*
+**/gpu-api.yaml*
+**/gpu2-api.yaml*
 
 ref-eksctl/cluster-autoscaler-autodiscover.yaml*
 ref-eksctl/v2_4_0_full.yaml*

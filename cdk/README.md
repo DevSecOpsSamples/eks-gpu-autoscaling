@@ -37,7 +37,7 @@ Use the `cdk` command-line toolkit to interact with your project:
 
 ### Step 1: VPC
 
-The VPC ID will be saved into the SSM parameter store to refer from other stacks.
+The VPC ID will be saved into the SSM Parameter Store to refer from other stacks.
 
 Parameter Name : `/eks-gpu-autoscaling/vpc-id`
 

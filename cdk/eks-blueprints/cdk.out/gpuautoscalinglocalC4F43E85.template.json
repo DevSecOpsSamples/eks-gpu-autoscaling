@@ -1,0 +1,1889 @@
+{
+ "Description": "Blueprints tracking (qs-1s1r465hk)",
+ "Resources": {
+  "gpuautoscalinglocalRole066512E8": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "eks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKSClusterPolicy"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Role/Resource"
+   }
+  },
+  "gpuautoscalinglocalControlPlaneSecurityGroup740D01C0": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "EKS Control Plane Security Group",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": "vpc-0617a2cb231493f27"
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/ControlPlaneSecurityGroup/Resource"
+   }
+  },
+  "gpuautoscalinglocalCreationRoleF56C758F": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::681747700094:root"
+          ]
+         ]
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Resource/CreationRole/Resource"
+   }
+  },
+  "gpuautoscalinglocalCreationRoleDefaultPolicyCFA0AA9D": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "iam:PassRole",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "gpuautoscalinglocalRole066512E8",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "eks:CreateCluster",
+        "eks:DescribeCluster",
+        "eks:DescribeUpdate",
+        "eks:DeleteCluster",
+        "eks:UpdateClusterVersion",
+        "eks:UpdateClusterConfig",
+        "eks:CreateFargateProfile",
+        "eks:TagResource",
+        "eks:UntagResource"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":eks:ap-northeast-2:681747700094:cluster/gpu-autoscaling-local"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":eks:ap-northeast-2:681747700094:cluster/gpu-autoscaling-local/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "eks:DescribeFargateProfile",
+        "eks:DeleteFargateProfile"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":eks:ap-northeast-2:681747700094:fargateprofile/gpu-autoscaling-local/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "iam:GetRole",
+        "iam:listAttachedRolePolicies"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "iam:CreateServiceLinkedRole",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "ec2:DescribeInstances",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeRouteTables",
+        "ec2:DescribeDhcpOptions",
+        "ec2:DescribeVpcs"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "gpuautoscalinglocalCreationRoleDefaultPolicyCFA0AA9D",
+    "Roles": [
+     {
+      "Ref": "gpuautoscalinglocalCreationRoleF56C758F"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Resource/CreationRole/DefaultPolicy/Resource"
+   }
+  },
+  "gpuautoscalinglocalD78C029F": {
+   "Type": "Custom::AWSCDK-EKS-Cluster",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+      "Outputs.gpuautoscalinglocalawscdkawseksClusterResourceProviderframeworkonEvent48AC9208Arn"
+     ]
+    },
+    "Config": {
+     "name": "gpu-autoscaling-local",
+     "version": "1.21",
+     "roleArn": {
+      "Fn::GetAtt": [
+       "gpuautoscalinglocalRole066512E8",
+       "Arn"
+      ]
+     },
+     "resourcesVpcConfig": {
+      "subnetIds": [
+       "subnet-0353b157a0ad8ff7c",
+       "subnet-00a68c30181acb18e",
+       "subnet-09314449879b0104d",
+       "subnet-0ee02055d479e015e",
+       "subnet-0369027aeedf63e74",
+       "subnet-00cbfd8e8d730f4bf"
+      ],
+      "securityGroupIds": [
+       {
+        "Fn::GetAtt": [
+         "gpuautoscalinglocalControlPlaneSecurityGroup740D01C0",
+         "GroupId"
+        ]
+       }
+      ],
+      "endpointPublicAccess": true,
+      "endpointPrivateAccess": true
+     }
+    },
+    "AssumeRoleArn": {
+     "Fn::GetAtt": [
+      "gpuautoscalinglocalCreationRoleF56C758F",
+      "Arn"
+     ]
+    },
+    "AttributesRevision": 2
+   },
+   "DependsOn": [
+    "gpuautoscalinglocalCreationRoleDefaultPolicyCFA0AA9D",
+    "gpuautoscalinglocalCreationRoleF56C758F"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Resource/Resource/Default"
+   }
+  },
+  "gpuautoscalinglocalKubectlReadyBarrier4CCD2A7F": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "aws:cdk:eks:kubectl-ready"
+   },
+   "DependsOn": [
+    "gpuautoscalinglocalCreationRoleDefaultPolicyCFA0AA9D",
+    "gpuautoscalinglocalCreationRoleF56C758F",
+    "gpuautoscalinglocalD78C029F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/KubectlReadyBarrier"
+   }
+  },
+  "gpuautoscalinglocalMastersRoleA4B84851": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::681747700094:root"
+          ]
+         ]
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/MastersRole/Resource"
+   }
+  },
+  "gpuautoscalinglocalAwsAuthmanifestB7546CA7": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.gpuautoscalinglocalawscdkawseksKubectlProviderframeworkonEventA89A7DD5Arn"
+     ]
+    },
+    "Manifest": {
+     "Fn::Join": [
+      "",
+      [
+       "[{\"apiVersion\":\"v1\",\"kind\":\"ConfigMap\",\"metadata\":{\"name\":\"aws-auth\",\"namespace\":\"kube-system\",\"labels\":{\"aws.cdk.eks/prune-c874f3e9b5ad48acd5080f59dbc450a24d271a6835\":\"\"}},\"data\":{\"mapRoles\":\"[{\\\"rolearn\\\":\\\"",
+       {
+        "Fn::GetAtt": [
+         "gpuautoscalinglocalMastersRoleA4B84851",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"username\\\":\\\"",
+       {
+        "Fn::GetAtt": [
+         "gpuautoscalinglocalMastersRoleA4B84851",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"groups\\\":[\\\"system:masters\\\"]},{\\\"rolearn\\\":\\\"",
+       {
+        "Fn::GetAtt": [
+         "gpuautoscalinglocalNodegroupcpungngNodeGroupRoleA9C9364D",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"username\\\":\\\"system:node:{{EC2PrivateDNSName}}\\\",\\\"groups\\\":[\\\"system:bootstrappers\\\",\\\"system:nodes\\\"]},{\\\"rolearn\\\":\\\"",
+       {
+        "Fn::GetAtt": [
+         "gpuautoscalinglocalNodegroupgpungngNodeGroupRole0E097733",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"username\\\":\\\"system:node:{{EC2PrivateDNSName}}\\\",\\\"groups\\\":[\\\"system:bootstrappers\\\",\\\"system:nodes\\\"]}]\",\"mapUsers\":\"[]\",\"mapAccounts\":\"[]\"}}]"
+      ]
+     ]
+    },
+    "ClusterName": {
+     "Ref": "gpuautoscalinglocalD78C029F"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "gpuautoscalinglocalCreationRoleF56C758F",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c874f3e9b5ad48acd5080f59dbc450a24d271a6835",
+    "Overwrite": true
+   },
+   "DependsOn": [
+    "gpuautoscalinglocalKubectlReadyBarrier4CCD2A7F"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/AwsAuth/manifest/Resource/Default"
+   }
+  },
+  "gpuautoscalinglocalNodegroupcpungngNodeGroupRoleA9C9364D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKSWorkerNodePolicy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKS_CNI_Policy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/CloudWatchAgentServerPolicy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "k8s.io/cluster-autoscaler/enabled",
+      "Value": "true"
+     },
+     {
+      "Key": "k8s.io/cluster-autoscaler/gpu-autoscaling-local/gpu-autoscaling-local/clusterName",
+      "Value": "owned"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupcpu-ng-ng/NodeGroupRole/Resource"
+   }
+  },
+  "gpuautoscalinglocalNodegroupcpungng0015FCEB": {
+   "Type": "AWS::EKS::Nodegroup",
+   "Properties": {
+    "ClusterName": {
+     "Ref": "gpuautoscalinglocalD78C029F"
+    },
+    "NodeRole": {
+     "Fn::GetAtt": [
+      "gpuautoscalinglocalNodegroupcpungngNodeGroupRoleA9C9364D",
+      "Arn"
+     ]
+    },
+    "Subnets": [
+     "subnet-0ee02055d479e015e",
+     "subnet-0369027aeedf63e74",
+     "subnet-00cbfd8e8d730f4bf"
+    ],
+    "AmiType": "AL2_x86_64",
+    "CapacityType": "SPOT",
+    "ForceUpdateEnabled": true,
+    "InstanceTypes": [
+     "c5.large"
+    ],
+    "NodegroupName": "cpu-ng",
+    "ScalingConfig": {
+     "DesiredSize": 2,
+     "MaxSize": 10,
+     "MinSize": 2
+    },
+    "Tags": {
+     "k8s.io/cluster-autoscaler/enabled": "true",
+     "k8s.io/cluster-autoscaler/gpu-autoscaling-local/gpu-autoscaling-local/clusterName": "owned"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupcpu-ng-ng/Resource"
+   }
+  },
+  "gpuautoscalinglocalNodegroupgpungngNodeGroupRole0E097733": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKSWorkerNodePolicy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKS_CNI_Policy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/CloudWatchAgentServerPolicy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "k8s.io/cluster-autoscaler/enabled",
+      "Value": "true"
+     },
+     {
+      "Key": "k8s.io/cluster-autoscaler/gpu-autoscaling-local/gpu-autoscaling-local/clusterName",
+      "Value": "owned"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupgpu-ng-ng/NodeGroupRole/Resource"
+   }
+  },
+  "gpuautoscalinglocalNodegroupgpungng757EAF03": {
+   "Type": "AWS::EKS::Nodegroup",
+   "Properties": {
+    "ClusterName": {
+     "Ref": "gpuautoscalinglocalD78C029F"
+    },
+    "NodeRole": {
+     "Fn::GetAtt": [
+      "gpuautoscalinglocalNodegroupgpungngNodeGroupRole0E097733",
+      "Arn"
+     ]
+    },
+    "Subnets": [
+     "subnet-0ee02055d479e015e",
+     "subnet-0369027aeedf63e74",
+     "subnet-00cbfd8e8d730f4bf"
+    ],
+    "AmiType": "AL2_x86_64_GPU",
+    "CapacityType": "SPOT",
+    "ForceUpdateEnabled": true,
+    "InstanceTypes": [
+     "g4dn.xlarge"
+    ],
+    "NodegroupName": "gpu-ng",
+    "ScalingConfig": {
+     "DesiredSize": 2,
+     "MaxSize": 10,
+     "MinSize": 2
+    },
+    "Tags": {
+     "k8s.io/cluster-autoscaler/enabled": "true",
+     "k8s.io/cluster-autoscaler/gpu-autoscaling-local/gpu-autoscaling-local/clusterName": "owned"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/Nodegroupgpu-ng-ng/Resource"
+   }
+  },
+  "gpuautoscalinglocalchartmetricsserver81953123": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.gpuautoscalinglocalawscdkawseksKubectlProviderframeworkonEventA89A7DD5Arn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "gpuautoscalinglocalD78C029F"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "gpuautoscalinglocalCreationRoleF56C758F",
+      "Arn"
+     ]
+    },
+    "Release": "blueprints-addon-metrics-server",
+    "Chart": "metrics-server",
+    "Version": "3.7.0",
+    "Values": "{}",
+    "Namespace": "kube-system",
+    "Repository": "https://kubernetes-sigs.github.io/metrics-server",
+    "CreateNamespace": true
+   },
+   "DependsOn": [
+    "gpuautoscalinglocalKubectlReadyBarrier4CCD2A7F"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-metrics-server/Resource/Default"
+   }
+  },
+  "gpuautoscalinglocalchartclusterautoscaler9E8EB53A": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.gpuautoscalinglocalawscdkawseksKubectlProviderframeworkonEventA89A7DD5Arn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "gpuautoscalinglocalD78C029F"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "gpuautoscalinglocalCreationRoleF56C758F",
+      "Arn"
+     ]
+    },
+    "Release": "blueprints-addon-cluster-autoscaler",
+    "Chart": "cluster-autoscaler",
+    "Version": "9.10.8",
+    "Values": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"cloudProvider\":\"aws\",\"autoDiscovery\":{\"clusterName\":\"",
+       {
+        "Ref": "gpuautoscalinglocalD78C029F"
+       },
+       "\"},\"awsRegion\":\"ap-northeast-2\"}"
+      ]
+     ]
+    },
+    "Namespace": "kube-system",
+    "Repository": "https://kubernetes.github.io/autoscaler",
+    "CreateNamespace": true
+   },
+   "DependsOn": [
+    "gpuautoscalinglocalKubectlReadyBarrier4CCD2A7F"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-cluster-autoscaler/Resource/Default"
+   }
+  },
+  "gpuautoscalinglocalchartadotexporterforeksonec2F7F40EA1": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.gpuautoscalinglocalawscdkawseksKubectlProviderframeworkonEventA89A7DD5Arn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "gpuautoscalinglocalD78C029F"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "gpuautoscalinglocalCreationRoleF56C758F",
+      "Arn"
+     ]
+    },
+    "Release": "adot-eks-addon",
+    "Chart": "adot-exporter-for-eks-on-ec2",
+    "Version": "0.1.0",
+    "Values": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"awsRegion\":\"ap-northeast-2\",\"clusterName\":\"",
+       {
+        "Ref": "gpuautoscalinglocalD78C029F"
+       },
+       "\"}"
+      ]
+     ]
+    },
+    "Namespace": "default",
+    "Repository": "https://aws-observability.github.io/aws-otel-helm-charts",
+    "CreateNamespace": true
+   },
+   "DependsOn": [
+    "gpuautoscalinglocalKubectlReadyBarrier4CCD2A7F"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-adot-exporter-for-eks-on-ec2/Resource/Default"
+   }
+  },
+  "gpuautoscalinglocalawsloadbalancercontrollerConditionJson5974394E": {
+   "Type": "Custom::AWSCDKCfnJson",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+      "Arn"
+     ]
+    },
+    "Value": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "gpuautoscalinglocalOpenIdConnectProvider30F8CD15"
+           }
+          ]
+         }
+        ]
+       },
+       ":aud\":\"sts.amazonaws.com\",\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "gpuautoscalinglocalOpenIdConnectProvider30F8CD15"
+           }
+          ]
+         }
+        ]
+       },
+       ":sub\":\"system:serviceaccount:kube-system:aws-load-balancer-controller\"}"
+      ]
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/ConditionJson/Resource/Default"
+   }
+  },
+  "gpuautoscalinglocalawsloadbalancercontrollerRole2E52CC9D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRoleWithWebIdentity",
+       "Condition": {
+        "StringEquals": {
+         "Fn::GetAtt": [
+          "gpuautoscalinglocalawsloadbalancercontrollerConditionJson5974394E",
+          "Value"
+         ]
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Federated": {
+         "Ref": "gpuautoscalinglocalOpenIdConnectProvider30F8CD15"
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/Role/Resource"
+   }
+  },
+  "gpuautoscalinglocalawsloadbalancercontrollerRoleDefaultPolicyC2CF049B": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "iam:CreateServiceLinkedRole",
+       "Condition": {
+        "StringEquals": {
+         "iam:AWSServiceName": "elasticloadbalancing.amazonaws.com"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "ec2:DescribeAccountAttributes",
+        "ec2:DescribeAddresses",
+        "ec2:DescribeAvailabilityZones",
+        "ec2:DescribeInternetGateways",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeVpcPeeringConnections",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeInstances",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeTags",
+        "ec2:GetCoipPoolUsage",
+        "ec2:DescribeCoipPools",
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "elasticloadbalancing:DescribeLoadBalancerAttributes",
+        "elasticloadbalancing:DescribeListeners",
+        "elasticloadbalancing:DescribeListenerCertificates",
+        "elasticloadbalancing:DescribeSSLPolicies",
+        "elasticloadbalancing:DescribeRules",
+        "elasticloadbalancing:DescribeTargetGroups",
+        "elasticloadbalancing:DescribeTargetGroupAttributes",
+        "elasticloadbalancing:DescribeTargetHealth",
+        "elasticloadbalancing:DescribeTags"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "cognito-idp:DescribeUserPoolClient",
+        "acm:ListCertificates",
+        "acm:DescribeCertificate",
+        "iam:ListServerCertificates",
+        "iam:GetServerCertificate",
+        "waf-regional:GetWebACL",
+        "waf-regional:GetWebACLForResource",
+        "waf-regional:AssociateWebACL",
+        "waf-regional:DisassociateWebACL",
+        "wafv2:GetWebACL",
+        "wafv2:GetWebACLForResource",
+        "wafv2:AssociateWebACL",
+        "wafv2:DisassociateWebACL",
+        "shield:GetSubscriptionState",
+        "shield:DescribeProtection",
+        "shield:CreateProtection",
+        "shield:DeleteProtection"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:RevokeSecurityGroupIngress"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "ec2:CreateSecurityGroup",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "ec2:CreateTags",
+       "Condition": {
+        "StringEquals": {
+         "ec2:CreateAction": "CreateSecurityGroup"
+        },
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":ec2:*:*:security-group/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "true",
+         "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":ec2:*:*:security-group/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:RevokeSecurityGroupIngress",
+        "ec2:DeleteSecurityGroup"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:CreateLoadBalancer",
+        "elasticloadbalancing:CreateTargetGroup"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:CreateListener",
+        "elasticloadbalancing:DeleteListener",
+        "elasticloadbalancing:CreateRule",
+        "elasticloadbalancing:DeleteRule"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:AddTags",
+        "elasticloadbalancing:RemoveTags"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:RequestTag/elbv2.k8s.aws/cluster": "true",
+         "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":elasticloadbalancing:*:*:targetgroup/*/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":elasticloadbalancing:*:*:loadbalancer/net/*/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":elasticloadbalancing:*:*:loadbalancer/app/*/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:AddTags",
+        "elasticloadbalancing:RemoveTags"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":elasticloadbalancing:*:*:listener/net/*/*/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":elasticloadbalancing:*:*:listener/app/*/*/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":elasticloadbalancing:*:*:listener-rule/net/*/*/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":elasticloadbalancing:*:*:listener-rule/app/*/*/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:ModifyLoadBalancerAttributes",
+        "elasticloadbalancing:SetIpAddressType",
+        "elasticloadbalancing:SetSecurityGroups",
+        "elasticloadbalancing:SetSubnets",
+        "elasticloadbalancing:DeleteLoadBalancer",
+        "elasticloadbalancing:ModifyTargetGroup",
+        "elasticloadbalancing:ModifyTargetGroupAttributes",
+        "elasticloadbalancing:DeleteTargetGroup"
+       ],
+       "Condition": {
+        "Null": {
+         "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:RegisterTargets",
+        "elasticloadbalancing:DeregisterTargets"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":elasticloadbalancing:*:*:targetgroup/*/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "elasticloadbalancing:SetWebAcl",
+        "elasticloadbalancing:ModifyListener",
+        "elasticloadbalancing:AddListenerCertificates",
+        "elasticloadbalancing:RemoveListenerCertificates",
+        "elasticloadbalancing:ModifyRule"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "gpuautoscalinglocalawsloadbalancercontrollerRoleDefaultPolicyC2CF049B",
+    "Roles": [
+     {
+      "Ref": "gpuautoscalinglocalawsloadbalancercontrollerRole2E52CC9D"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/Role/DefaultPolicy/Resource"
+   }
+  },
+  "gpuautoscalinglocalawsloadbalancercontrollermanifestawsloadbalancercontrollerServiceAccountResourceC344905A": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.gpuautoscalinglocalawscdkawseksKubectlProviderframeworkonEventA89A7DD5Arn"
+     ]
+    },
+    "Manifest": {
+     "Fn::Join": [
+      "",
+      [
+       "[{\"apiVersion\":\"v1\",\"kind\":\"ServiceAccount\",\"metadata\":{\"name\":\"aws-load-balancer-controller\",\"namespace\":\"kube-system\",\"labels\":{\"aws.cdk.eks/prune-c8d79c2221c3d3e78a0843e41c5238d0d13674d9da\":\"\",\"app.kubernetes.io/name\":\"aws-load-balancer-controller\"},\"annotations\":{\"eks.amazonaws.com/role-arn\":\"",
+       {
+        "Fn::GetAtt": [
+         "gpuautoscalinglocalawsloadbalancercontrollerRole2E52CC9D",
+         "Arn"
+        ]
+       },
+       "\"}}}]"
+      ]
+     ]
+    },
+    "ClusterName": {
+     "Ref": "gpuautoscalinglocalD78C029F"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "gpuautoscalinglocalCreationRoleF56C758F",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c8d79c2221c3d3e78a0843e41c5238d0d13674d9da"
+   },
+   "DependsOn": [
+    "gpuautoscalinglocalKubectlReadyBarrier4CCD2A7F"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/aws-load-balancer-controller/manifest-aws-load-balancer-controllerServiceAccountResource/Resource/Default"
+   }
+  },
+  "gpuautoscalinglocalOpenIdConnectProvider30F8CD15": {
+   "Type": "Custom::AWSCDKOpenIdConnectProvider",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0",
+      "Arn"
+     ]
+    },
+    "ClientIDList": [
+     "sts.amazonaws.com"
+    ],
+    "ThumbprintList": [
+     "9e99a48a9960b14926bb7f3b02e22da2b0ab7280"
+    ],
+    "Url": {
+     "Fn::GetAtt": [
+      "gpuautoscalinglocalD78C029F",
+      "OpenIdConnectIssuerUrl"
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/OpenIdConnectProvider/Resource/Default"
+   }
+  },
+  "gpuautoscalinglocalchartawsloadbalancercontrollerEE831889": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.gpuautoscalinglocalawscdkawseksKubectlProviderframeworkonEventA89A7DD5Arn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "gpuautoscalinglocalD78C029F"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "gpuautoscalinglocalCreationRoleF56C758F",
+      "Arn"
+     ]
+    },
+    "Release": "aws-load-balancer-controller",
+    "Chart": "aws-load-balancer-controller",
+    "Version": "1.3.3",
+    "Values": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"clusterName\":\"",
+       {
+        "Ref": "gpuautoscalinglocalD78C029F"
+       },
+       "\",\"serviceAccount\":{\"create\":false,\"name\":\"aws-load-balancer-controller\"},\"enableShield\":false,\"enableWaf\":false,\"enableWafv2\":false,\"createIngressClassResource\":true,\"ingressClass\":\"alb\",\"region\":\"ap-northeast-2\",\"image\":{\"repository\":\"602401143452.dkr.ecr.ap-northeast-2.amazonaws.com/amazon/aws-load-balancer-controller\"},\"vpcId\":\"vpc-0617a2cb231493f27\"}"
+      ]
+     ]
+    },
+    "Namespace": "kube-system",
+    "Repository": "https://aws.github.io/eks-charts",
+    "CreateNamespace": true
+   },
+   "DependsOn": [
+    "gpuautoscalinglocalawsloadbalancercontrollerConditionJson5974394E",
+    "gpuautoscalinglocalawsloadbalancercontrollermanifestawsloadbalancercontrollerServiceAccountResourceC344905A",
+    "gpuautoscalinglocalawsloadbalancercontrollerRoleDefaultPolicyC2CF049B",
+    "gpuautoscalinglocalawsloadbalancercontrollerRole2E52CC9D",
+    "gpuautoscalinglocalKubectlReadyBarrier4CCD2A7F"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/gpu-autoscaling-local/chart-aws-load-balancer-controller/Resource/Default"
+   }
+  },
+  "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454": {
+   "Type": "AWS::CloudFormation::Stack",
+   "Properties": {
+    "TemplateURL": {
+     "Fn::Join": [
+      "",
+      [
+       "https://s3.ap-northeast-2.",
+       {
+        "Ref": "AWS::URLSuffix"
+       },
+       "/cdk-hnb659fds-assets-681747700094-ap-northeast-2/40f8085461a657a00ac8a56f22201eda321e5d68a482df3316d50febc3a21387.json"
+      ]
+     ]
+    },
+    "Parameters": {
+     "referencetogpuautoscalinglocalCreationRoleDC484638Arn": {
+      "Fn::GetAtt": [
+       "gpuautoscalinglocalCreationRoleF56C758F",
+       "Arn"
+      ]
+     }
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource",
+    "aws:asset:path": "gpuautoscalinglocalawscdkawseksClusterResourceProviderE71BD2B1.nested.template.json",
+    "aws:asset:property": "TemplateURL"
+   }
+  },
+  "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B": {
+   "Type": "AWS::CloudFormation::Stack",
+   "Properties": {
+    "TemplateURL": {
+     "Fn::Join": [
+      "",
+      [
+       "https://s3.ap-northeast-2.",
+       {
+        "Ref": "AWS::URLSuffix"
+       },
+       "/cdk-hnb659fds-assets-681747700094-ap-northeast-2/025beaef0d28d05f20be4a5b881ca2ec75efe295105658d70e665fa4ea583cdb.json"
+      ]
+     ]
+    },
+    "Parameters": {
+     "referencetogpuautoscalinglocal971BC66BArn": {
+      "Fn::GetAtt": [
+       "gpuautoscalinglocalD78C029F",
+       "Arn"
+      ]
+     },
+     "referencetogpuautoscalinglocalCreationRoleDC484638Arn": {
+      "Fn::GetAtt": [
+       "gpuautoscalinglocalCreationRoleF56C758F",
+       "Arn"
+      ]
+     },
+     "referencetogpuautoscalinglocal971BC66BClusterSecurityGroupId": {
+      "Fn::GetAtt": [
+       "gpuautoscalinglocalD78C029F",
+       "ClusterSecurityGroupId"
+      ]
+     }
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource",
+    "aws:asset:path": "gpuautoscalinglocalawscdkawseksKubectlProvider18FF6CE5.nested.template.json",
+    "aws:asset:property": "TemplateURL"
+   }
+  },
+  "ClusterLogsEnablerCustomResourcePolicyBE4AA329": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "eks:UpdateClusterConfig",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "gpuautoscalinglocalD78C029F",
+            "Arn"
+           ]
+          },
+          "/update-config"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ClusterLogsEnablerCustomResourcePolicyBE4AA329",
+    "Roles": [
+     {
+      "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/ClusterLogsEnabler/CustomResourcePolicy/Resource"
+   }
+  },
+  "ClusterLogsEnablerD85801E8": {
+   "Type": "Custom::AWS",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+      "Arn"
+     ]
+    },
+    "Create": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"physicalResourceId\":{\"id\":\"",
+       {
+        "Fn::GetAtt": [
+         "gpuautoscalinglocalD78C029F",
+         "Arn"
+        ]
+       },
+       "/LogsEnabler\"},\"service\":\"EKS\",\"action\":\"updateClusterConfig\",\"region\":\"ap-northeast-2\",\"parameters\":{\"name\":\"",
+       {
+        "Ref": "gpuautoscalinglocalD78C029F"
+       },
+       "\",\"logging\":{\"clusterLogging\":[{\"enabled\":true,\"types\":[\"api\"]}]}}}"
+      ]
+     ]
+    },
+    "Update": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"physicalResourceId\":{\"id\":\"",
+       {
+        "Fn::GetAtt": [
+         "gpuautoscalinglocalD78C029F",
+         "Arn"
+        ]
+       },
+       "/LogsEnabler\"},\"service\":\"EKS\",\"action\":\"updateClusterConfig\",\"region\":\"ap-northeast-2\",\"parameters\":{\"name\":\"",
+       {
+        "Ref": "gpuautoscalinglocalD78C029F"
+       },
+       "\",\"logging\":{\"clusterLogging\":[{\"enabled\":true,\"types\":[\"api\"]},{\"enabled\":false,\"types\":[\"audit\",\"authenticator\",\"controllerManager\",\"scheduler\"]}]}}}"
+      ]
+     ]
+    },
+    "Delete": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"physicalResourceId\":{\"id\":\"",
+       {
+        "Fn::GetAtt": [
+         "gpuautoscalinglocalD78C029F",
+         "Arn"
+        ]
+       },
+       "/LogsEnabler\"},\"service\":\"EKS\",\"action\":\"updateClusterConfig\",\"region\":\"ap-northeast-2\",\"parameters\":{\"name\":\"",
+       {
+        "Ref": "gpuautoscalinglocalD78C029F"
+       },
+       "\",\"logging\":{\"clusterLogging\":[{\"enabled\":false,\"types\":[\"api\",\"audit\",\"authenticator\",\"controllerManager\",\"scheduler\"]}]}}}"
+      ]
+     ]
+    },
+    "InstallLatestAwsSdk": true
+   },
+   "DependsOn": [
+    "ClusterLogsEnablerCustomResourcePolicyBE4AA329"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/ClusterLogsEnabler/Resource/Default"
+   }
+  },
+  "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource"
+   }
+  },
+  "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-681747700094-ap-northeast-2",
+     "S3Key": "39381d2c8b8ec42679de4960c24f0c83c56772cdc2b10b6fc14cd0a99aba42ed.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+      "Arn"
+     ]
+    },
+    "Handler": "index.handler",
+    "Runtime": "nodejs12.x",
+    "Timeout": 120
+   },
+   "DependsOn": [
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/AWS679f53fac002430cb0da5b7982bd2287/Resource",
+    "aws:asset:path": "asset.39381d2c8b8ec42679de4960c24f0c83c56772cdc2b10b6fc14cd0a99aba42ed",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "clusterautoscalerpolicyBCFCC783": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "autoscaling:DescribeAutoScalingGroups",
+        "autoscaling:DescribeAutoScalingInstances",
+        "autoscaling:DescribeLaunchConfigurations",
+        "autoscaling:DescribeTags",
+        "autoscaling:SetDesiredCapacity",
+        "autoscaling:TerminateInstanceInAutoScalingGroup",
+        "ec2:DescribeInstanceTypes",
+        "ec2:DescribeLaunchTemplateVersions"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ClusterAutoscalerPolicy",
+    "Roles": [
+     {
+      "Ref": "gpuautoscalinglocalNodegroupcpungngNodeGroupRoleA9C9364D"
+     },
+     {
+      "Ref": "gpuautoscalinglocalNodegroupgpungngNodeGroupRole0E097733"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/cluster-autoscaler-policy/Resource"
+   }
+  },
+  "clusterNameB220FB68": {
+   "Type": "Custom::AWSCDKCfnJson",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+      "Arn"
+     ]
+    },
+    "Value": {
+     "Fn::Join": [
+      "",
+      [
+       "\"",
+       {
+        "Ref": "gpuautoscalinglocalD78C029F"
+       },
+       "\""
+      ]
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/clusterName/Resource/Default"
+   }
+  },
+  "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/AWSCDKCfnUtilsProviderCustomResourceProvider/Role"
+   }
+  },
+  "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-681747700094-ap-northeast-2",
+     "S3Key": "f6936269880ca7cba4a55a3b31d35973da96a3a8d67bf1bdb89ec0377026b8ee.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs12.x"
+   },
+   "DependsOn": [
+    "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.f6936269880ca7cba4a55a3b31d35973da96a3a8d67bf1bdb89ec0377026b8ee",
+    "aws:asset:property": "Code"
+   }
+  },
+  "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Resource": "*",
+         "Action": [
+          "iam:CreateOpenIDConnectProvider",
+          "iam:DeleteOpenIDConnectProvider",
+          "iam:UpdateOpenIDConnectProviderThumbprint",
+          "iam:AddClientIDToOpenIDConnectProvider",
+          "iam:RemoveClientIDFromOpenIDConnectProvider"
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role"
+   }
+  },
+  "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-681747700094-ap-northeast-2",
+     "S3Key": "e87ed7caf70963cf8fd827aa2d9795431f6e07a2d25d1dbac646437e0e0761ab.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs12.x"
+   },
+   "DependsOn": [
+    "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.e87ed7caf70963cf8fd827aa2d9795431f6e07a2d25d1dbac646437e0e0761ab",
+    "aws:asset:property": "Code"
+   }
+  },
+  "vpccniaddOn": {
+   "Type": "AWS::EKS::Addon",
+   "Properties": {
+    "AddonName": "vpc-cni",
+    "ClusterName": {
+     "Ref": "gpuautoscalinglocalD78C029F"
+    },
+    "AddonVersion": "v1.10.2-eksbuild.1",
+    "ResolveConflicts": "OVERWRITE"
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/vpc-cni-addOn"
+   }
+  },
+  "corednsaddOn": {
+   "Type": "AWS::EKS::Addon",
+   "Properties": {
+    "AddonName": "coredns",
+    "ClusterName": {
+     "Ref": "gpuautoscalinglocalD78C029F"
+    },
+    "AddonVersion": "v1.8.4-eksbuild.1",
+    "ResolveConflicts": "OVERWRITE"
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/coredns-addOn"
+   }
+  },
+  "kubeproxyaddOn": {
+   "Type": "AWS::EKS::Addon",
+   "Properties": {
+    "AddonName": "kube-proxy",
+    "ClusterName": {
+     "Ref": "gpuautoscalinglocalD78C029F"
+    },
+    "AddonVersion": "v1.21.2-eksbuild.2",
+    "ResolveConflicts": "OVERWRITE"
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/kube-proxy-addOn"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/11Qy47CMAz8Fu4mC+yBc6m0T+2C4ANQcAyEpgmKHRCq+u+b0oV9nDy2x57RTNRkpEYDfeYhmmro7EY1K9FYwZI4pIgEebduqGLVlC6xUITizEWSPbynDUVPQvyhvd0SC3wGQ7sY0hHKrf9pXsjV5V5HgRXFk0UqEEPyAvMj+VdTBu8JZRHDyZoskG8LY4JvwepaNcvgqJtd6yI4i5eu7VELhJNsmjBFK5fnm/ifQQtO1xujM8/6nSMJ/il5FBs83EE+uuEW+HGtmUlYFV3JvZolrEhmmqmFMicR6ntGnblfeJ7kmKRDb9w/7jPF69U6flPz7zP/+3RVy+xd9vlP5RZPCz4Hqw78cBpP1VSNBwe2dhhznrYmtezrF6soOKTaAQAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "gpu-autoscaling-local/gpu-autoscaling-local/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "gpuautoscalinglocalClusterNameEA1DAD2D": {
+   "Value": {
+    "Ref": "gpuautoscalinglocalD78C029F"
+   }
+  },
+  "gpuautoscalinglocalConfigCommand0D506CF5": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "aws eks update-kubeconfig --name ",
+      {
+       "Ref": "gpuautoscalinglocalD78C029F"
+      },
+      " --region ap-northeast-2 --role-arn ",
+      {
+       "Fn::GetAtt": [
+        "gpuautoscalinglocalMastersRoleA4B84851",
+        "Arn"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "gpuautoscalinglocalGetTokenCommand4E622749": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "aws eks get-token --cluster-name ",
+      {
+       "Ref": "gpuautoscalinglocalD78C029F"
+      },
+      " --region ap-northeast-2 --role-arn ",
+      {
+       "Fn::GetAtt": [
+        "gpuautoscalinglocalMastersRoleA4B84851",
+        "Arn"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "ExportsOutputRefgpuautoscalinglocalD78C029FB9F306C3": {
+   "Value": {
+    "Ref": "gpuautoscalinglocalD78C029F"
+   },
+   "Export": {
+    "Name": "gpuautoscalinglocalC4F43E85:ExportsOutputRefgpuautoscalinglocalD78C029FB9F306C3"
+   }
+  },
+  "ExportsOutputFnGetAttgpuautoscalinglocalD78C029FArn798A1035": {
+   "Value": {
+    "Fn::GetAtt": [
+     "gpuautoscalinglocalD78C029F",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "gpuautoscalinglocalC4F43E85:ExportsOutputFnGetAttgpuautoscalinglocalD78C029FArn798A1035"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
