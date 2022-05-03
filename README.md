@@ -533,3 +533,7 @@ You can check all event logs with `kubectl get events -w` command.
 2. How to check PromQL logs of prometheus-adapter?
 
 * You can see access log of /api/v1/query API with `logLevel: 6`. Refer to the [CustomMetric.md](./CustomMetric.md) page.
+
+3. gpu-api image download failed
+
+* Increase the root volumn size
