@@ -70,7 +70,7 @@ If you want to use the existing cluster or create a cluster by using `eksctl`, r
 
 # Step 1: Install Prometheus Stack
 
-6 components are included in the `kube-prometheus-stack` stack:
+Six components are included in the `kube-prometheus-stack` stack:
 
 * prometheus (prometheus-kube-prometheus-stack-prometheus-0)
 * prometheus-operator
@@ -107,7 +107,7 @@ kubectl apply -f dcgm-exporter-karpenter.yaml
 
 * [dcgm-exporter-karpenter.yaml](./dcgm-exporter-karpenter.yaml)
 
-Deploy with a local yaml file instead of Helm to use the ServiceMonitor for Service Discovery. Scrape configurations can be added in [additionalScrapeConfigs](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) element when installing Prometheus, but we will use ServiceMonitor to deploy configuration per K8s Service.
+Deploy with a local YAML file instead of Helm Chart to use the ServiceMonitor for Service Discovery. Scrape configurations can be added in [additionalScrapeConfigs](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) element when installing Prometheus, but we will use ServiceMonitor to deploy configuration per K8s Service.
 
 ```bash
 kubectl get servicemonitor dcgm-exporter -o yaml
@@ -168,7 +168,7 @@ Karpenter
                 - g4dn.xlarge
 ```
 
-You can see `serviceMonitor/default/dcgm-exporter` in [Status > Targets](http://localhost:9090/targets) menu:
+After deployment, you can see `serviceMonitor/default/dcgm-exporter` in [Status > Targets](http://localhost:9090/targets) menu like the following:
 
 ![promethus target](./screenshots/dcgm.png?raw=true)
 
@@ -213,12 +213,6 @@ Install prometheus-adapter:
 helm install --version=3.2.2 prometheus-adapter prometheus-community/prometheus-adapter -f prometheus-adapter-values.yaml
 ```
 
-```bash
-$ helm list
-NAME              	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART                         APP VERSION   
-prometheus-adapter	default  	1       	2022-05-02 13:43:52.857581 +0900 KST   	deployed	prometheus-adapter-3.2.2      v0.9.1  
-```
-
 [prometheus-adapter-values.yaml](./prometheus-adapter-values.yaml)
 
 ```bash
@@ -236,9 +230,13 @@ prometheus-adapter	default  	1       	2022-05-02 13:43:52.857581 +0900 KST   	de
 
 Override the label to retrieve with DCGM_FI_DEV_GPU_UTIL_AVG{`service="gpu-api"`} that saved as DCGM_FI_DEV_GPU_UTIL{`exported_container="gpu-api"`}. For details about prometheus-adapter rule, how it works, and how to check the /api/v1/query API logs, refer to the [CustomMetric.md](./CustomMetric.md) page.
 
+**IMPORTANT**
+
+You can retrieve the DCGM_FI_DEV_GPU_UTIL_AVG metric after deployment of gpu-api(Step 5) because it's collected based on K8s Service.
+
 ---
 
-Retrieve custom metrics:
+Retrieve DCGM metrics:
 
 ```bash
 kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1 | jq -r . | grep DCGM_FI_DEV_GPU_UTIL
@@ -249,10 +247,6 @@ kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1 | jq -r . | grep DCGM_FI_D
       "name": "namespaces/DCGM_FI_DEV_GPU_UTIL",
       "name": "jobs.batch/DCGM_FI_DEV_GPU_UTIL",
       "name": "pods/DCGM_FI_DEV_GPU_UTIL",
-      "name": "services/DCGM_FI_DEV_GPU_UTIL_AVG",
-      "name": "namespaces/DCGM_FI_DEV_GPU_UTIL_AVG",
-      "name": "jobs.batch/DCGM_FI_DEV_GPU_UTIL_AVG",
-      "name": "pods/DCGM_FI_DEV_GPU_UTIL_AVG",
       ...
 ```
 
@@ -261,20 +255,10 @@ kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*
 ```
 
 ```bash
-kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/DCGM_FI_DEV_GPU_UTIL_AVG" | jq .
-```
-
-```bash
 kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/dcgm-exporter/DCGM_FI_DEV_GPU_UTIL" | jq .
 ```
 
-```bash
-kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/gpu-api/DCGM_FI_DEV_GPU_UTIL_AVG" | jq .
-```
-
-Refer to the [CustomMetric.md](./CustomMetric.md) page to check API response.
-
-If there is no value, connect to the DCGM exporter pod, and check connectivity with `wget http://<prometheus-url>:<port>`.
+If there is no value, connect to the DCGM exporter pod, and check connectivity with `wget http://<prometheus-url>:<port>`. Refer to the [CustomMetric.md](./CustomMetric.md) page to check API response.
 
 # Step 4: Import Grafana Dashboards
 
@@ -314,6 +298,8 @@ aws ecr create-repository --repository-name cpu-api --region ${REGION}
 aws ecr create-repository --repository-name gpu-api --region ${REGION}
 ```
 
+We will deploy Deployment, Service, HorizontalPodAutoscaler, and Ingress for cpu-api and gpu-api:
+
 ```bash
 cd cpu-api
 ./build.sh
@@ -323,7 +309,7 @@ sed -e "s|<account-id>|${ACCOUNT_ID}|g" cpu-api-template.yaml | sed -e "s|<regio
 kubectl apply -f cpu-api.yaml
 ```
 
-[cpu-api.yaml](./cpu-api/cpu-api.yaml)
+[cpu-api-template.yaml](./cpu-api/cpu-api-template.yaml)
 
 ```bash
 cd ../gpu-api
@@ -337,7 +323,7 @@ kubectl apply -f gpu-api2.yaml
 
 image size: 3.33GB, image pull: 39.50s
 
-[gpu-api.yaml](./gpu-api/gpu-api.yaml)
+[gpu-api-template.yaml](./gpu-api/gpu-api-template.yaml)
 
 ```yaml
 apiVersion: autoscaling/v2beta2
@@ -387,6 +373,59 @@ spec:
         - name: gpu-api  # Set container name and service name with same name
           image: 123456789.dkr.ecr.ap-northeast-2.amazonaws.com/gpu-api:latest
           imagePullPolicy: Always
+```
+
+
+---
+
+Retrieve custom metrics:
+
+```bash
+kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1 | jq -r . | grep DCGM_FI_DEV_GPU_UTIL
+```
+
+```bash
+      "name": "services/DCGM_FI_DEV_GPU_UTIL",
+      "name": "namespaces/DCGM_FI_DEV_GPU_UTIL",
+      "name": "jobs.batch/DCGM_FI_DEV_GPU_UTIL",
+      "name": "pods/DCGM_FI_DEV_GPU_UTIL",
+      "name": "services/DCGM_FI_DEV_GPU_UTIL_AVG",
+      "name": "namespaces/DCGM_FI_DEV_GPU_UTIL_AVG",
+      "name": "jobs.batch/DCGM_FI_DEV_GPU_UTIL_AVG",
+      "name": "pods/DCGM_FI_DEV_GPU_UTIL_AVG",
+      ...
+```
+
+```bash
+kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/DCGM_FI_DEV_GPU_UTIL_AVG" | jq .
+```
+
+```bash
+kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/gpu-api/DCGM_FI_DEV_GPU_UTIL_AVG" | jq .
+```
+
+```bash
+{
+  "kind": "MetricValueList",
+  "apiVersion": "custom.metrics.k8s.io/v1beta1",
+  "metadata": {
+    "selfLink": "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/services/gpu-api/DCGM_FI_DEV_GPU_UTIL_AVG"
+  },
+  "items": [
+    {
+      "describedObject": {
+        "kind": "Service",
+        "namespace": "default",
+        "name": "gpu-api",
+        "apiVersion": "/v1"
+      },
+      "metricName": "DCGM_FI_DEV_GPU_UTIL_AVG",
+      "timestamp": "2022-05-03T02:27:08Z",
+      "value": "0",
+      "selector": null
+    }
+  ]
+}
 ```
 
 ```bash
@@ -485,4 +524,14 @@ helm uninstall metrics-server -n monitoring
 
 # Trouble Shooting
 
-You can check event logs with `kubectl get events -w` command.
+1. You can check all event logs with `kubectl get events -w` command.
+
+
+2. Error from server (NotFound): the server could not find the metric DCGM_FI_DEV_GPU_UTIL_AVG for services
+
+ *  gpu-api or your application should be deployed as a K8s Service.
+
+3. How to check PromQL log?
+
+ *  You can see access log of /api/v1/query API with `logLevel: 6`. Refer to the [CustomMetric.md](./CustomMetric.md) page.
+

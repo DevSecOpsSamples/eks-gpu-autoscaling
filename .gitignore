@@ -1,13 +1,8 @@
-# Compiled class file
-*.class
 
-# Log file
+.gradle
+.vscode
+
 *.log
-
-# BlueJ files
-*.ctxt
-
-# Package Files #
 *.jar
 *.war
 *.nar
@@ -18,17 +13,19 @@
 
 # internal
 *internal*
-*.DS_Store*
+
+# MAC
+**/.DS_Store
 
 # CDK
-*node_modules*
-*cdk.out*
-*cdk.context.json*
+**/node_modules
+**/cdk.out
+**/cdk.context.json
 
 # K8s output
-*cpu-api.yaml*
-*gpu-api.yaml*
-*gpu2-api.yaml*
+**/cpu-api.yaml*
+**/gpu-api.yaml*
+**/gpu2-api.yaml*
 
 ref-eksctl/cluster-autoscaler-autodiscover.yaml*
 ref-eksctl/v2_4_0_full.yaml*
