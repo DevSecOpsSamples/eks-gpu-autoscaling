@@ -107,7 +107,7 @@ kubectl apply -f dcgm-exporter-karpenter.yaml
 
 * [dcgm-exporter-karpenter.yaml](./dcgm-exporter-karpenter.yaml)
 
-Deploy with a local yaml file instead of Helm to use the ServiceMonitor for Service Discovery. Scrape configurations can be added in [additionalScrapeConfigs](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) element when installing Prometheus, but we will use ServiceMonitor to deploy configuration per K8s Service.
+Deploy with a local YAML file instead of Helm Chart to use the ServiceMonitor for Service Discovery. Scrape configurations can be added in [additionalScrapeConfigs](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) element when installing Prometheus, but we will use ServiceMonitor to deploy configuration per K8s Service.
 
 ```bash
 kubectl get servicemonitor dcgm-exporter -o yaml
