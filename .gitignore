@@ -23,7 +23,7 @@
 
 # CDK
 **/node_modules
-#**/cdk.out
+**/cdk.out
 **/cdk.context.json
 
 # K8s output
