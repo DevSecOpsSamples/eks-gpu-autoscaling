@@ -307,7 +307,7 @@ sed -e "s|<account-id>|${ACCOUNT_ID}|g" cpu-api-template.yaml | sed -e "s|<regio
 kubectl apply -f cpu-api.yaml
 ```
 
-[cpu-api.yaml](./cpu-api/cpu-api.yaml)
+[cpu-api-template.yaml](./cpu-api/cpu-api-template.yaml)
 
 ```bash
 cd ../gpu-api
@@ -321,7 +321,7 @@ kubectl apply -f gpu-api2.yaml
 
 image size: 3.33GB, image pull: 39.50s
 
-[gpu-api.yaml](./gpu-api/gpu-api.yaml)
+[gpu-api-template.yaml](./gpu-api/gpu-api-template.yaml)
 
 ```yaml
 apiVersion: autoscaling/v2beta2
