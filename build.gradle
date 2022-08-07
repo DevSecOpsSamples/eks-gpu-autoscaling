@@ -17,12 +17,13 @@ buildscript {
 sonarqube {
     properties {
         property "sonar.projectName", "eks-gpu-autoscaling"
-        property "sonar.projectKey", "eks-gpu-autoscaling"
+        property "sonar.projectKey", "engel80_eks-gpu-autoscaling"
+        property "sonar.organization", "engel80"
+        // property "sonar.host.url", "http://127.0.0.1:9000"
+        property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.sourceEncoding", "UTF-8"
         property "sonar.sources", "."
         property "sonar.exclusions", "**/node_modules/**, **/cdk.out/**"
-        property "sonar.cpd.exclusions", "**/*index.ts"
-        property "sonar.host.url", "http://127.0.0.1:9000"
         property "sonar.links.ci", "https://github.com/engel80/eks-gpu-autoscaling"
         property "sonar.issue.ignore.multicriteria", "e1"
         property "sonar.issue.ignore.multicriteria.e1.ruleKey", "typescript:S1848"
