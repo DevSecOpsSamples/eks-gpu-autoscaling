@@ -5,8 +5,6 @@
 
 GPU utilization-based horizontal autoscaling for inference APIs. This guideline provides complete steps for GPU auto scaling on AWS EKS.
 
-***Feel free to create an issue or raise a pull request if an update is required.***
-
 ## Introduction
 
 There are differences between CPU scaling and GPU scaling below:
