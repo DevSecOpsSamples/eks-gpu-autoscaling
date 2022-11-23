@@ -1,7 +1,7 @@
 
 # GPU Auto Scaling on EKS
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=engel80_eks-gpu-autoscaling&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=engel80_eks-gpu-autoscaling) [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=engel80_eks-gpu-autoscaling&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=engel80_eks-gpu-autoscaling)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DevSecOpsSamples_eks-gpu-autoscaling&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=DevSecOpsSamples_eks-gpu-autoscaling) [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=DevSecOpsSamples_eks-gpu-autoscaling&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=DevSecOpsSamples_eks-gpu-autoscaling)
 
 GPU utilization-based horizontal autoscaling for inference APIs. This guideline provides complete steps for GPU auto scaling on AWS EKS.
 
