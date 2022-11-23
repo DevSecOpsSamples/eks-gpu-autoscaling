@@ -1,12 +1,13 @@
 # EKS cluster setup using eksctl
+
 ## Steps
 
-1. Create EKS cluster and nodegroup
+1. Create an EKS cluster and nodegroup
 2. Install metrics-server
 3. Setup Cluster AutoScaler
 4. Install AWS Load Balancer Controller
 
-## Step 1: Create EKS cluster and nodegroup
+## Step 1: Create an EKS cluster and nodegroup
 
 ```bash
 eksctl create cluster -f gpu-cluster.yaml --without-nodegroup
@@ -128,13 +129,13 @@ kubectl get deployment -n kube-system aws-load-balancer-controller
 kubectl logs -f $(kubectl get po -n kube-system | egrep -o 'aws-load-balancer-controller-[A-Za-z0-9-]+') -n kube-system
 ```
 
-# Uninstall
+## Cleanup
 
 ```bash
 kubectl delete -f cluster-autoscaler-autodiscover.yaml
 kubectl delete -f v2_4_0_full.yaml
 ```
 
-# Reference
+# References
 
-https://github.com/aws/eks-charts/tree/master/stable/aws-load-balancer-controller
+* https://github.com/aws/eks-charts/tree/master/stable/aws-load-balancer-controller
