@@ -1,4 +1,4 @@
-# GPU cluster with EKS Blueprints
+# Create a GPU cluster with EKS Blueprints
 
 ## Prerequisites
 
@@ -7,21 +7,18 @@ npm install -g aws-cdk@2.20.0
 
 # install packages in the <repository-root>/cdk folder
 npm install
-
-export CDK_DEFAULT_ACCOUNT=123456789012
-export CDK_DEFAULT_REGION=us-east-1
 ```
 
 Use the `cdk` command-line toolkit to interact with your project:
 
- * `cdk deploy`: deploys your app into an AWS account
- * `cdk synth`: synthesizes an AWS CloudFormation template for your app
- * `cdk diff`: compares your app with the deployed stack
- * `cdk watch`: deployment every time a file change is detected
+* `cdk deploy`: deploys your app into an AWS account
+* `cdk synth`: synthesizes an AWS CloudFormation template for your app
+* `cdk diff`: compares your app with the deployed stack
+* `cdk watch`: deployment every time a file change is detected
 
-## CDK Stack Time Taken
+## CDK Stacks
 
-| Stack                         | Time    |
+| Stack                         | Time To Complete    |
 |-------------------------------|---------|
 | VPC                           | 3m      |
 | EKS cluster                   | 21m  (38 Stacks)   |
@@ -37,7 +34,7 @@ Use the `cdk` command-line toolkit to interact with your project:
 
 ### Step 1: VPC
 
-The VPC ID will be saved into the SSM Parameter Store to refer from other stacks.
+The VPC ID will be saved into the `SSM Parameter Store` to refer from other stacks.
 
 Parameter Name : `/eks-gpu-autoscaling/vpc-id`
 
@@ -171,8 +168,8 @@ cd ../eks-blueprints
 cdk destroy
 ```
 
-## Reference
+## References
 
- * https://github.com/aws-quickstart/cdk-eks-blueprints
+* https://github.com/aws-quickstart/cdk-eks-blueprints
 
- * https://aws-quickstart.github.io/cdk-eks-blueprints
+* https://aws-quickstart.github.io/cdk-eks-blueprints

@@ -9,7 +9,7 @@ GPU utilization-based horizontal autoscaling for inference APIs. This guideline 
 
 There are differences between CPU scaling and GPU scaling below:
 
-#### CPU scaling vs. GPU scaling ####
+CPU scaling vs. GPU scaling
 
 |              | CPU        | GPU           | Description                         |
 |--------------|------------|---------------|-------------------------------------|
@@ -17,15 +17,15 @@ There are differences between CPU scaling and GPU scaling below:
 | HPA          | Supported  | Not Supported | Horizontal Pod Autoscaling(HPA) for GPU can be working based on `Prometheus` custom metric.  |
 | Fraction     | Supported  | Not Supported | GPU resource fraction is not supported such as 'nvidia.com/gpu: 0.5'. |
 
-#### Objectives ####
+### Objectives
 
 * Collect the GPU metrics through Data Center GPU Manager(DCGM) exporter and scale pods through HPA, which works based on Prometheus custom metric.
 * GPU cluster autoscaling with CA or Karpenter.
 * `Pod-level` GPU autoscaling.
 * `One shared GPU node group`:
-  Two node groups are required for CPU and GPU, and GPU node group has `accelerator: nvidia-gpu` label. Inference API applications run in `one shared GPU node group` to not create clusters per GPU application. 
+  Two node groups are required for CPU and GPU, and GPU node group has `accelerator: nvidia-gpu` label. Inference API applications run in `one shared GPU node group` to not create clusters per GPU application.
 
-#### Environment ####
+### Environment
 
 | SW                 | Version | Desc   |
 |--------------------|---------|-------|
@@ -36,7 +36,7 @@ There are differences between CPU scaling and GPU scaling below:
 | Grafana            | 6.24.1  |  |
 | CDK                | 2.20.0  |  |
 
-#### Helm ####
+#### Helm
 
 | NAME                  | CHART    | APP VERSION |
 |-----------------------|----------|-------------|
@@ -55,7 +55,7 @@ The EKS Blueprint was used to minimize the installation steps of EKS cluster and
 * AWS Load Balancer Controller Addon
 * Kubernetes Dashboard
 
-If you want to use the existing cluster or create a cluster by using `eksctl`, refer to the [ref-eksctl/README.md](./ref-eksctl/README.md) page.
+If you want to use the existing cluster or create a new cluster by using `eksctl`, refer to the [ref-eksctl/README.md](./ref-eksctl/README.md) page.
 
 ## Steps
 
@@ -499,7 +499,7 @@ kubectl describe apiservices v1beta1.metrics.k8s.io
 kubectl logs -n kube-system -l k8s-app=metrics-server
 ```
 
-# Uninstall
+# Clenaup
 
 ```bash
 kubectl delete -f cpu-api/cpu-api.yaml
@@ -514,24 +514,22 @@ helm uninstall kube-prometheus-stack -n monitoring
 helm uninstall metrics-server -n monitoring
 ```
 
-# Reference
+# References
 
-[NVIDIA doc DCGM-Exporter](https://docs.nvidia.com/datacenter/cloud-native/gpu-telemetry/dcgm-exporter.html)
+* [NVIDIA doc DCGM-Exporter](https://docs.nvidia.com/datacenter/cloud-native/gpu-telemetry/dcgm-exporter.html)
 
-[prometheus-adapter](https://github.com/kubernetes-sigs/prometheus-adapter)
+* [prometheus-adapter](https://github.com/kubernetes-sigs/prometheus-adapter)
 
-[Monitoring GPU Utilization with Amazon CloudWatch](https://aws.amazon.com/ko/blogs/machine-learning/monitoring-gpu-utilization-with-amazon-cloudwatch/)
+* [Monitoring GPU Utilization with Amazon CloudWatch](https://aws.amazon.com/ko/blogs/machine-learning/monitoring-gpu-utilization-with-amazon-cloudwatch/)
 
 # Trouble Shooting
 
 1. You can check all event logs with `kubectl get events -w` command.
 
-
 2. Error from server (NotFound): the server could not find the metric DCGM_FI_DEV_GPU_UTIL_AVG for services
 
- *  gpu-api or your application should be deployed as a K8s Service.
+    gpu-api or your application should be deployed as a K8s Service.
 
 3. How to check PromQL logs?
 
- *  You can see access log of /api/v1/query API with `logLevel: 6`. Refer to the [CustomMetric.md](./CustomMetric.md) page.
-
+    You can see access log of /api/v1/query API with `logLevel: 6`. Refer to the [CustomMetric.md](./CustomMetric.md) page.
