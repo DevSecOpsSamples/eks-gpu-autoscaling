@@ -1,33 +1,27 @@
-apply plugin: 'base'
-apply plugin: 'org.sonarqube'
-archivesBaseName = 'eks-gpu-autoscaling'
+plugins {
+	id 'base'
+  	id "org.sonarqube" version "3.4.0.2513"
+}
 
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.4.0.2513")
-    }
+repositories {
+	mavenCentral()
 }
 
 sonarqube {
     properties {
         property "sonar.projectName", "eks-gpu-autoscaling"
-        property "sonar.projectKey", "engel80_eks-gpu-autoscaling"
-        property "sonar.organization", "engel80"
+        property "sonar.projectKey", "DevSecOpsSamples_eks-gpu-autoscaling"
+        property "sonar.organization", "devsecopssamples"
         // property "sonar.host.url", "http://127.0.0.1:9000"
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.sourceEncoding", "UTF-8"
         property "sonar.sources", "."
+        property "sonar.java.binaries", "build"
+        property "sonar.python.version", "3.9"
         property "sonar.exclusions", "**/node_modules/**, **/cdk.out/**"
-        property "sonar.links.ci", "https://github.com/engel80/eks-gpu-autoscaling"
         property "sonar.issue.ignore.multicriteria", "e1"
         property "sonar.issue.ignore.multicriteria.e1.ruleKey", "typescript:S1848"
         property "sonar.issue.ignore.multicriteria.e1.resourceKey", "**/*.ts"
-        property "sonar.log.level", "DEBUG"
+        property "sonar.links.ci", "https://github.com/DevSecOpsSamples/eks-gpu-autoscaling"
     }
 }
