@@ -7,8 +7,28 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  build:
-    name: Build
+  build-cdk:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ 18 ]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Build CDK
+        run: npm install && npm run build
+
+  # build-docker:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #   - name: Build the Docker image
+  #     run: cd app && docker build . -t sample-rest-api:$(date +%s)
+
+  sonarqube:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
