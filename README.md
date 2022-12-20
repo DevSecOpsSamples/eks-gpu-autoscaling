@@ -1,6 +1,7 @@
 
-# GPU Auto Scaling based on Prometheus custom metric on EKS
+# GPU auto scaling based on Prometheus custom metric on EKS
 
+[![Build](https://github.com/DevSecOpsSamples/eks-gpu-autoscaling/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/DevSecOpsSamples/eks-gpu-autoscaling/actions/workflows/build.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DevSecOpsSamples_eks-gpu-autoscaling&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=DevSecOpsSamples_eks-gpu-autoscaling) [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=DevSecOpsSamples_eks-gpu-autoscaling&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=DevSecOpsSamples_eks-gpu-autoscaling)
 
 GPU utilization-based horizontal autoscaling based on Prometheus custom metric. This guideline provides complete steps for GPU auto scaling on AWS EKS.
